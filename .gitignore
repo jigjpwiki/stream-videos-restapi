@@ -1,2 +1,4 @@
 .env
 node_modules/
+data/update-state.json
+data/videos-cache.json

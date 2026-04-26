@@ -199,6 +199,57 @@ function findFoldClose(lines, openIdx) {
 }
 
 // ---------------------------------------------------------------------------
+// ソート挿入ユーティリティ
+// ---------------------------------------------------------------------------
+
+/**
+ * fold ブロック内の動画行（-MM/DD ...）を日付・時刻昇順に並べ替えて新規行を挿入する。
+ *
+ * ソートキーの統一: toJST(str).getTime() = originalUTC_ms + 9h と同じ空間で比較する。
+ *   - 既存行（時刻情報なし）: Date.UTC(year, mm-1, dd) = JST 00:00 相当のソートキー
+ *   - 新規行: jstDate.getTime() (= toJST(baseDateStr).getTime())
+ *
+ * @param {string[]} lines       ページ行配列（破壊的に変更）
+ * @param {number} foldOpenIdx   '#fold..{{' 行のインデックス
+ * @param {number} foldCloseIdx  '}}' or '}}}' 行のインデックス
+ * @param {number} year          fold が属する年（JST）
+ * @param {string} newVideoLine  追加する動画行
+ * @param {number} newSortKey    新規行のソートキー（ms）
+ */
+function insertSorted(lines, foldOpenIdx, foldCloseIdx, year, newVideoLine, newSortKey) {
+  // fold ブロック内の動画行インデックスを収集
+  const videoIdxs = [];
+  for (let i = foldOpenIdx + 1; i < foldCloseIdx; i++) {
+    if (/^-\d{2}\/\d{2}[ \t]/.test(lines[i])) {
+      videoIdxs.push(i);
+    }
+  }
+
+  // 既存行のソートエントリ（時刻なし → MM/DD 00:00 JST として扱う）
+  const entries = videoIdxs.map((idx) => {
+    const m = lines[idx].match(/^-(\d{2})\/(\d{2})[ \t]/);
+    const mm = m ? parseInt(m[1], 10) : 1;
+    const dd = m ? parseInt(m[2], 10) : 1;
+    // Date.UTC(year, mm-1, dd) = JST 00:00 を shifted UTC 空間で表した値
+    const sortKey = Date.UTC(year, mm - 1, dd);
+    return { line: lines[idx], sortKey };
+  });
+
+  // 新規行を追加してソート（昇順）
+  entries.push({ line: newVideoLine, sortKey: newSortKey });
+  entries.sort((a, b) => a.sortKey - b.sortKey);
+
+  // 既存動画行を逆順で削除（インデックスズレ防止）
+  for (let i = videoIdxs.length - 1; i >= 0; i--) {
+    lines.splice(videoIdxs[i], 1);
+  }
+
+  // foldCloseIdx をずらしてソート済み行を挿入
+  const adjustedClose = foldCloseIdx - videoIdxs.length;
+  lines.splice(adjustedClose, 0, ...entries.map((e) => e.line));
+}
+
+// ---------------------------------------------------------------------------
 // ライブ配信アーカイブ挿入
 // ---------------------------------------------------------------------------
 
@@ -219,8 +270,9 @@ function findFoldClose(lines, openIdx) {
  * @param {string} videoLine 挿入する行
  * @param {number} year     年 (JST)
  * @param {number} month    月 (JST, 1-12)
+ * @param {number} newSortKey ソートキー（ms）
  */
-function insertIntoArchiveSection(lines, secStart, secEnd, videoLine, year, month) {
+function insertIntoArchiveSection(lines, secStart, secEnd, videoLine, year, month, newSortKey) {
   const yearHeader = `***${year}年 [#archives${year}]`;
   const monthLabel = `${month}月`;
 
@@ -253,8 +305,8 @@ function insertIntoArchiveSection(lines, secStart, secEnd, videoLine, year, mont
       lines[foldIdx] = openFold(lines[foldIdx]);
     }
     const closeIdx = findFoldClose(lines, foldIdx);
-    // closeIdx の直前に挿入
-    lines.splice(closeIdx, 0, videoLine);
+    // fold 内の動画行をソートして挿入
+    insertSorted(lines, foldIdx, closeIdx, year, videoLine, newSortKey);
   } else {
     // 月 fold を新規作成
     const newFold = [
@@ -287,8 +339,9 @@ function insertIntoArchiveSection(lines, secStart, secEnd, videoLine, year, mont
  * @param {number} secEnd
  * @param {string} videoLine
  * @param {number} year
+ * @param {number} newSortKey ソートキー（ms）
  */
-function insertIntoNormalSection(lines, secStart, secEnd, videoLine, year) {
+function insertIntoNormalSection(lines, secStart, secEnd, videoLine, year, newSortKey) {
   const yearLabel = `${year}年`;
 
   const foldResult = findFold(lines, yearLabel, secStart + 1, secEnd);
@@ -309,7 +362,7 @@ function insertIntoNormalSection(lines, secStart, secEnd, videoLine, year) {
     }
 
     const closeIdx = findFoldClose(lines, foldIdx);
-    lines.splice(closeIdx, 0, videoLine);
+    insertSorted(lines, foldIdx, closeIdx, year, videoLine, newSortKey);
   } else {
     // 既存年 fold を close
     for (let i = secStart + 1; i < secEnd; i++) {
@@ -347,7 +400,7 @@ function insertIntoNormalSection(lines, secStart, secEnd, videoLine, year) {
  *   }}
  *   }}}
  */
-function insertIntoShortsSection(lines, secStart, secEnd, videoLine, year, month) {
+function insertIntoShortsSection(lines, secStart, secEnd, videoLine, year, month, newSortKey) {
   const yearLabel = `${year}年`;
   const monthLabel = `${month}月`;
 
@@ -424,7 +477,7 @@ function insertIntoShortsSection(lines, secStart, secEnd, videoLine, year, month
     }
 
     const monthCloseIdx = findFoldClose(lines, monthFoldIdx);
-    lines.splice(monthCloseIdx, 0, videoLine);
+    insertSorted(lines, monthFoldIdx, monthCloseIdx, year, videoLine, newSortKey);
   } else {
     // 当月以外 close
     for (let i = yearFoldIdx + 1; i < yearCloseIdx; i++) {
@@ -499,15 +552,19 @@ export function insertVideoIntoPage(pageText, video) {
     `[DEBUG] videoId=${video.videoId} usedDateUTC=${baseDateStr} usedDateJST=${jstDateStr} MM/DD=${mm}/${dd}`
   );
 
+  // ソートキー: toJST(baseDateStr).getTime() = originalUTC_ms + 9h
+  // 既存行の MMDDソートキーと同じ空間（Date.UTC(year, mm-1, dd) = JST 00:00 相当）で比較可能
+  const newSortKey = jstDate.getTime();
+
   switch (video.videoType) {
     case 'liveArchive':
-      insertIntoArchiveSection(lines, secStart, secEnd, videoLine, year, month);
+      insertIntoArchiveSection(lines, secStart, secEnd, videoLine, year, month, newSortKey);
       break;
     case 'normal':
-      insertIntoNormalSection(lines, secStart, secEnd, videoLine, year);
+      insertIntoNormalSection(lines, secStart, secEnd, videoLine, year, newSortKey);
       break;
     case 'shorts':
-      insertIntoShortsSection(lines, secStart, secEnd, videoLine, year, month);
+      insertIntoShortsSection(lines, secStart, secEnd, videoLine, year, month, newSortKey);
       break;
     default:
       return null;

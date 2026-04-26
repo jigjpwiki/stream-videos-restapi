@@ -112,7 +112,11 @@ export async function updateLiverVideos(liver, apiKey) {
   // 6. Wiki 更新
   if (DRY_RUN) {
     for (const video of registeredVideos) {
-      const date = new Date(video.publishedAt);
+      const baseDateStr =
+        video.videoType === 'liveArchive' && video.actualStartTime
+          ? video.actualStartTime
+          : video.publishedAt;
+      const date = new Date(baseDateStr);
       const jstDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
       const year = jstDate.getUTCFullYear();
       const month = jstDate.getUTCMonth() + 1;
@@ -123,6 +127,7 @@ export async function updateLiverVideos(liver, apiKey) {
         locationParts.push(`${month}月`);
       }
       console.log(`[DRY_RUN] Inserted into: ${locationParts.join(' / ')}`);
+      console.log('[DRY_RUN] Sorted by baseDateJST ascending');
       console.log('[DRY_RUN] Added lines:');
       console.log(formatVideoLine(video));
     }
