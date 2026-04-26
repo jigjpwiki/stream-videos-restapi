@@ -3,25 +3,52 @@
  *
  * 環境変数:
  *   WIKI_API_BASE_URL  - API ベース URL (例: https://api.wikiwiki.jp/jigjp)
- *   WIKI_PASSWORD      - API トークン (Bearer 認証)
+ *   WIKI_PASSWORD      - WIKIWIKI パスワード（/auth で token を取得するために使用）
  *
  * エンドポイント仕様 (WIKIWIKI REST API v1):
+ *   POST {base}/auth                      - 認証 → token 取得
  *   GET  {base}/page/{encoded_page_name}  - ページ本文取得
  *   PUT  {base}/page/{encoded_page_name}  - ページ本文更新
  */
 
 const BASE_URL = process.env.WIKI_API_BASE_URL;
-const TOKEN = process.env.WIKI_PASSWORD;
 
-function getHeaders() {
-  return {
-    Authorization: `Bearer ${TOKEN}`,
-    'Content-Type': 'application/json',
-  };
+/**
+ * /auth エンドポイントでパスワード認証を行い、Bearer token を取得する
+ * @returns {Promise<string>} token
+ * @throws 認証失敗時
+ */
+async function authenticate() {
+  const password = process.env.WIKI_PASSWORD;
+  console.log(`[INFO] WIKI_PASSWORD exists: ${Boolean(password)}`);
+
+  const res = await fetch(`${BASE_URL}/auth`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ password }),
+  });
+
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`WIKIWIKI auth failed: ${res.status} ${body}`);
+  }
+
+  const data = await res.json();
+  const token = data.token ?? null;
+  console.log(`[INFO] WIKI token acquired: ${Boolean(token)}`);
+
+  if (!token) {
+    throw new Error('WIKIWIKI auth response did not contain a token');
+  }
+
+  return token;
 }
 
-function encodedPath(pageName) {
-  return encodeURIComponent(pageName);
+function authHeaders(token) {
+  return {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  };
 }
 
 /**
@@ -31,10 +58,11 @@ function encodedPath(pageName) {
  * @throws ページ取得失敗時
  */
 export async function getPage(pageName) {
-  const url = `${BASE_URL}/page/${encodedPath(pageName)}`;
+  const token = await authenticate();
+  const url = `${BASE_URL}/page/${encodeURIComponent(pageName)}`;
   const res = await fetch(url, {
     method: 'GET',
-    headers: getHeaders(),
+    headers: authHeaders(token),
   });
 
   if (!res.ok) {
@@ -56,10 +84,11 @@ export async function getPage(pageName) {
  * @throws ページ更新失敗時
  */
 export async function updatePage(pageName, content) {
-  const url = `${BASE_URL}/page/${encodedPath(pageName)}`;
+  const token = await authenticate();
+  const url = `${BASE_URL}/page/${encodeURIComponent(pageName)}`;
   const res = await fetch(url, {
     method: 'PUT',
-    headers: getHeaders(),
+    headers: authHeaders(token),
     body: JSON.stringify({ source: content }),
   });
 

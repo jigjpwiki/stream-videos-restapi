@@ -8,6 +8,8 @@
  *   4. キャッシュ更新・保存
  */
 
+import { writeFile, mkdir } from 'node:fs/promises';
+import path from 'node:path';
 import { getChannelVideos } from '../services/youtube.js';
 import { getPage, updatePage } from '../services/wikiwiki.js';
 import {
@@ -19,7 +21,16 @@ import {
 import {
   insertVideoIntoPage,
   isVideoAlreadyInPage,
+  formatVideoLine,
 } from '../formatter/wikiTextFormatter.js';
+
+const DEBUG_DIR = path.resolve('debug-output');
+
+const SECTION_LABEL = {
+  liveArchive: 'ライブ配信（アーカイブ）',
+  normal: '投稿動画',
+  shorts: 'Shorts動画',
+};
 
 const DRY_RUN = process.env.DRY_RUN === 'true';
 const DAYS_BACK = parseInt(process.env.DAYS_BACK ?? '14', 10);
@@ -100,8 +111,26 @@ export async function updateLiverVideos(liver, apiKey) {
 
   // 6. Wiki 更新
   if (DRY_RUN) {
-    console.log('[DRY_RUN] Wiki update skipped. Generated text preview:');
-    console.log(updatedText.slice(0, 500));
+    for (const video of registeredVideos) {
+      const date = new Date(video.publishedAt);
+      const jstDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+      const year = jstDate.getUTCFullYear();
+      const month = jstDate.getUTCMonth() + 1;
+      const sectionLabel = SECTION_LABEL[video.videoType] ?? video.videoType;
+
+      const locationParts = [sectionLabel, `${year}年`];
+      if (video.videoType === 'liveArchive' || video.videoType === 'shorts') {
+        locationParts.push(`${month}月`);
+      }
+      console.log(`[DRY_RUN] Inserted into: ${locationParts.join(' / ')}`);
+      console.log('[DRY_RUN] Added lines:');
+      console.log(formatVideoLine(video));
+    }
+
+    await mkdir(DEBUG_DIR, { recursive: true });
+    const previewPath = path.join(DEBUG_DIR, 'wiki-preview.txt');
+    await writeFile(previewPath, updatedText, 'utf-8');
+    console.log(`[DRY_RUN] Full preview saved to debug-output/wiki-preview.txt`);
   } else {
     try {
       await updatePage(wikiPageName, updatedText);

@@ -61,9 +61,10 @@ async function main() {
   // 前回処理位置を読み込み、バッチ対象を決定
   const state = await loadState();
   const startIndex = state.lastIndex % enabledLivers.length;
+  const actualBatchSize = Math.min(BATCH_SIZE, enabledLivers.length);
   const targets = [];
 
-  for (let i = 0; i < BATCH_SIZE; i++) {
+  for (let i = 0; i < actualBatchSize; i++) {
     const idx = (startIndex + i) % enabledLivers.length;
     targets.push(enabledLivers[idx]);
   }
@@ -85,7 +86,7 @@ async function main() {
   }
 
   // 処理状態を保存
-  const nextIndex = (startIndex + BATCH_SIZE) % enabledLivers.length;
+  const nextIndex = (startIndex + actualBatchSize) % enabledLivers.length;
   await saveState({
     lastIndex: nextIndex,
     updatedAt: new Date().toISOString(),

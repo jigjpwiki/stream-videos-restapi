@@ -1,0 +1,118 @@
+//ページ名：宵坂伊織/動画一覧
+
+#null{{
+テンプレート一斉変換用表
+
+フルネーム：宵坂伊織
+入学年度：2026
+
+}}
+
+【YouTube】&color(red){&#9724;&#65038;};宵坂伊織 / &color(maroon){&#9724;&#65038;};パレデミア学園 / &color(gray){&#9724;&#65038;};その他
+**ライブ配信（アーカイブ） [#archives]
+***2026年 [#archives2026]
+//#fold(1月){{
+//''1月''
+//-01/00 &color(Red){■};[[タイトル>https://example.com]]
+//}}
+
+//#fold(2月){{
+//''2月''
+//-02/00 &color(Red){■};[[タイトル>https://example.com]]
+//}}
+
+//#fold(3月){{
+//''3月''
+//-03/00 &color(Red){■};[[タイトル>https://example.com]]
+//}}
+
+//#fold(4月){{
+//''4月''
+//-04/00 &color(Red){■};[[タイトル>https://example.com]]
+//}}
+
+//#fold(5月){{
+//''5月''
+//-05/00 &color(Red){■};[[タイトル>https://example.com]]
+//}}
+
+//#fold(6月){{
+//''6月''
+//-06/00 &color(Red){■};[[タイトル>https://example.com]]
+//}}
+
+//#fold(7月){{
+//''7月''
+//-07/00 &color(Red){■};[[タイトル>https://example.com]]
+//}}
+
+//#fold(8月){{
+//''8月''
+//-08/00 &color(Red){■};[[タイトル>https://example.com]]
+//}}
+
+//#fold(9月){{
+//''9月''
+//-09/00 &color(Red){■};[[タイトル>https://example.com]]
+//}}
+
+//#fold(10月){{
+//''10月''
+//-10/00 &color(Red){■};[[タイトル>https://example.com]]
+//}}
+
+//#fold(11月){{
+//''11月''
+//-11/00 &color(Red){■};[[タイトル>https://example.com]]
+//}}
+
+//#fold(12月){{
+//''12月''
+//-12/00 &color(Red){■};[[タイトル>https://example.com]]
+//}}
+
+**歌動画 [#songs]
+//-11/00 &color(Red){■};[[タイトル>https://example.com]]
+//↑自分のチャンネルで公開している場合
+//-11/00 &color(gray){■};[[タイトル>https://example.com]]（[[コラボ相手の名前]]のチャンネル）
+//|BGCOLOR(#eee):コラボ相手：[[コラボ相手の名前]]|
+//↑別の人のチャンネルで公開している場合
+#fold(2026年,open){{
+''2026年''
+}}
+
+**公式動画 [#official_videos]
+***公式番組 [#official_programs]
+#fold(2026年,open){{
+''2026年''
+//-01/00 &color(#maroon){■};[[>]]
+}}
+***公式動画・公式切り抜き [#official_kirinuki]
+//''チャンネル名''
+#fold(2026年,open){{
+''2026年''
+//-11/00 &color(maroon){■};[[タイトル>https://example.com]]
+}}
+
+**投稿動画 [#edited_videos]
+#fold(2026年,open){{
+''2026年''
+//-11/00 &color(red){■};[[タイトル>https://example.com]]
+}}
+***Shorts動画 [#shorts]
+#fold(2026年,open){{{
+''2026年''
+//-11/00 &color(red){■};[[タイトル>https://example.com]]
+#fold(4月,open){{
+''4月''
+-04/16 &color(red){■};[[【パレデミア学園】2期生！クゥ寮所属の宵坂伊織やで！！:https://www.youtube.com/watch?v=3ToNyyeLdRU]]
+-04/17 &color(red){■};[[【パレデミア学園】事件発生！？名探偵伊織の推理をご覧あれ！！:https://www.youtube.com/watch?v=Xm9-kvRTw-4]]
+-04/18 &color(red){■};[[【パレデミア学園】〇年ぶりのマイクラ！？うちの冒険を見よ！！:https://www.youtube.com/shorts/K3dFc2EokZo]]
+-04/19 &color(red){■};[[【パレデミア学園】新ジャンル開拓！？コンビニで起きた悲劇！:https://www.youtube.com/watch?v=Uiy4XIpmhds]]
+-04/20 &color(red){■};[[美人上司、深夜テンションで大暴走！？:https://www.youtube.com/watch?v=rGgLGP25x0E]]
+-04/21 &color(red){■};[[運が良すぎてもはやバグ！？:https://www.youtube.com/watch?v=_vLcbGSXPRk]]
+-04/22 &color(red){■};[[オンライン会議必勝法見つけたり！！:https://www.youtube.com/watch?v=hb97-CapLhQ]]
+-04/25 &color(red){■};[[ダチが遊園地で幽霊になったんだが！？:https://www.youtube.com/watch?v=cCDtOoYVXrM]]
+-04/26 &color(red){■};[[注文の多いカフェで一生食事できない件:https://www.youtube.com/watch?v=jWWdjgUQSZ0]]
+}}
+}}}

@@ -23,23 +23,26 @@ function parseDurationToSeconds(duration) {
   return hours * 3600 + minutes * 60 + seconds;
 }
 
+const SHORTS_DURATION_THRESHOLD = 180; // 秒
+
 /**
  * 動画種別を判定する
- * @param {{ durationSeconds: number, liveBroadcastContent: string, actualStartTime: string|null, actualEndTime: string|null }} video
- * @returns {'normal'|'shorts'|'liveArchive'}
+ * 1. liveArchive（最優先）: actualEndTime がある
+ * 2. shorts: duration が 180秒以下
+ * 3. normal: それ以外
+ * @param {{ durationSeconds: number, actualEndTime: string|null }} video
+ * @returns {{ videoType: 'normal'|'shorts'|'liveArchive' }}
  */
 function determineVideoType(video) {
-  // ライブ配信アーカイブ判定
   if (video.actualEndTime) {
-    return 'liveArchive';
+    return { videoType: 'liveArchive' };
   }
 
-  // Shorts判定: 60秒以下の動画をShortsとみなす（YouTube APIだけでは完全判定不可のため暫定）
-  if (video.durationSeconds > 0 && video.durationSeconds <= 60) {
-    return 'shorts';
+  if (video.durationSeconds > 0 && video.durationSeconds <= SHORTS_DURATION_THRESHOLD) {
+    return { videoType: 'shorts' };
   }
 
-  return 'normal';
+  return { videoType: 'normal' };
 }
 
 /**
@@ -139,7 +142,13 @@ async function fetchVideoDetails(videoIds, apiKey) {
         continue;
       }
 
-      video.videoType = determineVideoType(video);
+      const { videoType } = determineVideoType(video);
+      video.videoType = videoType;
+
+      console.log(
+        `[DEBUG] videoId=${video.videoId} duration=${video.durationSeconds}s videoType=${videoType}`
+      );
+
       results.push(video);
     }
   }
