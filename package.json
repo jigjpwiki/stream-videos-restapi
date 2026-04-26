@@ -1,0 +1,16 @@
+{
+  "name": "stream-videos-restapi",
+  "version": "1.0.0",
+  "description": "YouTube動画記録 自動更新システム",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "update": "node src/index.js",
+    "update:dry": "DRY_RUN=true node src/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
+  }
+}
