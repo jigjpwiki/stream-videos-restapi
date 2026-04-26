@@ -375,6 +375,33 @@ function insertIntoArchiveSection(lines, secStart, secEnd, videoLine, year, mont
 // ---------------------------------------------------------------------------
 
 /**
+ * 投稿動画セクション内のすべての年 fold の open/close を調整する。
+ * 現在年（nowYear）のみ open にし、それ以外は close にする。
+ *
+ * @param {string[]} lines
+ * @param {number} secStart  セクション先頭インデックス
+ * @param {number} secEnd    セクション終端インデックス（排他）
+ * @param {number} nowYear   現在の年（JST）
+ */
+function adjustNormalYearFolds(lines, secStart, secEnd, nowYear) {
+  for (let i = secStart + 1; i < secEnd; i++) {
+    const yearMatch = lines[i].match(/^#fold\((\d{4})年/);
+    if (yearMatch) {
+      const foldYear = parseInt(yearMatch[1], 10);
+      const isCurrentYear = (foldYear === nowYear);
+      console.log(
+        `[DEBUG] Edited videos year fold: ${foldYear} open=${isCurrentYear}`
+      );
+      if (isCurrentYear) {
+        lines[i] = openFold(lines[i]);
+      } else {
+        lines[i] = closeFold(lines[i]);
+      }
+    }
+  }
+}
+
+/**
  * 投稿動画セクションに動画行を挿入する。
  *
  * 構造:
@@ -393,6 +420,8 @@ function insertIntoArchiveSection(lines, secStart, secEnd, videoLine, year, mont
  */
 function insertIntoNormalSection(lines, secStart, secEnd, videoLine, year, newSortKey) {
   const yearLabel = `${year}年`;
+  const nowJSTDate = nowJST();
+  const nowYear = nowJSTDate.getUTCFullYear();
 
   const foldResult = findFold(lines, yearLabel, secStart + 1, secEnd);
 
@@ -401,29 +430,13 @@ function insertIntoNormalSection(lines, secStart, secEnd, videoLine, year, newSo
     if (foldResult.wasComment) {
       uncommentFoldBlock(lines, foldIdx, secEnd);
     }
-    // 現在年は open に
-    lines[foldIdx] = openFold(lines[foldIdx]);
-
-    // 前年の fold を close に
-    for (let i = secStart + 1; i < foldIdx; i++) {
-      if (lines[i].startsWith('#fold(') && lines[i].includes(',open)')) {
-        lines[i] = closeFold(lines[i]);
-      }
-    }
-
     const closeIdx = findFoldClose(lines, foldIdx);
     insertSorted(lines, foldIdx, closeIdx, year, videoLine, newSortKey);
   } else {
-    // 既存年 fold を close
-    for (let i = secStart + 1; i < secEnd; i++) {
-      if (lines[i].startsWith('#fold(') && lines[i].includes(',open)')) {
-        lines[i] = closeFold(lines[i]);
-      }
-    }
-
-    // 新しい年 fold を末尾に追加
+    // 新しい年 fold を末尾に追加（現在年のみ open）
+    const openAttr = year === nowYear ? ',open' : '';
     const newFold = [
-      `#fold(${yearLabel},open){{`,
+      `#fold(${yearLabel}${openAttr}){{`,
       `''${yearLabel}''`,
       videoLine,
       '}}',
@@ -431,6 +444,10 @@ function insertIntoNormalSection(lines, secStart, secEnd, videoLine, year, newSo
     ];
     lines.splice(secEnd, 0, ...newFold);
   }
+
+  // 年 fold の open/close を一括調整: 現在年のみ open、それ以外は close
+  const freshSecEnd = findSectionEnd(lines, secStart);
+  adjustNormalYearFolds(lines, secStart, freshSecEnd, nowYear);
 }
 
 // ---------------------------------------------------------------------------
