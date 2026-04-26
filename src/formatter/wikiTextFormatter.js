@@ -49,6 +49,15 @@ function toJST(dateStr) {
 }
 
 /**
+ * 現在日時を JST の Date で返す
+ * @returns {Date}
+ */
+function nowJST() {
+  const now = new Date();
+  return new Date(now.getTime() + 9 * 60 * 60 * 1000);
+}
+
+/**
  * 動画1件のWIKI記法行を生成する
  *   -MM/DD &color(red){■};[[タイトル:URL]]
  * @param {{ title: string, url: string, videoType: string, publishedAt: string, actualStartTime: string|null }} video
@@ -254,6 +263,40 @@ function insertSorted(lines, foldOpenIdx, foldCloseIdx, year, newVideoLine, newS
 // ---------------------------------------------------------------------------
 
 /**
+ * ライブ配信（アーカイブ）セクション内のすべての月 fold の open/close を調整する。
+ * 当月（nowYear/nowMonth と一致する月）のみ open にし、それ以外は close にする。
+ *
+ * @param {string[]} lines
+ * @param {number} secStart  セクション先頭インデックス
+ * @param {number} secEnd    セクション終端インデックス（排他）
+ * @param {number} nowYear   現在の年（JST）
+ * @param {number} nowMonth  現在の月（JST, 1-12）
+ */
+function adjustArchiveMonthFolds(lines, secStart, secEnd, nowYear, nowMonth) {
+  let currentYear = null;
+  for (let i = secStart + 1; i < secEnd; i++) {
+    const yearMatch = lines[i].match(/^\*{3}(\d{4})年/);
+    if (yearMatch) {
+      currentYear = parseInt(yearMatch[1], 10);
+      continue;
+    }
+    const monthMatch = lines[i].match(/^#fold\((\d+)月/);
+    if (monthMatch && currentYear !== null) {
+      const foldMonth = parseInt(monthMatch[1], 10);
+      const isCurrentMonth = (currentYear === nowYear && foldMonth === nowMonth);
+      console.log(
+        `[DEBUG] Month fold: ${currentYear}/${String(foldMonth).padStart(2, '0')} open=${isCurrentMonth}`
+      );
+      if (isCurrentMonth) {
+        lines[i] = openFold(lines[i]);
+      } else {
+        lines[i] = closeFold(lines[i]);
+      }
+    }
+  }
+}
+
+/**
  * ライブ配信アーカイブセクションに動画行を挿入する。
  *
  * 構造:
@@ -318,6 +361,13 @@ function insertIntoArchiveSection(lines, secStart, secEnd, videoLine, year, mont
     ];
     lines.splice(effectiveSecEnd, 0, ...newFold);
   }
+
+  // 月 fold の open/close を一括調整: 当月のみ open、それ以外は close
+  const nowJSTDate = nowJST();
+  const nowYear = nowJSTDate.getUTCFullYear();
+  const nowMonth = nowJSTDate.getUTCMonth() + 1;
+  const freshSecEnd = findSectionEnd(lines, secStart);
+  adjustArchiveMonthFolds(lines, secStart, freshSecEnd, nowYear, nowMonth);
 }
 
 // ---------------------------------------------------------------------------
