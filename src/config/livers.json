@@ -1,8 +1,416 @@
 [
   {
+    "name": "新巻るろな",
+    "youtubeChannelId": "UCUd4wJjvPQflbLnsk_YHleA",
+    "wikiPageName": "新巻るろな/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "愛葉はな",
+    "youtubeChannelId": "UC5G2BLvcdLvBwBqgShrag9A",
+    "wikiPageName": "愛葉はな/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "音海まいる",
+    "youtubeChannelId": "UCz339ZwPv-i_PaBi_FVCF6w",
+    "wikiPageName": "音海まいる/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "陰山アゲハ",
+    "youtubeChannelId": "UCIw8aQVRBwi72yOrPLgkbRQ",
+    "wikiPageName": "陰山アゲハ/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "亀城ちかり",
+    "youtubeChannelId": "UCn67GGb_NB7P17BVTduGkEw",
+    "wikiPageName": "亀城ちかり/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "恋歌さわこ",
+    "youtubeChannelId": "UCtmMsFjXCXSUqdg6dehYKnA",
+    "wikiPageName": "恋歌さわこ/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "東雲アカリ",
+    "youtubeChannelId": "UCghTiBLhbEGJv-RQwI5BgOg",
+    "wikiPageName": "東雲アカリ/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "鈴木沙透",
+    "youtubeChannelId": "UCj5nRzNFXZn9GRhITRkKElA",
+    "wikiPageName": "鈴木沙透/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "氷雨セイ",
+    "youtubeChannelId": "UCL66HaXfxrR23G8sCU5-cnA",
+    "wikiPageName": "氷雨セイ/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "緋雨柚",
+    "youtubeChannelId": "UCrB-SfrqB5ChY8aAT99grXw",
+    "wikiPageName": "緋雨柚/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "雛菊のん",
+    "youtubeChannelId": "UChccV6U0Tkx9de4YjXbEelw",
+    "wikiPageName": "雛菊のん/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "灯野ぺけ。",
+    "youtubeChannelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+    "wikiPageName": "灯野ぺけ。/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "夜宵カレン",
+    "youtubeChannelId": "UCiPOaOGhMEXaq0tiVftObBw",
+    "wikiPageName": "夜宵カレン/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "天辻ゆらぐ",
+    "youtubeChannelId": "UCeOFQCn_QZJMTszlRYRg3rQ",
+    "wikiPageName": "天辻ゆらぐ/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "愛乃宮ゆめ",
+    "youtubeChannelId": "UCttSjPiwPYpiPuCrgxK7c1g",
+    "wikiPageName": "愛乃宮ゆめ/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "桜雲ほわり",
+    "youtubeChannelId": "UCDoAYyzd9aNnYOrURDuy3ww",
+    "wikiPageName": "桜雲ほわり/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "彼方ルカ",
+    "youtubeChannelId": "UCDDYyCAWxccRh1QbjMd1NlQ",
+    "wikiPageName": "彼方ルカ/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "桜庭羽奈",
+    "youtubeChannelId": "UCPgg_A08ksSYP-VivJGniRw",
+    "wikiPageName": "桜庭羽奈/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "シグマ・イングラム",
+    "youtubeChannelId": "UCnQFkIgH-2IURW--34owWIw",
+    "wikiPageName": "シグマ・イングラム/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "神童めしあ",
+    "youtubeChannelId": "UC6qmN_y3OTthBIjX4XlWfMw",
+    "wikiPageName": "神童めしあ/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "瀬奈りるか",
+    "youtubeChannelId": "UCWi_ztz8Xuz4XfzhoG6ZfyA",
+    "wikiPageName": "瀬奈りるか/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "猫乃間うと",
+    "youtubeChannelId": "UCOH9jshsynMeCSRlPhiCSvw",
+    "wikiPageName": "猫乃間うと/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "畑スイカ",
+    "youtubeChannelId": "UCLUfaErD7KcjYkwshbqdk8g",
+    "wikiPageName": "畑スイカ/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "山田スバル",
+    "youtubeChannelId": "UCpC109d73Mw2GDp0cAodr2w",
+    "wikiPageName": "山田スバル/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "愛上オハナ",
+    "youtubeChannelId": "UCwxQdxFJW67WGv-s5_z030w",
+    "wikiPageName": "愛上オハナ/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "相栖るじゅ",
+    "youtubeChannelId": "UCrpdBoGpa6g2WEtRWsIlhDQ",
+    "wikiPageName": "相栖るじゅ/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "天透あわ",
+    "youtubeChannelId": "UCXI0W_Os-BCIngpCb1YnOow",
+    "wikiPageName": "天透あわ/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "雨海まる",
+    "youtubeChannelId": "UCLuPxPlM1v6IOTLxM1TRPzA",
+    "wikiPageName": "雨海まる/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "犬丸なでこ",
+    "youtubeChannelId": "UCdJmJxMfXrlnZabUkuss2EA",
+    "wikiPageName": "犬丸なでこ/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "黄金つむぎ",
+    "youtubeChannelId": "UCCqDErkWNs8yWjKS7zHYZBA",
+    "wikiPageName": "黄金つむぎ/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "采多しゆあ",
+    "youtubeChannelId": "UCH-y5TRNvToQpVKZ9JrD5WA",
+    "wikiPageName": "采多しゆあ/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "堂下さとり",
+    "youtubeChannelId": "UCBq6MSUL-Ermvnoj3PtX7Iw",
+    "wikiPageName": "堂下さとり/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "斗瀬ひおり",
+    "youtubeChannelId": "UC08QpBje15pNUqtG9_SivMw",
+    "wikiPageName": "斗瀬ひおり/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "飛渡ココ",
+    "youtubeChannelId": "UCMElh_FlHyzp_obVe-b3Qrg",
+    "wikiPageName": "飛渡ココ/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "フローレ・ブランカ",
+    "youtubeChannelId": "UCNb9zRVc1coFKxJAn9lVtsw",
+    "wikiPageName": "フローレ・ブランカ/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "夢ト見りんね",
+    "youtubeChannelId": "UCPuZO9f0ai8szY72XagL_eQ",
+    "wikiPageName": "夢ト見りんね/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "桜堂ねる",
+    "youtubeChannelId": "UC0H7dRRqhfOifbYQ2TURdAg",
+    "wikiPageName": "桜堂ねる/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "久堂れしあ",
+    "youtubeChannelId": "UC0O_8Ssx5exycwGvuF5S6_Q",
+    "wikiPageName": "久堂れしあ/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "黒鋼亜華",
+    "youtubeChannelId": "UCEJSKIlp0XitVYFjJG7eYBg",
+    "wikiPageName": "黒鋼亜華/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "七音うら",
+    "youtubeChannelId": "UCv2IYO-4waCpHvn50SWWY2A",
+    "wikiPageName": "七音うら/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "花晴りら",
+    "youtubeChannelId": "UCqcnlq8uJqnGml6hcIrMCZw",
+    "wikiPageName": "花晴りら/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "緋月・ローズ・ブレイド",
+    "youtubeChannelId": "UCDutDfyKbX_ah4GF6kPNKmw",
+    "wikiPageName": "緋月・ローズ・ブレイド/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "藤森ちとせ",
+    "youtubeChannelId": "UCAhdxmsdngH4noySdpVAVWQ",
+    "wikiPageName": "藤森ちとせ/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "水無瀬天",
+    "youtubeChannelId": "UCT-r3Sqvmoxd_uZYmQEABJg",
+    "wikiPageName": "水無瀬天/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "八重森ふゆの",
+    "youtubeChannelId": "UCYVPgR8PrA-DjOh36rLvSeg",
+    "wikiPageName": "八重森ふゆの/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "ローズ・ダマスクハート",
+    "youtubeChannelId": "UCyY_NaAfv6k0CdHFcmYDqCA",
+    "wikiPageName": "ローズ・ダマスクハート/動画一覧",
+    "enabled": false
+  },
+  {
+    "name": "天麗らん",
+    "youtubeChannelId": "UCAa19AEBEEvh2tZ_FJKt5Rw",
+    "wikiPageName": "天麗らん/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "汐月永遠",
+    "youtubeChannelId": "UCCCm2ueQtW3mYUMB7Excq8g",
+    "wikiPageName": "汐月永遠/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "牡丹雪",
+    "youtubeChannelId": "UCl-qrfygvCjyA_lMR5lJzig",
+    "wikiPageName": "牡丹雪/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "さくさくさく",
+    "youtubeChannelId": "UC9zEgqk0yVvX3nqRLCJXGGg",
+    "wikiPageName": "さくさくさく/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "銀河キララ",
+    "youtubeChannelId": "UCRuWA3zi9BB3pm4J0vLan_A",
+    "wikiPageName": "銀河キララ/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "夜雨ねむる",
+    "youtubeChannelId": "UC1hxdM37vjjqr-IfZuDn1iw",
+    "wikiPageName": "夜雨ねむる/動画一覧",
+    "enabled": true
+  },
+  {
     "name": "宵坂伊織",
     "youtubeChannelId": "UCa1C15g_z1k5oQIYCeD2Hdw",
     "wikiPageName": "宵坂伊織/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "香桜あんにん",
+    "youtubeChannelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+    "wikiPageName": "香桜あんにん/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "天堂ライラ",
+    "youtubeChannelId": "UCpdWNjSU-onhmcARqgHIfpg",
+    "wikiPageName": "天堂ライラ/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "夕凪万夜",
+    "youtubeChannelId": "UCJLYktDEOak1rSOGRVRKlLQ",
+    "wikiPageName": "夕凪万夜/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "夏凪はつみ",
+    "youtubeChannelId": "UCjGfpZuK6__30b6IpMhR_SQ",
+    "wikiPageName": "夏凪はつみ/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "白尾すず",
+    "youtubeChannelId": "UCAbXhpEu49k6t3HE3qqpFCg",
+    "wikiPageName": "白尾すず/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "翡翠あかね",
+    "youtubeChannelId": "UCaADm-qI6khKDIX8AIek1-w",
+    "wikiPageName": "翡翠あかね/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "冬星れんこん",
+    "youtubeChannelId": "UCy4tS4QJSyI-VOr9ImBEveg",
+    "wikiPageName": "冬星れんこん/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "水凪るぅ",
+    "youtubeChannelId": "UCxAVEiT5nj07iqZo4Ymka0Q",
+    "wikiPageName": "水凪るぅ/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "狛社なの",
+    "youtubeChannelId": "UCXhHHxwH94cuHv4N1cAYQeA",
+    "wikiPageName": "狛社なの/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "巳野みこと",
+    "youtubeChannelId": "UCHBPF4eBZEAQ5MmiddmhM2w",
+    "wikiPageName": "巳野みこと/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "露草なぎ",
+    "youtubeChannelId": "UC9nhm1B-XhPaUO8W8oc4thQ",
+    "wikiPageName": "露草なぎ/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "雪紫誉",
+    "youtubeChannelId": "UCdbYinKlpkB_uMt_wPmYcsw",
+    "wikiPageName": "雪紫誉/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "無月いお",
+    "youtubeChannelId": "UC2X_mAVGw8e3N9JQZZDVBfQ",
+    "wikiPageName": "無月いお/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "四葉みっけ",
+    "youtubeChannelId": "UCObfu1e9xeIzisKCslx_XQA",
+    "wikiPageName": "四葉みっけ/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "火狐むい",
+    "youtubeChannelId": "UCaolaxqG55OJhU8qwRHHtQg",
+    "wikiPageName": "火狐むい/動画一覧",
+    "enabled": true
+  },
+  {
+    "name": "ニコ・ダークウェル",
+    "youtubeChannelId": "UCwSq7LbTyR1lXLJphsHKy2A",
+    "wikiPageName": "ニコ・ダークウェル/動画一覧",
     "enabled": true
   }
 ]
