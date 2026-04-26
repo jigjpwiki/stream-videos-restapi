@@ -25,16 +25,38 @@ function sanitizeTitle(title) {
 }
 
 /**
+ * 動画の基準日時文字列を返す
+ * - liveArchive: actualStartTime 優先、なければ publishedAt
+ * - その他: publishedAt
+ * @param {{ videoType: string, actualStartTime: string|null, publishedAt: string }} video
+ * @returns {string}
+ */
+function getBaseDateStr(video) {
+  if (video.videoType === 'liveArchive' && video.actualStartTime) {
+    return video.actualStartTime;
+  }
+  return video.publishedAt;
+}
+
+/**
+ * 日付文字列を JST の Date に変換する
+ * @param {string} dateStr
+ * @returns {Date}
+ */
+function toJST(dateStr) {
+  const d = new Date(dateStr);
+  return new Date(d.getTime() + 9 * 60 * 60 * 1000);
+}
+
+/**
  * 動画1件のWIKI記法行を生成する
  *   -MM/DD &color(red){■};[[タイトル:URL]]
- * @param {{ title: string, url: string, publishedAt: string }} video
+ * @param {{ title: string, url: string, videoType: string, publishedAt: string, actualStartTime: string|null }} video
  * @returns {string}
  */
 export function formatVideoLine(video) {
-  const date = new Date(video.publishedAt);
-  // JST (UTC+9) に変換
-  const jstOffset = 9 * 60;
-  const jstDate = new Date(date.getTime() + jstOffset * 60 * 1000);
+  const baseDateStr = getBaseDateStr(video);
+  const jstDate = toJST(baseDateStr);
   const mm = String(jstDate.getUTCMonth() + 1).padStart(2, '0');
   const dd = String(jstDate.getUTCDate()).padStart(2, '0');
 
@@ -464,12 +486,18 @@ export function insertVideoIntoPage(pageText, video) {
   const secEnd = findSectionEnd(lines, secStart);
   const videoLine = formatVideoLine(video);
 
-  // JST 日付
-  const date = new Date(video.publishedAt);
-  const jstOffset = 9 * 60;
-  const jstDate = new Date(date.getTime() + jstOffset * 60 * 1000);
+  // JST 日付（liveArchive は actualStartTime 優先）
+  const baseDateStr = getBaseDateStr(video);
+  const jstDate = toJST(baseDateStr);
   const year = jstDate.getUTCFullYear();
   const month = jstDate.getUTCMonth() + 1;
+
+  const jstDateStr = `${year}-${String(month).padStart(2, '0')}-${String(jstDate.getUTCDate()).padStart(2, '0')}`;
+  const mm = String(month).padStart(2, '0');
+  const dd = String(jstDate.getUTCDate()).padStart(2, '0');
+  console.log(
+    `[DEBUG] videoId=${video.videoId} usedDateUTC=${baseDateStr} usedDateJST=${jstDateStr} MM/DD=${mm}/${dd}`
+  );
 
   switch (video.videoType) {
     case 'liveArchive':
