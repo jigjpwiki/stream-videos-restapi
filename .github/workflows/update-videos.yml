@@ -2,8 +2,8 @@ name: Update Videos
 
 on:
   schedule:
-    # 1時間ごとに実行 (UTC)
-    - cron: "0 * * * *"
+    # 2時間ごとに実行 (UTC)
+    - cron: "0 */2 * * *"
   workflow_dispatch:
     inputs:
       dry_run:
@@ -17,11 +17,11 @@ on:
       batch_size:
         description: "1回の処理ライバー数"
         required: false
-        default: "5"
+        default: "30"
       days_back:
         description: "取得対象の過去日数"
         required: false
-        default: "14"
+        default: "3"
 
 jobs:
   update:

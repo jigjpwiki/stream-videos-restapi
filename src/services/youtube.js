@@ -15,7 +15,7 @@ const YOUTUBE_API_BASE = 'https://www.googleapis.com/youtube/v3';
  */
 function parseDurationToSeconds(duration) {
   if (!duration) return 0;
-  const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+  const match = duration.match(/^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?$/);
   if (!match) return 0;
   const hours = parseInt(match[1] ?? '0', 10);
   const minutes = parseInt(match[2] ?? '0', 10);
@@ -27,22 +27,28 @@ const SHORTS_DURATION_THRESHOLD = 180; // 秒
 
 /**
  * 動画種別を判定する
- * 1. liveArchive（最優先）: actualEndTime がある
- * 2. shorts: duration が 180秒以下
- * 3. normal: それ以外
- * @param {{ durationSeconds: number, actualEndTime: string|null }} video
- * @returns {{ videoType: 'normal'|'shorts'|'liveArchive' }}
+ * 1. liveArchive（最優先）: actualStartTime と actualEndTime が両方ある
+ * 2. shorts: タイトルに #shorts または #short を含む（大文字小文字不問）
+ * 3. normal: duration が 180秒超
+ * 4. uncategorized: duration が 180秒以下かつ上記タグなし（Shorts か通常投稿か確定不能）
+ * @param {{ durationSeconds: number, actualStartTime: string|null, actualEndTime: string|null, title: string }} video
+ * @returns {{ videoType: 'normal'|'shorts'|'liveArchive'|'uncategorized' }}
  */
 function determineVideoType(video) {
-  if (video.actualEndTime) {
+  if (video.actualStartTime && video.actualEndTime) {
     return { videoType: 'liveArchive' };
   }
 
-  if (video.durationSeconds > 0 && video.durationSeconds <= SHORTS_DURATION_THRESHOLD) {
+  const title = (video.title ?? '').toLowerCase();
+  if (title.includes('#shorts') || title.includes('#short')) {
     return { videoType: 'shorts' };
   }
 
-  return { videoType: 'normal' };
+  if (video.durationSeconds > SHORTS_DURATION_THRESHOLD) {
+    return { videoType: 'normal' };
+  }
+
+  return { videoType: 'uncategorized' };
 }
 
 /**
@@ -146,7 +152,7 @@ async function fetchVideoDetails(videoIds, apiKey) {
       video.videoType = videoType;
 
       console.log(
-        `[DEBUG] videoId=${video.videoId} duration=${video.durationSeconds}s videoType=${videoType}`
+        `[DEBUG] videoId=${video.videoId} rawDuration=${video.duration} duration=${video.durationSeconds}s videoType=${videoType}`
       );
 
       results.push(video);

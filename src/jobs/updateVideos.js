@@ -30,10 +30,11 @@ const SECTION_LABEL = {
   liveArchive: 'ライブ配信（アーカイブ）',
   normal: '投稿動画',
   shorts: 'Shorts動画',
+  uncategorized: 'Shorts・投稿動画未分類（自動取得）',
 };
 
 const DRY_RUN = process.env.DRY_RUN === 'true';
-const DAYS_BACK = parseInt(process.env.DAYS_BACK ?? '14', 10);
+const DAYS_BACK = parseInt(process.env.DAYS_BACK ?? '3', 10);
 
 /**
  * 1ライバー分の動画更新処理
@@ -122,7 +123,10 @@ export async function updateLiverVideos(liver, apiKey) {
       const month = jstDate.getUTCMonth() + 1;
       const sectionLabel = SECTION_LABEL[video.videoType] ?? video.videoType;
 
-      const locationParts = [sectionLabel, `${year}年`];
+      const locationParts = [sectionLabel];
+      if (video.videoType !== 'uncategorized') {
+        locationParts.push(`${year}年`);
+      }
       if (video.videoType === 'liveArchive' || video.videoType === 'shorts') {
         locationParts.push(`${month}月`);
       }

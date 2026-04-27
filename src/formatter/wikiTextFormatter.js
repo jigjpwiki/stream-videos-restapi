@@ -9,6 +9,7 @@ const SECTION_HEADERS = {
   liveArchive: '**ライブ配信（アーカイブ） [#archives]',
   normal: '**投稿動画 [#edited_videos]',
   shorts: '***Shorts動画 [#shorts]',
+  uncategorized: '***Shorts・投稿動画未分類（自動取得） [#uncategorized]',
 };
 
 /**
@@ -720,6 +721,75 @@ function insertIntoShortsSection(lines, secStart, secEnd, videoLine, year, month
 }
 
 // ---------------------------------------------------------------------------
+// 未分類セクション自動作成・挿入
+// ---------------------------------------------------------------------------
+
+/**
+ * 未分類セクションが存在しない場合、***Shorts動画 [#shorts] の直後に自動作成する。
+ * @param {string[]} lines ページ行配列（破壊的に変更）
+ * @returns {number} 未分類セクション見出し行のインデックス
+ */
+function ensureUncategorizedSection(lines) {
+  const uncatHeader = SECTION_HEADERS.uncategorized;
+  const idx = findLineIndex(lines, uncatHeader);
+  if (idx !== -1) return idx;
+
+  // ***Shorts動画 [#shorts] セクションの終端を探す
+  const shortsHeader = SECTION_HEADERS.shorts;
+  const shortsIdx = findLineIndex(lines, shortsHeader);
+  const insertAt = shortsIdx !== -1 ? findSectionEnd(lines, shortsIdx) : lines.length;
+
+  const newSection = [
+    uncatHeader,
+    '#fold(未分類動画一覧,close){{',
+    '}}',
+    '',
+  ];
+  lines.splice(insertAt, 0, ...newSection);
+  return insertAt;
+}
+
+/**
+ * 未分類セクションに動画行を挿入する。
+ *
+ * 構造:
+ *   ***Shorts・投稿動画未分類（自動取得） [#uncategorized]
+ *   #fold(未分類動画一覧,close){{
+ *   -MM/DD ...
+ *   }}
+ *
+ * @param {string[]} lines
+ * @param {number} secStart
+ * @param {number} secEnd
+ * @param {string} videoLine
+ * @param {number} newSortKey ソートキー（ms）
+ */
+function insertIntoUncategorizedSection(lines, secStart, secEnd, videoLine, newSortKey) {
+  const foldLabel = '未分類動画一覧';
+  // newSortKey は toJST(baseDateStr).getTime() = UTC+9h 空間のタイムスタンプ
+  const year = new Date(newSortKey).getUTCFullYear();
+
+  const foldResult = findFold(lines, foldLabel, secStart + 1, secEnd);
+
+  if (foldResult) {
+    let foldIdx = foldResult.idx;
+    if (foldResult.wasComment) {
+      uncommentFoldBlock(lines, foldIdx, secEnd);
+    }
+    const closeIdx = findFoldClose(lines, foldIdx);
+    insertSorted(lines, foldIdx, closeIdx, year, videoLine, newSortKey);
+  } else {
+    const newFold = [
+      '#fold(未分類動画一覧,close){{',
+      videoLine,
+      '}}',
+      '',
+    ];
+    lines.splice(secEnd, 0, ...newFold);
+  }
+}
+
+// ---------------------------------------------------------------------------
 // 重複チェック
 // ---------------------------------------------------------------------------
 
@@ -753,9 +823,15 @@ export function insertVideoIntoPage(pageText, video) {
 
   const lines = pageText.split('\n');
 
-  const secStart = findLineIndex(lines, headerText);
-  if (secStart === -1) {
-    return null; // セクション未検出 → 更新しない
+  let secStart;
+  if (video.videoType === 'uncategorized') {
+    // 未分類セクションは存在しない場合に自動作成する
+    secStart = ensureUncategorizedSection(lines);
+  } else {
+    secStart = findLineIndex(lines, headerText);
+    if (secStart === -1) {
+      return null; // セクション未検出 → 更新しない
+    }
   }
 
   const secEnd = findSectionEnd(lines, secStart);
@@ -787,6 +863,9 @@ export function insertVideoIntoPage(pageText, video) {
       break;
     case 'shorts':
       insertIntoShortsSection(lines, secStart, secEnd, videoLine, year, month, newSortKey);
+      break;
+    case 'uncategorized':
+      insertIntoUncategorizedSection(lines, secStart, secEnd, videoLine, newSortKey);
       break;
     default:
       return null;

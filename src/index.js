@@ -5,9 +5,9 @@
  *   YOUTUBE_API_KEY   - YouTube Data API v3 キー
  *   WIKI_API_BASE_URL - WIKIWIKI REST API ベース URL
  *   WIKI_PASSWORD     - WIKIWIKI API トークン
- *   BATCH_SIZE        - 1回の実行で処理するライバー数 (デフォルト: 5)
+ *   BATCH_SIZE        - 1回の実行で処理するライバー数 (デフォルト: 30)
  *   DRY_RUN           - "true" にすると Wiki 更新を行わない
- *   DAYS_BACK         - 取得対象期間（日数、デフォルト: 14）
+ *   DAYS_BACK         - 取得対象期間（日数、デフォルト: 3）
  */
 
 import 'dotenv/config';
@@ -29,7 +29,7 @@ try {
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const LIVERS_FILE = path.resolve(__dirname, 'config/livers.json');
-const BATCH_SIZE = parseInt(process.env.BATCH_SIZE ?? '5', 10);
+const BATCH_SIZE = parseInt(process.env.BATCH_SIZE ?? '30', 10);
 
 async function main() {
   console.log('[INFO] Start update job');
