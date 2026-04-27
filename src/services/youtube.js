@@ -26,6 +26,30 @@ function parseDurationToSeconds(duration) {
 const SHORTS_DURATION_THRESHOLD = 180; // 秒
 
 /**
+ * 開始前・配信中など、記録対象外の動画かどうかを判定する
+ * @param {{ snippet: object, liveStreamingDetails: object }} item YouTube API の raw item
+ * @returns {{ skip: boolean, reason: string|null }}
+ */
+function shouldSkipVideo(item) {
+  const liveContent = item.snippet?.liveBroadcastContent;
+  const liveDetails = item.liveStreamingDetails;
+
+  if (liveContent === 'upcoming') {
+    return { skip: true, reason: 'upcoming' };
+  }
+
+  if (liveDetails?.scheduledStartTime && !liveDetails?.actualStartTime) {
+    return { skip: true, reason: 'not-started' };
+  }
+
+  if (liveDetails?.actualStartTime && !liveDetails?.actualEndTime) {
+    return { skip: true, reason: 'live-not-ended' };
+  }
+
+  return { skip: false, reason: null };
+}
+
+/**
  * 動画種別を判定する
  * 1. liveArchive（最優先）: actualStartTime と actualEndTime が両方ある
  * 2. shorts: タイトルに #shorts または #short を含む（大文字小文字不問）
@@ -128,6 +152,13 @@ async function fetchVideoDetails(videoIds, apiKey) {
       const liveDetails = item.liveStreamingDetails ?? {};
       const durationSeconds = parseDurationToSeconds(contentDetails.duration);
 
+      // 開始前・配信中など記録対象外はスキップ
+      const { skip, reason } = shouldSkipVideo(item);
+      if (skip) {
+        console.log(`[DEBUG] skipped videoId=${item.id} reason=${reason}`);
+        continue;
+      }
+
       const video = {
         videoId: item.id,
         title: snippet.title ?? '',
@@ -142,11 +173,6 @@ async function fetchVideoDetails(videoIds, apiKey) {
         actualEndTime: liveDetails.actualEndTime ?? null,
         videoType: null,
       };
-
-      // ライブ配信中はスキップ
-      if (snippet.liveBroadcastContent === 'live') {
-        continue;
-      }
 
       const { videoType } = determineVideoType(video);
       video.videoType = videoType;
