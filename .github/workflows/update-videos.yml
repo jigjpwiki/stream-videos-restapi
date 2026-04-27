@@ -2,8 +2,8 @@ name: Update Videos
 
 on:
   schedule:
-    # 1時間ごとに実行 (UTC)
-    - cron: "0 * * * *"
+    # 2時間ごとに実行 (UTC)
+    - cron: "0 */2 * * *"
   workflow_dispatch:
     inputs:
       dry_run:
