@@ -33,7 +33,7 @@ const SECTION_LABEL = {
 };
 
 const DRY_RUN = process.env.DRY_RUN === 'true';
-const DAYS_BACK = parseInt(process.env.DAYS_BACK ?? '14', 10);
+const DAYS_BACK = parseInt(process.env.DAYS_BACK ?? '3', 10);
 
 /**
  * 1ライバー分の動画更新処理
