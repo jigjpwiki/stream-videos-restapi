@@ -451,6 +451,185 @@ function insertIntoNormalSection(lines, secStart, secEnd, videoLine, year, newSo
 }
 
 // ---------------------------------------------------------------------------
+// Shorts 月fold open/close 調整
+// ---------------------------------------------------------------------------
+
+/**
+ * Shorts 年fold直下の全月foldのopen/closeを調整する。
+ * 当月のみ open、それ以外は close。
+ * @param {string[]} lines
+ * @param {number} yearFoldIdx  年fold行のインデックス
+ * @param {number} year         年fold の年
+ * @param {number} nowYear      現在年（JST）
+ * @param {number} nowMonth     現在月（JST, 1-12）
+ */
+function adjustShortsMonthFolds(lines, yearFoldIdx, year, nowYear, nowMonth) {
+  const yearCloseIdx = findFoldClose(lines, yearFoldIdx);
+  let depth = 0;
+
+  for (let i = yearFoldIdx + 1; i < yearCloseIdx; i++) {
+    const t = lines[i].trim();
+
+    // 月fold の open/close を depth=0（年fold直下）でのみ調整
+    if (depth === 0 && lines[i].startsWith('#fold(')) {
+      const label = parseFoldLabel(lines[i]);
+      if (label && /^\d+月$/.test(label)) {
+        const mm = parseInt(label, 10);
+        const isCurrentMonth = year === nowYear && mm === nowMonth;
+        console.log(
+          `[DEBUG] Shorts month fold: ${year}/${String(mm).padStart(2, '0')} open=${isCurrentMonth}`
+        );
+        if (isCurrentMonth) {
+          lines[i] = openFold(lines[i]);
+        } else {
+          lines[i] = closeFold(lines[i]);
+        }
+      }
+    }
+
+    // depth 更新（チェックの後）
+    if (t.endsWith('{{') || t.endsWith('{{{')) depth++;
+    if (t === '}}' || t === '}}}') {
+      if (depth > 0) depth--;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Shorts 年fold open/close 調整
+// ---------------------------------------------------------------------------
+
+/**
+ * Shorts セクション内の全年foldのopen/closeを調整する。
+ * 現在年のみ open、それ以外は close。
+ * @param {string[]} lines
+ * @param {number} secStart
+ * @param {number} secEnd
+ * @param {number} nowYear
+ */
+function adjustShortsYearFolds(lines, secStart, secEnd, nowYear) {
+  for (let i = secStart + 1; i < secEnd; i++) {
+    if (!lines[i].startsWith('#fold(')) continue;
+    const label = parseFoldLabel(lines[i]);
+    if (!label || !/^\d{4}年$/.test(label)) continue;
+    const foldYear = parseInt(label, 10);
+    const isCurrentYear = foldYear === nowYear;
+    if (isCurrentYear) {
+      lines[i] = openFold(lines[i]);
+    } else {
+      lines[i] = closeFold(lines[i]);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Shorts 年fold直下の誤配置動画行を修正
+// ---------------------------------------------------------------------------
+
+/**
+ * 年fold直下に誤って置かれた動画行（-MM/DD ...）を検出し、
+ * 対応する月fold内に移動する。
+ * @param {string[]} lines
+ * @param {number} yearFoldIdx  年fold行のインデックス
+ * @param {number} year         年fold の年
+ * @returns {number} 修正した行数
+ */
+function fixShortsYearLevelLines(lines, yearFoldIdx, year) {
+  const yearCloseIdx = findFoldClose(lines, yearFoldIdx);
+  let depth = 0;
+  const misplaced = []; // { idx, mm, dd, line }
+
+  for (let i = yearFoldIdx + 1; i < yearCloseIdx; i++) {
+    const t = lines[i].trim();
+
+    if (t.endsWith('{{') || t.endsWith('{{{')) {
+      depth++;
+      continue;
+    }
+    if (t === '}}' || t === '}}}') {
+      if (depth > 0) depth--;
+      continue;
+    }
+    if (depth === 0) {
+      const m = lines[i].match(/^-(\d{2})\/(\d{2})[ \t]/);
+      if (m) {
+        misplaced.push({
+          idx: i,
+          mm: parseInt(m[1], 10),
+          dd: parseInt(m[2], 10),
+          line: lines[i],
+        });
+      }
+    }
+  }
+
+  if (misplaced.length === 0) return 0;
+
+  // 逆順に削除（インデックスずれ防止）
+  for (let i = misplaced.length - 1; i >= 0; i--) {
+    lines.splice(misplaced[i].idx, 1);
+  }
+
+  // 月別にグループ化して月fold内へ挿入
+  const byMonth = new Map();
+  for (const item of misplaced) {
+    if (!byMonth.has(item.mm)) byMonth.set(item.mm, []);
+    byMonth.get(item.mm).push(item);
+  }
+
+  for (const [mm, entries] of byMonth) {
+    const monthLabel = `${mm}月`;
+    const freshYearClose = findFoldClose(lines, yearFoldIdx);
+    const freshFold = findFold(lines, monthLabel, yearFoldIdx + 1, freshYearClose);
+
+    if (freshFold) {
+      // 既存月foldへ追記してソート
+      const mFoldIdx = freshFold.idx;
+      let mClose = findFoldClose(lines, mFoldIdx);
+
+      // 既存の動画行を収集・削除
+      const existingIdxs = [];
+      for (let k = mFoldIdx + 1; k < mClose; k++) {
+        if (/^-\d{2}\/\d{2}[ \t]/.test(lines[k])) existingIdxs.push(k);
+      }
+      const existingLines = existingIdxs.map((k) => lines[k]);
+      for (let k = existingIdxs.length - 1; k >= 0; k--) {
+        lines.splice(existingIdxs[k], 1);
+      }
+      mClose -= existingIdxs.length;
+
+      // 全動画行をソートして挿入
+      const allVideos = [...existingLines, ...entries.map((e) => e.line)];
+      allVideos.sort((a, b) => {
+        const ma = a.match(/^-(\d{2})\/(\d{2})/);
+        const mb = b.match(/^-(\d{2})\/(\d{2})/);
+        if (!ma || !mb) return 0;
+        return (
+          Date.UTC(year, parseInt(ma[1], 10) - 1, parseInt(ma[2], 10)) -
+          Date.UTC(year, parseInt(mb[1], 10) - 1, parseInt(mb[2], 10))
+        );
+      });
+      lines.splice(mClose, 0, ...allVideos);
+    } else {
+      // 月foldが存在しないので新規作成
+      const freshClose = findFoldClose(lines, yearFoldIdx);
+      const videoLines = [...entries]
+        .sort((a, b) => Date.UTC(year, a.mm - 1, a.dd) - Date.UTC(year, b.mm - 1, b.dd))
+        .map((e) => e.line);
+      const newFold = [
+        `#fold(${monthLabel}){{`,
+        `''${monthLabel}''`,
+        ...videoLines,
+        '}}',
+      ];
+      lines.splice(freshClose, 0, ...newFold);
+    }
+  }
+
+  return misplaced.length;
+}
+
+// ---------------------------------------------------------------------------
 // Shorts 挿入
 // ---------------------------------------------------------------------------
 
@@ -466,12 +645,18 @@ function insertIntoNormalSection(lines, secStart, secEnd, videoLine, year, newSo
  *   -MM/DD ...
  *   }}
  *   }}}
+ *
+ * 動画行は必ず月fold内（月foldの閉じ `}}` 直前）に挿入される。
+ * 年fold直下に誤配置された行があれば対応する月foldへ移動する。
  */
 function insertIntoShortsSection(lines, secStart, secEnd, videoLine, year, month, newSortKey) {
   const yearLabel = `${year}年`;
   const monthLabel = `${month}月`;
+  const nowJSTDate = nowJST();
+  const nowYear = nowJSTDate.getUTCFullYear();
+  const nowMonth = nowJSTDate.getUTCMonth() + 1;
 
-  // --- 年 outer fold を探す / なければ作成 ---
+  // --- Step 1: 年 outer fold を探す / なければ作成 ---
   const yearFoldResult = findFold(lines, yearLabel, secStart + 1, secEnd);
   let yearFoldIdx;
 
@@ -479,30 +664,10 @@ function insertIntoShortsSection(lines, secStart, secEnd, videoLine, year, month
     yearFoldIdx = yearFoldResult.idx;
     if (yearFoldResult.wasComment) {
       uncommentFoldBlock(lines, yearFoldIdx, secEnd);
-    }
-    lines[yearFoldIdx] = openFold(lines[yearFoldIdx]);
-
-    // 前年 fold を close
-    for (let i = secStart + 1; i < yearFoldIdx; i++) {
-      if (lines[i].startsWith('#fold(') && lines[i].includes(',open)')) {
-        const lv = parseFoldLabel(lines[i]);
-        if (lv && lv.endsWith('年')) {
-          lines[i] = closeFold(lines[i]);
-        }
-      }
+      // uncommentFoldBlock は行数を変えないため secEnd は有効のまま
     }
   } else {
-    // 既存年 fold を close
-    for (let i = secStart + 1; i < secEnd; i++) {
-      if (lines[i].startsWith('#fold(') && lines[i].includes(',open)')) {
-        const lv = parseFoldLabel(lines[i]);
-        if (lv && lv.endsWith('年')) {
-          lines[i] = closeFold(lines[i]);
-        }
-      }
-    }
-
-    // 新年 fold を末尾に挿入 (中身は後で追加するので空で)
+    // 新年 fold を secEnd 直前に挿入（中身は後で追加するので空で）
     const newYearFold = [
       `#fold(${yearLabel},open){{{`,
       `''${yearLabel}''`,
@@ -517,51 +682,41 @@ function insertIntoShortsSection(lines, secStart, secEnd, videoLine, year, month
   // year fold の閉じ括弧 }}} を探す
   const yearCloseIdx = findFoldClose(lines, yearFoldIdx);
 
-  // --- 月 inner fold を探す ---
-  const monthFoldResult = findFold(
-    lines,
-    monthLabel,
-    yearFoldIdx + 1,
-    yearCloseIdx
-  );
+  // --- Step 2: 月 inner fold を探す / 動画行を挿入 ---
+  const monthFoldResult = findFold(lines, monthLabel, yearFoldIdx + 1, yearCloseIdx);
 
   if (monthFoldResult) {
-    let monthFoldIdx = monthFoldResult.idx;
+    const monthFoldIdx = monthFoldResult.idx;
     if (monthFoldResult.wasComment) {
       uncommentFoldBlock(lines, monthFoldIdx, yearCloseIdx);
+      // uncommentFoldBlock は行数を変えないため yearCloseIdx は有効のまま
     }
-    lines[monthFoldIdx] = openFold(lines[monthFoldIdx]);
-
-    // 当月以外を close
-    for (let i = yearFoldIdx + 1; i < yearCloseIdx; i++) {
-      if (
-        lines[i].startsWith('#fold(') &&
-        lines[i].includes(',open)') &&
-        i !== monthFoldIdx
-      ) {
-        lines[i] = closeFold(lines[i]);
-      }
-    }
-
+    // 月fold閉じ `}}` の直前にソート挿入（月foldの外には一切置かない）
     const monthCloseIdx = findFoldClose(lines, monthFoldIdx);
     insertSorted(lines, monthFoldIdx, monthCloseIdx, year, videoLine, newSortKey);
   } else {
-    // 当月以外 close
-    for (let i = yearFoldIdx + 1; i < yearCloseIdx; i++) {
-      if (lines[i].startsWith('#fold(') && lines[i].includes(',open)')) {
-        lines[i] = closeFold(lines[i]);
-      }
-    }
-
-    // 月 fold を year fold の閉じ括弧の直前に追加
+    // 月 fold を year fold の閉じ括弧の直前に新規作成（videoLine を内包）
     const newMonthFold = [
-      `#fold(${monthLabel},open){{`,
+      `#fold(${monthLabel}){{`,
       `''${monthLabel}''`,
       videoLine,
       '}}',
     ];
     lines.splice(yearCloseIdx, 0, ...newMonthFold);
   }
+
+  // --- Step 3: 年fold直下の誤配置動画行を修正 ---
+  const fixedCount = fixShortsYearLevelLines(lines, yearFoldIdx, year);
+  if (fixedCount > 0) {
+    console.log(`[DEBUG] Shorts misplaced lines fixed: ${fixedCount}`);
+  }
+
+  // --- Step 4: 月fold の open/close を一括調整（当月のみ open）---
+  adjustShortsMonthFolds(lines, yearFoldIdx, year, nowYear, nowMonth);
+
+  // --- Step 5: 年fold の open/close を一括調整（現在年のみ open）---
+  const freshSecEnd = findSectionEnd(lines, secStart);
+  adjustShortsYearFolds(lines, secStart, freshSecEnd, nowYear);
 }
 
 // ---------------------------------------------------------------------------
