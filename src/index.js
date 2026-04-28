@@ -34,6 +34,12 @@ const BATCH_SIZE = parseInt(process.env.BATCH_SIZE ?? '30', 10);
 async function main() {
   console.log('[INFO] Start update job');
 
+  const treatUncategorizedAsShorts = process.env.TREAT_UNCATEGORIZED_AS_SHORTS === 'true';
+  console.log(`[INFO] TREAT_UNCATEGORIZED_AS_SHORTS=${treatUncategorizedAsShorts}`);
+  if (treatUncategorizedAsShorts) {
+    console.log('[INFO] Uncategorized short videos will be inserted into Shorts section');
+  }
+
   // 必須環境変数チェック
   const apiKey = process.env.YOUTUBE_API_KEY;
   if (!apiKey) {

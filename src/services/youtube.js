@@ -25,6 +25,9 @@ function parseDurationToSeconds(duration) {
 
 const SHORTS_DURATION_THRESHOLD = 180; // 秒
 
+const treatUncategorizedAsShorts =
+  process.env.TREAT_UNCATEGORIZED_AS_SHORTS === 'true';
+
 /**
  * 開始前・配信中など、記録対象外の動画かどうかを判定する
  * @param {{ snippet: object, liveStreamingDetails: object }} item YouTube API の raw item
@@ -72,7 +75,7 @@ function determineVideoType(video) {
     return { videoType: 'normal' };
   }
 
-  return { videoType: 'uncategorized' };
+  return { videoType: treatUncategorizedAsShorts ? 'shorts' : 'uncategorized' };
 }
 
 /**

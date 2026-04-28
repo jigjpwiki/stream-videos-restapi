@@ -22,6 +22,14 @@ on:
         description: "取得対象の過去日数"
         required: false
         default: "3"
+      treat_uncategorized_as_shorts:
+        description: "短尺タグなし動画をShortsとして扱う"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
 
 jobs:
   update:
@@ -51,6 +59,7 @@ jobs:
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
           BATCH_SIZE: ${{ github.event.inputs.batch_size || '5' }}
           DAYS_BACK: ${{ github.event.inputs.days_back || '14' }}
+          TREAT_UNCATEGORIZED_AS_SHORTS: ${{ github.event.inputs.treat_uncategorized_as_shorts || 'false' }}
         run: npm run update
 
       - name: Commit data files
