@@ -40,7 +40,11 @@ export function classify(records, now, config = {}) {
     const person = config[`${row.platform}:${row.identity}`];
     const item = { ...row, name: person?.displayName || row.name, facePage: person?.facePage, menuOrder: person?.menuOrder ?? Number.MAX_SAFE_INTEGER };
     if (row.status === 'live') live.push(item);
-    else if (row.status === 'upcoming' && Date.parse(row.date) > +now && day(row.date) === day(now)) upcoming.push(item);
+    else if (row.status === 'upcoming' && day(row.date) === day(now)) {
+      // YouTube status has been rechecked by verify(): lateness alone is not an end/cancellation.
+      const waitingForStart = row.platform === 'youtube' && Date.parse(row.date) <= +now;
+      if (waitingForStart || Date.parse(row.date) > +now) upcoming.push({ ...item, waitingForStart });
+    }
   }
   const sorted = rows => rows.sort((a, b) => Date.parse(a.date) - Date.parse(b.date) || a.menuOrder - b.menuOrder || `${a.platform}:${a.id}`.localeCompare(`${b.platform}:${b.id}`, 'en')).slice(0, 10);
   return { live: sorted(live), upcoming: sorted(upcoming) };
