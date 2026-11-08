@@ -8,8 +8,9 @@ export function formatRows(rows, empty) {
     const time = new Intl.DateTimeFormat('ja-JP', { timeZone: 'Asia/Tokyo', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(new Date(row.date)).replace(':', '時') + '分～';
     const icon = row.platform === 'youtube' ? 'youtube,#ff0033' : 'twitch,#9246ff';
     if (row.facePage && !/^[\p{L}\p{N} _・ー。]+\/face\.png$/u.test(row.facePage)) throw new Error('Unsafe face path');
+    const waiting = row.waitingForStart ? '[開始待ち] ' : '';
     const face = row.facePage ? `&ref(${row.facePage},nolink,25x25); ` : '';
-    return `-&fa(fa-brands fa-${icon}); ${time} ${face}[[${escapeName(row.name)}>${row.url}]]`;
+    return `-&fa(fa-brands fa-${icon}); ${time} ${waiting}${face}[[${escapeName(row.name)}>${row.url}]]`;
   }).join('\n');
 }
 export const markers = ['// JIGWIKI_LIVE_BEGIN', '// JIGWIKI_LIVE_END', '// JIGWIKI_UPCOMING_BEGIN', '// JIGWIKI_UPCOMING_END'];
