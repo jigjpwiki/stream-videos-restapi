@@ -1,0 +1,26 @@
+//自動更新
+
+#responsive_layout_item(12){{{{
+#cssbox("margin-block: 1em; padding-bottom: 3px; margin-inline: auto; background: #FAFAFA;"){{{
+***現在配信中 [#geb25313]
+#cssbox("margin: 0.5em 0.5em;"){{
+// JIGWIKI_LIVE_BEGIN
+-&fa(fa-brands fa-youtube,#ff0033); 19時20分～ &ref(変幻リメ/face.png,nolink,25x25); [[変幻リメ>https://www.youtube.com/watch?v=84C0pu7_ek0]]
+-&fa(fa-brands fa-youtube,#ff0033); 20時24分～ &ref(橙葉ぽん/face.png,nolink,25x25); [[橙葉ぽん>https://www.youtube.com/watch?v=fgwlT606FK8]]
+-&fa(fa-brands fa-youtube,#ff0033); 21時00分～ &ref(愛乃宮ゆめ/face.png,nolink,25x25); [[愛乃宮ゆめ>https://www.youtube.com/watch?v=M7BgYxpx3Z0]]
+-&fa(fa-brands fa-youtube,#ff0033); 23時00分～ &ref(牡丹雪/face.png,nolink,25x25); [[牡丹雪>https://www.youtube.com/watch?v=VaQdwCn0W_M]]
+// JIGWIKI_LIVE_END
+}}
+***このあと配信 [#ve9bd9f9]
+#cssbox("margin: 0.5em 0.5em;"){{
+// JIGWIKI_UPCOMING_BEGIN
+-&fa(fa-brands fa-youtube,#ff0033); 02時00分～ &ref(相栖るじゅ/face.png,nolink,25x25); [[相栖るじゅ>https://www.youtube.com/watch?v=cciBBtG7AOo]]
+-&fa(fa-brands fa-youtube,#ff0033); 06時30分～ &ref(桜庭羽奈/face.png,nolink,25x25); [[桜庭羽奈>https://www.youtube.com/watch?v=ID_orBCUb7c]]
+-&fa(fa-brands fa-youtube,#ff0033); 07時00分～ &ref(天辻ゆらぐ/face.png,nolink,25x25); [[天辻ゆらぐ>https://www.youtube.com/watch?v=MACeJB7vc8g]]
+-&fa(fa-brands fa-youtube,#ff0033); 07時00分～ &ref(犬丸なでこ/face.png,nolink,25x25); [[犬丸なでこ>https://www.youtube.com/watch?v=aGhcjQriMMg]]
+-&fa(fa-brands fa-youtube,#ff0033); 07時00分～ &ref(花晴りら/face.png,nolink,25x25); [[花晴りら>https://www.youtube.com/watch?v=SQWZDsUmCXY]]
+// JIGWIKI_UPCOMING_END
+}}
+CENTER:[[すべての配信予定を見る（じぐじゅーる）>https://www.jigdule.jp/]]
+}}}
+}}}}

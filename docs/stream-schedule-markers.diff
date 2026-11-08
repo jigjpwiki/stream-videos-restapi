@@ -1,0 +1,18 @@
+--- FrontPage/配信スケジュール (before)
++++ FrontPage/配信スケジュール (markers only)
+@@ -4,11 +4,15 @@
+ #cssbox("margin-block: 1em; padding-bottom: 3px; margin-inline: auto; background: #FAFAFA;"){{{
+ ***現在配信中 [#geb25313]
+ #cssbox("margin: 0.5em 0.5em;"){{
++// JIGWIKI_LIVE_BEGIN
+ CENTER:&color(red){こちらの機能は調整中です};
++// JIGWIKI_LIVE_END
+ }}
+ ***このあと配信 [#ve9bd9f9]
+ #cssbox("margin: 0.5em 0.5em;"){{
++// JIGWIKI_UPCOMING_BEGIN
+ CENTER:&color(red){こちらの機能は調整中です};
++// JIGWIKI_UPCOMING_END
+ }}
+ CENTER:[[すべての配信予定を見る（じぐじゅーる）>https://www.jigdule.jp/]]
+ }}}

@@ -1,0 +1,20 @@
+//自動更新
+
+#responsive_layout_item(12){{{{
+#cssbox("margin-block: 1em; padding-bottom: 3px; margin-inline: auto; background: #FAFAFA;"){{{
+***現在配信中 [#geb25313]
+#cssbox("margin: 0.5em 0.5em;"){{
+// JIGWIKI_LIVE_BEGIN
+-&fa(fa-brands fa-twitch,#9246ff); 23時00分～ &ref(真昼ねる/face.png,nolink,25x25); [[真昼ねる>https://www.twitch.tv/mahiruneru]]
+-&fa(fa-brands fa-youtube,#ff0033); 12時00分～ &ref(真昼ねる/face.png,nolink,25x25); [[真昼ねる>https://www.youtube.com/watch?v=abcdefghijk]]
+// JIGWIKI_LIVE_END
+}}
+***このあと配信 [#ve9bd9f9]
+#cssbox("margin: 0.5em 0.5em;"){{
+// JIGWIKI_UPCOMING_BEGIN
+-&fa(fa-brands fa-youtube,#ff0033); 22時00分～ [[未登録の配信者>https://www.youtube.com/watch?v=lmnopqrstuv]]
+// JIGWIKI_UPCOMING_END
+}}
+CENTER:[[すべての配信予定を見る（じぐじゅーる）>https://www.jigdule.jp/]]
+}}}
+}}}}

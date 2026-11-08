@@ -1,0 +1,462 @@
+{
+  "youtube:UCI-8WyYqMymGPw9vg55HXDQ": {
+    "displayName": "真昼ねる",
+    "facePage": "真昼ねる/face.png",
+    "menuOrder": 0
+  },
+  "youtube:UCVI8oEcv0MArpjPdwlRgYRw": {
+    "displayName": "火乃晴るい",
+    "facePage": "火乃晴るい/face.png",
+    "menuOrder": 2
+  },
+  "youtube:UCOah55SQYynzPgQQ4wxuzkA": {
+    "displayName": "水透ユウ",
+    "facePage": "水透ユウ/face.png",
+    "menuOrder": 3
+  },
+  "youtube:UCpr-9ssUUgSb0EpDA8bRuTA": {
+    "displayName": "銘兎目あう",
+    "facePage": "銘兎目あう/face.png",
+    "menuOrder": 4
+  },
+  "youtube:UC5xSDiB2WG4pO_zUZ_t-n0Q": {
+    "displayName": "しーはむ",
+    "facePage": "しーはむ/face.png",
+    "menuOrder": 1
+  },
+  "youtube:UCvTAG-S8KykNcWTneGLNpnw": {
+    "displayName": "なかもとおまち",
+    "facePage": "なかもとおまち/face.png",
+    "menuOrder": 8
+  },
+  "youtube:UC1Eq7ExEH0XO380it8cZYZg": {
+    "displayName": "小澄くろまる",
+    "facePage": "小澄くろまる/face.png",
+    "menuOrder": 5
+  },
+  "youtube:UCgod8po0u4P5hdCsLhJWFPQ": {
+    "displayName": "猫吸はぴ",
+    "facePage": "猫吸はぴ/face.png",
+    "menuOrder": 6
+  },
+  "youtube:UC0aNUh8VfQwgqj0taB8MDpg": {
+    "displayName": "橙葉ぽん",
+    "facePage": "橙葉ぽん/face.png",
+    "menuOrder": 7
+  },
+  "youtube:UCPjtwOeRQV5EFkCwUycZsgw": {
+    "displayName": "秋桜しゅお",
+    "facePage": "秋桜しゅお/face.png",
+    "menuOrder": 9
+  },
+  "youtube:UCgvB9D0dJkYf-5wQb0WkUhA": {
+    "displayName": "八千代あさ",
+    "facePage": "八千代あさ/face.png",
+    "menuOrder": 82
+  },
+  "youtube:UC8ZvOnH9mScadm3NLIn-WDg": {
+    "displayName": "八千代よる",
+    "facePage": "八千代よる/face.png",
+    "menuOrder": 83
+  },
+  "youtube:UCWi_ztz8Xuz4XfzhoG6ZfyA": {
+    "displayName": "瀬奈りるか",
+    "facePage": "瀬奈りるか/face.png",
+    "menuOrder": 34
+  },
+  "youtube:UCyY_NaAfv6k0CdHFcmYDqCA": {
+    "displayName": "ローズ・ダマスクハート",
+    "facePage": "ローズ・ダマスクハート/face.png",
+    "menuOrder": 68
+  },
+  "youtube:UCrpdBoGpa6g2WEtRWsIlhDQ": {
+    "displayName": "相栖るじゅ",
+    "facePage": "相栖るじゅ/face.png",
+    "menuOrder": 45
+  },
+  "youtube:UCeOFQCn_QZJMTszlRYRg3rQ": {
+    "displayName": "天辻ゆらぐ",
+    "facePage": "天辻ゆらぐ/face.png",
+    "menuOrder": 28
+  },
+  "youtube:UCldoz5HLh6BMW29HGnRpC0Q": {
+    "displayName": "灯野ぺけ。",
+    "facePage": "灯野ぺけ。/face.png",
+    "menuOrder": 21
+  },
+  "youtube:UCAhdxmsdngH4noySdpVAVWQ": {
+    "displayName": "藤森ちとせ",
+    "facePage": "藤森ちとせ/face.png",
+    "menuOrder": 66
+  },
+  "youtube:UCEJSKIlp0XitVYFjJG7eYBg": {
+    "displayName": "黒鋼亜華",
+    "facePage": "黒鋼亜華/face.png",
+    "menuOrder": 62
+  },
+  "youtube:UCqcnlq8uJqnGml6hcIrMCZw": {
+    "displayName": "花晴りら",
+    "facePage": "花晴りら/face.png",
+    "menuOrder": 64
+  },
+  "youtube:UCnQFkIgH-2IURW--34owWIw": {
+    "displayName": "シグマ・イングラム",
+    "facePage": "シグマ・イングラム/face.png",
+    "menuOrder": 33
+  },
+  "youtube:UCn67GGb_NB7P17BVTduGkEw": {
+    "displayName": "亀城ちかり",
+    "facePage": "亀城ちかり/face.png",
+    "menuOrder": 14
+  },
+  "youtube:UCv2IYO-4waCpHvn50SWWY2A": {
+    "displayName": "七音うら",
+    "facePage": "七音うら/face.png",
+    "menuOrder": 63
+  },
+  "youtube:UC0H7dRRqhfOifbYQ2TURdAg": {
+    "displayName": "桜堂ねる",
+    "facePage": "桜堂ねる/face.png",
+    "menuOrder": 60
+  },
+  "youtube:UCOH9jshsynMeCSRlPhiC": {
+    "displayName": "猫乃間うと",
+    "facePage": "猫乃間うと/face.png",
+    "menuOrder": 35
+  },
+  "youtube:UChccV6U0Tkx9de4YjXbEelw": {
+    "displayName": "雛菊のん",
+    "facePage": "雛菊のん/face.png",
+    "menuOrder": 20
+  },
+  "youtube:UC0O_8Ssx5exycwGvuF5S6_Q": {
+    "displayName": "久堂れしあ",
+    "facePage": "久堂れしあ/face.png",
+    "menuOrder": 61
+  },
+  "youtube:UCz339ZwPv-i_PaBi_FVCF6w": {
+    "displayName": "音海まいる",
+    "facePage": "音海まいる/face.png",
+    "menuOrder": 12
+  },
+  "youtube:UCUd4wJjvPQflbLnsk_YHleA": {
+    "displayName": "新巻るろな",
+    "facePage": "新巻るろな/face.png",
+    "menuOrder": 10
+  },
+  "youtube:UCIw8aQVRBwi72yOrPLgkbRQ": {
+    "displayName": "陰山アゲハ",
+    "facePage": "陰山アゲハ/face.png",
+    "menuOrder": 13
+  },
+  "youtube:UCj5nRzNFXZn9GRhITRkKElA": {
+    "displayName": "鈴木沙透",
+    "facePage": "鈴木沙透/face.png",
+    "menuOrder": 17
+  },
+  "youtube:UCrB-SfrqB5ChY8aAT99grXw": {
+    "displayName": "緋雨柚",
+    "facePage": "緋雨柚/face.png",
+    "menuOrder": 19
+  },
+  "youtube:UCttSjPiwPYpiPuCrgxK7c1g": {
+    "displayName": "愛乃宮ゆめ",
+    "facePage": "愛乃宮ゆめ/face.png",
+    "menuOrder": 29
+  },
+  "youtube:UCPgg_A08ksSYP-VivJGniRw": {
+    "displayName": "桜庭羽奈",
+    "facePage": "桜庭羽奈/face.png",
+    "menuOrder": 32
+  },
+  "youtube:UCwxQdxFJW67WGv-s5_z030w": {
+    "displayName": "愛上オハナ",
+    "facePage": "愛上オハナ/face.png",
+    "menuOrder": 44
+  },
+  "youtube:UC5G2BLvcdLvBwBqgShrag9A": {
+    "displayName": "愛葉はな",
+    "facePage": "愛葉はな/face.png",
+    "menuOrder": 11
+  },
+  "youtube:UCghTiBLhbEGJv-RQwI5BgOg": {
+    "displayName": "東雲アカリ",
+    "facePage": "東雲アカリ/face.png",
+    "menuOrder": 16
+  },
+  "youtube:UCL66HaXfxrR23G8sCU5-cnA": {
+    "displayName": "氷雨セイ",
+    "facePage": "氷雨セイ/face.png",
+    "menuOrder": 18
+  },
+  "youtube:UCXI0W_Os-BCIngpCb1YnOow": {
+    "displayName": "天透あわ",
+    "facePage": "天透あわ/face.png",
+    "menuOrder": 46
+  },
+  "youtube:UCLuPxPlM1v6IOTLxM1TRPzA": {
+    "displayName": "雨海まる",
+    "facePage": "雨海まる/face.png",
+    "menuOrder": 47
+  },
+  "youtube:UCdJmJxMfXrlnZabUkuss2EA": {
+    "displayName": "犬丸なでこ",
+    "facePage": "犬丸なでこ/face.png",
+    "menuOrder": 48
+  },
+  "youtube:UCCqDErkWNs8yWjKS7zHYZBA": {
+    "displayName": "黄金つむぎ",
+    "facePage": "黄金つむぎ/face.png",
+    "menuOrder": 49
+  },
+  "youtube:UCBq6MSUL-Ermvnoj3PtX7Iw": {
+    "displayName": "堂下さとり",
+    "facePage": "堂下さとり/face.png",
+    "menuOrder": 50
+  },
+  "youtube:UCMElh_FlHyzp_obVe-b3Qrg": {
+    "displayName": "飛渡ココ",
+    "facePage": "飛渡ココ/face.png",
+    "menuOrder": 51
+  },
+  "youtube:UCNb9zRVc1coFKxJAn9lVtsw": {
+    "displayName": "フローレ・ブランカ",
+    "facePage": "フローレ・ブランカ/face.png",
+    "menuOrder": 52
+  },
+  "youtube:UCDutDfyKbX_ah4GF6kPNKmw": {
+    "displayName": "緋月・ローズ・ブレイド",
+    "facePage": "緋月・ローズ・ブレイド/face.png",
+    "menuOrder": 65
+  },
+  "youtube:UCT-r3Sqvmoxd_uZYmQEABJg": {
+    "displayName": "水無瀬天",
+    "facePage": "水無瀬天/face.png",
+    "menuOrder": 67
+  },
+  "youtube:UCiPOaOGhMEXaq0tiVftObBw": {
+    "displayName": "夜宵カレン",
+    "facePage": "夜宵カレン/face.png",
+    "menuOrder": 22
+  },
+  "youtube:UCDoAYyzd9aNnYOrURDuy3ww": {
+    "displayName": "桜雲ほわり",
+    "facePage": "桜雲ほわり/face.png",
+    "menuOrder": 30
+  },
+  "youtube:UCLUfaErD7KcjYkwshbqdk8g": {
+    "displayName": "畑スイカ",
+    "facePage": "畑スイカ/face.png",
+    "menuOrder": 36
+  },
+  "youtube:UCpC109d73Mw2GDp0cAodr2w": {
+    "displayName": "山田スバル",
+    "facePage": "山田スバル/face.png",
+    "menuOrder": 37
+  },
+  "youtube:UCPuZO9f0ai8szY72XagL_eQ": {
+    "displayName": "夢ト見りんね",
+    "facePage": "夢ト見りんね/face.png",
+    "menuOrder": 53
+  },
+  "youtube:UCDDYyCAWxccRh1QbjMd1NlQ": {
+    "displayName": "彼方ルカ",
+    "facePage": "彼方ルカ/face.png",
+    "menuOrder": 31
+  },
+  "youtube:UCIaZylf5L9MsCMOJX3BdTEg": {
+    "displayName": "七海ロナ",
+    "facePage": "七海ロナ/face.png",
+    "menuOrder": 79
+  },
+  "youtube:UCGndc74kfWb_A-8hZBG534Q": {
+    "displayName": "藤宮コトハ",
+    "facePage": "藤宮コトハ/face.png",
+    "menuOrder": 80
+  },
+  "youtube:UChpkyQ3O21OnkcMcgCoNHCg": {
+    "displayName": "江波キョウカ",
+    "facePage": "江波キョウカ/face.png",
+    "menuOrder": 74
+  },
+  "youtube:UCnrJK-sb3gSn3kRLkmpmzaw": {
+    "displayName": "鬼多見アユム",
+    "facePage": "鬼多見アユム/face.png",
+    "menuOrder": 75
+  },
+  "youtube:UCbNEgJIF_ADD9e8-q7SoxCg": {
+    "displayName": "常磐カナメ",
+    "facePage": "常磐カナメ/face.png",
+    "menuOrder": 77
+  },
+  "youtube:UCn4XvlTXjGSvDynpxpOYZPQ": {
+    "displayName": "暁月クララ",
+    "facePage": "暁月クララ/face.png",
+    "menuOrder": 76
+  },
+  "youtube:UCay6Y3oEoiC6ZEE2G0UZu_A": {
+    "displayName": "香鳴ハノン",
+    "facePage": "香鳴ハノン/face.png",
+    "menuOrder": 78
+  },
+  "youtube:UC_a00ml_EVDXSrtY8ZuyqGQ": {
+    "displayName": "夏渚まはろ",
+    "facePage": "夏渚まはろ/face.png",
+    "menuOrder": 81
+  },
+  "youtube:UC5bCRde8xRrNS7s6GjCNCyQ": {
+    "displayName": "変幻リメ",
+    "facePage": "変幻リメ/face.png",
+    "menuOrder": 84
+  },
+  "youtube:UCAa19AEBEEvh2tZ_FJKt5Rw": {
+    "displayName": "天麗らん",
+    "facePage": "天麗らん/face.png",
+    "menuOrder": 23
+  },
+  "youtube:UCCCm2ueQtW3mYUMB7Excq8g": {
+    "displayName": "汐月永遠",
+    "facePage": "汐月永遠/face.png",
+    "menuOrder": 24
+  },
+  "youtube:UCl-qrfygvCjyA_lMR5lJzig": {
+    "displayName": "牡丹雪",
+    "facePage": "牡丹雪/face.png",
+    "menuOrder": 25
+  },
+  "youtube:UC9zEgqk0yVvX3nqRLCJXGGg": {
+    "displayName": "さくさくさく",
+    "facePage": "さくさくさく/face.png",
+    "menuOrder": 26
+  },
+  "youtube:UCRuWA3zi9BB3pm4J0vLan_A": {
+    "displayName": "銀河キララ",
+    "facePage": "銀河キララ/face.png",
+    "menuOrder": 27
+  },
+  "youtube:UC1hxdM37vjjqr-IfZuDn1iw": {
+    "displayName": "夜雨ねむる",
+    "facePage": "夜雨ねむる/face.png",
+    "menuOrder": 38
+  },
+  "youtube:UCa1C15g_z1k5oQIYCeD2Hdw": {
+    "displayName": "宵坂伊織",
+    "facePage": "宵坂伊織/face.png",
+    "menuOrder": 39
+  },
+  "youtube:UC8zjZBqGnx_j55ZJzluhW8A": {
+    "displayName": "香桜あんにん",
+    "facePage": "香桜あんにん/face.png",
+    "menuOrder": 40
+  },
+  "youtube:UCpdWNjSU-onhmcARqgHIfpg": {
+    "displayName": "天堂ライラ",
+    "facePage": "天堂ライラ/face.png",
+    "menuOrder": 41
+  },
+  "youtube:UCJLYktDEOak1rSOGRVRKlLQ": {
+    "displayName": "夕凪万夜",
+    "facePage": "夕凪万夜/face.png",
+    "menuOrder": 42
+  },
+  "youtube:UCjGfpZuK6__30b6IpMhR_SQ": {
+    "displayName": "夏凪はつみ",
+    "facePage": "夏凪はつみ/face.png",
+    "menuOrder": 43
+  },
+  "youtube:UCAbXhpEu49k6t3HE3qqpFCg": {
+    "displayName": "白尾すず",
+    "facePage": "白尾すず/face.png",
+    "menuOrder": 54
+  },
+  "youtube:UCaADm-qI6khKDIX8AIek1-w": {
+    "displayName": "翡翠あかね",
+    "facePage": "翡翠あかね/face.png",
+    "menuOrder": 55
+  },
+  "youtube:UCy4tS4QJSyI-VOr9ImBEveg": {
+    "displayName": "冬星れんこん",
+    "facePage": "冬星れんこん/face.png",
+    "menuOrder": 56
+  },
+  "youtube:UCxAVEiT5nj07iqZo4Ymka0Q": {
+    "displayName": "水凪るぅ",
+    "facePage": "水凪るぅ/face.png",
+    "menuOrder": 57
+  },
+  "youtube:UCXhHHxwH94cuHv4N1cAYQeA": {
+    "displayName": "狛社なの",
+    "facePage": "狛社なの/face.png",
+    "menuOrder": 58
+  },
+  "youtube:UCHBPF4eBZEAQ5MmiddmhM2w": {
+    "displayName": "巳野みこと",
+    "facePage": "巳野みこと/face.png",
+    "menuOrder": 59
+  },
+  "youtube:UC9nhm1B-XhPaUO8W8oc4thQ": {
+    "displayName": "露草なぎ",
+    "facePage": "露草なぎ/face.png",
+    "menuOrder": 69
+  },
+  "youtube:UCdbYinKlpkB_uMt_wPmYcsw": {
+    "displayName": "雪紫誉",
+    "facePage": "雪紫誉/face.png",
+    "menuOrder": 70
+  },
+  "youtube:UC2X_mAVGw8e3N9JQZZDVBfQ": {
+    "displayName": "無月いお",
+    "facePage": "無月いお/face.png",
+    "menuOrder": 71
+  },
+  "youtube:UCObfu1e9xeIzisKCslx_XQA": {
+    "displayName": "四葉みっけ",
+    "facePage": "四葉みっけ/face.png",
+    "menuOrder": 72
+  },
+  "youtube:UCaolaxqG55OJhU8qwRHHtQg": {
+    "displayName": "火狐むい",
+    "facePage": "火狐むい/face.png",
+    "menuOrder": 73
+  },
+  "youtube:UCMX0Mn5PTjojdQL8MN1B5Vg": {
+    "displayName": "なる",
+    "facePage": "なる/face.png",
+    "menuOrder": 85
+  },
+  "twitch:mahiruneru": {
+    "displayName": "真昼ねる",
+    "facePage": "真昼ねる/face.png",
+    "menuOrder": 0
+  },
+  "twitch:hinoha_rui": {
+    "displayName": "火乃晴るい",
+    "facePage": "火乃晴るい/face.png",
+    "menuOrder": 2
+  },
+  "twitch:metome_au": {
+    "displayName": "銘兎目あう",
+    "facePage": "銘兎目あう/face.png",
+    "menuOrder": 4
+  },
+  "twitch:minato_yu_": {
+    "displayName": "水透ユウ",
+    "facePage": "水透ユウ/face.png",
+    "menuOrder": 3
+  },
+  "twitch:41futon": {
+    "displayName": "なかもとおまち",
+    "facePage": "なかもとおまち/face.png",
+    "menuOrder": 8
+  },
+  "twitch:siyham": {
+    "displayName": "しーはむ",
+    "facePage": "しーはむ/face.png",
+    "menuOrder": 1
+  },
+  "twitch:kitamiayumu": {
+    "displayName": "鬼多見アユム",
+    "facePage": "鬼多見アユム/face.png",
+    "menuOrder": 75
+  }
+}

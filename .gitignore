@@ -1,2 +1,4 @@
 .env
 node_modules/
+# Schedule previews and recovery sources
+work/

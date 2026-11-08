@@ -106,8 +106,7 @@ async function fetchVideoIds(channelId, apiKey, publishedAfter) {
     const url = `${YOUTUBE_API_BASE}/search?${params}`;
     const res = await fetch(url);
     if (!res.ok) {
-      const body = await res.text();
-      throw new Error(`YouTube search.list failed: ${res.status} ${body}`);
+      throw new Error(`YouTube search.list failed: ${res.status}`);
     }
     const data = await res.json();
 
@@ -144,8 +143,7 @@ async function fetchVideoDetails(videoIds, apiKey) {
     const url = `${YOUTUBE_API_BASE}/videos?${params}`;
     const res = await fetch(url);
     if (!res.ok) {
-      const body = await res.text();
-      throw new Error(`YouTube videos.list failed: ${res.status} ${body}`);
+      throw new Error(`YouTube videos.list failed: ${res.status}`);
     }
     const data = await res.json();
 

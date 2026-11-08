@@ -1,0 +1,18 @@
+{
+  "processedAt": "2026-11-08T16:52:04.138Z",
+  "sources": {
+    "youtube": 173,
+    "twitch": 2
+  },
+  "skipped": {
+    "archiveOrVideo": 131
+  },
+  "apis": {
+    "YouTube videos.list": "ok"
+  },
+  "live": 4,
+  "upcoming": 5,
+  "verified": 40,
+  "changed": true,
+  "written": false
+}
