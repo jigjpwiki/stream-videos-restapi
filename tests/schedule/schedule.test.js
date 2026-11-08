@@ -1,3 +1,5 @@
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, mkdtemp, rm } from 'node:fs/promises';
@@ -124,4 +126,12 @@ test('real API reservation duration may be omitted; all configured face paths ar
  assert.equal((await verify(normalize([fixture.youtube[1]],'youtube'),{request:async()=>({items:[reservation]}),env,now})).length,1);
  const config=JSON.parse(await readFile(new URL('../../src/schedule/config.json',import.meta.url)));
  for(const person of Object.values(config))assert.doesNotThrow(()=>formatRows([{...normalize([fixture.youtube[0]],'youtube')[0],name:person.displayName,facePage:person.facePage}],''));
+});
+
+test('demo CLI works in an empty credentials environment',async()=>{
+ const output=await mkdtemp(join(tmpdir(),'schedule-cli-'));
+ try{
+ const stdout=execFileSync(process.execPath,[fileURLToPath(new URL('../../src/schedule/index.js',import.meta.url)),'--fixture',fileURLToPath(new URL('./fixture.json',import.meta.url)),'--output',output],{env:{PATH:process.env.PATH},encoding:'utf8'});
+ assert.equal(JSON.parse(stdout).written,false);
+ }finally{await rm(output,{recursive:true,force:true});}
 });

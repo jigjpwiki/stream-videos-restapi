@@ -59,7 +59,7 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
         return new Response(JSON.stringify(data), { status: 200 });
       };
     }
-    await run({ fixture, fetchImpl, now: fixture ? new Date(fixture.now) : new Date(), output: outputAt !== -1 ? process.argv[outputAt + 1] : undefined });
+    await run({ fixture, fetchImpl, env: fixture ? { YOUTUBE_API_KEY: 'DEMO_KEY', TWITCH_CLIENT_ID: 'DEMO_CLIENT', TWITCH_CLIENT_SECRET: 'DEMO_SECRET' } : process.env, now: fixture ? new Date(fixture.now) : new Date(), output: outputAt !== -1 ? process.argv[outputAt + 1] : undefined });
   } catch {
     // Remote exceptions may contain credentials: log only a fixed message.
     console.error('Schedule sync failed; Wiki update aborted. Check configuration, markers and API availability.');
