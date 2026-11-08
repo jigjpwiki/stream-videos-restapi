@@ -1,0 +1,75 @@
+{
+  "now": "2026-11-09T12:30:00+09:00",
+  "source": "//自動更新\n\n#responsive_layout_item(12){{{{\n#cssbox(\"margin-block: 1em; padding-bottom: 3px; margin-inline: auto; background: #FAFAFA;\"){{{\n***現在配信中 [#geb25313]\n#cssbox(\"margin: 0.5em 0.5em;\"){{\n// JIGWIKI_LIVE_BEGIN\nCENTER:&color(red){こちらの機能は調整中です};\n// JIGWIKI_LIVE_END\n}}\n***このあと配信 [#ve9bd9f9]\n#cssbox(\"margin: 0.5em 0.5em;\"){{\n// JIGWIKI_UPCOMING_BEGIN\nCENTER:&color(red){こちらの機能は調整中です};\n// JIGWIKI_UPCOMING_END\n}}\nCENTER:[[すべての配信予定を見る（じぐじゅーる）>https://www.jigdule.jp/]]\n}}}\n}}}}\n",
+  "youtube": [
+    {
+      "name": "真昼ねる",
+      "youtubeid": "UCI-8WyYqMymGPw9vg55HXDQ",
+      "title": "MUST NEVER APPEAR",
+      "date": "2026-11-09T12:00:00+09:00",
+      "status": "live",
+      "type": "stream",
+      "url": "https://youtu.be/abcdefghijk"
+    },
+    {
+      "name": "未登録の配信者",
+      "youtubeid": "UCaaaaaaaaaaaaaaaaaaaaaa",
+      "date": "2026-11-09T22:00:00+09:00",
+      "status": "upcoming",
+      "type": "stream",
+      "url": "https://youtu.be/lmnopqrstuv"
+    }
+  ],
+  "twitch": [
+    {
+      "name": "真昼ねる",
+      "twitchid": "mahiruneru",
+      "date": "2026-11-08T23:00:00+09:00",
+      "status": "live",
+      "type": "stream",
+      "url": "https://www.twitch.tv/mahiruneru"
+    }
+  ],
+  "responses": {
+    "www.googleapis.com": {
+      "items": [
+        {
+          "id": "abcdefghijk",
+          "snippet": {
+            "channelId": "UCI-8WyYqMymGPw9vg55HXDQ",
+            "liveBroadcastContent": "live"
+          },
+          "liveStreamingDetails": {
+            "actualStartTime": "2026-11-09T12:00:00+09:00"
+          }
+        },
+        {
+          "id": "lmnopqrstuv",
+          "snippet": {
+            "channelId": "UCaaaaaaaaaaaaaaaaaaaaaa",
+            "liveBroadcastContent": "upcoming"
+          },
+          "liveStreamingDetails": {
+            "scheduledStartTime": "2026-11-09T22:00:00+09:00"
+          },
+          "contentDetails": {
+            "duration": "P0D"
+          }
+        }
+      ]
+    },
+    "id.twitch.tv": {
+      "access_token": "DEMO_TOKEN_NOT_REAL"
+    },
+    "api.twitch.tv": {
+      "data": [
+        {
+          "id": "1",
+          "user_login": "mahiruneru",
+          "type": "live",
+          "started_at": "2026-11-08T23:00:00+09:00"
+        }
+      ]
+    }
+  }
+}

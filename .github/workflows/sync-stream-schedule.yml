@@ -1,0 +1,64 @@
+name: Sync stream schedule
+on:
+  schedule:
+    - cron: '3-53/10 * * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry Run (Wikiを書き換えない)'
+        type: boolean
+        default: true
+  pull_request:
+    paths:
+      - 'src/schedule/**'
+      - 'tests/schedule/**'
+      - '.github/workflows/sync-stream-schedule.yml'
+      - 'package*.json'
+permissions:
+  contents: read
+concurrency:
+  group: wiki-stream-schedule
+  cancel-in-progress: false
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm test
+      - run: npm run schedule:demo
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stream-schedule-demo
+          path: work/schedule/
+          retention-days: 7
+  sync:
+    if: github.event_name != 'pull_request'
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Generate preview and optionally sync
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
+          TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
+          WIKI_API_BASE_URL: ${{ secrets.WIKI_API_BASE_URL }}
+          WIKI_PASSWORD: ${{ secrets.WIKI_PASSWORD }}
+          WIKI_WRITE_ENABLED: ${{ vars.WIKI_WRITE_ENABLED || 'false' }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && (inputs.dry_run && 'true' || 'false') || vars.WIKI_WRITE_ENABLED != 'true' && 'true' || 'false' }}
+        run: npm run schedule
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stream-schedule-preview-${{ github.run_id }}
+          path: work/schedule/
+          if-no-files-found: ignore
+          retention-days: 7

@@ -11,7 +11,6 @@
  */
 
 import 'dotenv/config';
-console.log('YOUTUBE_API_KEY:', process.env.YOUTUBE_API_KEY);
 
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';

@@ -94,3 +94,7 @@ DRY_RUN=true npm run update
 
 - WIKIWIKI REST API のエンドポイント仕様は公式ドキュメントに合わせて `src/services/wikiwiki.js` を調整してください。
 - Shorts 判定は動画時間 60 秒以下を暫定基準としています。必要に応じて `src/services/youtube.js` の `determineVideoType` を調整してください。
+
+## Wiki配信スケジュール（独立ジョブ）
+
+[導入・Dry Run・Secrets・有効化・復旧手順](docs/stream-schedule.md)を参照。書き込みはデフォルト無効です。`npm test` / `npm run schedule:demo` は本番APIを使いません。

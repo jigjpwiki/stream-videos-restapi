@@ -29,8 +29,7 @@ async function authenticate() {
   });
 
   if (!res.ok) {
-    const body = await res.text();
-    throw new Error(`WIKIWIKI auth failed: ${res.status} ${body}`);
+    throw new Error(`WIKIWIKI auth failed: ${res.status}`);
   }
 
   const data = await res.json();
@@ -66,9 +65,8 @@ export async function getPage(pageName) {
   });
 
   if (!res.ok) {
-    const body = await res.text();
     throw new Error(
-      `WIKIWIKI GET page failed [${pageName}]: ${res.status} ${body}`
+      `WIKIWIKI GET page failed [${pageName}]: ${res.status}`
     );
   }
 
@@ -93,9 +91,8 @@ export async function updatePage(pageName, content) {
   });
 
   if (!res.ok) {
-    const body = await res.text();
     throw new Error(
-      `WIKIWIKI PUT page failed [${pageName}]: ${res.status} ${body}`
+      `WIKIWIKI PUT page failed [${pageName}]: ${res.status}`
     );
   }
 }
