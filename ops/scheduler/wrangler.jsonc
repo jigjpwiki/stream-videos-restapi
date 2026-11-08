@@ -1,0 +1,34 @@
+{
+  "name": "wiki-stream-scheduler",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": true,
+  "triggers": {
+    "crons": [
+      "4-54/10 * * * *"
+    ]
+  },
+  "vars": {
+    "ENABLED": "false",
+    "REPOSITORY": "jigjpwiki/stream-videos-restapi",
+    "WORKFLOW": "sync-stream-schedule.yml",
+    "INTERVAL_MINUTES": "10",
+    "SUCCESS_JOB": "sync"
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "SCHEDULER",
+        "class_name": "Scheduler"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "Scheduler"
+      ]
+    }
+  ]
+}
