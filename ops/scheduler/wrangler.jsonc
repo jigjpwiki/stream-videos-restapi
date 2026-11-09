@@ -9,7 +9,7 @@
     ]
   },
   "vars": {
-    "ENABLED": "false",
+    "ENABLED": "true",
     "REPOSITORY": "jigjpwiki/stream-videos-restapi",
     "WORKFLOW": "sync-stream-schedule.yml",
     "INTERVAL_MINUTES": "10",
