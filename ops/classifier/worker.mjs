@@ -3,7 +3,7 @@ import {custodyPrepare,custodyCommit,itemKey} from './custody.mjs';
 import {ApiError,diagnostic} from './errors.mjs';
 import { editorIdentity, syncAuthorized } from './auth.mjs';
 import { importedItem, decide, pending, acknowledge } from './model.mjs';
-import { HTML } from './ui.mjs';
+import { HTML, CSP } from './ui.mjs';
 const headers={ 'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff' };
 const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers});
 async function body(request) {
@@ -27,7 +27,7 @@ async function handleRequest(request,env,requestId) {
         const editorRequest=requestedWith==='wiki-classifier'||requestedWith==='XMLHttpRequest'&&request.headers.get('X-Classifier-Request')==='wiki-classifier';
         if(request.headers.get('Origin')!==url.origin || !editorRequest){diagnostic(url.pathname,403,'csrf_rejected',requestId);return json({error:'Invalid origin',code:'csrf_rejected'},403);}
       }
-      if(url.pathname==='/' && request.method==='GET')return new Response(HTML,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'none'; script-src 'self'; style-src 'self'; img-src https://i.ytimg.com; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'",'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'}});
+      if(url.pathname==='/' && request.method==='GET')return new Response(HTML,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':CSP,'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'}});
       if(url.pathname==='/app.js' && request.method==='GET') {
         const {JS}=await import('./ui.mjs');return new Response(JS,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
       }

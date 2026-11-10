@@ -5,7 +5,7 @@
 利用者の2026-11-10 17:41頃（JST）のNetwork情報で、POST /api/decisionがHTTP 302、
 Content-Type: text/html、Cloudflare Accessのlogin URLへのLocationを返していた。
 この302はWorker/DOの分類失敗ではなく、Accessで認証の再確認が必要になった応答。
-旧api()はfetchの既定redirect=followでログイン画面を追い、クロスOrigin転送のCORS拒否、
+旧api()はfetchの既定redirect=followでログイン画面を追い、connect-src 'self'による転送先へのCSP拒否や、クロスOrigin転送のCORS拒否、
 HTML/JSON解析失敗、実ネットワーク障害を同じ「通信を確認できませんでした」に変換していた。
 画面内の更新も同じAPI fetchなのでログイン画面へ遷移できず、同じ状態を繰り返す。
 
@@ -55,7 +55,9 @@ AccessがWorker到達前に401/302等を返す場合にはWorker requestIdは付
 調査時は、発生時刻（JST）、固定APIパス、status、形式分類、requestId/CF-Rayだけを共有する。
 Cookie、JWT、Authorization、Locationのquery、Network全文/HAR、動画行の本文は共有しない。
 401/302ならAccessのsession/loginの確認、429/5xxなら該当IDのWorker logs/Analytics/無料枠を確認する。
-CORS・DNS・TLS・offlineはブラウザが同じTypeErrorにすることがあるため、fetch_failedだけで原因を断定しない。
+CSP connect-src違反はURLを含めない独立したcsp_connect_blockedイベントも記録する。
+本番とブラウザテストは同じCSP定数を使い、接続先制限を緩めない。
+CORS・CSP・DNS・TLS・offlineはブラウザが同じTypeErrorにすることがあるため、fetch_failedだけで原因を断定しない。
 
 ## 検証と導入
 

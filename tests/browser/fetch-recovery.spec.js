@@ -102,3 +102,9 @@ test('60 classifications with periodic auth, HTML, 302, 5xx and network faults r
  const state=await(await request.get('/api/state?counts=1')).json();expect(state.counts.classified).toBe(60);
  const a=await(await request.get('/api/history')).json(),b=await(await request.get('/api/history?before='+a.next)).json();expect(a.events.length+b.events.length).toBe(60);
 });
+test('production CSP remains enforced; connection violations log only a fixed code without blocked URL',async({page,request})=>{
+ const logs=[];page.on('console',m=>{if(m.text().includes('"component":"classifier-ui"'))logs.push(m.text());});
+ await init(page,request);await page.evaluate(async value=>{try{await fetch('https://login.example.test/blocked?token='+value);}catch{}},secret);
+ await expect.poll(()=>logs.some(x=>x.includes('csp_connect_blocked'))).toBe(true);expect(logs.join('')).not.toContain(secret);expect(logs.join('')).not.toContain('https://login.example.test');
+ await action(page,'#shorts');await expect(page.locator('#title')).toHaveText('動画 1');
+});
