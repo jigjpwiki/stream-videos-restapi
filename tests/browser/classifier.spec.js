@@ -25,7 +25,7 @@ test('single hold ends tour, refresh starts a new tour; double click is one CAS 
 test('safe 400/auth/500 messages, connection recovery, successful save survives counts failure',async({page,request})=>{
  await init(page,request,4);
  for(const [status,text]of [[400,'操作内容'],[401,'認証が切れ'],[403,'編集権限'],[500,'サーバー']]){
- await page.route('**/api/decision',r=>r.fulfill({status,body:'SECRET_SERVER_BODY'}),{times:1});await save(page,'#shorts');await expect(page.locator('#message')).toContainText(text);await expect(page.locator('#title')).toHaveText('動画 0');}
+ await page.route('**/api/decision',r=>r.fulfill({status,body:'SECRET_SERVER_BODY'}),{times:1});await save(page,'#shorts');await expect(page.locator('#message')).toContainText(text);await expect(page.locator('#title')).toHaveText('動画 0');if(status===401||status===403)await save(page,'#refresh');}
  await page.route('**/api/decision',r=>r.abort(),{times:1});await save(page,'#shorts');await expect(page.locator('#message')).toContainText('通信');
  await page.route('**/api/state?counts=1',r=>r.fulfill({status:503,body:'SECRET'}),{times:1});await save(page,'#shorts');await expect(page.locator('#title')).toHaveText('動画 1');await expect(page.locator('#message')).toContainText('保存済み');
  await save(page,'#normal');await expect(page.locator('#title')).toHaveText('動画 2');

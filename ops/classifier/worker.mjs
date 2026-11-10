@@ -1,16 +1,16 @@
+import {traceId,tracedResponse} from './trace.mjs';
 import {custodyPrepare,custodyCommit,itemKey} from './custody.mjs';
 import {ApiError,diagnostic} from './errors.mjs';
 import { editorIdentity, syncAuthorized } from './auth.mjs';
 import { importedItem, decide, pending, acknowledge } from './model.mjs';
-import { HTML } from './ui.mjs';
+import { HTML, CSP } from './ui.mjs';
 const headers={ 'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff' };
 const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers});
 async function body(request) {
   if(!request.headers.get('Content-Type')?.startsWith('application/json'))throw new ApiError(400,'json_required');
   const text=await request.text();if(text.length>1500000)throw new ApiError(400,'payload_too_large');try{return JSON.parse(text);}catch{throw new ApiError(400,'invalid_json');}
 }
-export default {
-  async fetch(request,env) {
+async function handleRequest(request,env,requestId) {
     const url=new URL(request.url);
     const internal=url.pathname.startsWith('/internal/');
     let actor;
@@ -18,14 +18,16 @@ export default {
       if(internal) {if(!await syncAuthorized(request,env))return json({error:'Unauthorized'},401);actor='actions';}
       else actor=await editorIdentity(request,env);
     }catch {
-      diagnostic(url.pathname,403,'access_denied',crypto.randomUUID());
-      return json({error:'Access denied',code:'access_denied'},403);
+      diagnostic(url.pathname,403,'access_denied',requestId);
+      return json({error:'Access denied',code:'access_denied',requestId},403);
     }
     try {
       if(!internal && request.method!=='GET') {
-        if(request.headers.get('Origin')!==url.origin || request.headers.get('X-Requested-With')!=='wiki-classifier')return json({error:'Invalid origin'},403);
+        const requestedWith=request.headers.get('X-Requested-With');
+        const editorRequest=requestedWith==='wiki-classifier'||requestedWith==='XMLHttpRequest'&&request.headers.get('X-Classifier-Request')==='wiki-classifier';
+        if(request.headers.get('Origin')!==url.origin || !editorRequest){diagnostic(url.pathname,403,'csrf_rejected',requestId);return json({error:'Invalid origin',code:'csrf_rejected'},403);}
       }
-      if(url.pathname==='/' && request.method==='GET')return new Response(HTML,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'none'; script-src 'self'; style-src 'self'; img-src https://i.ytimg.com; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'",'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'}});
+      if(url.pathname==='/' && request.method==='GET')return new Response(HTML,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':CSP,'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'}});
       if(url.pathname==='/app.js' && request.method==='GET') {
         const {JS}=await import('./ui.mjs');return new Response(JS,{headers:{'Content-Type':'text/javascript; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
       }
@@ -37,8 +39,17 @@ export default {
       const payload=request.method==='GET'?null:await body(request);
       const stub=env.CLASSIFIER.get(env.CLASSIFIER.idFromName('wiki-video-classifier-v1'));
       // Client-supplied headers cannot spoof this actor; the DO binding is private.
-      return await stub.fetch(new Request(`https://classifier${url.pathname}${url.search}`,{method:request.method,headers:{'Content-Type':'application/json','X-Actor':actor},body:payload?JSON.stringify(payload):undefined}));
-    }catch(error){const status=error instanceof ApiError?error.status:500;const code=error instanceof ApiError?error.code:'internal_error';const requestId=crypto.randomUUID();diagnostic(url.pathname,status,code,requestId);return json({code,requestId},status);}
+      return await stub.fetch(new Request(`https://classifier${url.pathname}${url.search}`,{method:request.method,headers:{'Content-Type':'application/json','X-Actor':actor,'X-Request-Id':requestId},body:payload?JSON.stringify(payload):undefined}));
+    }catch(error){const status=error instanceof ApiError?error.status:500;const code=error instanceof ApiError?error.code:'internal_error';diagnostic(url.pathname,status,code,requestId);return json({code,requestId},status);}
+}
+export default {
+  async fetch(request,env){
+    const requestId=crypto.randomUUID(),started=performance.now();
+    let response;
+    try{response=await handleRequest(request,env,requestId);}
+    catch{diagnostic(new URL(request.url).pathname,500,'worker_boundary_error',requestId);response=json({code:'internal_error',requestId},500);}
+    diagnostic(new URL(request.url).pathname,response.status,'worker_response',requestId,{stage:'worker',elapsedMs:performance.now()-started});
+    return tracedResponse(response,requestId);
   },
 };
 
@@ -54,6 +65,14 @@ export class Classifier {
   put(item){this.sql.exec('INSERT INTO items(id,page,data) VALUES(?,?,?) ON CONFLICT(id) DO UPDATE SET data=excluded.data,page=excluded.page',item.key,item.page,JSON.stringify(item));}
   event(item,action){this.sql.exec('INSERT INTO history(videoId,data) VALUES(?,?)',item.videoId,JSON.stringify({videoId:item.videoId,name:item.name,choice:item.choice,revision:item.revision,actor:item.actor??'actions',at:item.updatedAt,action,outcome:item.outcome,receipt:item.receipt}));}
   async fetch(request) {
+    const requestId=traceId(request.headers.get('X-Request-Id')),started=performance.now();
+    let response;
+    try{response=await this.handle(request,requestId);}
+    catch{diagnostic(new URL(request.url).pathname,500,'durable_boundary_error',requestId);response=json({code:'internal_error',requestId},500);}
+    diagnostic(new URL(request.url).pathname,response.status,'durable_response',requestId,{stage:'durable_object',elapsedMs:performance.now()-started});
+    return tracedResponse(response,requestId);
+  }
+  async handle(request,requestId) {
     const url=new URL(request.url),actor=request.headers.get('X-Actor'),now=new Date().toISOString();
     try {
       if(url.pathname==='/internal/custody-status'){if(url.searchParams.has('page'))return json({pending:this.sql.exec("SELECT count(*) AS n FROM items WHERE page=? AND json_extract(data,'$.custody.phase')='prepared'",url.searchParams.get('page')).toArray()[0].n});return json(this.sql.exec("SELECT coalesce(sum(CASE WHEN json_extract(data,'$.custody.origin')='wiki' AND json_extract(data,'$.custody.phase')='committed' THEN 1 ELSE 0 END),0) AS wikiTransfersCommitted,coalesce(sum(CASE WHEN json_extract(data,'$.custody.phase')='prepared' THEN 1 ELSE 0 END),0) AS preparedRemaining,coalesce(sum(CASE WHEN json_extract(data,'$.custody.origin')='new' THEN 1 ELSE 0 END),0) AS newDirectCount FROM items").toArray()[0]);}
@@ -126,7 +145,7 @@ export class Classifier {
       if(url.pathname==='/api/decision') {
         const data=await request.json();if(typeof data?.key!=='string'||typeof data.undo!=='undefined'&&typeof data.undo!=='boolean')throw new ApiError(400,'invalid_input');let next;
         this.ctx.storage.transactionSync(()=>{next=decide(this.get(data.key),data,actor,now);this.put(next);this.event(next,data.undo?'undo':'decision');});
-        diagnostic(url.pathname,200,'decision_saved',crypto.randomUUID());
+        diagnostic(url.pathname,200,'decision_saved',requestId);
         return json({item:next});
       }
       if(url.pathname==='/api/item') {const item=this.get(url.searchParams.get('key'));if(!item)return json({code:'item_not_found'},404);return json({item});}
@@ -156,6 +175,6 @@ export class Classifier {
         return json({counts,items,next:items.length===50?offset+50:null,nextCursor:items.length===50?btoa(JSON.stringify([tail.rank,tail.id])):null});
       }
       return json({error:'Not found'},404);
-    }catch(error){const status=error instanceof ApiError?error.status:error instanceof SyntaxError?400:500;const code=error instanceof ApiError?error.code:error instanceof SyntaxError?'invalid_json':'internal_error';const requestId=crypto.randomUUID();diagnostic(url.pathname,status,code,requestId);return json({code,requestId},status);}
+    }catch(error){const status=error instanceof ApiError?error.status:error instanceof SyntaxError?400:500;const code=error instanceof ApiError?error.code:error instanceof SyntaxError?'invalid_json':'internal_error';diagnostic(url.pathname,status,code,requestId);return json({code,requestId},status);}
   }
 }

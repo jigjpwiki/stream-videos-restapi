@@ -182,3 +182,7 @@ SQLテーブル・既存判断・履歴は削除しない。旧offset APIも残�
 [PR2の段階移管・新着直接登録・フラグ・Dry Run・導入/rollback](cloudflare-custody.md)を参照。
 この機能を有効にした項目はWikiに元行がなくても管理画面に残り、保留/取消中はWikiへ掲載しない。
 無効時の既存項目は従来どおりWikiを参照する。
+
+## Access転送・通信エラーからの復帰
+
+[確認できた原因、AJAX/CSRFヘッダー、再認証とrevision照合、診断方法](classifier-access-recovery.md)を参照。
