@@ -12,7 +12,14 @@ export async function editorIdentity(request, env, fetchImpl = fetch, now = Date
   const head=decode(parts[0]), claims=decode(parts[1]);
   if(head.alg!=='RS256'||typeof head.kid!=='string')throw Error('Invalid JWT algorithm');
   if(!cached || cached.issuer!==issuer || cached.until<now) {
-    const res=await fetchImpl(`${issuer}/cdn-cgi/access/certs`,{redirect:'error',signal:AbortSignal.timeout(5000)});
+    const res = await fetchImpl(`${issuer}/cdn-cgi/access/certs`, {
+      redirect: 'manual',
+      signal: AbortSignal.timeout(5000),
+    });
+
+    if (res.status >= 300 && res.status < 400) {
+      throw new Error('Unexpected redirect when fetching Access keys');
+    }
     if(!res.ok)throw Error('Access keys unavailable');
     const data=await res.json();if(!Array.isArray(data.keys))throw Error('Invalid keys');
     cached={issuer,keys:data.keys,until:now+300000};

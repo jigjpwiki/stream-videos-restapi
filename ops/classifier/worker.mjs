@@ -15,7 +15,13 @@ export default {
     try {
       if(internal) {if(!await syncAuthorized(request,env))return json({error:'Unauthorized'},401);actor='actions';}
       else actor=await editorIdentity(request,env);
-    }catch {return json({error:'Access denied'},403);}
+    }catch (error) {
+      console.warn(
+        '[classifier auth]',
+        error instanceof Error ? error.message : 'Unknown error'
+      );
+      return json({error:'Access denied'},403);
+    }
     try {
       if(!internal && request.method!=='GET') {
         if(request.headers.get('Origin')!==url.origin || request.headers.get('X-Requested-With')!=='wiki-classifier')return json({error:'Invalid origin'},403);
