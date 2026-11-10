@@ -1,4 +1,4 @@
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 
@@ -31,7 +31,7 @@ export async function loadCache() {
  */
 export async function saveCache(cache) {
   await ensureDataDir();
-  await writeFile(CACHE_FILE, JSON.stringify(cache, null, 2), 'utf-8');
+  await atomicSave(CACHE_FILE, cache);
 }
 
 /**
@@ -82,5 +82,11 @@ export async function loadState() {
  */
 export async function saveState(state) {
   await ensureDataDir();
-  await writeFile(STATE_FILE, JSON.stringify(state, null, 2), 'utf-8');
+  await atomicSave(STATE_FILE, state);
+}
+
+async function atomicSave(file, value) {
+  const temp = `${file}.tmp`;
+  await writeFile(temp, JSON.stringify(value, null, 2) + '\n', 'utf8');
+  await rename(temp, file);
 }

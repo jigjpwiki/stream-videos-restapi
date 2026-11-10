@@ -7,7 +7,7 @@
 - cronはUTCで10分ごと。単一名のDurable Objectがリクエストを直列化し、起動試行slot・時刻を永続化する。再配信、隣接slot境界も周期境界の最大1分の遅延差を許容しつつ最低9分あけ、POST前に記録する。POST timeout/403/429は即再試行せず次周期に回す。
 - mainの当該workflowの最新100runに未完了/直近起動があれば追加起動しない。通常手動やpushも頻度抑制に含める。古いactive runが100件外になる場合や確認後の手動起動とのraceは、この確認だけでは排除できないため、既存のActions concurrencyを最終的なwriter排他に使う。厳密な分散exactly-onceは保証しない。
 - `SCHEDULE_DRIVER=cloudflare`で標準scheduleの実処理をskipし、外部の`periodic=true`を許可。未設定/`github`は逆。両方有効でも二つの定期収集経路を動かさない。通常手動は維持。手動の繰り返し実行までレート制限する仕組みではない。
-- 外部`periodic=true`はscheduleと同じDRY_RUN判定を使う。`WIKI_WRITE_ENABLED == 'true'`の場合だけ書込み可能で、それ以外はdry-run。処理本体のwriteEnabledチェックも維持する。手動のdry_run既定trueはそのまま。既存Update Videosは別用途として変更せず、同じYouTube APIプロジェクトの合計クォータに含める。
+- 外部`periodic=true`はscheduleと同じDRY_RUN判定を使う。`WIKI_WRITE_ENABLED == 'true'`の場合だけ書込み可能で、それ以外はdry-run。処理本体のwriteEnabledチェックも維持する。手動のdry_run既定trueはそのまま。動画更新も同じ起動に統合する。[段階切替・状態保存・合計クォータ](../../docs/unified-sync.md)を参照。旧2時間cronは動作確認後に停止する。
 - APIエラー/残クォータ100未満ではfail closed。各GitHub呼出しは3秒timeout（DO直列区間の30秒上限内に収める）。1 tickあたりGET 1〜6回+POST最大1回、1日最大144 dispatch。2つを合算しても定常時GitHubリクエストは概ね数十回/時程度（監視頻度を含めて算定）。YouTube等は既存の定期間隔・キャッシュを維持し、GitHub/nativeとの二重収集を抑制する。欠落が解消すれば実際の収集回数は本来の予定数まで増えるため、既存APIの合計日次使用量を切替前後で確認する。新たな探索や自動リトライは増やさない。
 
 ## 導入手順（マージ後、別途承認された運用作業）

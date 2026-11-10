@@ -16,7 +16,10 @@ on:
         default: true
   pull_request:
     paths:
-      - 'src/schedule/**'
+      - 'src/**'
+      - 'tests/**'
+      - 'ops/state/**'
+      - '.github/workflows/update-videos.yml'
       - 'tests/schedule/**'
       - '.github/workflows/sync-stream-schedule.yml'
       - 'package*.json'
@@ -24,7 +27,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: wiki-stream-schedule${{ github.event_name == 'pull_request' && format('-pr-{0}', github.event.pull_request.number) || '' }}
+  group: wiki-writer${{ github.event_name == 'pull_request' && format('-pr-{0}', github.event.pull_request.number) || '' }}
   cancel-in-progress: false
 jobs:
   test:
@@ -40,19 +43,29 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: stream-schedule-demo
-          path: work/schedule/
+          path: work/
           retention-days: 7
   sync:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && (github.event_name != 'schedule' || vars.SCHEDULE_DRIVER != 'cloudflare') && (github.event_name != 'workflow_dispatch' || !inputs.periodic || vars.SCHEDULE_DRIVER == 'cloudflare')
     needs: test
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 18
+    permissions:
+      contents: write
+    env:
+      VIDEO_WIKI_WRITE_ENABLED: ${{ vars.VIDEO_WIKI_WRITE_ENABLED || 'false' }}
+      UNIFIED_VIDEOS_ENABLED: ${{ vars.UNIFIED_VIDEOS_ENABLED || 'false' }}
+      DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && !inputs.periodic && (inputs.dry_run && 'true' || 'false') || vars.WIKI_WRITE_ENABLED != 'true' && 'true' || 'false' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Generate preview and optionally sync
+      - run: npm ci
+      - name: Load durable video state
+        id: state
+        run: bash ops/state/sync-state.sh load
+      - name: Generate previews and optionally sync
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
@@ -60,12 +73,14 @@ jobs:
           WIKI_API_BASE_URL: ${{ secrets.WIKI_API_BASE_URL }}
           WIKI_PASSWORD: ${{ secrets.WIKI_PASSWORD }}
           WIKI_WRITE_ENABLED: ${{ vars.WIKI_WRITE_ENABLED || 'false' }}
-          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && !inputs.periodic && (inputs.dry_run && 'true' || 'false') || vars.WIKI_WRITE_ENABLED != 'true' && 'true' || 'false' }}
-        run: npm run schedule
+        run: npm run sync
+      - name: Save durable video state
+        if: always() && steps.state.outcome == 'success' && env.UNIFIED_VIDEOS_ENABLED == 'true'
+        run: bash ops/state/sync-state.sh save
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: stream-schedule-preview-${{ github.run_id }}
-          path: work/schedule/
+          path: work/
           if-no-files-found: ignore
           retention-days: 7

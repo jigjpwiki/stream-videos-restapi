@@ -1,98 +1,42 @@
-/**
- * WIKIWIKI REST API クライアント
- *
- * 環境変数:
- *   WIKI_API_BASE_URL  - API ベース URL (例: https://api.wikiwiki.jp/jigjp)
- *   WIKI_PASSWORD      - WIKIWIKI パスワード（/auth で token を取得するために使用）
- *
- * エンドポイント仕様 (WIKIWIKI REST API v1):
- *   POST {base}/auth                      - 認証 → token 取得
- *   GET  {base}/page/{encoded_page_name}  - ページ本文取得
- *   PUT  {base}/page/{encoded_page_name}  - ページ本文更新
- */
+import { httpClient } from '../schedule/http.js';
 
-const BASE_URL = process.env.WIKI_API_BASE_URL;
-
-/**
- * /auth エンドポイントでパスワード認証を行い、Bearer token を取得する
- * @returns {Promise<string>} token
- * @throws 認証失敗時
- */
-async function authenticate() {
-  const password = process.env.WIKI_PASSWORD;
-  console.log(`[INFO] WIKI_PASSWORD exists: ${Boolean(password)}`);
-
-  const res = await fetch(`${BASE_URL}/auth`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ password }),
-  });
-
-  if (!res.ok) {
-    throw new Error(`WIKIWIKI auth failed: ${res.status}`);
-  }
-
-  const data = await res.json();
-  const token = data.token ?? null;
-  console.log(`[INFO] WIKI token acquired: ${Boolean(token)}`);
-
-  if (!token) {
-    throw new Error('WIKIWIKI auth response did not contain a token');
-  }
-
-  return token;
-}
-
-function authHeaders(token) {
+// Never expose credentials/remote bodies in errors. No retries for ambiguous PUTs.
+export function videoWikiClient(env = process.env, fetchImpl = fetch) {
+  const base = env.WIKI_API_BASE_URL?.replace(/\/$/, '');
+  if (base !== 'https://api.wikiwiki.jp/jigjp' || !env.WIKI_PASSWORD) throw new Error('Expected jigjp Wiki configuration');
+  const request = httpClient(fetchImpl);
+  let token;
+  const headers = async () => {
+    if (!token) {
+      const auth = await request('Wiki auth', `${base}/auth`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: env.WIKI_PASSWORD }) });
+      if (typeof auth.token !== 'string' || !auth.token) throw new Error('Invalid Wiki token');
+      token = auth.token;
+    }
+    return { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' };
+  };
   return {
-    Authorization: `Bearer ${token}`,
-    'Content-Type': 'application/json',
+    async get(page) {
+      const data = await request('Wiki GET', `${base}/page/${encodeURIComponent(page)}`, { headers: await headers() });
+      if (typeof data.source !== 'string') throw new Error('Invalid Wiki source');
+      return data.source;
+    },
+    async put(page, source) {
+      if (env.DRY_RUN !== 'false' || env.VIDEO_WIKI_WRITE_ENABLED !== 'true') throw new Error('Video Wiki write disabled');
+      await request('Wiki PUT', `${base}/page/${encodeURIComponent(page)}`, { method: 'PUT', headers: await headers(), body: JSON.stringify({ source }) });
+    },
   };
 }
 
-/**
- * WIKIWIKI ページ本文を取得する
- * @param {string} pageName ページ名 (例: "ライバー名/動画一覧")
- * @returns {Promise<string>} ページ本文テキスト
- * @throws ページ取得失敗時
- */
-export async function getPage(pageName) {
-  const token = await authenticate();
-  const url = `${BASE_URL}/page/${encodeURIComponent(pageName)}`;
-  const res = await fetch(url, {
-    method: 'GET',
-    headers: authHeaders(token),
-  });
-
-  if (!res.ok) {
-    throw new Error(
-      `WIKIWIKI GET page failed [${pageName}]: ${res.status}`
-    );
-  }
-
-  const data = await res.json();
-  return data.source ?? '';
-}
-
-/**
- * WIKIWIKI ページ本文を更新する
- * @param {string} pageName ページ名
- * @param {string} content  更新後のページ本文
- * @returns {Promise<void>}
- * @throws ページ更新失敗時
- */
-export async function updatePage(pageName, content) {
-  const token = await authenticate();
-  const url = `${BASE_URL}/page/${encodeURIComponent(pageName)}`;
-  const res = await fetch(url, {
-    method: 'PUT',
-    headers: authHeaders(token),
-    body: JSON.stringify({ source: content }),
-  });
-
-  if (!res.ok) {
-    throw new Error(
-      `WIKIWIKI PUT page failed [${pageName}]: ${res.status}`
-    );
-  }
+// Shared by ingestion and manual classification. Save recovery material before PUT.
+export async function guardedEdit({ wiki, page, transform, save, dryRun = true, writeEnabled = false }) {
+  const before = await wiki.get(page);
+  const after = await transform(before);
+  if (typeof after !== 'string') throw new Error('Invalid transformed source');
+  await save(before, after);
+  if (after === before) return { changed: false, written: false };
+  if (dryRun || !writeEnabled) return { changed: true, written: false };
+  if (await wiki.get(page) !== before) throw new Error('Wiki conflict; retry next run');
+  await wiki.put(page, after);
+  if (await wiki.get(page) !== after) throw new Error('Wiki verification failed; inspect recovery preview');
+  return { changed: true, written: true };
 }
