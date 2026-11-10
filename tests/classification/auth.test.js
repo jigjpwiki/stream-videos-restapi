@@ -20,7 +20,7 @@ test('Access verifies RSA signature, issuer, audience, expiry, nbf and editor al
 test('dedicated sync token cannot access editor APIs and editors cannot use internal API via forged actor',async()=>{
  const request=new Request('https://editor.example.com/internal/pending',{headers:{Authorization:'Bearer '+env.SYNC_TOKEN}});
  assert.equal(await syncAuthorized(request,env),true);assert.equal(await syncAuthorized(request,{SYNC_TOKEN:'short'}),false);
- const denied=await worker.fetch(new Request('https://editor.example.com/api/state',{headers:{Authorization:'Bearer '+env.SYNC_TOKEN}}),env);assert.equal(denied.status,403);
+ const denied=await worker.fetch(new Request('https://editor.example.com/api/state',{headers:{Authorization:'Bearer '+env.SYNC_TOKEN}}),env);assert.equal(denied.status,401);
  const noInternal=await worker.fetch(new Request('https://editor.example.com/internal/pending',{headers:{'X-Actor':'actions'}}),env);assert.equal(noInternal.status,401);
 });
 test('authenticated browser mutation requires exact same origin and custom JSON request',async()=>{
@@ -44,4 +44,15 @@ test('Access AJAX header retains same-origin and independent CSRF marker; legacy
   assert.equal(response.status,expected);assert.match(response.headers.get('X-Request-Id'),/^[a-f0-9-]{36}$/i);
  }
  assert.equal(mutations,2);
+});
+
+test('Worker auth causes are traceable: missing/expired/permission/key service failures remain distinct and fail closed',async t=>{
+ const entries=[];t.mock.method(console,'info',value=>entries.push(value));
+ let mutations=0;const appEnv={...env,CLASSIFIER:{idFromName:()=>1,get:()=>({fetch:async()=>{mutations++;return Response.json({ok:true});}})}};
+ for(const [value,status,code,action] of [[null,401,'jwt_missing','reauthenticate'],[await jwt({exp:0}),401,'jwt_expired','reauthenticate'],[await jwt({aud:['wrong']}),403,'jwt_audience_mismatch','contact_admin'],[await jwt({email:'private-person@example.test'}),403,'editor_not_allowed','contact_admin']]){
+  const response=await worker.fetch(new Request('https://editor.example.com/api/state?counts=1',{headers:value?{'Cf-Access-Jwt-Assertion':value}:{}}),appEnv);const data=await response.json();assert.equal(response.status,status);assert.equal(data.code,code);assert.equal(data.authSource,'worker');assert.equal(data.authAction,action);assert.equal(data.requestId,response.headers.get('X-Request-Id'));assert.equal(response.headers.get('X-Classifier-Auth-Source'),'worker');assert.ok(entries.some(entry=>entry.includes(data.requestId)&&entry.includes(code)));
+ }
+ t.mock.method(globalThis,'fetch',async()=>new Response('PRIVATE_TOKEN',{status:503}));
+ const response=await worker.fetch(req(await jwt({}, {kid:'cold-key-for-service-test'})),appEnv);const data=await response.json();assert.equal(response.status,503);assert.equal(data.code,'auth_keys_http');assert.equal(data.authAction,'retry');assert.equal(mutations,0);
+ assert.ok(entries.some(entry=>entry.includes(data.requestId)&&entry.includes('"upstreamStatus":503')));assert.ok(!entries.join('').includes('private-person'));assert.ok(!entries.join('').includes('PRIVATE_TOKEN'));assert.ok(!entries.join('').includes('Cf-Access-Jwt-Assertion'));
 });

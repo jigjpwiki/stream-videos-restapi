@@ -1,7 +1,7 @@
 import {traceId,tracedResponse} from './trace.mjs';
 import {custodyPrepare,custodyCommit,itemKey} from './custody.mjs';
 import {ApiError,diagnostic} from './errors.mjs';
-import { editorIdentity, syncAuthorized } from './auth.mjs';
+import { editorIdentity, syncAuthorized, AuthError } from './auth.mjs';
 import { importedItem, decide, pending, acknowledge } from './model.mjs';
 import { HTML, CSP } from './ui.mjs';
 const headers={ 'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff' };
@@ -17,9 +17,11 @@ async function handleRequest(request,env,requestId) {
     try {
       if(internal) {if(!await syncAuthorized(request,env))return json({error:'Unauthorized'},401);actor='actions';}
       else actor=await editorIdentity(request,env);
-    }catch {
-      diagnostic(url.pathname,403,'access_denied',requestId);
-      return json({error:'Access denied',code:'access_denied',requestId},403);
+    }catch(error) {
+      const failure=error instanceof AuthError?error:new AuthError(503,'auth_check_unavailable','retry');
+      diagnostic(url.pathname,failure.status,failure.code,requestId,{stage:'auth',upstreamStatus:failure.upstreamStatus});
+      const response=json({code:failure.code,authSource:'worker',authAction:failure.action,requestId},failure.status);
+      response.headers.set('X-Classifier-Auth-Source','worker');return response;
     }
     try {
       if(!internal && request.method!=='GET') {
