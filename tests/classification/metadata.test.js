@@ -43,12 +43,16 @@ test('publication date merging preserves verified history but never converts reg
 test('two private videos on the same page remain pending across repeated runs; verified metadata later resumes once without changing decisions/history/receipts',()=>fixture(async f=>{
  const history=await f.remote('/api/history');
  const before=ids.map(id=>f.worker.get(key(id)));
+ const expire=()=>{for(const id of ids){const item=f.worker.get(key(id));if(item.metadataRetry)f.worker.put({...item,metadataRetry:{...item.metadataRetry,nextCheckAt:'2000-01-01T00:00:00Z'}});}};
  for(let i=0;i<2;i++){
+  expire();
   const report=await runClassifications({...f.options,cache:f.cache});assert.equal(report.failed,false);assert.equal(report.outcome,'deferred');assert.equal(report.complete,false);assert.equal(report.metadataWaiting,2);assert.deepEqual(report.metadataUnavailable,ids);assert.equal(f.puts,0);assert.equal(f.text,original);
   for(const id of ids){const result=report.results.find(r=>r.videoId===id);assert.equal(result.reason,'missing_publication_date');assert.equal(result.outcome,'metadata_waiting');assert.equal(result.availability,'not_returned');const item=f.worker.get(key(id)),old=before[ids.indexOf(id)];assert.equal(item.revision,3);assert.equal(item.choice,old.choice);assert.equal(item.appliedRevision,old.appliedRevision);assert.deepEqual(item.receipt,old.receipt);assert.deepEqual(item.prepared,old.prepared);}
   assert.deepEqual(await f.remote('/api/history'),history);
  }
+ expire();
  const a=await runClassifications({...f.options,cache:f.cache,details:async()=>[good(ids[0])]});assert.equal(a.failed,false);assert.equal(a.metadataWaiting,1);assert.equal(f.puts,1);assert.equal(f.worker.get(key(ids[0])).appliedRevision,3);assert.equal(unclassifiedRows(f.text).length,1);assert.equal(f.cache.UC0.find(v=>v.videoId===ids[0]).publishedAt,good(ids[0]).publishedAt);
+ expire();
  const b=await runClassifications({...f.options,cache:f.cache,details:async()=>[good(ids[1])]});assert.equal(b.outcome,'success');assert.equal(f.puts,2);assert.equal(unclassifiedRows(f.text).length,0);for(const id of ids){assert.equal(f.text.split(id).length-1,1);assert.equal(f.worker.get(key(id)).revision,3);assert.equal(f.worker.get(key(id)).appliedRevision,3);}
  await runClassifications({...f.options,cache:f.cache});assert.equal(f.puts,2);
 }));
@@ -62,8 +66,8 @@ test('missing API results do not erase cached publication dates; invalid Worker 
 }));
 test('temporary metadata API errors fail visibly instead of pretending videos are private; Dry Run never mutates DB/cache/Wiki/state',()=>fixture(async f=>{
  const history=await f.remote('/api/history');const before=JSON.stringify(ids.map(id=>f.worker.get(key(id))));const calls=[];
- const report=await runClassifications({...f.options,cache:f.cache,env:{...env,DRY_RUN:'true'},remote:async(path,data)=>{calls.push(path);assert.equal(data,undefined);return f.remote(path,data);},details:async()=>{throw Error('SECRET API failure');},persist:async()=>assert.fail(),persistCache:async()=>assert.fail()});
- assert.equal(report.failed,true);assert.equal(report.outcome,'failure');assert.equal(report.metadataWaiting,0);assert.equal(report.metadataFailures.length,2);assert.ok(report.results.every(r=>r.reason==='metadata_fetch_failed'));assert.equal(f.text,original);assert.equal(f.puts,0);assert.deepEqual(calls,['/internal/pending']);assert.equal(JSON.stringify(ids.map(id=>f.worker.get(key(id)))),before);assert.deepEqual(await f.remote('/api/history'),history);assert.ok(!JSON.stringify(report).includes('SECRET'));
+ const report=await runClassifications({...f.options,cache:f.cache,env:{...env,DRY_RUN:'true'},remote:async(path,data)=>{calls.push(path);assert.ok(path==='/internal/pending'||path==='/internal/lookup');return f.remote(path,data);},details:async()=>{throw Error('SECRET API failure');},persist:async()=>assert.fail(),persistCache:async()=>assert.fail()});
+ assert.equal(report.failed,true);assert.equal(report.outcome,'failure');assert.equal(report.metadataWaiting,0);assert.equal(report.metadataFailures.length,2);assert.ok(report.results.every(r=>r.reason==='metadata_fetch_failed'));assert.equal(f.text,original);assert.equal(f.puts,0);assert.deepEqual(calls,['/internal/pending','/internal/lookup']);assert.equal(JSON.stringify(ids.map(id=>f.worker.get(key(id)))),before);assert.deepEqual(await f.remote('/api/history'),history);assert.ok(!JSON.stringify(report).includes('SECRET'));
 }));
 test('custody enabled never withdraws existing unknown-date rows, even after manual classification',()=>fixture(async f=>{
  const report=await runClassifications({...f.options,cache:f.cache,env:{...env,CLASSIFIER_CUSTODY_ENABLED:'true'}});assert.equal(report.failed,false);assert.equal(report.metadataWaiting,2);assert.equal(f.puts,0);assert.equal(f.text,original);assert.ok(report.custody.results.every(r=>r.outcome==='metadata_waiting'));for(const id of ids)assert.equal(f.worker.get(key(id)).authority,undefined);

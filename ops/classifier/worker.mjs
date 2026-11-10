@@ -1,3 +1,4 @@
+import {metadataWait} from './metadata.mjs';
 import {traceId,tracedResponse} from './trace.mjs';
 import {custodyPrepare,custodyCommit,itemKey} from './custody.mjs';
 import {ApiError,diagnostic} from './errors.mjs';
@@ -36,7 +37,7 @@ async function handleRequest(request,env,requestId) {
       if(url.pathname==='/app.css' && request.method==='GET') {
         const {CSS}=await import('./ui.mjs');return new Response(CSS,{headers:{'Content-Type':'text/css; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
       }
-      const allowed=internal?['POST /internal/import','GET /internal/pending','POST /internal/ack','POST /internal/prepare','GET /internal/item','POST /internal/lookup','POST /internal/custody','GET /internal/custody-recovery','GET /internal/custody-status']:['GET /api/state','GET /api/history','GET /api/item','POST /api/decision'];
+      const allowed=internal?['POST /internal/import','POST /internal/metadata-wait','GET /internal/pending','POST /internal/ack','POST /internal/prepare','GET /internal/item','POST /internal/lookup','POST /internal/custody','GET /internal/custody-recovery','GET /internal/custody-status']:['GET /api/state','GET /api/history','GET /api/item','POST /api/decision'];
       if(!allowed.includes(`${request.method} ${url.pathname}`))return json({error:'Not found'},404);
       const payload=request.method==='GET'?null:await body(request);
       const stub=env.CLASSIFIER.get(env.CLASSIFIER.idFromName('wiki-video-classifier-v1'));
@@ -118,9 +119,25 @@ export class Classifier {
       }
       if(url.pathname==='/internal/pending') {
         // Bounded work per tick; rotation by age includes conflicts without starving fresh decisions.
-        const items=this.sql.exec("SELECT data FROM items WHERE (json_extract(data,'$.needsPublication')=1 OR json_extract(data,'$.revision') > json_extract(data,'$.appliedRevision')) AND (coalesce(json_extract(data,'$.choice'),'') != 'hold' OR json_extract(data,'$.authority')='cloudflare') AND (json_extract(data,'$.choice') IS NOT NULL OR json_extract(data,'$.receipt') IS NOT NULL) ORDER BY json_extract(data,'$.lastTriedAt') ASC, id LIMIT 50").toArray().map(r=>JSON.parse(r.data)).filter(pending);
-        // Merely reading the queue does not modify state (Dry Run safe).
-        return json({items});
+        const predicate="(json_extract(data,'$.needsPublication')=1 OR json_extract(data,'$.revision') > json_extract(data,'$.appliedRevision')) AND (coalesce(json_extract(data,'$.choice'),'') != 'hold' OR json_extract(data,'$.authority')='cloudflare') AND (json_extract(data,'$.choice') IS NOT NULL OR json_extract(data,'$.receipt') IS NOT NULL)";
+        const waiting="coalesce(json_extract(data,'$.metadataRetry.revision') = json_extract(data,'$.revision') AND json_extract(data,'$.metadataRetry.nextCheckAt') > ?,0)";
+        const items=this.sql.exec(`SELECT data FROM items WHERE ${predicate} AND NOT (${waiting}) ORDER BY CASE WHEN json_extract(data,'$.metadataRetry.revision')=json_extract(data,'$.revision') THEN json_extract(data,'$.metadataRetry.checkedAt') ELSE json_extract(data,'$.lastTriedAt') END ASC, id LIMIT 50`,now).toArray().map(r=>JSON.parse(r.data)).filter(pending);
+        const scheduled=this.sql.exec(`SELECT count(*) AS n FROM items WHERE ${predicate} AND (${waiting})`,now).toArray()[0].n;
+        // Reading the queue never changes state; old items without retry fields work unchanged.
+        return json({items,metadataWaitSupported:true,metadataWaiting:scheduled});
+      }
+      if(url.pathname==='/internal/metadata-wait') {
+        const {items}=await request.json();
+        if(!Array.isArray(items)||items.length>50||items.some(i=>typeof i?.key!=='string'||!Number.isInteger(i.revision)||i.revision<0))throw new ApiError(400,'invalid_input');
+        const conflicts=[];
+        this.ctx.storage.transactionSync(()=>{
+          for(const entry of items){
+            const item=this.get(entry.key);
+            if(!item||item.revision!==entry.revision||!pending(item)){conflicts.push(entry.key);continue;}
+            this.put(metadataWait(item,entry.revision,now));
+          }
+        });
+        return json({ok:true,conflicts});
       }
       if(url.pathname==='/internal/prepare') {
         const data=await request.json();

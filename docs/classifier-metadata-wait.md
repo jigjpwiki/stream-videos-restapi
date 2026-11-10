@@ -38,9 +38,9 @@ Wiki本文には投稿動画/Shorts動画の見出しも存在した。
 
 メタデータ待ちだけではfailed=trueにせず、reportはmetadataWaiting件数、complete=false、outcome=deferredを示す。
 別の真のエラーがあればfailureを優先する。成功/失敗ackを送らず、分類判断、revision、appliedRevision、
-receipt、prepare journal、履歴を保持する。候補はpendingに残り、次回も通常の上限付き取得対象となる。
+receipt、prepare journal、履歴を保持する。候補の未反映状態を維持し、再確認期限が来た候補だけをpendingの取得対象とする。
 後日正式な情報を取得できれば同じrevisionを自動反映する。失敗したまま恒久除外しない。
-Workerのスキーマや新しい認証権限は追加しない。待ち状態は同期reportに記録する。
+DOのテーブル変更や新しい認証権限は追加しない。再確認予定は既存JSONに保持し、待ち状態は同期reportにも記録する。
 
 不明日時の既存Wiki行は移動/削除しない。custody機能が有効でも、日時不明の取り下げは延期する。
 Dry Runの移管previewも不明日時の行を取り下げ対象にしない。
@@ -67,3 +67,36 @@ Worker/キャッシュの日時再利用、部分メタデータ、null/不正�
 保持して手動でWorkerを更新する。新しいSecrets/Variablesやschema移行は不要。本作業ではデプロイしない。
 ロールバックはActionsの変更をrevertし、必要なら同じbindingの旧Worker bundleへ戻す。
 分類DB・キャッシュ・履歴・prepare journalを削除/初期化しない。
+
+## 追加レビュー: メタデータ待ちキューの公平性
+
+従来は日時不明の先頭50件を毎回選び、lastTriedAtも変わらないため後続が飢餓状態になり得た。
+新しい`POST /internal/metadata-wait`は成功/失敗ACKと独立した通知で、同期専用トークンだけが利用できる。
+key/revisionをCAS確認し、現revisionが未反映の場合だけmetadataRetry={revision,checkedAt,nextCheckAt}を保存する。
+revision、choice、appliedRevision、needsPublication、receipt、prepare journal、lastTriedAt、履歴は変えない。
+通知の再送は冪等で、期限前の同じrevisionへの重複通知で期限を延長しない。
+取得済みの有効日時がある場合や適用済みの対象には待ちを設定しない。
+
+再確認は6時間後を初期方針とする。10分ごとの同一ID取得を避けるローカル方針で、YouTubeの制限値ではない。
+期限前の待ちはpendingのLIMIT 50から除外し、期限が来ればcheckedAt順で再確認対象へ戻る。
+新しい分類/取り消し操作、または有効な公開日時のimportは待ちを解除する。
+旧JSONにフィールドがなくても通常のpendingとして扱い、schema移行やデータ初期化は不要。
+
+Wiki巡回で見つかった行も既存lookup APIで待ち予定を確認する（100 keysずつ・読み取り専用）。
+これによりpendingから外した候補を巡回から再びYouTubeへ問い合わせる迂回経路も防ぐ。
+キャッシュに有効な日時が増えればimportに利用でき、待ちを解除して次回の適用対象へ戻す。
+API障害による失敗をメタデータ待ちへ変換したり、429の共有cooldownを解除したりしない。
+
+reportのmetadataWaitingは今回発生した待ち、metadataWaitingScheduledはWorkerが予約中の未反映件数。
+予約が残る場合もcomplete=false/outcome=deferredを維持し、ほかの真の失敗があればfailureを優先する。
+通知失敗・revision競合も安全な固定項目で失敗として示し、成功に見せない。
+Dry Runはpending/lookupを読むだけで、待ち通知も時刻更新も行わない。
+
+**導入順序:** レビュー後、まず同じDO bindingと既存設定を保ってWorkerを手動更新し、その後Actionsを利用する。
+pending応答のmetadataWaitSupportedで対応を確認するため、旧Workerに未知の通知を送らない。
+旧WorkerのままならmetadataWaitUnsupportedをreport/logへ出し、待ち自体は保持するが飢餓対策は未適用となる。
+本作業では本番Workerをデプロイしない。ロールバックは同じbindingの旧bundle/Actionsへ戻すだけでデータを消さない。
+
+回帰テストでは待ち50件+正常1件の51件を使い、2回目に正常動画を反映し、3回目でもYouTube再取得が増えないことを検証する。
+期限切れ、同revisionの自動再開、通知の重複/CAS競合、新判断/正式メタデータの待ち解除、Dry Runも確認する。
+実workerdの再起動後も予約と分類データを保持し、新しい判断で再びpendingになることを検証する。

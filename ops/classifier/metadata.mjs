@@ -16,3 +16,11 @@ export function mergeMetadata(...values) {
   }
   return merged;
 }
+
+// Local retry policy, not a YouTube quota claim. Kept in the DO, independent of
+// classification acknowledgements. Duplicate notifications never slide the deadline.
+export function metadataWait(item, revision, now) {
+  if(hasPublicationDate(item.metadata))return item;
+  if(item.metadataRetry?.revision===revision&&item.metadataRetry.nextCheckAt>now)return item;
+  return {...item,metadataRetry:{revision,checkedAt:now,nextCheckAt:new Date(Date.parse(now)+6*3600000).toISOString()}};
+}

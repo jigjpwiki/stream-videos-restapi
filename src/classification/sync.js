@@ -16,7 +16,7 @@ export function classifierClient(env, fetchImpl = fetch) {
   const url=new URL(origin);
   if(url.protocol!=='https:'||url.origin!==origin||url.username||url.password||!env.CLASSIFIER_SYNC_TOKEN)throw Error('Expected classifier HTTPS origin and dedicated token');
   return async (path,data) => {
-    if(!['/internal/import','/internal/pending','/internal/ack','/internal/prepare','/internal/item','/internal/lookup','/internal/custody','/internal/custody-recovery','/internal/custody-status'].includes(path.split('?')[0]))throw Error('Invalid classifier operation');
+    if(!['/internal/import','/internal/metadata-wait','/internal/pending','/internal/ack','/internal/prepare','/internal/item','/internal/lookup','/internal/custody','/internal/custody-recovery','/internal/custody-status'].includes(path.split('?')[0]))throw Error('Invalid classifier operation');
     const res=await fetchImpl(origin+path,{method:data?'POST':'GET',headers:{Authorization:`Bearer ${env.CLASSIFIER_SYNC_TOKEN}`,...(data?{'Content-Type':'application/json'}:{})},body:data?JSON.stringify(data):undefined,redirect:'error',signal:AbortSignal.timeout(15000)});
     if(!res.ok)throw Error('Classifier request failed');return res.json();
   };
@@ -37,6 +37,10 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
   const pendingResponse=await remote('/internal/pending');
   if(!Array.isArray(pendingResponse.items)||pendingResponse.items.length>50)throw Error('Invalid classifier queue');
   const queue=pendingResponse.items;
+  report.metadataWaitingScheduled=pendingResponse.metadataWaiting??0;
+  if(!Number.isInteger(report.metadataWaitingScheduled)||report.metadataWaitingScheduled<0)throw Error('Invalid metadata waiting count');
+  const waitingObserved=new Map();
+
   const custodyEnabled=env.CLASSIFIER_CUSTODY_ENABLED==='true';
   const custodyBatch=Number(env.CLASSIFIER_CUSTODY_BATCH_SIZE??10);
   if(!Number.isInteger(custodyBatch)||custodyBatch<1||custodyBatch>50)throw Error('Invalid custody batch size');
@@ -74,11 +78,21 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
       }
     }
   }
+  if(pendingResponse.metadataWaitSupported===true){
+    const keys=[...new Set(pages.flatMap(p=>p.rows.map(row=>encodeURIComponent(p.page)+':'+row.videoId)))];
+    for(let i=0;i<keys.length;i+=100){
+      const response=await remote('/internal/lookup',{keys:keys.slice(i,i+100)});
+      if(!Array.isArray(response.items))throw Error('Invalid metadata lookup');
+      for(const item of response.items)waitingObserved.set(item.key,item);
+    }
+  }
   report.unclassifiedCount=pages.reduce((count,page)=>count+page.rows.length,0);
   const metadata=new Map();
   for(const video of Object.values(cache).flat())metadata.set(video.videoId,mergeMetadata(metadata.get(video.videoId),video));
+  for(const item of waitingObserved.values())metadata.set(item.videoId,mergeMetadata(metadata.get(item.videoId),item.metadata));
   for(const item of queue)metadata.set(item.videoId,mergeMetadata(metadata.get(item.videoId),item.metadata));
-  const missing=[...new Set([...queue,...pages.flatMap(p=>p.rows)].map(v=>v.videoId))].filter(id=>!hasPublicationDate(metadata.get(id))||!Number.isFinite(metadata.get(id)?.durationSeconds)).slice(0,50);
+  const postponedIds=new Set([...waitingObserved.values()].filter(item=>item.metadataRetry?.revision===item.revision&&Date.parse(item.metadataRetry.nextCheckAt)>+now&&!hasPublicationDate(metadata.get(item.videoId))).map(item=>item.videoId));
+  const missing=[...new Set([...queue,...pages.flatMap(p=>p.rows)].map(v=>v.videoId))].filter(id=>!hasPublicationDate(metadata.get(id))||!Number.isFinite(metadata.get(id)?.durationSeconds)).filter(id=>!postponedIds.has(id)).slice(0,50);
   const {request,usage}=quotaRequest(3);
   if(missing.length) {
     try {
@@ -172,6 +186,12 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
       const failed={key:item.key,videoId:item.videoId,revision:item.revision,outcome:'failed',...(validation??requestErrorDetails(error)),...(validation?.reason==='missing_publication_date'&&report.metadataFailures.includes(item.videoId)?{reason:'metadata_fetch_failed'}:{})};receipts.push(failed);report.results.push(failed);}
   }
   if(!dryRun) {
+    const waiting=report.results.filter(r=>r.outcome==='metadata_waiting').map(({key,revision})=>({key,revision}));
+    if(waiting.length){
+      if(pendingResponse.metadataWaitSupported===true){
+        try{const result=await remote('/internal/metadata-wait',{items:waiting});report.metadataWaitConflicts=result.conflicts??[];}catch{report.metadataWaitUpdateFailed=true;}
+      }else report.metadataWaitUnsupported=true;
+    }
     if(receipts.length){try{const ack=await remote('/internal/ack',{results:receipts});report.ackConflicts=ack.conflicts??[];}catch{report.ackFailed=true;}}
     state.scanIndex=(start+scanAttempted)%Math.max(1,livers.length);
     if(pauseUntil)state.wikiRetryAt=new Date(pauseUntil).toISOString();else delete state.wikiRetryAt;
@@ -179,15 +199,15 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
     if(pauseUntil||(!report.importFailed&&!report.ackFailed))await persist(state);
   }
   if(custodyEnabled&&!dryRun){try{report.custody.totals=await remote('/internal/custody-status');}catch{report.statusFailed=true;}}
-  report.failed=!!(report.importFailed||report.recoveryFailed||report.ackFailed||report.statusFailed||report.metadataCacheFailed)||report.custody.failed>0||report.results.some(r=>r.outcome==='failed')||report.scanFailures.length>0||report.metadataFailures.length>0||!!report.ackConflicts?.length;
+  report.failed=!!(report.importFailed||report.recoveryFailed||report.ackFailed||report.statusFailed||report.metadataCacheFailed||report.metadataWaitUpdateFailed||report.metadataWaitConflicts?.length)||report.custody.failed>0||report.results.some(r=>r.outcome==='failed')||report.scanFailures.length>0||report.metadataFailures.length>0||!!report.ackConflicts?.length;
   report.written=report.results.some(r=>r.written===true)||report.custody.results.some(r=>r.written===true);
   report.writeUnverified=[...report.results,...report.custody.results].some(r=>r.writeUnverified);
   report.writeAttempted=report.written||[...report.results,...report.custody.results].some(r=>r.writeAttempted);
   report.metadataWaiting=report.results.filter(r=>r.outcome==='metadata_waiting').length;
-  report.deferred=report.metadataWaiting+report.scanDeferred.length+report.results.filter(r=>r.outcome==='deferred'||r.outcome.endsWith('_paused')).length+report.custody.results.filter(r=>['deferred','metadata_waiting'].includes(r.outcome)).length;
+  report.deferred=report.metadataWaitingScheduled+report.metadataWaiting+report.scanDeferred.length+report.results.filter(r=>r.outcome==='deferred'||r.outcome.endsWith('_paused')).length+report.custody.results.filter(r=>['deferred','metadata_waiting'].includes(r.outcome)).length;
   report.complete=!report.failed&&report.deferred===0;
   report.outcome=report.failed?'failure':report.deferred?'deferred':report.scanSkipped.length?'success_with_warnings':'success';
-  console.log(JSON.stringify({phase:'classifications',dryRun,outcome:report.outcome,deferred:report.deferred,complete:report.complete,scanned:report.scanned.length,skipped:report.scanSkipped.length,scanFailures:report.scanFailures.length,applyFailures:report.results.filter(r=>r.outcome==='failed').length,metadataFailures:report.metadataFailures.length,metadataWaiting:report.metadataWaiting,metadataUnavailable:report.metadataUnavailable.length,unclassifiedCount:report.unclassifiedCount,custodyPlanned:report.custody.planned,custodyWithdrawn:report.custody.withdrawn,custodyFailed:report.custody.failed,written:report.written,writeAttempted:report.writeAttempted,writeUnverified:report.writeUnverified}));
+  console.log(JSON.stringify({phase:'classifications',dryRun,outcome:report.outcome,deferred:report.deferred,complete:report.complete,scanned:report.scanned.length,skipped:report.scanSkipped.length,scanFailures:report.scanFailures.length,applyFailures:report.results.filter(r=>r.outcome==='failed').length,metadataFailures:report.metadataFailures.length,metadataWaiting:report.metadataWaiting,metadataWaitingScheduled:report.metadataWaitingScheduled,metadataWaitUnsupported:report.metadataWaitUnsupported===true,metadataUnavailable:report.metadataUnavailable.length,unclassifiedCount:report.unclassifiedCount,custodyPlanned:report.custody.planned,custodyWithdrawn:report.custody.withdrawn,custodyFailed:report.custody.failed,written:report.written,writeAttempted:report.writeAttempted,writeUnverified:report.writeUnverified}));
   await writeFile(join(output,'report.json'),JSON.stringify(report,null,2)+'\n');
   await writeFile(join(output,'import-preview.json'),JSON.stringify({pages},null,2)+'\n');
   return report;
