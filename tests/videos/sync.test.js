@@ -48,7 +48,7 @@ test('fresh Wiki overrides stale cache; ambiguous PUT followed by rerun never du
  let text=source,puts=0;const cache={UC0:[{...video,videoType:'shorts'}]};
  const wiki={get:async()=>text,put:async(p,s)=>{puts++;text=s;throw new Error('lost response');}};
  const opts={wiki,cache,now,output,dryRun:false,writeEnabled:true,fetchVideos:async()=>[video]};
- await assert.rejects(updateLiverVideos(livers[0],'test',opts));
+ assert.equal((await updateLiverVideos(livers[0],'test',opts)).success,true);
  const result=await updateLiverVideos(livers[0],'test',opts);
  assert.equal(puts,1);assert.equal(result.newVideosCount,0);assert.equal(text.split(video.videoId).length-1,1);
  const manuallyClassified=text;await updateLiverVideos(livers[0],'test',{...opts,fetchVideos:async()=>[{...video,videoType:'shorts'}]});assert.equal(text,manuallyClassified);

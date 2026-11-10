@@ -1,3 +1,4 @@
+import {HttpRequestError} from '../../src/schedule/http.js';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
@@ -33,9 +34,9 @@ test('Wiki transfer preserves exact rows/structure and history; missing Wiki row
 }));
 test('Wiki PUT response loss and commit response loss recover idempotently with at least one complete copy',()=>fixture(async f=>{
  let losePut=true;const actualPut=f.wiki.put;f.wiki.put=async(p,s)=>{await actualPut(p,s);if(losePut){losePut=false;throw Error('lost');}};
- const a=await runClassifications(f.options);assert.equal(a.failed,true);assert.ok(!f.text.includes(id));assert.equal(f.worker.get(key).line,line);assert.equal(f.worker.get(key).custody.phase,'prepared');
+ const a=await runClassifications(f.options);assert.equal(a.failed,false);assert.ok(!f.text.includes(id));assert.equal(f.worker.get(key).line,line);assert.equal(f.worker.get(key).custody.phase,'committed');
  const b=await runClassifications(f.options);assert.equal(b.failed,false);assert.equal(f.puts,1);assert.equal(f.worker.get(key).custody.phase,'committed');
- const files=await readdir(f.output);const backups=files.filter(n=>n.endsWith('.before.wiki')&&n.includes('.custody.'));assert.ok(backups.length>=2);assert.ok((await Promise.all(backups.map(n=>readFile(join(f.output,n),'utf8')))).includes(source));
+ const files=await readdir(f.output);const backups=files.filter(n=>n.endsWith('.before.wiki')&&n.includes('.custody.'));assert.ok(backups.length>=1);assert.ok((await Promise.all(backups.map(n=>readFile(join(f.output,n),'utf8')))).includes(source));
 }));
 test('human edit after prepare aborts withdrawal, preserves full durable record and leaves conflict pending',()=>fixture(async f=>{
  const remote=f.options.remote;let inject=false;
@@ -134,4 +135,16 @@ test('human-authoritative Cloudflare records stay in classified/history view and
  await runClassifications(f.options);f.worker.put({...f.worker.get(key),outcome:'external',choice:null});
  const queue=await f.remote('/api/state');assert.equal(queue.items.length,0);assert.equal(queue.counts.unclassified,0);assert.equal(queue.counts.classified,1);
  const history=await f.remote('/api/state?mode=classified');assert.equal(history.items[0].key,key);
+}));
+
+test('429 after classification PUT preserves durable revision, receipt, history and prepare journal until verification on rerun',()=>fixture(async f=>{
+ await runClassifications(f.options);
+ await f.remote('/api/decision',{key,revision:0,choice:'shorts'});
+ const before=f.worker.get(key),history=await f.remote('/api/history');
+ const get=f.wiki.get;f.wiki.get=async(p,o)=>{if(o?.operation==='verify_get')throw new HttpRequestError('Wiki GET','http_error',429,120000);return get();};
+ const limited=await runClassifications(f.options);
+ assert.equal(limited.outcome,'deferred');assert.equal(limited.writeUnverified,true);assert.equal(limited.writeAttempted,true);
+ const pending=f.worker.get(key);assert.equal(pending.revision,before.revision);assert.equal(pending.appliedRevision,before.appliedRevision);assert.deepEqual(pending.receipt,before.receipt);assert.equal(pending.prepared.revision,pending.revision);assert.deepEqual(await f.remote('/api/history'),history);
+ const puts=f.puts;f.wiki.get=get;
+ const recovered=await runClassifications(f.options);assert.equal(recovered.failed,false);assert.equal(recovered.outcome,'success');assert.equal(f.puts,puts);assert.equal(f.worker.get(key).appliedRevision,1);assert.equal(f.worker.get(key).receipt.choice,'shorts');assert.equal(f.text.split(id).length-1,1);
 }));

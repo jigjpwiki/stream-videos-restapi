@@ -1,8 +1,9 @@
+import {wikiRateLimit} from '../services/wikiHttp.js';
 import {transferToCloudflare,digest} from './custody.js';
 import { savePreview } from '../services/preview.js';
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import { join } from 'node:path';
-import { requestErrorDetails } from '../schedule/http.js';
+import { requestErrorDetails, HttpRequestError } from '../schedule/http.js';
 import { videoWikiClient, guardedEdit, WikiPageNotFoundError } from '../services/wikiwiki.js';
 import { loadCache, saveCache } from '../services/storage.js';
 import { fetchVideoDetails, quotaRequest } from '../services/youtube.js';
@@ -26,9 +27,12 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
   livers??=JSON.parse(await readFile(new URL('../config/livers.json',import.meta.url)));
   cache=structuredClone(cache??await loadCache());
   if(!state) {try {state=JSON.parse(await readFile('data/classification-state.json'));}catch(e){if(e.code!=='ENOENT')throw e;state={};}}
-  state=structuredClone(state);wiki??=videoWikiClient(env);remote??=classifierClient(env);
+  state=structuredClone(state);
+  const ownWiki=!wiki;
+  if(ownWiki)wikiRateLimit.restore(state.wikiRetryAt);
+  wiki??=videoWikiClient(env);remote??=classifierClient(env);
   await mkdir(output,{recursive:true});
-  const report={dryRun,scanned:[],results:[],scanSkipped:[],scanFailures:[],metadataFailures:[],unclassifiedCount:0,written:false};
+  const report={dryRun,scanned:[],results:[],scanSkipped:[],scanFailures:[],scanDeferred:[],metadataFailures:[],unclassifiedCount:0,written:false};
   const pendingResponse=await remote('/internal/pending');
   if(!Array.isArray(pendingResponse.items)||pendingResponse.items.length>50)throw Error('Invalid classifier queue');
   const queue=pendingResponse.items;
@@ -36,18 +40,31 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
   const custodyBatch=Number(env.CLASSIFIER_CUSTODY_BATCH_SIZE??10);
   if(!Number.isInteger(custodyBatch)||custodyBatch<1||custodyBatch>50)throw Error('Invalid custody batch size');
   const scanSize=dryRun&&env.CLASSIFIER_SCAN_ALL==='true'?livers.length:Math.min(5,livers.length);
+  let rateFailures=0, pauseUntil=Date.parse(state.wikiRetryAt)>+now?Date.parse(state.wikiRetryAt):0, scanAttempted=0;
+  function rateLimited(error) {
+    if(!(error instanceof HttpRequestError)||error.status!==429)return false;
+    rateFailures++;
+    if(error.code==='rate_limited'||rateFailures>=2||(error.retryAfterMs??0)>5000)
+      pauseUntil=Math.max(pauseUntil,Date.now()+Math.max(30000,error.retryAfterMs??0));
+    return true;
+  }
+  const deferredEntry=(item,error)=>({...item,outcome:'deferred',reason:'rate_limited',...(error?requestErrorDetails(error):{}),...(pauseUntil?{retryAt:new Date(pauseUntil).toISOString()}: {})});
   const sources=new Map();
   const pages=[];const start=(state.scanIndex??0)%Math.max(1,livers.length);
   // Scan even disabled livers: historical Wiki rows must remain discoverable.
   for(let i=0;i<scanSize;i++) {
     const liver=livers[(start+i)%livers.length];
+    if(pauseUntil){report.scanDeferred.push(deferredEntry({page:liver.wikiPageName}));continue;}
+    scanAttempted++;
     try {
-      const source=await wiki.get(liver.wikiPageName);sources.set(liver.wikiPageName,source);
+      const source=await wiki.get(liver.wikiPageName);rateFailures=0;sources.set(liver.wikiPageName,source);
       pages.push({page:liver.wikiPageName,name:liver.name,rows:[...new Map(unclassifiedRows(source).map(row=>[row.videoId,row])).values()].map(row=>({videoId:row.videoId,line:row.line,metadata:cache[liver.youtubeChannelId]?.find(v=>v.videoId===row.videoId)}))});
       report.scanned.push(liver.wikiPageName);
     }catch (error) {
       const entry={page:liver.wikiPageName,...requestErrorDetails(error)};
-      if(error instanceof WikiPageNotFoundError) {
+      if(rateLimited(error)) {
+        report.scanDeferred.push(deferredEntry({page:liver.wikiPageName},error));
+      } else if(error instanceof WikiPageNotFoundError) {
         report.scanSkipped.push(entry);
         console.warn(JSON.stringify({phase:'classification_scan',level:'warning',...entry}));
       } else {
@@ -96,15 +113,16 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
       let recovery={items:[]};try{recovery=await remote('/internal/custody-recovery');}catch{report.recoveryFailed=true;}
       for(const item of recovery.items??[])if(!transfers.some(t=>t.page===item.page&&t.row.videoId===item.videoId))transfers.unshift({page:item.page,row:{videoId:item.videoId,line:item.line}});
     }
-    for(const transfer of (report.importFailed||dryRun?[]:transfers.slice(0,custodyBatch))){if(blockedPages.has(transfer.page))continue;try{
+    for(const transfer of (report.importFailed||dryRun?[]:transfers.slice(0,custodyBatch))){if(pauseUntil){report.custody.results.push(deferredEntry({page:transfer.page,videoId:transfer.row.videoId}));continue;}if(blockedPages.has(transfer.page))continue;try{
       if(!livers.some(l=>l.wikiPageName===transfer.page))throw Error('Unknown custody page');
       const result=await transferToCloudflare({wiki,remote,...transfer,dryRun,output,onPrepared:()=>checkpointManaged(transfer)});
       report.custody.results.push(result);
       if(result.withdrawn){report.custody.withdrawn++;await checkpointManaged(transfer);}
-    }catch{blockedPages.add(transfer.page);if(!dryRun){try{await remote('/internal/custody',{operation:'failed',key:encodeURIComponent(transfer.page)+':'+transfer.row.videoId});}catch{}}report.custody.failed++;report.custody.results.push({page:transfer.page,videoId:transfer.row.videoId,outcome:'conflict_or_failure'});}}
+    }catch(error){if(rateLimited(error)){report.custody.results.push(deferredEntry({page:transfer.page,videoId:transfer.row.videoId},error));continue;}blockedPages.add(transfer.page);if(!dryRun){try{await remote('/internal/custody',{operation:'failed',key:encodeURIComponent(transfer.page)+':'+transfer.row.videoId});}catch{}}report.custody.failed++;report.custody.results.push({page:transfer.page,videoId:transfer.row.videoId,outcome:'conflict_or_failure'});}}
   }
   const receipts=[];
   for(let item of queue) {
+    if(pauseUntil){report.results.push(deferredEntry({key:item.key,videoId:item.videoId,revision:item.revision}));continue;}
     if(blockedPages.has(item.page)){report.results.push({videoId:item.videoId,outcome:'custody_page_paused'});continue;}
     if(item.authority==='cloudflare'&&!custodyEnabled){report.results.push({videoId:item.videoId,outcome:'custody_paused'});continue;}
     const liver=livers.find(l=>l.wikiPageName===item.page);
@@ -118,19 +136,25 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
           if(!dryRun && before!==after)await remote('/internal/prepare',{key:item.key,videoId:item.videoId,revision:item.revision,receipt:resolution.receipt});},
       });
       const receipt={key:item.key,videoId:item.videoId,revision:item.revision,outcome:resolution.outcome,receipt:resolution.receipt};
-      report.results.push({...receipt,...result});receipts.push(receipt);
-    }catch (error) {const failed={key:item.key,videoId:item.videoId,revision:item.revision,outcome:'failed',...requestErrorDetails(error)};receipts.push(failed);report.results.push(failed);}
+      report.results.push({...receipt,...result});receipts.push(receipt);rateFailures=0;
+    }catch (error) {if(rateLimited(error)){report.results.push(deferredEntry({key:item.key,videoId:item.videoId,revision:item.revision},error));continue;}const failed={key:item.key,videoId:item.videoId,revision:item.revision,outcome:'failed',...requestErrorDetails(error)};receipts.push(failed);report.results.push(failed);}
   }
   if(!dryRun) {
     if(receipts.length){try{const ack=await remote('/internal/ack',{results:receipts});report.ackConflicts=ack.conflicts??[];}catch{report.ackFailed=true;}}
-    state.scanIndex=(start+Math.min(5,livers.length))%Math.max(1,livers.length);
-    if(!report.importFailed&&!report.ackFailed)await persist(state);
+    state.scanIndex=(start+scanAttempted)%Math.max(1,livers.length);
+    if(pauseUntil)state.wikiRetryAt=new Date(pauseUntil).toISOString();else delete state.wikiRetryAt;
+    if(report.importFailed||report.ackFailed)state.scanIndex=start;
+    if(pauseUntil||(!report.importFailed&&!report.ackFailed))await persist(state);
   }
   if(custodyEnabled&&!dryRun){try{report.custody.totals=await remote('/internal/custody-status');}catch{report.statusFailed=true;}}
   report.failed=!!(report.importFailed||report.recoveryFailed||report.ackFailed||report.statusFailed)||report.custody.failed>0||report.results.some(r=>r.outcome==='failed')||report.scanFailures.length>0||report.metadataFailures.length>0||!!report.ackConflicts?.length;
   report.written=report.results.some(r=>r.written===true)||report.custody.results.some(r=>r.written===true);
-  report.outcome=report.failed?'failure':report.scanSkipped.length?'success_with_warnings':'success';
-  console.log(JSON.stringify({phase:'classifications',dryRun,outcome:report.outcome,scanned:report.scanned.length,skipped:report.scanSkipped.length,scanFailures:report.scanFailures.length,applyFailures:report.results.filter(r=>r.outcome==='failed').length,metadataFailures:report.metadataFailures.length,unclassifiedCount:report.unclassifiedCount,custodyPlanned:report.custody.planned,custodyWithdrawn:report.custody.withdrawn,custodyFailed:report.custody.failed,written:report.written}));
+  report.writeUnverified=[...report.results,...report.custody.results].some(r=>r.writeUnverified);
+  report.writeAttempted=report.written||[...report.results,...report.custody.results].some(r=>r.writeAttempted);
+  report.deferred=report.scanDeferred.length+report.results.filter(r=>r.outcome==='deferred'||r.outcome.endsWith('_paused')).length+report.custody.results.filter(r=>r.outcome==='deferred').length;
+  report.complete=!report.failed&&report.deferred===0;
+  report.outcome=report.failed?'failure':report.deferred?'deferred':report.scanSkipped.length?'success_with_warnings':'success';
+  console.log(JSON.stringify({phase:'classifications',dryRun,outcome:report.outcome,deferred:report.deferred,complete:report.complete,scanned:report.scanned.length,skipped:report.scanSkipped.length,scanFailures:report.scanFailures.length,applyFailures:report.results.filter(r=>r.outcome==='failed').length,metadataFailures:report.metadataFailures.length,unclassifiedCount:report.unclassifiedCount,custodyPlanned:report.custody.planned,custodyWithdrawn:report.custody.withdrawn,custodyFailed:report.custody.failed,written:report.written,writeAttempted:report.writeAttempted,writeUnverified:report.writeUnverified}));
   await writeFile(join(output,'report.json'),JSON.stringify(report,null,2)+'\n');
   await writeFile(join(output,'import-preview.json'),JSON.stringify({pages},null,2)+'\n');
   return report;

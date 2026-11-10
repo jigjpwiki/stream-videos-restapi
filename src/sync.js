@@ -1,3 +1,5 @@
+import {readFile} from 'node:fs/promises';
+import {wikiRateLimit} from './services/wikiHttp.js';
 import { run as schedule } from './schedule/index.js';
 import { runClassifications } from './classification/sync.js';
 import { runVideos } from './jobs/videoBatch.js';
@@ -6,6 +8,8 @@ import { runVideos } from './jobs/videoBatch.js';
 export async function runSync({ env = process.env, runSchedule = schedule, runVideoBatch = runVideos,
   applyClassifications = runClassifications,
 } = {}) {
+  // Restore the server cooldown before the schedule's first Wiki request, too.
+  try {const state=JSON.parse(await readFile('data/classification-state.json','utf8'));wikiRateLimit.restore(state.wikiRetryAt);}catch(error){if(error.code!=='ENOENT')throw error;}
   const results = {};
   for (const [name, operation] of [['schedule', () => runSchedule({ env })],
     ['classifications', () => applyClassifications({ env })],

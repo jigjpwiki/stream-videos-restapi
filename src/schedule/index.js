@@ -2,6 +2,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { wikiHttpClient } from '../services/wikiHttp.js';
 import { httpClient } from './http.js';
 import { normalize, classify } from './normalize.js';
 import { verify } from './verify.js';
@@ -9,7 +10,8 @@ import { sync, wikiClient } from './sync.js';
 
 export async function run({ env = process.env, fetchImpl = fetch, now = new Date(), fixture, output = 'work/schedule' } = {}) {
   const report = { processedAt: now.toISOString(), sources: {}, skipped: {} };
-  const transport = httpClient(fetchImpl);
+  const generalTransport = httpClient(fetchImpl), wikiTransport = wikiHttpClient(fetchImpl);
+  const transport = (label,...args) => (label.startsWith('Wiki ')?wikiTransport:generalTransport)(label,...args);
   report.apis = {};
   const request = async (label, url, options) => {
     try {
