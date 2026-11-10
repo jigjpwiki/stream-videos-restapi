@@ -42,6 +42,11 @@ jobs:
         run: bash ops/state/sync-state.sh load
       - name: Update due channels
         env:
+          CLASSIFIER_INGEST_BATCH_SIZE: ${{ vars.CLASSIFIER_INGEST_BATCH_SIZE || '10' }}
+          CLASSIFIER_CUSTODY_READ_ENABLED: ${{ vars.CLASSIFIER_CUSTODY_READ_ENABLED || 'false' }}
+          CLASSIFIER_CUSTODY_ENABLED: ${{ vars.CLASSIFIER_CUSTODY_ENABLED || 'false' }}
+          CLASSIFIER_URL: ${{ vars.CLASSIFIER_URL }}
+          CLASSIFIER_SYNC_TOKEN: ${{ secrets.CLASSIFIER_SYNC_TOKEN }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           WIKI_API_BASE_URL: ${{ secrets.WIKI_API_BASE_URL }}
           WIKI_PASSWORD: ${{ secrets.WIKI_PASSWORD }}

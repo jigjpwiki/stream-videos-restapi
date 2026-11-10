@@ -1,3 +1,4 @@
+import {custodyPrepare,custodyCommit,itemKey} from './custody.mjs';
 import {ApiError,diagnostic} from './errors.mjs';
 import { editorIdentity, syncAuthorized } from './auth.mjs';
 import { importedItem, decide, pending, acknowledge } from './model.mjs';
@@ -31,7 +32,7 @@ export default {
       if(url.pathname==='/app.css' && request.method==='GET') {
         const {CSS}=await import('./ui.mjs');return new Response(CSS,{headers:{'Content-Type':'text/css; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
       }
-      const allowed=internal?['POST /internal/import','GET /internal/pending','POST /internal/ack','POST /internal/prepare']:['GET /api/state','GET /api/history','GET /api/item','POST /api/decision'];
+      const allowed=internal?['POST /internal/import','GET /internal/pending','POST /internal/ack','POST /internal/prepare','GET /internal/item','POST /internal/lookup','POST /internal/custody','GET /internal/custody-recovery','GET /internal/custody-status']:['GET /api/state','GET /api/history','GET /api/item','POST /api/decision'];
       if(!allowed.includes(`${request.method} ${url.pathname}`))return json({error:'Not found'},404);
       const payload=request.method==='GET'?null:await body(request);
       const stub=env.CLASSIFIER.get(env.CLASSIFIER.idFromName('wiki-video-classifier-v1'));
@@ -42,7 +43,8 @@ export default {
 };
 
 export class Classifier {
-  constructor(ctx) {
+  constructor(ctx,env={}) {
+    this.env=env;
     this.ctx=ctx;this.sql=ctx.storage.sql;
     this.sql.exec('CREATE TABLE IF NOT EXISTS items (id TEXT PRIMARY KEY, page TEXT NOT NULL, data TEXT NOT NULL)');
     this.sql.exec('CREATE INDEX IF NOT EXISTS items_page ON items(page)');
@@ -50,10 +52,35 @@ export class Classifier {
   }
   get(id){const rows=this.sql.exec('SELECT data FROM items WHERE id=?',id).toArray();return rows[0]?JSON.parse(rows[0].data):null;}
   put(item){this.sql.exec('INSERT INTO items(id,page,data) VALUES(?,?,?) ON CONFLICT(id) DO UPDATE SET data=excluded.data,page=excluded.page',item.key,item.page,JSON.stringify(item));}
-  event(item,action){this.sql.exec('INSERT INTO history(videoId,data) VALUES(?,?)',item.videoId,JSON.stringify({videoId:item.videoId,name:item.name,choice:item.choice,revision:item.revision,actor:item.actor??'actions',at:item.updatedAt,action,outcome:item.outcome}));}
+  event(item,action){this.sql.exec('INSERT INTO history(videoId,data) VALUES(?,?)',item.videoId,JSON.stringify({videoId:item.videoId,name:item.name,choice:item.choice,revision:item.revision,actor:item.actor??'actions',at:item.updatedAt,action,outcome:item.outcome,receipt:item.receipt}));}
   async fetch(request) {
     const url=new URL(request.url),actor=request.headers.get('X-Actor'),now=new Date().toISOString();
     try {
+      if(url.pathname==='/internal/custody-status'){if(url.searchParams.has('page'))return json({pending:this.sql.exec("SELECT count(*) AS n FROM items WHERE page=? AND json_extract(data,'$.custody.phase')='prepared'",url.searchParams.get('page')).toArray()[0].n});return json(this.sql.exec("SELECT coalesce(sum(CASE WHEN json_extract(data,'$.custody.origin')='wiki' AND json_extract(data,'$.custody.phase')='committed' THEN 1 ELSE 0 END),0) AS wikiTransfersCommitted,coalesce(sum(CASE WHEN json_extract(data,'$.custody.phase')='prepared' THEN 1 ELSE 0 END),0) AS preparedRemaining,coalesce(sum(CASE WHEN json_extract(data,'$.custody.origin')='new' THEN 1 ELSE 0 END),0) AS newDirectCount FROM items").toArray()[0]);}
+      if(url.pathname==='/internal/custody-recovery'){return json({items:this.sql.exec("SELECT data FROM items WHERE json_extract(data,'$.custody.phase')='prepared' ORDER BY id LIMIT 5").toArray().map(r=>JSON.parse(r.data))});}
+      if(url.pathname==='/internal/item'){const item=this.get(url.searchParams.get('key'));return json({item});}
+      if(url.pathname==='/internal/lookup'){
+        const {keys}=await request.json();if(!Array.isArray(keys)||keys.length>100||keys.some(k=>typeof k!=='string'))throw new ApiError(400,'invalid_input');
+        return json({items:keys.map(key=>this.get(key)).filter(Boolean)});
+      }
+      if(url.pathname==='/internal/custody'){
+        if(this.env.CUSTODY_ENABLED!=='true')throw new ApiError(409,'custody_disabled');
+        const data=await request.json();let item;
+        this.ctx.storage.transactionSync(()=>{
+          if(data.operation==='register'){
+            if(typeof data.page!=='string'||data.page.length>300||typeof data.name!=='string')throw new ApiError(400,'invalid_input');
+            if(typeof data.row?.line!=='string'||!data.row.line.includes(data.row.videoId)||/[\r\n]/.test(data.row.line)||!Number.isFinite(Date.parse(data.row.metadata?.publishedAt)))throw new ApiError(400,'invalid_input');
+            const key=itemKey(data.page,data.row?.videoId);const old=this.get(key);
+            if(old){item=old;return;}
+            item=importedItem(null,data.row,data.page,data.name,now);
+            item={...item,authority:'cloudflare',present:true,wikiPresent:false,originalLines:[item.line],custody:{phase:'committed',origin:'new',line:item.line,committedAt:now}};
+          }else if(data.operation==='prepare')item=custodyPrepare(this.get(data.key),data,now);
+          else if(data.operation==='failed'){item=this.get(data.key);if(!item?.custody)throw new ApiError(409,'custody_conflict');item={...item,custody:{...item.custody,lastTriedAt:now,error:'conflict_or_failure'}};}
+          else if(data.operation==='commit')item=custodyCommit(this.get(data.key),data,now);
+          else throw new ApiError(400,'invalid_input');
+          this.put(item);
+        });return json({item});
+      }
       if(url.pathname==='/internal/import') {
         const {pages}=await request.json();if(!Array.isArray(pages)||pages.length>5)throw new ApiError(409,'invalid_sync_input');
         this.ctx.storage.transactionSync(()=>{
@@ -63,14 +90,14 @@ export class Classifier {
             for(const row of page.rows) {if(ids.has(row.videoId))throw new ApiError(409,'invalid_sync_input');ids.add(row.videoId);this.put(importedItem(this.get(encodeURIComponent(page.page)+':'+row.videoId),row,page.page,page.name,now));}
             for(const record of this.sql.exec('SELECT data FROM items WHERE page=?',page.page).toArray()) {
               const item=JSON.parse(record.data);
-              if(item.present&&!ids.has(item.videoId))this.put({...item,present:false,updatedAt:now});
+              if(item.authority!=='cloudflare'&&item.present&&!ids.has(item.videoId))this.put({...item,present:false,updatedAt:now});
             }
           }
         });return json({ok:true});
       }
       if(url.pathname==='/internal/pending') {
         // Bounded work per tick; rotation by age includes conflicts without starving fresh decisions.
-        const items=this.sql.exec("SELECT data FROM items WHERE json_extract(data,'$.revision') > json_extract(data,'$.appliedRevision') AND coalesce(json_extract(data,'$.choice'),'') != 'hold' AND (json_extract(data,'$.choice') IS NOT NULL OR json_extract(data,'$.receipt') IS NOT NULL) ORDER BY json_extract(data,'$.lastTriedAt') ASC, id LIMIT 50").toArray().map(r=>JSON.parse(r.data)).filter(pending);
+        const items=this.sql.exec("SELECT data FROM items WHERE (json_extract(data,'$.needsPublication')=1 OR json_extract(data,'$.revision') > json_extract(data,'$.appliedRevision')) AND (coalesce(json_extract(data,'$.choice'),'') != 'hold' OR json_extract(data,'$.authority')='cloudflare') AND (json_extract(data,'$.choice') IS NOT NULL OR json_extract(data,'$.receipt') IS NOT NULL) ORDER BY json_extract(data,'$.lastTriedAt') ASC, id LIMIT 50").toArray().map(r=>JSON.parse(r.data)).filter(pending);
         // Merely reading the queue does not modify state (Dry Run safe).
         return json({items});
       }
@@ -79,7 +106,7 @@ export class Classifier {
         this.ctx.storage.transactionSync(()=>{
           const item=this.get(data.key);
           if(!item||item.revision!==data.revision||!pending(item))throw new ApiError(409,'invalid_sync_input');
-          if(!data.receipt||!['shorts','normal','uncategorized'].includes(data.receipt.choice)||typeof data.receipt.line!=='string'||typeof data.receipt.location!=='string')throw new ApiError(409,'invalid_sync_input');
+          if(!data.receipt||!['shorts','normal','uncategorized','hold'].includes(data.receipt.choice)||typeof data.receipt.line!=='string'||typeof data.receipt.location!=='string')throw new ApiError(409,'invalid_sync_input');
           this.put({...item,prepared:{revision:data.revision,receipt:data.receipt}});
         });return json({ok:true});
       }
@@ -90,7 +117,7 @@ export class Classifier {
           for(const result of results) {
             const item=this.get(result.key);
             if(!item||item.revision!==result.revision){conflicts.push(result.videoId);continue;}
-            if(item.appliedRevision===result.revision && item.outcome===result.outcome)continue;
+            if(item.appliedRevision===result.revision && item.outcome===result.outcome&&!item.needsPublication)continue;
             if(result.outcome==='failed') {this.put({...item,lastTriedAt:now,lastError:'Wiki conflict, missing metadata or API failure'});continue;}
             const next=acknowledge(item,result,now);this.put(next);this.event(next,'wiki');
           }
@@ -112,11 +139,11 @@ export class Classifier {
         const mode=url.searchParams.get('mode')==='classified'?'classified':'queue';
         const offset=Math.max(0,Math.min(100000,Number(url.searchParams.get('offset'))||0));
         const counts=this.sql.exec(`SELECT
-          sum(CASE WHEN json_extract(data,'$.present')=1 AND json_extract(data,'$.choice') IS NULL THEN 1 ELSE 0 END) AS unclassified,
-          sum(CASE WHEN json_extract(data,'$.choice') IN ('shorts','normal') THEN 1 ELSE 0 END) AS classified,
-          sum(CASE WHEN json_extract(data,'$.revision')>json_extract(data,'$.appliedRevision') AND coalesce(json_extract(data,'$.choice'),'')!='hold' AND (json_extract(data,'$.choice') IS NOT NULL OR json_extract(data,'$.receipt') IS NOT NULL) THEN 1 ELSE 0 END) AS awaiting,
+          sum(CASE WHEN (json_extract(data,'$.present')=1 OR json_extract(data,'$.authority')='cloudflare') AND json_extract(data,'$.choice') IS NULL AND coalesce(json_extract(data,'$.outcome'),'')!='external' THEN 1 ELSE 0 END) AS unclassified,
+          sum(CASE WHEN json_extract(data,'$.choice') IN ('shorts','normal') OR json_extract(data,'$.outcome')='external' THEN 1 ELSE 0 END) AS classified,
+          sum(CASE WHEN (json_extract(data,'$.needsPublication')=1 OR json_extract(data,'$.revision')>json_extract(data,'$.appliedRevision')) AND (coalesce(json_extract(data,'$.choice'),'')!='hold' OR json_extract(data,'$.authority')='cloudflare') AND (json_extract(data,'$.choice') IS NOT NULL OR json_extract(data,'$.receipt') IS NOT NULL) THEN 1 ELSE 0 END) AS awaiting,
           sum(CASE WHEN json_extract(data,'$.choice')='hold' THEN 1 ELSE 0 END) AS held FROM items`).toArray()[0];
-        const where=mode==='queue'?"json_extract(data,'$.present')=1 AND (json_extract(data,'$.choice') IS NULL OR json_extract(data,'$.choice')='hold')":"json_extract(data,'$.choice') IS NOT NULL OR json_extract(data,'$.receipt') IS NOT NULL OR json_extract(data,'$.outcome')='external'";
+        const where=mode==='queue'?"(json_extract(data,'$.present')=1 OR json_extract(data,'$.authority')='cloudflare') AND (json_extract(data,'$.choice') IS NULL OR json_extract(data,'$.choice')='hold') AND coalesce(json_extract(data,'$.outcome'),'')!='external'":"json_extract(data,'$.choice') IS NOT NULL OR json_extract(data,'$.receipt') IS NOT NULL OR json_extract(data,'$.outcome')='external'";
         const rank=mode==='queue'?"CASE WHEN json_extract(data,'$.choice')='hold' THEN 1 ELSE 0 END":'0';
         let cursor=null;
         if(url.searchParams.has('cursor')) {

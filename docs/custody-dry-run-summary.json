@@ -1,0 +1,497 @@
+{
+  "checkedAt": "2026-11-10T07:54:59.314Z",
+  "scope": "73 configured Wiki pages; disabled livers included",
+  "cloudflareQueueSource": "local_empty_fixture",
+  "cloudflareDatabaseVerified": false,
+  "wikiWritten": false,
+  "cloudflareWritten": false,
+  "stateChanged": false,
+  "scanned": [
+    "新巻るろな/動画一覧",
+    "愛葉はな/動画一覧",
+    "音海まいる/動画一覧",
+    "陰山アゲハ/動画一覧",
+    "亀城ちかり/動画一覧",
+    "鈴木沙透/動画一覧",
+    "緋雨柚/動画一覧",
+    "雛菊のん/動画一覧",
+    "灯野ぺけ。/動画一覧",
+    "夜宵カレン/動画一覧",
+    "天辻ゆらぐ/動画一覧",
+    "愛乃宮ゆめ/動画一覧",
+    "彼方ルカ/動画一覧",
+    "桜庭羽奈/動画一覧",
+    "瀬奈りるか/動画一覧",
+    "猫乃間うと/動画一覧",
+    "愛上オハナ/動画一覧",
+    "相栖るじゅ/動画一覧",
+    "天透あわ/動画一覧",
+    "犬丸なでこ/動画一覧",
+    "堂下さとり/動画一覧",
+    "フローレ・ブランカ/動画一覧",
+    "桜堂ねる/動画一覧",
+    "七音うら/動画一覧",
+    "花晴りら/動画一覧",
+    "藤森ちとせ/動画一覧",
+    "ローズ・ダマスクハート/動画一覧",
+    "天麗らん/動画一覧",
+    "汐月永遠/動画一覧",
+    "牡丹雪/動画一覧",
+    "さくさくさく/動画一覧",
+    "銀河キララ/動画一覧",
+    "夜雨ねむる/動画一覧",
+    "宵坂伊織/動画一覧",
+    "香桜あんにん/動画一覧",
+    "天堂ライラ/動画一覧",
+    "夕凪万夜/動画一覧",
+    "夏凪はつみ/動画一覧",
+    "白尾すず/動画一覧",
+    "翡翠あかね/動画一覧",
+    "冬星れんこん/動画一覧",
+    "水凪るぅ/動画一覧",
+    "狛社なの/動画一覧",
+    "巳野みこと/動画一覧",
+    "露草なぎ/動画一覧",
+    "雪紫誉/動画一覧",
+    "無月いお/動画一覧",
+    "四葉みっけ/動画一覧",
+    "火狐むい/動画一覧",
+    "ニコ・ダークウェル/動画一覧",
+    "変幻リメ/動画一覧",
+    "小澄くろまる/動画一覧",
+    "猫吸はぴ/動画一覧",
+    "橙葉ぽん/動画一覧"
+  ],
+  "scanSkipped": [
+    {
+      "page": "恋歌さわこ/動画一覧",
+      "reason": "page_not_found",
+      "status": 404
+    },
+    {
+      "page": "東雲アカリ/動画一覧",
+      "reason": "page_not_found",
+      "status": 404
+    },
+    {
+      "page": "氷雨セイ/動画一覧",
+      "reason": "page_not_found",
+      "status": 404
+    },
+    {
+      "page": "桜雲ほわり/動画一覧",
+      "reason": "page_not_found",
+      "status": 404
+    },
+    {
+      "page": "シグマ・イングラム/動画一覧",
+      "reason": "page_not_found",
+      "status": 404
+    },
+    {
+      "page": "神童めしあ/動画一覧",
+      "reason": "page_not_found",
+      "status": 404
+    },
+    {
+      "page": "畑スイカ/動画一覧",
+      "reason": "page_not_found",
+      "status": 404
+    },
+    {
+      "page": "山田スバル/動画一覧",
+      "reason": "page_not_found",
+      "status": 404
+    },
+    {
+      "page": "雨海まる/動画一覧",
+      "reason": "page_not_found",
+      "status": 404
+    },
+    {
+      "page": "黄金つむぎ/動画一覧",
+      "reason": "page_not_found",
+      "status": 404
+    },
+    {
+      "page": "采多しゆあ/動画一覧",
+      "reason": "page_not_found",
+      "status": 404
+    },
+    {
+      "page": "斗瀬ひおり/動画一覧",
+      "reason": "page_not_found",
+      "status": 404
+    },
+    {
+      "page": "飛渡ココ/動画一覧",
+      "reason": "page_not_found",
+      "status": 404
+    },
+    {
+      "page": "夢ト見りんね/動画一覧",
+      "reason": "page_not_found",
+      "status": 404
+    },
+    {
+      "page": "久堂れしあ/動画一覧",
+      "reason": "page_not_found",
+      "status": 404
+    },
+    {
+      "page": "黒鋼亜華/動画一覧",
+      "reason": "page_not_found",
+      "status": 404
+    },
+    {
+      "page": "緋月・ローズ・ブレイド/動画一覧",
+      "reason": "page_not_found",
+      "status": 404
+    },
+    {
+      "page": "水無瀬天/動画一覧",
+      "reason": "page_not_found",
+      "status": 404
+    },
+    {
+      "page": "八重森ふゆの/動画一覧",
+      "reason": "page_not_found",
+      "status": 404
+    }
+  ],
+  "scanFailures": [],
+  "metadataFailures": [],
+  "unclassifiedCount": 283,
+  "planned": 283,
+  "quota": {
+    "used": 1,
+    "limit": 3
+  },
+  "outcome": "success_with_warnings",
+  "pages": [
+    {
+      "page": "新巻るろな/動画一覧",
+      "planned": 0,
+      "beforeHash": "086077d495df677be2ac9ad81936780bb493acb003d91710e6ab75e536432672",
+      "afterHash": "086077d495df677be2ac9ad81936780bb493acb003d91710e6ab75e536432672"
+    },
+    {
+      "page": "愛葉はな/動画一覧",
+      "planned": 0,
+      "beforeHash": "7256328207c067fd91ba937289482c3cd9dfca5d0504e201b10342e9400399aa",
+      "afterHash": "7256328207c067fd91ba937289482c3cd9dfca5d0504e201b10342e9400399aa"
+    },
+    {
+      "page": "音海まいる/動画一覧",
+      "planned": 0,
+      "beforeHash": "a11a249681071c8e5fac3ef730ba8a72b3b86509ac9dda0caf857b302edc6a63",
+      "afterHash": "a11a249681071c8e5fac3ef730ba8a72b3b86509ac9dda0caf857b302edc6a63"
+    },
+    {
+      "page": "陰山アゲハ/動画一覧",
+      "planned": 0,
+      "beforeHash": "fe2e93eefe586e209d55250c760eb6867d820d887952ba5a8db21354d00c93eb",
+      "afterHash": "fe2e93eefe586e209d55250c760eb6867d820d887952ba5a8db21354d00c93eb"
+    },
+    {
+      "page": "亀城ちかり/動画一覧",
+      "planned": 0,
+      "beforeHash": "099cf31abd927aaa191973f82a1d70293082df4adca797f818ec3b87fca6a95d",
+      "afterHash": "099cf31abd927aaa191973f82a1d70293082df4adca797f818ec3b87fca6a95d"
+    },
+    {
+      "page": "鈴木沙透/動画一覧",
+      "planned": 23,
+      "beforeHash": "c709316e4bf7566b90f5798f90012b8f2a46e0e6650821c785409b88eea9282e",
+      "afterHash": "2f91f5905842e8a9f953e87e889eb807736b4ebb7ba6fb713176c41ba28b72ab"
+    },
+    {
+      "page": "緋雨柚/動画一覧",
+      "planned": 1,
+      "beforeHash": "3314af69bf8c985b45a00a580d61524092af341ed934250cb3800088535b70cb",
+      "afterHash": "77f33a5d9dcee13b6bdfdc6ca07fce6cdb921a407727b2d8730b57a397d9a431"
+    },
+    {
+      "page": "雛菊のん/動画一覧",
+      "planned": 1,
+      "beforeHash": "ddd3512a27cd0f3df41c34a35f4618d0b2c6a3bd0e351e7448ea341b9e776905",
+      "afterHash": "c8253cfd1f01f7e268913c04a2f1ab5ecc5b5ccc35006e96fc0a0e75b5e51281"
+    },
+    {
+      "page": "灯野ぺけ。/動画一覧",
+      "planned": 0,
+      "beforeHash": "501cf92149e5d01fc473acc3a4f29d994d615ba7346b6575e57f4298bbee2878",
+      "afterHash": "501cf92149e5d01fc473acc3a4f29d994d615ba7346b6575e57f4298bbee2878"
+    },
+    {
+      "page": "夜宵カレン/動画一覧",
+      "planned": 0,
+      "beforeHash": "865459866858512c761dc5294a8f52b0dad993c585f9e3cc685f479d43e511d6",
+      "afterHash": "865459866858512c761dc5294a8f52b0dad993c585f9e3cc685f479d43e511d6"
+    },
+    {
+      "page": "天辻ゆらぐ/動画一覧",
+      "planned": 0,
+      "beforeHash": "bfaeafa3b490f8d6ee531c9c5aaaf2bbe0a561e17da5c65e590be8dbe0f56520",
+      "afterHash": "bfaeafa3b490f8d6ee531c9c5aaaf2bbe0a561e17da5c65e590be8dbe0f56520"
+    },
+    {
+      "page": "愛乃宮ゆめ/動画一覧",
+      "planned": 1,
+      "beforeHash": "2eddc0f97543e7e1584912b5e757ddd3784fc5c80ed50d8ebdafc4e77fce7b99",
+      "afterHash": "a1a96e9f8edc25bf6c576a06bd9254585bd7ab149d5552786763c4478872d3e9"
+    },
+    {
+      "page": "彼方ルカ/動画一覧",
+      "planned": 0,
+      "beforeHash": "1dd281331f339be023e03d93d1dcae698d79ea374ff4d223cd622cd8b8c69bad",
+      "afterHash": "1dd281331f339be023e03d93d1dcae698d79ea374ff4d223cd622cd8b8c69bad"
+    },
+    {
+      "page": "桜庭羽奈/動画一覧",
+      "planned": 17,
+      "beforeHash": "0772e3daf97d083268f49c7ca8bfbb50571d8efbfa568b0ac6000c4d741cfe66",
+      "afterHash": "40752a3cf13e4131bd3b94e206e319897f6e1f80ceaf50ac3f302ec5319f6f76"
+    },
+    {
+      "page": "瀬奈りるか/動画一覧",
+      "planned": 36,
+      "beforeHash": "46455ed56862eb91a846026f8d04b50e2c33a4846b85859c9c40772f4d9410e6",
+      "afterHash": "c5eb427bf8df627a79bc0e21a80eb62228c9966acecbcf54f47c56b06ceaec69"
+    },
+    {
+      "page": "猫乃間うと/動画一覧",
+      "planned": 1,
+      "beforeHash": "ec7a645c3f84216a0e7e397a7e10efc49ef6f8a258ce1b9332e90e981155a074",
+      "afterHash": "cb0171b1f1c57e2cad8d03fbe5b48dc35cd2f64004b7af02a90fe0f635cecbe6"
+    },
+    {
+      "page": "愛上オハナ/動画一覧",
+      "planned": 0,
+      "beforeHash": "e3de079971e4b7a9642dcdd0ba6261677144fd193c04e2ad903f63af35b0221a",
+      "afterHash": "e3de079971e4b7a9642dcdd0ba6261677144fd193c04e2ad903f63af35b0221a"
+    },
+    {
+      "page": "相栖るじゅ/動画一覧",
+      "planned": 0,
+      "beforeHash": "28e5fa79ec5f93a9a50e7add19edbabe296b4ef5f17e2fddba660466d4d5f3ba",
+      "afterHash": "28e5fa79ec5f93a9a50e7add19edbabe296b4ef5f17e2fddba660466d4d5f3ba"
+    },
+    {
+      "page": "天透あわ/動画一覧",
+      "planned": 10,
+      "beforeHash": "c70438218b3b344d0f8a00d727266f1f31f79bf2e4e409f748f84cfd6fe1c201",
+      "afterHash": "586bf2a47bcc447d07a3929f7611dc7e28227e7b5015c3958eb14ffe7103cfc9"
+    },
+    {
+      "page": "犬丸なでこ/動画一覧",
+      "planned": 17,
+      "beforeHash": "b36e7be313af9a1c0c49f2e7622caf7720b403233b0351998505e2f8f7eabb6b",
+      "afterHash": "3069c108125c060a4e5b04ca876ce6f3e164c471f91b0c2590fc2812d7d61d14"
+    },
+    {
+      "page": "堂下さとり/動画一覧",
+      "planned": 51,
+      "beforeHash": "151e62452a8dcdabbf3601355079f5599f5b1cb29d186957a386a5cfb91e4c30",
+      "afterHash": "80fc9da767c7e3c89fbe49e8399f18a40e6dd94437fbfbdbc80e3ad388f83716"
+    },
+    {
+      "page": "フローレ・ブランカ/動画一覧",
+      "planned": 0,
+      "beforeHash": "e07f00b95e8ecef5311bb40b26585f2e721e8cecf05dadebcd3aa0d24c2be609",
+      "afterHash": "e07f00b95e8ecef5311bb40b26585f2e721e8cecf05dadebcd3aa0d24c2be609"
+    },
+    {
+      "page": "桜堂ねる/動画一覧",
+      "planned": 1,
+      "beforeHash": "6fcc16672a2f2d528bbb7ef74e3f67a155845e0055a2d9e7513b3083a1f327d3",
+      "afterHash": "716fef1ba0fd23e639a71be2a11c3eaedfb718cc2c20a2a43cde3d58056e8c35"
+    },
+    {
+      "page": "七音うら/動画一覧",
+      "planned": 1,
+      "beforeHash": "b6840b0555fc4a15eb6a61ea0ad33bf506ecf978d46c4f62a666cbc91576d7ca",
+      "afterHash": "4f1f4571cb0e0a23a94d5203dc330a61e78332aaf35863c94f479abff4d7aa90"
+    },
+    {
+      "page": "花晴りら/動画一覧",
+      "planned": 2,
+      "beforeHash": "f69b2789b52aa15306b051f06c69f1134a04f263b139f18f70da58665a796d18",
+      "afterHash": "b11d27293825740e74e106ea1cf8dd46dd9b86c3cee6cec491ae7ee65a9e84f8"
+    },
+    {
+      "page": "藤森ちとせ/動画一覧",
+      "planned": 8,
+      "beforeHash": "c3b1eb264831a54d55fb0d18bc7fc621cdc731a52f13fbee4a34ff5f495c6ee1",
+      "afterHash": "7ab0f7614fcd52c8749c6471186217c57dde41523723e753bf1044e4cf07d8ee"
+    },
+    {
+      "page": "ローズ・ダマスクハート/動画一覧",
+      "planned": 0,
+      "beforeHash": "965eed78d92e77979c83101d13455f7d7013b6fb657cc1a890241abb04a09981",
+      "afterHash": "965eed78d92e77979c83101d13455f7d7013b6fb657cc1a890241abb04a09981"
+    },
+    {
+      "page": "天麗らん/動画一覧",
+      "planned": 1,
+      "beforeHash": "77f11246d257e1a13d521181d80127d4f00ef54d2533271f21eb1295913381b5",
+      "afterHash": "82e2847fca36640084b5e44d2a54c57e5a3bca0e84cbc09b10e8b2765f0bf6ba"
+    },
+    {
+      "page": "汐月永遠/動画一覧",
+      "planned": 0,
+      "beforeHash": "78700228d6814182d5236f1d5bb74946a15001db00789381749fd31d9fc621b6",
+      "afterHash": "78700228d6814182d5236f1d5bb74946a15001db00789381749fd31d9fc621b6"
+    },
+    {
+      "page": "牡丹雪/動画一覧",
+      "planned": 22,
+      "beforeHash": "1c9962f039a5bd6280a8cf12b89a51418454b879f6f5e3eb3e1172faca439a4b",
+      "afterHash": "fecec7aca1eb168dfa83212be9fa394dde15989a3c4d49692ac43398e7537a40"
+    },
+    {
+      "page": "さくさくさく/動画一覧",
+      "planned": 1,
+      "beforeHash": "a2e19f196d11488820a3a7ce1bdda66d9634dd7b37d1cb2f7486e21b3c765c92",
+      "afterHash": "92d150602c2f9b2aa05a2601d4f28a823a3f5dbb55c2b03db57fde0dbd12a8b8"
+    },
+    {
+      "page": "銀河キララ/動画一覧",
+      "planned": 0,
+      "beforeHash": "1be50db4ddc116f1cee9903f73c383dfed20b042661f2627917c62ca315dde21",
+      "afterHash": "1be50db4ddc116f1cee9903f73c383dfed20b042661f2627917c62ca315dde21"
+    },
+    {
+      "page": "夜雨ねむる/動画一覧",
+      "planned": 1,
+      "beforeHash": "3f73ad045646b4ba4f5f2420b17ea3770941e359452053b46342d23a5646aecd",
+      "afterHash": "852bac3b70594ffcdb5d0f09773b46e71269e8ec1071527e4cdec449d639fb94"
+    },
+    {
+      "page": "宵坂伊織/動画一覧",
+      "planned": 0,
+      "beforeHash": "ef4989878490e506b8d9dcc3ce4c57c0df017751f7de92f025e2aa7b876e3187",
+      "afterHash": "ef4989878490e506b8d9dcc3ce4c57c0df017751f7de92f025e2aa7b876e3187"
+    },
+    {
+      "page": "香桜あんにん/動画一覧",
+      "planned": 0,
+      "beforeHash": "5b05cd7af91134a985838d03991522bf55e08e3d4f30526a8c45045f71bae8f1",
+      "afterHash": "5b05cd7af91134a985838d03991522bf55e08e3d4f30526a8c45045f71bae8f1"
+    },
+    {
+      "page": "天堂ライラ/動画一覧",
+      "planned": 8,
+      "beforeHash": "fdf0223b6e0da7f196802ce50a20480720f3097434cb0c817460fc45d8aafa12",
+      "afterHash": "d28617c0a0d3c227bf5b40784f59b1dd21ecbc13b990b5513f0305c39e619da7"
+    },
+    {
+      "page": "夕凪万夜/動画一覧",
+      "planned": 1,
+      "beforeHash": "1d33f11f49f81babda24fabe09af50aed507808e8ab6a19b0ed47cf62cdc3d98",
+      "afterHash": "8b8972c275516133acf1724beecc19f22e887eb3a3843cbde3b03fb0105b77fb"
+    },
+    {
+      "page": "夏凪はつみ/動画一覧",
+      "planned": 0,
+      "beforeHash": "0304c12a6eb7fae423fa1b154bb5a30096fdf5d2a839c928b6be70b0370283ca",
+      "afterHash": "0304c12a6eb7fae423fa1b154bb5a30096fdf5d2a839c928b6be70b0370283ca"
+    },
+    {
+      "page": "白尾すず/動画一覧",
+      "planned": 0,
+      "beforeHash": "643835cfab190a5b6988dac1f58dccd4b7e7a013eeeae1b435d6229bb5384575",
+      "afterHash": "643835cfab190a5b6988dac1f58dccd4b7e7a013eeeae1b435d6229bb5384575"
+    },
+    {
+      "page": "翡翠あかね/動画一覧",
+      "planned": 2,
+      "beforeHash": "eca68ee017bfe16338748761a58bdb006dafffab8a2313e3683f4076bc07cf75",
+      "afterHash": "0af33dfcd0fe99e5ae28be461715f53b8fd28edf847501641cf4a6fc488d8d87"
+    },
+    {
+      "page": "冬星れんこん/動画一覧",
+      "planned": 5,
+      "beforeHash": "f416247cb30a7a1517faa3727ebcb535eadb362ff0b8ee15c65048fb71cd9f5c",
+      "afterHash": "ec024b991a4595cde623e014154cca2c9b6e055d1acf0358bd1c396a7fd65601"
+    },
+    {
+      "page": "水凪るぅ/動画一覧",
+      "planned": 15,
+      "beforeHash": "f84d0fdc576b7c97bc3089c8799d5387607b9ecca488c7d4ff07c19c0a1181b3",
+      "afterHash": "bb3fe2835ce091aebde878e099fa8c0ccd9239d157bd41a5ce0109a8c347efe8"
+    },
+    {
+      "page": "狛社なの/動画一覧",
+      "planned": 1,
+      "beforeHash": "e2ddd8ab9399173d82948fdbdc2769359f8099295e99891c8555057cf5c8c79d",
+      "afterHash": "11d6b17baa8353ec1aff65e9cfc4ceb15be71e87dedd62ca0fcaf330498a85c9"
+    },
+    {
+      "page": "巳野みこと/動画一覧",
+      "planned": 1,
+      "beforeHash": "cafaf81e66155fe88d46b73ef4129a182a5695c9f4333fc8a966aa129e4ed02d",
+      "afterHash": "637ab21dd286fcc3b3ce2ffbd0527243d7a893bd8831ef65e82d4510c70bd3ba"
+    },
+    {
+      "page": "露草なぎ/動画一覧",
+      "planned": 4,
+      "beforeHash": "5e204f42157781ed24db61a9818a484b6486abc90604017490f27550fc0f9950",
+      "afterHash": "8f3753ae73576050f96d55d9f6ea807bd8e68f9b20ad8d721b6c0ed6c07f91ef"
+    },
+    {
+      "page": "雪紫誉/動画一覧",
+      "planned": 6,
+      "beforeHash": "cabf3be1674d1fa2db1086ddf0400e1cd085fb5561ea1dff7b61db73bcc5da0f",
+      "afterHash": "c87804773df2470c31b860aa2732cbe98eeb568f5de5114264dca8355234acc9"
+    },
+    {
+      "page": "無月いお/動画一覧",
+      "planned": 41,
+      "beforeHash": "d8c74ef1894e16c44c2443151fa77265ccfb813c11a2a016ea7382180919d707",
+      "afterHash": "aad35ea1b8bea1204b9d251e2a74413c944f894dddd724d954d4c55e03e29264"
+    },
+    {
+      "page": "四葉みっけ/動画一覧",
+      "planned": 0,
+      "beforeHash": "9b7483d9ba3a5302bc6eb6e32afd5ed2666650a85c398930530b9ac05303862b",
+      "afterHash": "9b7483d9ba3a5302bc6eb6e32afd5ed2666650a85c398930530b9ac05303862b"
+    },
+    {
+      "page": "火狐むい/動画一覧",
+      "planned": 0,
+      "beforeHash": "f38e68126e4a1e600c390258d2f5157c3b3fcf7bb1db7691a5e6a881b2642a87",
+      "afterHash": "f38e68126e4a1e600c390258d2f5157c3b3fcf7bb1db7691a5e6a881b2642a87"
+    },
+    {
+      "page": "ニコ・ダークウェル/動画一覧",
+      "planned": 0,
+      "beforeHash": "a7a2b0d875ab4d4c8728db05f54b554f89dba6913fd908f701965de34b4201b2",
+      "afterHash": "a7a2b0d875ab4d4c8728db05f54b554f89dba6913fd908f701965de34b4201b2"
+    },
+    {
+      "page": "変幻リメ/動画一覧",
+      "planned": 1,
+      "beforeHash": "d5cc481a20b2f547e16ec350d2e18099b07fdfb69ae746b1ca2efd8966ee998d",
+      "afterHash": "fb6970ed25c56013d8e53283373985d151ba2ca93accfd0ca28c61b9440f8b8d"
+    },
+    {
+      "page": "小澄くろまる/動画一覧",
+      "planned": 3,
+      "beforeHash": "cba32ea4a118af592014ba78408333beccd93c9dc8410800c776db116d62b7d2",
+      "afterHash": "2acf7f0030d8fbcd196583fb653ae717167e19398b462c7610b0e9374b05ab24"
+    },
+    {
+      "page": "猫吸はぴ/動画一覧",
+      "planned": 0,
+      "beforeHash": "d7f0252b63d44fb0aa29d8470c42797858ad3b53f169d0c35df2a05bb2cc1f7b",
+      "afterHash": "d7f0252b63d44fb0aa29d8470c42797858ad3b53f169d0c35df2a05bb2cc1f7b"
+    },
+    {
+      "page": "橙葉ぽん/動画一覧",
+      "planned": 0,
+      "beforeHash": "c81d21770ed8eac65aea3f0383b20ccf3db8051e795e6f8eb2268987fc84a3f0",
+      "afterHash": "c81d21770ed8eac65aea3f0383b20ccf3db8051e795e6f8eb2268987fc84a3f0"
+    }
+  ]
+}

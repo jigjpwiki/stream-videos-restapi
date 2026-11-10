@@ -55,3 +55,9 @@ test('saved boundary item stays saved when next page fails; request timeout unlo
  await page.locator('#shorts').click();await page.clock.fastForward(16000);await expect(page.locator('#refresh')).toBeEnabled();await expect(page.locator('#message')).toContainText('タイムアウト');
  await stalled.abort();await page.unroute('**/api/decision');await save(page,'#shorts');await expect(page.locator('#title')).toHaveText('動画 51');
 });
+test('cloud-managed row remains editable without Wiki presence, survives hold, classification and undo',async({page,request})=>{
+ const items=fixtures(2).map(item=>({...item,present:false,authority:'cloudflare',custody:{phase:'committed',origin:'wiki',line:item.line}}));
+ await request.post('/__reset',{data:{items}});await page.goto('/');await expect(page.locator('#title')).toHaveText('動画 0');
+ await save(page,'#hold');await expect(page.locator('#title')).toHaveText('動画 1');await save(page,'#shorts');await expect(page.locator('#title')).toHaveText('動画 0');await save(page,'#normal');await expect(page.locator('#card')).toBeHidden();
+ await save(page,'#undo');await expect(page.locator('#title')).toHaveText('動画 0');await expect(page.locator('#status')).toContainText('保留');
+});
