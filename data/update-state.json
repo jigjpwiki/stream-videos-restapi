@@ -1,0 +1,36 @@
+{
+  "lastIndex": 42,
+  "updatedAt": "2026-11-10T01:31:44.439Z",
+  "version": 2,
+  "channels": {
+    "UC0aNUh8VfQwgqj0taB8MDpg": {
+      "lastAttemptAt": "2026-11-10T02:34:44.800Z",
+      "status": "failed",
+      "failures": 1
+    },
+    "UC0H7dRRqhfOifbYQ2TURdAg": {
+      "lastAttemptAt": "2026-11-10T02:34:44.800Z",
+      "lastSuccessAt": "2026-11-10T02:34:44.800Z",
+      "status": "success",
+      "failures": 0
+    },
+    "UC1Eq7ExEH0XO380it8cZYZg": {
+      "lastAttemptAt": "2026-11-10T02:34:44.800Z",
+      "lastSuccessAt": "2026-11-10T02:34:44.800Z",
+      "status": "success",
+      "failures": 0
+    },
+    "UC1hxdM37vjjqr-IfZuDn1iw": {
+      "lastAttemptAt": "2026-11-10T02:34:44.800Z",
+      "lastSuccessAt": "2026-11-10T02:34:44.800Z",
+      "status": "success",
+      "failures": 0
+    },
+    "UC2X_mAVGw8e3N9JQZZDVBfQ": {
+      "lastAttemptAt": "2026-11-10T02:34:44.800Z",
+      "lastSuccessAt": "2026-11-10T02:34:44.800Z",
+      "status": "success",
+      "failures": 0
+    }
+  }
+}
