@@ -5,7 +5,8 @@
   "workers_dev": true,
   "vars": {
   "ACCESS_ISSUER": "https://jigjpwiki.cloudflareaccess.com",
-  "ACCESS_AUD": "0e6dc3f0b2de310f163e5e83de92f55a3e0ab2f1ca10d121623c71e02473423c"
+  "ACCESS_AUD": "0e6dc3f0b2de310f163e5e83de92f55a3e0ab2f1ca10d121623c71e02473423c",
+  "CUSTODY_ENABLED": "false"
   },
   "durable_objects": { "bindings": [{ "name": "CLASSIFIER", "class_name": "Classifier" }] },
   "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Classifier"] }]

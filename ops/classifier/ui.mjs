@@ -26,7 +26,7 @@ function render(){
  el('title').textContent=item.metadata?.title||item.line?.match(/\[\[(.*?):https?:/)?.[1]||item.videoId;
  const date=item.metadata?.publishedAt?new Date(item.metadata.publishedAt).toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'}):'公開日を確認中';
  const seconds=item.metadata?.durationSeconds;el('meta').textContent=date+' / '+(Number.isFinite(seconds)?Math.floor(seconds/60)+':'+String(seconds%60).padStart(2,'0'):'時間を確認中');
- el('status').textContent=(label[item.choice]||'未分類')+' · '+(item.outcome==='external'?'Wikiの手動分類を優先':item.revision>item.appliedRevision&&item.choice!=='hold'?'Wiki反映待ち':'保存済み')+(item.lastError?' / 反映時にエラー。次の同期で再確認します。':'');
+ el('status').textContent=(label[item.choice]||'未分類')+' · '+(item.outcome==='external'?'Wikiの手動分類を優先':item.custody?.phase==='prepared'?'移管確認待ち':(item.needsPublication||item.revision>item.appliedRevision)&&(item.choice!=='hold'||item.authority==='cloudflare')&&(item.choice!==null||item.receipt)?'Wiki反映待ち':'保存済み')+(item.lastError?' / 反映時にエラー。次の同期で再確認します。':'');
  el('link').href='https://www.youtube.com/watch?v='+item.videoId;
 }
 function showCounts(data){counts=data;const names={unclassified:'未分類',classified:'分類済み',awaiting:'Wiki反映待ち',held:'保留'};el('counts').replaceChildren();for(const [key,name]of Object.entries(names)){const div=document.createElement('div'),strong=document.createElement('strong');strong.textContent=counts[key]||0;div.append(strong,document.createTextNode(name));el('counts').append(div);}}
@@ -43,7 +43,7 @@ async function advance(){
 }
 async function refreshCounts(stamp){try{const data=await api('/api/state?counts=1');if(version===stamp)showCounts(data.counts);}catch{if(version===stamp&&!busy)message('分類は保存済みです。件数の再取得に失敗しました。「更新」で確認できます。');}}
 async function conflict(item){
- try{const {item:fresh}=await api('/api/item?key='+encodeURIComponent(item.key));const at=items.findIndex(v=>v.key===fresh.key);if(mode==='queue'&&['shorts','normal'].includes(fresh.choice)){visited.add(fresh.key);if(at>=0)items.splice(at,1);await advance();}else if(at>=0)items[at]=fresh;else items.splice(index,0,fresh);render();message(errors[409]);}
+ try{const {item:fresh}=await api('/api/item?key='+encodeURIComponent(item.key));const at=items.findIndex(v=>v.key===fresh.key);if(mode==='queue'&&(['shorts','normal'].includes(fresh.choice)||fresh.outcome==='external')){visited.add(fresh.key);if(at>=0)items.splice(at,1);await advance();}else if(at>=0)items[at]=fresh;else items.splice(index,0,fresh);render();message(errors[409]);}
  catch{message('最新データを取得できません。「更新」してから再操作してください。');}
 }
 async function choose(choice,undo=false,target=null){

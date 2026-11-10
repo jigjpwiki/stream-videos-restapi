@@ -176,3 +176,9 @@ JSONサマリーを出す。分類結果の`outcome`を動画取得の`success`�
 `npx wrangler deploy --config ops/classifier/wrangler.jsonc`でUI/APIを同時更新する。
 このPRでは本番deployしない。ロールバックは旧commitのWorker bundleを同じbindingへ戻す。
 SQLテーブル・既存判断・履歴は削除しない。旧offset APIも残すためデータ移行は不要。
+
+## Cloudflareを正本とする運用
+
+[PR2の段階移管・新着直接登録・フラグ・Dry Run・導入/rollback](cloudflare-custody.md)を参照。
+この機能を有効にした項目はWikiに元行がなくても管理画面に残り、保留/取消中はWikiへ掲載しない。
+無効時の既存項目は従来どおりWikiを参照する。
