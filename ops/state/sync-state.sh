@@ -2,7 +2,7 @@
 set -euo pipefail
 # Dedicated durable state branch. Never commit/push to main; never restore executable code.
 branch=automation/wiki-sync-state
-files=(data/videos-cache.json data/update-state.json)
+files=(data/videos-cache.json data/update-state.json data/classification-state.json)
 mkdir -p work/state data
 case "${1:?load or save}" in
   load)
@@ -15,10 +15,16 @@ case "${1:?load or save}" in
     elif [[ $status == 0 ]]; then
       git fetch --no-tags origin "refs/heads/$branch"
       git rev-parse FETCH_HEAD > work/state/base
-      for file in "${files[@]}"; do git show "$(cat work/state/base):$file" > "$file"; done
+      for file in "${files[@]}"; do
+        if git cat-file -e "$(cat work/state/base):$file" 2>/dev/null; then
+          git show "$(cat work/state/base):$file" > "$file"
+        elif [[ "$file" == data/classification-state.json ]]; then echo '{}' > "$file"
+        else echo 'Required state file missing' >&2; exit 1; fi
+      done
     else
       echo 'State remote unavailable; aborting' >&2; exit 1
     fi
+    [[ -f data/classification-state.json ]] || echo '{}' > data/classification-state.json
     node --input-type=module -e 'import {readFileSync} from "node:fs"; for (const f of process.argv.slice(1)) JSON.parse(readFileSync(f));' "${files[@]}"
     ;;
   save)

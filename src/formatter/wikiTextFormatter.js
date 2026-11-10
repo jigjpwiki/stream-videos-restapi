@@ -105,6 +105,12 @@ function headingLevel(line) {
  * @param {number} startIdx セクション見出し行のインデックス
  * @returns {number}
  */
+// 投稿動画の直下だけを対象にし、子見出しのShorts/未分類へ混入させない。
+function findDirectContentEnd(lines, startIdx) {
+  for (let i = startIdx + 1; i < lines.length; i++) if (headingLevel(lines[i]) > 0) return i;
+  return lines.length;
+}
+
 function findSectionEnd(lines, startIdx) {
   const level = headingLevel(lines[startIdx]);
   for (let i = startIdx + 1; i < lines.length; i++) {
@@ -447,7 +453,7 @@ function insertIntoNormalSection(lines, secStart, secEnd, videoLine, year, newSo
   }
 
   // 年 fold の open/close を一括調整: 現在年のみ open、それ以外は close
-  const freshSecEnd = findSectionEnd(lines, secStart);
+  const freshSecEnd = findDirectContentEnd(lines, secStart);
   adjustNormalYearFolds(lines, secStart, freshSecEnd, nowYear);
 }
 
@@ -834,7 +840,7 @@ export function insertVideoIntoPage(pageText, video) {
     }
   }
 
-  const secEnd = findSectionEnd(lines, secStart);
+  const secEnd = video.videoType === 'normal' ? findDirectContentEnd(lines, secStart) : findSectionEnd(lines, secStart);
   const videoLine = formatVideoLine(video);
 
   // JST 日付（liveArchive は actualStartTime 優先）

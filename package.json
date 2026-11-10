@@ -1,7 +1,7 @@
 {
   "name": "stream-videos-restapi",
   "version": "1.0.0",
-  "description": "YouTube\u52d5\u753b\u8a18\u9332 \u81ea\u52d5\u66f4\u65b0\u30b7\u30b9\u30c6\u30e0",
+  "description": "YouTube動画記録 自動更新システム",
   "type": "module",
   "engines": {
     "node": ">=22"
@@ -14,9 +14,17 @@
     "schedule:dry": "DRY_RUN=true node src/schedule/index.js",
     "schedule:demo": "node src/schedule/index.js --fixture tests/schedule/fixture.json",
     "sync": "node src/runSync.js",
-    "sync:dry": "DRY_RUN=true node src/runSync.js"
+    "sync:dry": "DRY_RUN=true node src/runSync.js",
+    "classifier:bundle": "XDG_CONFIG_HOME=\"$PWD/work/wrangler-config\" WRANGLER_SEND_METRICS=false wrangler deploy --dry-run --config ops/classifier/wrangler.jsonc --outdir \"$PWD/work/classifier-bundle\"",
+    "classifier:smoke": "npm run classifier:bundle && node tests/classification/workerd-smoke.mjs",
+    "test:browser": "playwright test"
   },
   "dependencies": {
     "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.0",
+    "miniflare": "4.20260730.0",
+    "wrangler": "4.100.0"
   }
 }

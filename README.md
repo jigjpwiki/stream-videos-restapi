@@ -102,3 +102,8 @@ DRY_RUN=true npm run update
 ## 共通10分同期
 
 [PR 1の設計・クォータ・安全制御・段階切替](docs/unified-sync.md)。動画の書込みは既定無効。
+
+## Shorts・投稿動画の分類管理
+
+[Cloudflare管理画面・認証・過去行収集・Wiki反映と復旧手順](docs/video-classifier.md)。
+`npm run classifier:smoke` / `npm run test:browser` は本番へ接続せず検証します。

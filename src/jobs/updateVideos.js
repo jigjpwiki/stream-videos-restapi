@@ -1,4 +1,5 @@
-import { mkdir, writeFile } from 'node:fs/promises';
+import { savePreview } from '../services/preview.js';
+import { mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { getChannelVideos } from '../services/youtube.js';
 import { guardedEdit } from '../services/wikiwiki.js';
@@ -29,8 +30,7 @@ export async function updateLiverVideos(liver, apiKey, {
       return next;
     },
     async save(before, after) {
-      await writeFile(join(output, `${channel}.before.wiki`), before);
-      await writeFile(join(output, `${channel}.preview.wiki`), after);
+      await savePreview(join(output, channel), before, after);
     },
   });
   if (!dryRun && writeEnabled) cache[channel] = Object.values(metadata);

@@ -1,9 +1,10 @@
 import { run as schedule } from './schedule/index.js';
+import { runClassifications } from './classification/sync.js';
 import { runVideos } from './jobs/videoBatch.js';
 
 // Each phase is isolated; classification will use this same writer and state in PR2.
 export async function runSync({ env = process.env, runSchedule = schedule, runVideoBatch = runVideos,
-  applyClassifications = async () => ({ skipped: true }),
+  applyClassifications = runClassifications,
 } = {}) {
   const results = {};
   for (const [name, operation] of [['schedule', () => runSchedule({ env })],

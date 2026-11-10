@@ -1,0 +1,13 @@
+{
+  "name": "wiki-video-classifier",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-07-30",
+  "workers_dev": false,
+  "vars": {
+    "ACCESS_ISSUER": "https://YOUR-TEAM.cloudflareaccess.com",
+    "ACCESS_AUD": "REPLACE_WITH_ACCESS_APPLICATION_AUD",
+    "EDITOR_EMAILS": ""
+  },
+  "durable_objects": { "bindings": [{ "name": "CLASSIFIER", "class_name": "Classifier" }] },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Classifier"] }]
+}
