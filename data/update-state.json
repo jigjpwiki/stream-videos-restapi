@@ -4,10 +4,10 @@
   "version": 2,
   "channels": {
     "UC0aNUh8VfQwgqj0taB8MDpg": {
-      "lastAttemptAt": "2026-11-10T17:55:04.567Z",
-      "status": "failed",
-      "failures": 1,
-      "lastSuccessAt": "2026-11-10T15:45:08.515Z",
+      "lastAttemptAt": "2026-11-10T18:05:07.084Z",
+      "status": "success",
+      "failures": 0,
+      "lastSuccessAt": "2026-11-10T18:05:07.084Z",
       "firstAttemptAt": "2026-11-10T09:24:54.574Z"
     },
     "UC0H7dRRqhfOifbYQ2TURdAg": {
@@ -18,10 +18,10 @@
       "firstAttemptAt": "2026-11-10T09:24:54.574Z"
     },
     "UC1Eq7ExEH0XO380it8cZYZg": {
-      "lastAttemptAt": "2026-11-10T16:05:16.841Z",
-      "lastSuccessAt": "2026-11-10T13:44:55.267Z",
-      "status": "failed",
-      "failures": 1,
+      "lastAttemptAt": "2026-11-10T18:05:07.084Z",
+      "lastSuccessAt": "2026-11-10T18:05:07.084Z",
+      "status": "success",
+      "failures": 0,
       "firstAttemptAt": "2026-11-10T09:34:54.385Z"
     },
     "UC1hxdM37vjjqr-IfZuDn1iw": {
@@ -270,10 +270,10 @@
       "firstAttemptAt": "2026-11-10T08:46:16.455Z"
     },
     "UCqcnlq8uJqnGml6hcIrMCZw": {
-      "lastAttemptAt": "2026-11-10T16:35:13.959Z",
-      "status": "failed",
-      "failures": 1,
-      "lastSuccessAt": "2026-11-10T13:54:53.685Z",
+      "lastAttemptAt": "2026-11-10T18:05:07.084Z",
+      "status": "success",
+      "failures": 0,
+      "lastSuccessAt": "2026-11-10T18:05:07.084Z",
       "firstAttemptAt": "2026-11-10T09:45:06.958Z"
     },
     "UCrB-SfrqB5ChY8aAT99grXw": {
@@ -319,15 +319,15 @@
       "firstAttemptAt": "2026-11-10T09:05:01.032Z"
     },
     "UCWi_ztz8Xuz4XfzhoG6ZfyA": {
-      "lastAttemptAt": "2026-11-10T15:45:08.515Z",
-      "lastSuccessAt": "2026-11-10T15:45:08.515Z",
+      "lastAttemptAt": "2026-11-10T18:05:07.084Z",
+      "lastSuccessAt": "2026-11-10T18:05:07.084Z",
       "status": "success",
       "failures": 0,
       "firstAttemptAt": "2026-11-10T09:05:01.032Z"
     },
     "UCwSq7LbTyR1lXLJphsHKy2A": {
-      "lastAttemptAt": "2026-11-10T15:45:08.515Z",
-      "lastSuccessAt": "2026-11-10T15:45:08.515Z",
+      "lastAttemptAt": "2026-11-10T18:05:07.084Z",
+      "lastSuccessAt": "2026-11-10T18:05:07.084Z",
       "status": "success",
       "failures": 0,
       "firstAttemptAt": "2026-11-10T09:05:01.032Z"
