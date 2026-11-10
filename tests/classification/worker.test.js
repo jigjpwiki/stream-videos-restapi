@@ -75,3 +75,18 @@ test('missing Wiki scan/apply never deletes durable decisions, present flag, rec
   }
  }finally{await rm(output,{recursive:true,force:true});}
 });
+
+test('decision API distinguishes invalid input, stale revision and runtime failure; item refresh and keyset pagination',async()=>{
+ const worker=instance();
+ for(let i=0;i<55;i++)worker.put({key:'K'+String(i).padStart(3,'0'),page:'L',name:'L',videoId:String(i).padStart(11,'0'),present:true,choice:null,revision:0,appliedRevision:0});
+ const a=await call(worker,'/api/state');assert.equal(a.items.length,50);assert.ok(a.nextCursor);
+ // Remove the first page from the queue; keyset pagination must not skip the tail.
+ for(const item of a.items)worker.put({...item,choice:'shorts'});
+ const b=await call(worker,'/api/state?cursor='+encodeURIComponent(a.nextCursor));assert.equal(b.items.length,5);
+ assert.equal((await call(worker,'/api/state?cursor=invalid')).status,400);
+ let res=await worker.fetch(new Request('https://local/api/decision',{method:'POST',body:JSON.stringify({key:'K050',revision:0,choice:'bad'})}));assert.equal(res.status,400);
+ res=await worker.fetch(new Request('https://local/api/decision',{method:'POST',body:JSON.stringify({key:'K050',revision:9,choice:'shorts'})}));assert.equal(res.status,409);
+ assert.equal((await call(worker,'/api/item?key=K050')).item.revision,0);
+ const original=worker.put;worker.put=()=>{throw Error('SECRET_RUNTIME');};
+ res=await worker.fetch(new Request('https://local/api/decision',{method:'POST',body:JSON.stringify({key:'K050',revision:0,choice:'shorts'})}));assert.equal(res.status,500);assert.ok(!(await res.text()).includes('SECRET'));worker.put=original;
+});
