@@ -29,3 +29,19 @@ test('authenticated browser mutation requires exact same origin and custom JSON 
  const response=await worker.fetch(new Request('https://editor.example.com/api/decision',{method:'POST',headers:{'Cf-Access-Jwt-Assertion':token,...headers,'Content-Type':'application/json'},body:'{}'}),env);assert.equal(response.status,403);
  }
 });
+
+test('Access AJAX header retains same-origin and independent CSRF marker; legacy client remains compatible',async()=>{
+ const token=await jwt();let mutations=0;const appEnv={...env,CLASSIFIER:{idFromName:()=>1,get:()=>({fetch:async request=>{mutations++;assert.ok(request.headers.get('X-Request-Id'));return Response.json({ok:true});}})}};
+ for(const [origin,requested,marker,expected]of [
+  ['https://evil.example','XMLHttpRequest','wiki-classifier',403],
+  ['https://editor.example.com','XMLHttpRequest',undefined,403],
+  ['https://editor.example.com','XMLHttpRequest','wrong',403],
+  [undefined,'XMLHttpRequest','wiki-classifier',403],
+  ['https://editor.example.com','XMLHttpRequest','wiki-classifier',200],
+  ['https://editor.example.com','wiki-classifier',undefined,200],
+ ]){
+  const response=await worker.fetch(new Request('https://editor.example.com/api/decision',{method:'POST',headers:{'Cf-Access-Jwt-Assertion':token,'Content-Type':'application/json','X-Requested-With':requested,...(origin?{Origin:origin}:{}),...(marker?{'X-Classifier-Request':marker}:{})},body:'{}'}),appEnv);
+  assert.equal(response.status,expected);assert.match(response.headers.get('X-Request-Id'),/^[a-f0-9-]{36}$/i);
+ }
+ assert.equal(mutations,2);
+});

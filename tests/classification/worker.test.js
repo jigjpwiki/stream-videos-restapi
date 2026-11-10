@@ -90,3 +90,16 @@ test('decision API distinguishes invalid input, stale revision and runtime failu
  const original=worker.put;worker.put=()=>{throw Error('SECRET_RUNTIME');};
  res=await worker.fetch(new Request('https://local/api/decision',{method:'POST',body:JSON.stringify({key:'K050',revision:0,choice:'shorts'})}));assert.equal(res.status,500);assert.ok(!(await res.text()).includes('SECRET'));worker.put=original;
 });
+
+test('read, successful mutation and error responses share the supplied requestId without changing durable state on failure',async()=>{
+ const worker=instance();await call(worker,'/internal/import',{pages});const requestId='12345678-1234-4234-8234-123456789abc';
+ const read=await worker.fetch(new Request('https://local/api/state?counts=1',{headers:{'X-Request-Id':requestId}}));assert.equal(read.headers.get('X-Request-Id'),requestId);
+ const key=encodeURIComponent('L/動画一覧')+':'+row.videoId;
+ const success=await worker.fetch(new Request('https://local/api/decision',{method:'POST',headers:{'X-Request-Id':requestId},body:JSON.stringify({key,revision:0,choice:'shorts'})}));assert.equal(success.status,200);assert.equal(success.headers.get('X-Request-Id'),requestId);
+ const before=worker.get(key);const bad=await worker.fetch(new Request('https://local/api/decision',{method:'POST',headers:{'X-Request-Id':requestId},body:JSON.stringify({key,revision:0,choice:'normal'})}));assert.equal(bad.status,409);assert.equal((await bad.json()).requestId,requestId);assert.equal(bad.headers.get('X-Request-Id'),requestId);assert.deepEqual(worker.get(key),before);
+});
+
+test('unexpected DO boundary exceptions remain JSON with requestId and no raw failure data',async()=>{
+ const worker=instance();worker.handle=async()=>{throw Error('SECRET_COOKIE_JWT_USER');};
+ const res=await worker.fetch(new Request('https://local/api/state'));assert.equal(res.status,500);assert.match(res.headers.get('content-type'),/application\/json/);const text=await res.text();assert.ok(!text.includes('SECRET'));assert.equal(JSON.parse(text).requestId,res.headers.get('X-Request-Id'));
+});
