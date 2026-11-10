@@ -2,9 +2,11 @@
  * YouTube Data API v3 を使用して動画情報を取得するサービス
  *
  * 使用APIエンドポイント:
- *   search.list  - チャンネルの動画ID一覧を取得
+ *   channels.list / playlistItems.list - uploadsの差分を取得
  *   videos.list  - 動画の詳細情報を取得
  */
+
+import { httpClient, arrayField } from '../schedule/http.js';
 
 const YOUTUBE_API_BASE = 'https://www.googleapis.com/youtube/v3';
 
@@ -85,41 +87,29 @@ function determineVideoType(video) {
  * @param {string} publishedAfter ISO8601 文字列
  * @returns {Promise<string[]>} videoId 配列
  */
-async function fetchVideoIds(channelId, apiKey, publishedAfter) {
-  const videoIds = [];
-  let pageToken = null;
-
-  do {
-    const params = new URLSearchParams({
-      part: 'id',
-      channelId,
-      type: 'video',
-      maxResults: '50',
-      order: 'date',
-      publishedAfter,
-      key: apiKey,
-    });
-    if (pageToken) {
-      params.set('pageToken', pageToken);
+export async function fetchVideoIds(channelId, apiKey, publishedAfter, { request = httpClient(), maxPages = 20 } = {}) {
+  // channels.list supplies the authoritative uploads playlist; never use search.list (100 units).
+  const channels = await request('YouTube channels', `${YOUTUBE_API_BASE}/channels?${new URLSearchParams({part:'contentDetails',id:channelId,key:apiKey})}`);
+  const channel = arrayField(channels, 'items').find(item => item.id === channelId);
+  const playlistId = channel?.contentDetails?.relatedPlaylists?.uploads;
+  if (!playlistId) throw new Error('Uploads playlist unavailable');
+  const ids = new Set();
+  let pageToken;
+  for (let page = 0; page < maxPages; page++) {
+    const params = new URLSearchParams({part:'contentDetails',playlistId,maxResults:'50',key:apiKey});
+    if (pageToken) params.set('pageToken', pageToken);
+    const data = await request('YouTube playlist', `${YOUTUBE_API_BASE}/playlistItems?${params}`);
+    let old = false;
+    for (const item of arrayField(data, 'items')) {
+      const {videoId, videoPublishedAt} = item.contentDetails ?? {};
+      // Missing dates are included for details lookup; never guess a year.
+      if (videoPublishedAt && Date.parse(videoPublishedAt) < Date.parse(publishedAfter)) old = true;
+      else if (videoId) ids.add(videoId);
     }
-
-    const url = `${YOUTUBE_API_BASE}/search?${params}`;
-    const res = await fetch(url);
-    if (!res.ok) {
-      throw new Error(`YouTube search.list failed: ${res.status}`);
-    }
-    const data = await res.json();
-
-    for (const item of data.items ?? []) {
-      if (item.id?.videoId) {
-        videoIds.push(item.id.videoId);
-      }
-    }
-
-    pageToken = data.nextPageToken ?? null;
-  } while (pageToken);
-
-  return videoIds;
+    pageToken = data.nextPageToken;
+    if (!pageToken || old) return [...ids];
+  }
+  throw new Error('Uploads pagination limit reached; watermark unchanged');
 }
 
 /**
@@ -128,7 +118,7 @@ async function fetchVideoIds(channelId, apiKey, publishedAfter) {
  * @param {string} apiKey
  * @returns {Promise<Object[]>}
  */
-async function fetchVideoDetails(videoIds, apiKey) {
+export async function fetchVideoDetails(videoIds, apiKey, request = httpClient()) {
   const results = [];
 
   // API は一度に最大50件
@@ -141,13 +131,9 @@ async function fetchVideoDetails(videoIds, apiKey) {
     });
 
     const url = `${YOUTUBE_API_BASE}/videos?${params}`;
-    const res = await fetch(url);
-    if (!res.ok) {
-      throw new Error(`YouTube videos.list failed: ${res.status}`);
-    }
-    const data = await res.json();
+    const data = await request('YouTube videos', url);
 
-    for (const item of data.items ?? []) {
+    for (const item of arrayField(data, 'items')) {
       const snippet = item.snippet ?? {};
       const contentDetails = item.contentDetails ?? {};
       const liveDetails = item.liveStreamingDetails ?? {};
@@ -165,6 +151,7 @@ async function fetchVideoDetails(videoIds, apiKey) {
         title: snippet.title ?? '',
         url: `https://www.youtube.com/watch?v=${item.id}`,
         publishedAt: snippet.publishedAt ?? null,
+        thumbnail: snippet.thumbnails?.medium?.url ?? null,
         channelId: snippet.channelId ?? '',
         channelTitle: snippet.channelTitle ?? '',
         duration: contentDetails.duration ?? '',
@@ -175,6 +162,7 @@ async function fetchVideoDetails(videoIds, apiKey) {
         videoType: null,
       };
 
+      if (!video.publishedAt || !Number.isFinite(Date.parse(video.publishedAt))) throw new Error('Missing video publication date');
       const { videoType } = determineVideoType(video);
       video.videoType = videoType;
 
@@ -198,15 +186,28 @@ async function fetchVideoDetails(videoIds, apiKey) {
  */
 export async function getChannelVideos(channelId, apiKey, options = {}) {
   const daysBack = options.daysBack ?? 14;
-  const publishedAfter = new Date(
-    Date.now() - daysBack * 24 * 60 * 60 * 1000
-  ).toISOString();
+  const now = options.now ?? new Date();
+  // Replay the overlap to catch delayed archives and late publication. A long outage
+  // expands back to last success rather than silently dropping the gap.
+  const since = options.lastSuccessAt && Number.isFinite(Date.parse(options.lastSuccessAt)) ? Math.min(+now, Date.parse(options.lastSuccessAt)) : +now;
+  const publishedAfter = new Date(since - daysBack * 86400000).toISOString();
+  const request = options.request ?? httpClient();
+  const videoIds = await fetchVideoIds(channelId, apiKey, publishedAfter, { request });
+  if (!videoIds.length) return [];
+  return fetchVideoDetails(videoIds, apiKey, request);
+}
 
-  const videoIds = await fetchVideoIds(channelId, apiKey, publishedAfter);
-  if (videoIds.length === 0) {
-    return [];
-  }
-
-  const videos = await fetchVideoDetails(videoIds, apiKey);
-  return videos;
+// All list endpoints used here cost 1 unit. Count every HTTP attempt, including retries.
+export function quotaRequest(limit = 40, fetchImpl = fetch) {
+  const usage = { used: 0, limit };
+  const transport = httpClient(async (url, options) => {
+    if (usage.used >= limit) throw new Error('Video quota budget exhausted');
+    usage.used++;
+    return fetchImpl(url, options);
+  });
+  const request = async (label, url, options) => {
+    if (usage.used >= limit) throw new Error('Video quota budget exhausted');
+    return transport(label, url, options);
+  };
+  return { request, usage };
 }

@@ -19,7 +19,7 @@ src/
 └─ index.js                # エントリポイント（バッチ制御）
 data/
 ├─ videos-cache.json       # 登録済み動画 ID キャッシュ
-└─ update-state.json       # 前回処理位置
+└─ update-state.json       # 対象別の最終成功・失敗状態
 .github/workflows/
 └─ update-videos.yml       # GitHub Actions 定期実行
 ```
@@ -93,8 +93,12 @@ DRY_RUN=true npm run update
 ## 注意事項
 
 - WIKIWIKI REST API のエンドポイント仕様は公式ドキュメントに合わせて `src/services/wikiwiki.js` を調整してください。
-- Shorts 判定は動画時間 60 秒以下を暫定基準としています。必要に応じて `src/services/youtube.js` の `determineVideoType` を調整してください。
+- Shortsはタグで判定し、180秒以下でタグのない動画は未分類として扱います。必要に応じて `src/services/youtube.js` の `determineVideoType` を調整してください。
 
-## Wiki配信スケジュール（独立ジョブ）
+## Wiki配信スケジュールと共通起動
 
 [導入・Dry Run・Secrets・有効化・復旧手順](docs/stream-schedule.md)を参照。書き込みはデフォルト無効です。`npm test` / `npm run schedule:demo` は本番APIを使いません。
+
+## 共通10分同期
+
+[PR 1の設計・クォータ・安全制御・段階切替](docs/unified-sync.md)。動画の書込みは既定無効。

@@ -1,7 +1,7 @@
 {
   "name": "stream-videos-restapi",
   "version": "1.0.0",
-  "description": "YouTube動画記録 自動更新システム",
+  "description": "YouTube\u52d5\u753b\u8a18\u9332 \u81ea\u52d5\u66f4\u65b0\u30b7\u30b9\u30c6\u30e0",
   "type": "module",
   "engines": {
     "node": ">=22"
@@ -12,7 +12,9 @@
     "test": "node --test",
     "schedule": "node src/schedule/index.js",
     "schedule:dry": "DRY_RUN=true node src/schedule/index.js",
-    "schedule:demo": "node src/schedule/index.js --fixture tests/schedule/fixture.json"
+    "schedule:demo": "node src/schedule/index.js --fixture tests/schedule/fixture.json",
+    "sync": "node src/runSync.js",
+    "sync:dry": "DRY_RUN=true node src/runSync.js"
   },
   "dependencies": {
     "dotenv": "^16.4.7"
