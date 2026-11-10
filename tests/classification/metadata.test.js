@@ -77,7 +77,7 @@ test('API authentication, quota, server and transport errors are failures, not p
 }));
 test('metadata-only cache checkpoint failure stays visible and is not classified as an API omission',()=>fixture(async f=>{
  const report=await runClassifications({...f.options,cache:f.cache,details:async()=>ids.map(good),persistCache:async()=>{throw Error('SECRET disk failure');}});
- assert.equal(report.failed,true);assert.equal(report.metadataCacheFailed,true);assert.deepEqual(report.metadataFailures,[]);assert.deepEqual(report.metadataUnavailable,[]);assert.equal(report.metadataWaiting,0);assert.ok(!JSON.stringify(report).includes('SECRET'));
+ assert.equal(report.failed,true);assert.equal(report.metadataCacheFailed,true);assert.equal(f.puts,0);assert.ok(report.results.every(r=>r.reason==='metadata_cache_failed'));assert.deepEqual(report.metadataFailures,[]);assert.deepEqual(report.metadataUnavailable,[]);assert.equal(report.metadataWaiting,0);assert.ok(!JSON.stringify(report).includes('SECRET'));
 }));
 
 test('Dry Run custody preview preserves unknown-date rows and all durable decisions/history',()=>fixture(async f=>{

@@ -28,7 +28,7 @@ Wiki本文には投稿動画/Shorts動画の見出しも存在した。
 - registeredAt、Wikiの月日、現在年、receiptの配置先から公開日時を作らない。
 - 正式なYouTube詳細を追加取得した場合は、書き込みガードが有効な実行で既存の動画キャッシュへ保存する。
   巡回5ページ外のpending候補にも対応し、不完全なページsnapshotをWorkerへ送ってほかの行を消さない。
-  巡回ページの詳細は従来どおりimportされる。キャッシュ保存失敗も真の失敗として報告する。
+  巡回ページの詳細は従来どおりimportされる。キャッシュ保存失敗も真の失敗として報告し、その実行のWiki適用/取り下げは停止する。
 - 動画が正常API応答に含まれず、どこにも有効日時がない場合は`outcome=metadata_waiting`、
   `reason=missing_publication_date`、`availability=not_returned`とする。
   API 401/429/5xx・通信障害・不正応答はmetadataFailures/metadataErrorとmetadata_fetch_failedで区別する。

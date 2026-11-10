@@ -134,7 +134,7 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
       let recovery={items:[]};try{recovery=await remote('/internal/custody-recovery');}catch{report.recoveryFailed=true;}
       for(const item of recovery.items??[])if(!transfers.some(t=>t.page===item.page&&t.row.videoId===item.videoId))transfers.unshift({page:item.page,row:{videoId:item.videoId,line:item.line}});
     }
-    for(const transfer of (report.importFailed||dryRun?[]:transfers.slice(0,custodyBatch))){if(pauseUntil){report.custody.results.push(deferredEntry({page:transfer.page,videoId:transfer.row.videoId}));continue;}if(blockedPages.has(transfer.page))continue;
+    for(const transfer of (report.importFailed||report.metadataCacheFailed||dryRun?[]:transfers.slice(0,custodyBatch))){if(pauseUntil){report.custody.results.push(deferredEntry({page:transfer.page,videoId:transfer.row.videoId}));continue;}if(blockedPages.has(transfer.page))continue;
       if(!hasPublicationDate(metadata.get(transfer.row.videoId))){
         const failed=report.metadataFailures.includes(transfer.row.videoId);
         if(failed)report.custody.failed++;
@@ -149,6 +149,7 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
   }
   const receipts=[];
   for(let item of queue) {
+    if(report.metadataCacheFailed){report.results.push({key:item.key,videoId:item.videoId,revision:item.revision,outcome:'failed',reason:'metadata_cache_failed'});continue;}
     if(pauseUntil){report.results.push(deferredEntry({key:item.key,videoId:item.videoId,revision:item.revision}));continue;}
     if(blockedPages.has(item.page)){report.results.push({videoId:item.videoId,outcome:'custody_page_paused'});continue;}
     if(item.authority==='cloudflare'&&!custodyEnabled){report.results.push({videoId:item.videoId,outcome:'custody_paused'});continue;}
