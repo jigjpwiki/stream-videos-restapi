@@ -1,3 +1,4 @@
+import {createWikiRateLimit} from '../../src/services/wikiHttp.js';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {httpClient,HttpRequestError,requestErrorDetails} from '../../src/schedule/http.js';
@@ -46,7 +47,7 @@ test('only authenticated page GET HTTP 404 becomes WikiPageNotFoundError (not au
    if(mode==='body404')return Response.json({status:404,error:'not found'});
    if(mode==='malformed')return Response.json(null);
    return Response.json({source:mode==='empty'?'':'本文のみ'});
-  });
+  },{rateLimit:createWikiRateLimit({sleep:async()=>{},intervalMs:0})});
   if(mode==='empty'||mode==='noSection')assert.equal(await client.get('page'),mode==='empty'?'':'本文のみ');
   else await assert.rejects(client.get('page'),error=>{
    assert.equal(error instanceof WikiPageNotFoundError,mode==='page404');

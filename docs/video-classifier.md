@@ -190,3 +190,7 @@ SQLテーブル・既存判断・履歴は削除しない。旧offset APIも残�
 ## 認証失敗の原因分類
 
 [Access側401とWorker認証の区別、公開鍵キャッシュ、不要な再認証の防止](classifier-auth-causes.md)を参照。
+
+## Wiki APIの429と延期
+
+[Wiki API間隔制御・Retry-After・再開とレポート](wiki-rate-limit.md)を参照。

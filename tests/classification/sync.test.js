@@ -30,7 +30,7 @@ test('ambiguous PUT followed by rerun uses prepare journal to recover; stale ack
  let text=source,prepared,puts=0,first=true;
  const wiki={get:async()=>text,put:async(p,s)=>{text=s;puts++;throw Error('ambiguous');}};
  const remote=async(path,data)=>{if(path==='/internal/pending')return {items:[{...candidate,prepared}]};if(path==='/internal/prepare')prepared={revision:data.revision,receipt:data.receipt};if(path==='/internal/ack')return {conflicts:first?[]:['abcdefghijk']};return {};};
- const a=await runClassifications({env,livers,state:{},cache:{},output,wiki,remote,persist:async()=>{}});assert.equal(a.results[0].outcome,'failed');first=false;
+ const a=await runClassifications({env,livers,state:{},cache:{},output,wiki,remote,persist:async()=>{}});assert.equal(a.results[0].outcome,'applied');assert.equal(a.results[0].recovered,true);first=false;
  const b=await runClassifications({env,livers,state:{},cache:{},output,wiki,remote,persist:async()=>{}});assert.equal(puts,1);assert.equal(b.results[0].outcome,'applied');assert.equal(b.failed,true);assert.equal(text.split(metadata.videoId).length-1,1);
 }));
 test('one Wiki conflict does not prevent another classification; human classification is acknowledged without overwrite',()=>temporary(async output=>{
@@ -58,8 +58,8 @@ test('one HTTP page-not-found warning among five pages succeeds, collects other 
  assert.deepEqual(JSON.parse(await readFile(join(output,'report.json'))),report);
  const combined=await runSync({env:{},runSchedule:async()=>({written:false}),applyClassifications:async()=>report});assert.equal(combined.classifications.failed,false);
 }));
-test('401/403, 429/5xx, timeout, network and invalid responses are failures, never page-not-found',()=>temporary(async output=>{
- for(const error of [new HttpRequestError('Wiki GET','http_error',401),new HttpRequestError('Wiki GET','http_error',403),new HttpRequestError('Wiki GET','http_error',429),new HttpRequestError('Wiki GET','http_error',503),new HttpRequestError('Wiki GET','timeout'),new HttpRequestError('Wiki GET','network_error'),new HttpRequestError('Wiki GET','invalid_response',200),new Error('SECRET_BODY')]) {
+test('401/403, 5xx, timeout, network and invalid responses are failures, never page-not-found',()=>temporary(async output=>{
+ for(const error of [new HttpRequestError('Wiki GET','http_error',401),new HttpRequestError('Wiki GET','http_error',403),new HttpRequestError('Wiki GET','http_error',503),new HttpRequestError('Wiki GET','timeout'),new HttpRequestError('Wiki GET','network_error'),new HttpRequestError('Wiki GET','invalid_response',200),new Error('SECRET_BODY')]) {
   const fetched=[];
   const report=await runClassifications({env:{...env,DRY_RUN:'true'},livers:fiveLivers,state:{},cache:{},output,
    wiki:{get:async page=>{fetched.push(page);if(page===fiveLivers[0].wikiPageName)throw error;return '';},put:async()=>assert.fail()},remote:async()=>({items:[]}),persist:async()=>assert.fail()});

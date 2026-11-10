@@ -1,4 +1,5 @@
-import { httpClient, HttpRequestError } from '../schedule/http.js';
+import { wikiHttpClient } from './wikiHttp.js';
+import { HttpRequestError } from '../schedule/http.js';
 
 export class WikiPageNotFoundError extends HttpRequestError {
   constructor() {
@@ -8,10 +9,10 @@ export class WikiPageNotFoundError extends HttpRequestError {
 }
 
 // Never expose credentials/remote bodies in errors. No retries for ambiguous PUTs.
-export function videoWikiClient(env = process.env, fetchImpl = fetch) {
+export function videoWikiClient(env = process.env, fetchImpl = fetch, options = {}) {
   const base = env.WIKI_API_BASE_URL?.replace(/\/$/, '');
   if (base !== 'https://api.wikiwiki.jp/jigjp' || !env.WIKI_PASSWORD) throw new Error('Expected jigjp Wiki configuration');
-  const request = httpClient(fetchImpl);
+  const request = wikiHttpClient(fetchImpl, options);
   let token;
   const headers = async () => {
     if (!token) {
@@ -22,12 +23,12 @@ export function videoWikiClient(env = process.env, fetchImpl = fetch) {
     return { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' };
   };
   return {
-    async get(page) {
+    async get(page, {operation='get'} = {}) {
       // Authentication failures (including auth 404) are never page-not-found.
       const pageHeaders = await headers();
       let data;
       try {
-        data = await request('Wiki GET', `${base}/page/${encodeURIComponent(page)}`, { headers: pageHeaders });
+        data = await request('Wiki GET', `${base}/page/${encodeURIComponent(page)}`, { headers: pageHeaders, wikiOperation: operation });
       } catch (error) {
         if (error instanceof HttpRequestError && error.code === 'http_error' && error.status === 404) throw new WikiPageNotFoundError();
         throw error;
@@ -44,14 +45,24 @@ export function videoWikiClient(env = process.env, fetchImpl = fetch) {
 
 // Shared by ingestion and manual classification. Save recovery material before PUT.
 export async function guardedEdit({ wiki, page, transform, save, dryRun = true, writeEnabled = false }) {
-  const before = await wiki.get(page);
+  let writeAttempted=false;
+  const read=async operation=>{try{return await wiki.get(page,{operation});}catch(error){if(error instanceof HttpRequestError){error.operation??=operation;if(writeAttempted){error.writeAttempted=true;error.writeUnverified=true;}}throw error;}};
+  const before = await read('get');
   const after = await transform(before);
   if (typeof after !== 'string') throw new Error('Invalid transformed source');
   await save(before, after);
   if (after === before) return { changed: false, written: false };
   if (dryRun || !writeEnabled) return { changed: true, written: false };
-  if (await wiki.get(page) !== before) throw new Error('Wiki conflict; retry next run');
-  await wiki.put(page, after);
-  if (await wiki.get(page) !== after) throw new Error('Wiki verification failed; inspect recovery preview');
+  if (await read('conflict_get') !== before) throw new Error('Wiki conflict; retry next run');
+  writeAttempted=true;
+  try { await wiki.put(page, after); } catch (error) {
+    // A lost PUT response is ambiguous. Never replay it; only exact after-image verification permits success.
+    if(error instanceof HttpRequestError){error.operation??='put';if(error.operation==='put')error.writeAttempted=true;}
+    const ambiguous = !(error instanceof HttpRequestError) || ['timeout','network_error'].includes(error.code) || error.status >= 500;
+    if (!ambiguous) throw error;
+    if (await read('verify_get') === after) return { changed:true, written:true, recovered:true };
+    throw error;
+  }
+  if (await read('verify_get') !== after) throw new Error('Wiki verification failed; inspect recovery preview');
   return { changed: true, written: true };
 }
