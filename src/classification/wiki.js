@@ -1,3 +1,5 @@
+import {hasPublicationDate} from '../../ops/classifier/metadata.mjs';
+import {ClassificationValidationError} from './errors.js';
 import { insertVideoIntoPage, isVideoAlreadyInPage, formatVideoLine } from '../formatter/wikiTextFormatter.js';
 
 export const UNCATEGORIZED = '***Shorts・投稿動画未分類（自動取得） [#uncategorized]';
@@ -36,23 +38,23 @@ function locationAt(source,index) {
 }
 export function reconcileClassification(source, item) {
   const {videoId,choice,metadata,receipt,prepared}=item;
-  if(!/^[\w-]{11}$/.test(videoId) || !['shorts','normal','uncategorized','hold'].includes(choice))throw Error('Invalid classification');
+  if(!/^[\w-]{11}$/.test(videoId) || !['shorts','normal','uncategorized','hold'].includes(choice))throw new ClassificationValidationError('invalid_classification');
   const lines=source.split(/\r?\n/);
   const occurrences=lines.map((line,index)=>({line,index})).filter(row=>row.line.includes(videoId));
   const uncat=unclassifiedRows(source).filter(row=>row.videoId===videoId);
   // A duplicate or edited/non-video reference requires human review; do not destroy either row.
-  if(occurrences.length>1)throw Error('Duplicate video references');
-  if(item.authority==='cloudflare'&&item.custody?.phase!=='committed')throw Error('Custody transfer not committed');
+  if(occurrences.length>1)throw new ClassificationValidationError('duplicate_video_reference');
+  if(item.authority==='cloudflare'&&item.custody?.phase!=='committed')throw new ClassificationValidationError('custody_not_committed');
   const hiddenReceipt={choice,line:item.line,location:'cloudflare'};
   if(!occurrences.length){
     if(item.authority!=='cloudflare')return {source,outcome:'external',receipt:null};
     if(['hold','uncategorized'].includes(choice))return {source,outcome:'applied',receipt:hiddenReceipt};
-    if(!metadata?.publishedAt||!Number.isFinite(Date.parse(metadata.publishedAt)))throw Error('Verified publication date required');
-    const video={...metadata,videoId,videoType:choice,url:`https://www.youtube.com/watch?v=${videoId}`};
+    if(!hasPublicationDate(metadata))throw new ClassificationValidationError('missing_publication_date');
+    const video={...metadata,title:typeof metadata.title==='string'?metadata.title:'',videoId,videoType:choice,url:`https://www.youtube.com/watch?v=${videoId}`};
     const next=insertVideoIntoPage(source.replaceAll('\r\n','\n'),video);
-    if(next===null)throw Error('Destination section missing');
+    if(next===null)throw new ClassificationValidationError('destination_section_missing');
     const nextLines=next.split('\n');const target=nextLines.findIndex(line=>line===formatVideoLine(video));
-    if(target<0||typeof item.line!=='string')throw Error('Stored original row required');
+    if(target<0||typeof item.line!=='string')throw new ClassificationValidationError('stored_original_row_missing');
     nextLines[target]=item.line;const result=nextLines.join(source.includes('\r\n')?'\r\n':'\n');
     return {source:result,outcome:'applied',receipt:{choice,line:item.line,location:locationAt(result,target)}};
   }
@@ -66,20 +68,20 @@ export function reconcileClassification(source, item) {
   if(item.authority==='cloudflare'&&['hold','uncategorized'].includes(choice)){const parts=source.match(/[^\n]*\n|[^\n]+$/g)??[];return {source:parts.filter((_,i)=>i!==current.index).join(''),outcome:'applied',receipt:hiddenReceipt};}
   if(!uncat.length && !ownsRow) return {source,outcome:'external',receipt:null};
   if(currentCategory===choice)return {source,outcome:'applied',receipt:{choice,line:current.line,location}};
-  if(!metadata?.publishedAt || !Number.isFinite(Date.parse(metadata.publishedAt)))throw Error('Verified publication date required');
-  const video={...metadata,videoId,url:`https://www.youtube.com/watch?v=${videoId}`,videoType:choice};
+  if(!hasPublicationDate(metadata))throw new ClassificationValidationError('missing_publication_date');
+  const video={...metadata,title:typeof metadata.title==='string'?metadata.title:'',videoId,url:`https://www.youtube.com/watch?v=${videoId}`,videoType:choice};
   // Keep the exact existing video row (human title, URL and displayed date).
   const eol=source.includes('\r\n')?'\r\n':'\n';
   const without=lines.filter((_,i)=>i!==current.index).join('\n');
-  if(isVideoAlreadyInPage(without,videoId))throw Error('Duplicate video');
+  if(isVideoAlreadyInPage(without,videoId))throw new ClassificationValidationError('duplicate_video_reference');
   let next=insertVideoIntoPage(without,video);
-  if(next===null)throw Error('Destination section missing');
+  if(next===null)throw new ClassificationValidationError('destination_section_missing');
   const generated=formatVideoLine(video);
   const nextLines=next.split('\n');
   const target=nextLines.findIndex(line=>line===generated);
-  if(target<0)throw Error('Destination row missing');
+  if(target<0)throw new ClassificationValidationError('destination_row_missing');
   nextLines[target]=current.line;
   next=nextLines.join(eol);
-  if(next.split(videoId).length-1!==1)throw Error('Duplicate video after move');
+  if(next.split(videoId).length-1!==1)throw new ClassificationValidationError('duplicate_video_reference');
   return {source:next,outcome:'applied',receipt:{choice,line:current.line,location:locationAt(next,target)}};
 }

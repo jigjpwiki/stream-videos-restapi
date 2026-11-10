@@ -194,3 +194,7 @@ SQLテーブル・既存判断・履歴は削除しない。旧offset APIも残�
 ## Wiki APIの429と延期
 
 [Wiki API間隔制御・Retry-After・再開とレポート](wiki-rate-limit.md)を参照。
+
+## 公開日時が不明な動画
+
+[非公開等の動画のメタデータ待ち・安全な再開と検証コード](classifier-metadata-wait.md)を参照。

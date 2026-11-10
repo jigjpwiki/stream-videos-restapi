@@ -1,3 +1,5 @@
+import {hasPublicationDate,mergeMetadata} from '../../ops/classifier/metadata.mjs';
+import {validationDetails} from './errors.js';
 import {createWikiRateLimit} from '../services/wikiHttp.js';
 import {transferToCloudflare,digest} from './custody.js';
 import { savePreview } from '../services/preview.js';
@@ -31,7 +33,7 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
   if(Date.parse(state.wikiRetryAt)>+now)rateLimit.restore(state.wikiRetryAt);
   wiki??=videoWikiClient(env,fetch,{rateLimit});remote??=classifierClient(env);
   await mkdir(output,{recursive:true});
-  const report={dryRun,scanned:[],results:[],scanSkipped:[],scanFailures:[],scanDeferred:[],metadataFailures:[],unclassifiedCount:0,written:false};
+  const report={dryRun,scanned:[],results:[],scanSkipped:[],scanFailures:[],scanDeferred:[],metadataFailures:[],metadataUnavailable:[],unclassifiedCount:0,written:false};
   const pendingResponse=await remote('/internal/pending');
   if(!Array.isArray(pendingResponse.items)||pendingResponse.items.length>50)throw Error('Invalid classifier queue');
   const queue=pendingResponse.items;
@@ -73,13 +75,31 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
     }
   }
   report.unclassifiedCount=pages.reduce((count,page)=>count+page.rows.length,0);
-  const metadata=new Map(Object.values(cache).flat().map(v=>[v.videoId,v]));
-  for(const item of queue)if(item.metadata?.publishedAt)metadata.set(item.videoId,item.metadata);
-  const missing=[...new Set([...queue,...pages.flatMap(p=>p.rows)].map(v=>v.videoId))].filter(id=>!metadata.get(id)?.publishedAt||!Number.isFinite(metadata.get(id)?.durationSeconds)).slice(0,50);
+  const metadata=new Map();
+  for(const video of Object.values(cache).flat())metadata.set(video.videoId,mergeMetadata(metadata.get(video.videoId),video));
+  for(const item of queue)metadata.set(item.videoId,mergeMetadata(metadata.get(item.videoId),item.metadata));
+  const missing=[...new Set([...queue,...pages.flatMap(p=>p.rows)].map(v=>v.videoId))].filter(id=>!hasPublicationDate(metadata.get(id))||!Number.isFinite(metadata.get(id)?.durationSeconds)).slice(0,50);
   const {request,usage}=quotaRequest(3);
   if(missing.length) {
-    try {for(const video of await details(missing,env.YOUTUBE_API_KEY,request))metadata.set(video.videoId,video);}
-    catch {report.metadataFailures.push(...missing);}
+    try {
+      const fetched=await details(missing,env.YOUTUBE_API_KEY,request);
+      if(!Array.isArray(fetched)||fetched.some(v=>!missing.includes(v?.videoId)||!hasPublicationDate(v)))throw Error('Invalid metadata response');
+      for(const video of fetched)metadata.set(video.videoId,mergeMetadata(metadata.get(video.videoId),video));
+      report.metadataUnavailable=missing.filter(id=>!fetched.some(v=>v.videoId===id));
+      // Queue items may be outside this tick's five scanned pages. Retain verified
+      // details in the existing durable cache without inventing a page snapshot.
+      if(!dryRun&&fetched.length){
+        for(const video of fetched){
+          const owners=new Set([...queue.filter(i=>i.videoId===video.videoId).map(i=>i.page),...pages.filter(p=>p.rows.some(r=>r.videoId===video.videoId)).map(p=>p.page)]);
+          for(const liver of livers.filter(l=>owners.has(l.wikiPageName))){
+            const entries=cache[liver.youtubeChannelId]??=[];const index=entries.findIndex(v=>v.videoId===video.videoId);
+            const merged=mergeMetadata(index<0?null:entries[index],video);
+            if(index<0)entries.push(merged);else entries[index]=merged;
+          }
+        }
+        try{await persistCache(cache);}catch{report.metadataCacheFailed=true;}
+      }
+    }catch(error){report.metadataFailures.push(...missing);report.metadataError=requestErrorDetails(error);}
   }
   report.quota=usage;
   for(const page of pages)for(const row of page.rows)row.metadata=metadata.get(row.videoId)??null;
@@ -99,11 +119,13 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
       for(const page of pages){try{
         const source=sources.get(page.page);const rows=unclassifiedRows(source);
         if(page.rows.some(row=>source.split(row.videoId).length!==2))throw Error('Duplicate custody rows');
-        const remove=new Set(rows.map(row=>row.index));const parts=source.match(/[^\n]*\n|[^\n]+$/g)??[];
+        const remove=new Set(rows.filter(row=>hasPublicationDate(metadata.get(row.videoId))).map(row=>row.index));const parts=source.match(/[^\n]*\n|[^\n]+$/g)??[];
         const after=parts.filter((_,index)=>!remove.has(index)).join('');
         const prefix=join(output,digest(page.page)+'.custody-plan');await savePreview(prefix,source,after);
-        report.custody.planned+=page.rows.length;
-        report.custody.results.push({page:page.page,planned:page.rows.length,beforeHash:digest(source),afterHash:digest(after),previewPrefix:prefix});
+        const planned=remove.size;
+        report.custody.planned+=planned;
+        for(const row of page.rows.filter(row=>!hasPublicationDate(metadata.get(row.videoId))))report.custody.results.push({page:page.page,videoId:row.videoId,outcome:'metadata_waiting',reason:'missing_publication_date'});
+        report.custody.results.push({page:page.page,planned,beforeHash:digest(source),afterHash:digest(after),previewPrefix:prefix});
       }catch{report.custody.failed++;report.custody.results.push({page:page.page,outcome:'dry_run_conflict'});}}
     }
     const transfers=pages.flatMap(page=>page.rows.map(row=>({page:page.page,row})));
@@ -112,7 +134,13 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
       let recovery={items:[]};try{recovery=await remote('/internal/custody-recovery');}catch{report.recoveryFailed=true;}
       for(const item of recovery.items??[])if(!transfers.some(t=>t.page===item.page&&t.row.videoId===item.videoId))transfers.unshift({page:item.page,row:{videoId:item.videoId,line:item.line}});
     }
-    for(const transfer of (report.importFailed||dryRun?[]:transfers.slice(0,custodyBatch))){if(pauseUntil){report.custody.results.push(deferredEntry({page:transfer.page,videoId:transfer.row.videoId}));continue;}if(blockedPages.has(transfer.page))continue;try{
+    for(const transfer of (report.importFailed||dryRun?[]:transfers.slice(0,custodyBatch))){if(pauseUntil){report.custody.results.push(deferredEntry({page:transfer.page,videoId:transfer.row.videoId}));continue;}if(blockedPages.has(transfer.page))continue;
+      if(!hasPublicationDate(metadata.get(transfer.row.videoId))){
+        const failed=report.metadataFailures.includes(transfer.row.videoId);
+        if(failed)report.custody.failed++;
+        report.custody.results.push({page:transfer.page,videoId:transfer.row.videoId,outcome:failed?'failed':'metadata_waiting',reason:failed?'metadata_fetch_failed':'missing_publication_date'});continue;
+      }
+      try{
       if(!livers.some(l=>l.wikiPageName===transfer.page))throw Error('Unknown custody page');
       const result=await transferToCloudflare({wiki,remote,...transfer,dryRun,output,onPrepared:()=>checkpointManaged(transfer)});
       report.custody.results.push(result);
@@ -130,13 +158,17 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
       if(custodyEnabled&&!dryRun)item=(await remote('/internal/item?key='+encodeURIComponent(item.key))).item??item;
       let resolution;
       const result=await guardedEdit({wiki,page:item.page,dryRun,writeEnabled:!dryRun,
-        transform(source) {resolution=reconcileClassification(source,{...item,metadata:metadata.get(item.videoId)??item.metadata,choice:item.choice??'uncategorized'});return resolution.source;},
+        transform(source) {resolution=reconcileClassification(source,{...item,metadata:mergeMetadata(item.metadata,metadata.get(item.videoId)),choice:item.choice??'uncategorized'});return resolution.source;},
         async save(before,after){const prefix=join(output,`${item.authority==='cloudflare'?digest(item.page).slice(0,12)+'.':''}${item.videoId}-r${item.revision}`);await savePreview(prefix,before,after);
           if(!dryRun && before!==after)await remote('/internal/prepare',{key:item.key,videoId:item.videoId,revision:item.revision,receipt:resolution.receipt});},
       });
       const receipt={key:item.key,videoId:item.videoId,revision:item.revision,outcome:resolution.outcome,receipt:resolution.receipt};
       report.results.push({...receipt,...result});receipts.push(receipt);rateFailures=0;
-    }catch (error) {if(rateLimited(error)){report.results.push(deferredEntry({key:item.key,videoId:item.videoId,revision:item.revision},error));continue;}const failed={key:item.key,videoId:item.videoId,revision:item.revision,outcome:'failed',...requestErrorDetails(error)};receipts.push(failed);report.results.push(failed);}
+    }catch (error) {if(rateLimited(error)){report.results.push(deferredEntry({key:item.key,videoId:item.videoId,revision:item.revision},error));continue;}const validation=validationDetails(error);
+      if(validation?.reason==='missing_publication_date'&&!report.metadataFailures.includes(item.videoId)){
+        report.results.push({key:item.key,videoId:item.videoId,revision:item.revision,outcome:'metadata_waiting',...validation,availability:report.metadataUnavailable.includes(item.videoId)?'not_returned':'unknown'});continue;
+      }
+      const failed={key:item.key,videoId:item.videoId,revision:item.revision,outcome:'failed',...(validation??requestErrorDetails(error)),...(validation?.reason==='missing_publication_date'&&report.metadataFailures.includes(item.videoId)?{reason:'metadata_fetch_failed'}:{})};receipts.push(failed);report.results.push(failed);}
   }
   if(!dryRun) {
     if(receipts.length){try{const ack=await remote('/internal/ack',{results:receipts});report.ackConflicts=ack.conflicts??[];}catch{report.ackFailed=true;}}
@@ -146,14 +178,15 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
     if(pauseUntil||(!report.importFailed&&!report.ackFailed))await persist(state);
   }
   if(custodyEnabled&&!dryRun){try{report.custody.totals=await remote('/internal/custody-status');}catch{report.statusFailed=true;}}
-  report.failed=!!(report.importFailed||report.recoveryFailed||report.ackFailed||report.statusFailed)||report.custody.failed>0||report.results.some(r=>r.outcome==='failed')||report.scanFailures.length>0||report.metadataFailures.length>0||!!report.ackConflicts?.length;
+  report.failed=!!(report.importFailed||report.recoveryFailed||report.ackFailed||report.statusFailed||report.metadataCacheFailed)||report.custody.failed>0||report.results.some(r=>r.outcome==='failed')||report.scanFailures.length>0||report.metadataFailures.length>0||!!report.ackConflicts?.length;
   report.written=report.results.some(r=>r.written===true)||report.custody.results.some(r=>r.written===true);
   report.writeUnverified=[...report.results,...report.custody.results].some(r=>r.writeUnverified);
   report.writeAttempted=report.written||[...report.results,...report.custody.results].some(r=>r.writeAttempted);
-  report.deferred=report.scanDeferred.length+report.results.filter(r=>r.outcome==='deferred'||r.outcome.endsWith('_paused')).length+report.custody.results.filter(r=>r.outcome==='deferred').length;
+  report.metadataWaiting=report.results.filter(r=>r.outcome==='metadata_waiting').length;
+  report.deferred=report.metadataWaiting+report.scanDeferred.length+report.results.filter(r=>r.outcome==='deferred'||r.outcome.endsWith('_paused')).length+report.custody.results.filter(r=>['deferred','metadata_waiting'].includes(r.outcome)).length;
   report.complete=!report.failed&&report.deferred===0;
   report.outcome=report.failed?'failure':report.deferred?'deferred':report.scanSkipped.length?'success_with_warnings':'success';
-  console.log(JSON.stringify({phase:'classifications',dryRun,outcome:report.outcome,deferred:report.deferred,complete:report.complete,scanned:report.scanned.length,skipped:report.scanSkipped.length,scanFailures:report.scanFailures.length,applyFailures:report.results.filter(r=>r.outcome==='failed').length,metadataFailures:report.metadataFailures.length,unclassifiedCount:report.unclassifiedCount,custodyPlanned:report.custody.planned,custodyWithdrawn:report.custody.withdrawn,custodyFailed:report.custody.failed,written:report.written,writeAttempted:report.writeAttempted,writeUnverified:report.writeUnverified}));
+  console.log(JSON.stringify({phase:'classifications',dryRun,outcome:report.outcome,deferred:report.deferred,complete:report.complete,scanned:report.scanned.length,skipped:report.scanSkipped.length,scanFailures:report.scanFailures.length,applyFailures:report.results.filter(r=>r.outcome==='failed').length,metadataFailures:report.metadataFailures.length,metadataWaiting:report.metadataWaiting,metadataUnavailable:report.metadataUnavailable.length,unclassifiedCount:report.unclassifiedCount,custodyPlanned:report.custody.planned,custodyWithdrawn:report.custody.withdrawn,custodyFailed:report.custody.failed,written:report.written,writeAttempted:report.writeAttempted,writeUnverified:report.writeUnverified}));
   await writeFile(join(output,'report.json'),JSON.stringify(report,null,2)+'\n');
   await writeFile(join(output,'import-preview.json'),JSON.stringify({pages},null,2)+'\n');
   return report;
