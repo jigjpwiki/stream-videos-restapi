@@ -19,6 +19,7 @@ on:
       - 'src/**'
       - 'tests/**'
       - 'ops/state/**'
+      - 'ops/classifier/**'
       - '.github/workflows/update-videos.yml'
       - 'tests/schedule/**'
       - '.github/workflows/sync-stream-schedule.yml'
@@ -38,11 +39,31 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - run: npm ci --omit=dev
       - run: npm test
       - run: npm run schedule:demo
       - uses: actions/upload-artifact@v4
         with:
           name: stream-schedule-demo
+          path: work/
+          retention-days: 7
+  classifier-checks:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npm run classifier:smoke
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: classifier-validation-${{ github.run_id }}
           path: work/
           retention-days: 7
   sync:
@@ -61,7 +82,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm ci
+      - run: npm ci --omit=dev
       - name: Load durable video state
         id: state
         run: bash ops/state/sync-state.sh load
@@ -72,10 +93,13 @@ jobs:
           TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
           WIKI_API_BASE_URL: ${{ secrets.WIKI_API_BASE_URL }}
           WIKI_PASSWORD: ${{ secrets.WIKI_PASSWORD }}
+          CLASSIFIER_SYNC_ENABLED: ${{ vars.CLASSIFIER_SYNC_ENABLED || 'false' }}
+          CLASSIFIER_URL: ${{ vars.CLASSIFIER_URL }}
+          CLASSIFIER_SYNC_TOKEN: ${{ secrets.CLASSIFIER_SYNC_TOKEN }}
           WIKI_WRITE_ENABLED: ${{ vars.WIKI_WRITE_ENABLED || 'false' }}
         run: npm run sync
       - name: Save durable video state
-        if: always() && steps.state.outcome == 'success' && env.UNIFIED_VIDEOS_ENABLED == 'true'
+        if: always() && steps.state.outcome == 'success' && (env.UNIFIED_VIDEOS_ENABLED == 'true' || vars.CLASSIFIER_SYNC_ENABLED == 'true')
         run: bash ops/state/sync-state.sh save
       - uses: actions/upload-artifact@v4
         if: always()
