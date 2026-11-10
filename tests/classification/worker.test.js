@@ -43,3 +43,35 @@ test('same video on different Wiki pages stays independent and repeated acknowle
  assert.equal((await call(worker,'/api/history')).events.length,2);
  assert.equal((await call(worker,'/api/state')).counts.unclassified,1);
 });
+
+test('missing Wiki scan/apply never deletes durable decisions, present flag, receipts, prepare journal or history',async()=>{
+ const {runClassifications}=await import('../../src/classification/sync.js');
+ const {WikiPageNotFoundError}=await import('../../src/services/wikiwiki.js');
+ const {mkdtemp,rm}=await import('node:fs/promises');
+ const {join}=await import('node:path');const {tmpdir}=await import('node:os');
+ const output=await mkdtemp(join(tmpdir(),'missing-wiki-db-'));
+ try {
+  for(const queued of [false,true]) {
+   const worker=instance();const key=encodeURIComponent(pages[0].page)+':'+row.videoId;
+   await call(worker,'/internal/import',{pages});
+   await call(worker,'/api/decision',{videoId:row.videoId,revision:0,choice:'shorts'});
+   const receipt={choice:'shorts',line:row.line,location:'shorts/2025/1'};
+   await call(worker,'/internal/ack',{results:[{videoId:row.videoId,revision:1,outcome:'applied',receipt}]});
+   await call(worker,'/internal/import',{pages});
+   if(queued){
+    await call(worker,'/api/decision',{videoId:row.videoId,revision:1,choice:'normal'});
+    await call(worker,'/internal/prepare',{videoId:row.videoId,revision:2,receipt:{...receipt,choice:'normal'}});
+   }
+   const before=worker.get(key);const history=await call(worker,'/api/history');const calls=[];
+   const report=await runClassifications({env:{CLASSIFIER_SYNC_ENABLED:'true',DRY_RUN:'false',VIDEO_WIKI_WRITE_ENABLED:'true'},
+    livers:[{name:'L',wikiPageName:pages[0].page,youtubeChannelId:'UC0',enabled:false}],cache:{UC0:[{...row.metadata,videoId:row.videoId}]},state:{},output,
+    wiki:{get:async()=>{throw new WikiPageNotFoundError();},put:async()=>assert.fail('Missing pages must not be created')},
+    remote:async(path,data)=>{calls.push([path,data]);const result=await call(worker,path,data);assert.equal(result.status,200);return result;},persist:async()=>{}});
+   assert.ok(!calls.some(([path])=>path==='/internal/import'||path==='/internal/prepare'));
+   assert.equal(report.scanSkipped.length,1);assert.equal(report.failed,queued);
+   const after=worker.get(key);delete after.lastError;delete after.lastTriedAt;
+   assert.deepEqual(after,before);assert.deepEqual(await call(worker,'/api/history'),history);
+   if(queued){const ack=calls.find(([path])=>path==='/internal/ack')[1];assert.equal(ack.results[0].outcome,'failed');assert.equal(ack.results[0].reason,'page_not_found');}
+  }
+ }finally{await rm(output,{recursive:true,force:true});}
+});

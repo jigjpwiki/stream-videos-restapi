@@ -109,3 +109,46 @@ Wrangler bundle Dry Runを確認。認証/JWT偽装・CSRF・revision競合・�
 元行保持・年月・重複なしを確認。Wiki書込み・DO変更・本番deployはなし。
 通常投稿セクションの子見出し（Shorts/未分類）の年foldを誤選択する既存の範囲探索を修正し、
 分類修正・取り消しでも正しい投稿動画の年foldに入ることを回帰テストした。
+
+## 未作成ページと巡回エラーの扱い
+
+巡回中の**認証後のページGETがHTTP 404**を返した場合のみ、`WikiPageNotFoundError`
+（`code=page_not_found`, `status=404`）として`scanSkipped`に記録する。
+警告だけなら`failed=false`, `outcome=success_with_warnings`で同期を継続する。
+未取得ページの空snapshotはimportしないため、DO内の`present`、分類revision、receipt、
+prepare journal、履歴は変更しない。ページを自動作成したり、恒久除外リストを作ったりもしない。
+73ページを1回最大5ページずつ巡回する方式とdisabledライバーの収集を維持し、
+後から作成されたページも次の巡回で通常どおり再取得する。
+
+401/403、429/5xx、認証API自体の404、タイムアウト、通信障害、JSON/`source`不正は
+ページ不存在と区別して失敗にする。HTTPエラーの`reason=http_error`と数値`status`、
+または`timeout` / `network_error` / `invalid_response` / `operation_failed`を安全に記録する。
+外部のエラー本文・URL・資格情報・raw causeは記録しない。
+共通HTTPの15秒timeout、非PUT最大3回と1秒/2秒backoff、PUT再送禁止、物理試行のquota計数は維持する。
+この変更は既存の4xxリトライ回数も変更しない。
+
+既存ページが空文字の`source`を持つ場合や未分類セクションがない場合は、正常な空snapshotとして扱う。
+**取得できなかったページ**と**取得して対象行がないページ**は異なる。
+分類適用時のGET失敗（404を含む）は警告に降格せず、その対象を`outcome=failed`として再試行待ちにする。
+成功や`external`としてackしない。ほかの対象は継続する。
+
+`work/classifications/report.json`は以下を区別する。
+
+|項目|意味|
+|---|---|
+|`scanned`|正常取得したページ名|
+|`scanSkipped`|`{page, reason: "page_not_found", status: 404}`の警告|
+|`scanFailures`|`{page, reason, status?}`のエラー（従来のページ名配列から構造化）|
+|`unclassifiedCount`|今回正常取得したページから収集した未分類件数（ページ内はvideoIdで重複除去）|
+|`results`|各分類適用の結果。失敗時は安全な`reason` / `status?`も記録|
+|`written`|少なくとも1件のWiki更新を更新後GETまで確認したか。未確認のPUT成功を保証する値ではない|
+|`failed` / `outcome`|失敗有無と`success` / `success_with_warnings` / `failure`|
+
+Actionsログにもページごとのwarning/errorと、取得・skip・失敗・収集件数・書込み確認・最終結果の
+JSONサマリーを出す。分類結果の`outcome`を動画取得の`success`形式と混同しないよう、
+共通起動側も各phaseの判定を尊重する。
+
+実APIは2026-11-10の認証付き読取確認で、作成済みページのGETが200（`source`は文字列）、
+ランダム名の未作成ページが404（JSONに`status` / `error`）であることを確認した。
+[Wiki REST APIの案内](https://wikiwiki.jp/sample/REST%20API)はこの環境では403のため本文を参照できず、
+非404の「ページなし」表現は確認していない。本文の文言やJSON内の`status`だけでは判定を広げない。
