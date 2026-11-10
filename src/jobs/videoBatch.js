@@ -1,3 +1,5 @@
+import {createWikiRateLimit,isWikiRateLimited} from '../services/wikiHttp.js';
+import {requestErrorDetails} from '../schedule/http.js';
 import {classifierClient} from '../classification/sync.js';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { loadState, saveState, loadCache, saveCache } from '../services/storage.js';
@@ -22,7 +24,7 @@ export function selectDue(livers, state, now, { batchSize = 5, intervalHours = 2
   }).slice(0, batchSize);
 }
 export async function runVideos({ env = process.env, now = new Date(), livers, state, cache, wiki,
-  update = updateLiverVideos, persistState = saveState, persistCache = saveCache, output = 'work/videos',
+  rateLimit=createWikiRateLimit(),update = updateLiverVideos, persistState = saveState, persistCache = saveCache, output = 'work/videos',
 } = {}) {
   const batchSize = positiveInt(env.BATCH_SIZE, 5, 52);
   const daysBack = positiveInt(env.DAYS_BACK, 14);
@@ -38,10 +40,13 @@ export async function runVideos({ env = process.env, now = new Date(), livers, s
   const report = { processedAt: now.toISOString(), dryRun, total: livers.length, enabled: livers.filter(l=>l.enabled).length,
     selected: targets.map(l=>l.youtubeChannelId), results: {}, quota: usage, channels: state.channels };
   if (targets.length && !env.YOUTUBE_API_KEY) throw new Error('Missing YouTube API key');
-  wiki ??= videoWikiClient(env);
+  wiki ??= videoWikiClient(env,fetch,{rateLimit});
   const classifier=(env.CLASSIFIER_CUSTODY_ENABLED==='true'||env.CLASSIFIER_CUSTODY_READ_ENABLED==='true')?classifierClient(env):undefined;
   for (const liver of targets) {
     const id = liver.youtubeChannelId;
+    const cooldown=rateLimit.snapshot();
+    if(cooldown.retryAt){report.results[id]={success:false,outcome:'deferred',reason:'rate_limited',...cooldown};continue;}
+    const previous=structuredClone(state.channels[id]);
     const status = state.channels[id] ??= {};
     status.firstAttemptAt ??= now.toISOString();
     const lastSuccessAt = status.lastSuccessAt ?? status.firstAttemptAt;
@@ -51,16 +56,26 @@ export async function runVideos({ env = process.env, now = new Date(), livers, s
       if (!result.success) throw new Error('Liver update failed');
       status.lastSuccessAt = now.toISOString(); status.status = 'success'; status.failures = 0;
       report.results[id] = result;
-    } catch {
-      status.status = 'failed'; status.failures = (status.failures ?? 0) + 1;
-      // Fixed diagnostic, no remote body or credentials. Failed attempts never move success watermark.
-      report.results[id] = { success: false, error: 'Fetch, section, or Wiki conflict/write verification failed' };
+    } catch (error) {
+      if(isWikiRateLimited(error)){
+        rateLimit.postpone(error);
+        if(previous)state.channels[id]=previous;else delete state.channels[id];
+        report.results[id]={success:false,outcome:'deferred',...requestErrorDetails(error),...rateLimit.snapshot()};
+      }else{
+        status.status = 'failed'; status.failures = (status.failures ?? 0) + 1;
+        // Fixed diagnostic, no remote body or credentials. Failed attempts never move success watermark.
+        report.results[id] = { success: false, outcome:'failed', error: 'Fetch, section, or Wiki conflict/write verification failed' };
+      }
     }
     // Checkpoint independently: one failed channel cannot discard another's progress.
     if (!dryRun) { await persistCache(cache); await persistState(state); }
   }
+  report.deferred=Object.values(report.results).filter(r=>r.outcome==='deferred').length;
+  report.failed=Object.values(report.results).some(r=>!r.success&&r.outcome!=='deferred');
+  report.complete=!report.failed&&!report.deferred;
+  report.outcome=report.failed?'failure':report.deferred?'deferred':'success';
   await mkdir(output, { recursive: true });
   await writeFile(`${output}/report.json`, JSON.stringify(report, null, 2) + '\n');
-  console.log(JSON.stringify({ total: report.total, enabled: report.enabled, selected: targets.length, dryRun, failed: Object.values(report.results).filter(r=>!r.success).length }));
+  console.log(JSON.stringify({ total: report.total, enabled: report.enabled, selected: targets.length, dryRun, failed: Object.values(report.results).filter(r=>!r.success&&r.outcome!=='deferred').length, deferred:report.deferred,outcome:report.outcome,complete:report.complete }));
   return report;
 }

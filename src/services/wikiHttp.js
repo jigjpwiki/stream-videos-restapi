@@ -1,4 +1,5 @@
 import {httpClient, HttpRequestError} from '../schedule/http.js';
+export const isWikiRateLimited = error => error instanceof HttpRequestError && error.status===429 && ['auth','get','conflict_get','put','verify_get'].includes(error.operation);
 const sleepDefault = ms => new Promise(resolve => setTimeout(resolve, ms));
 // Local conservative pacing policy, NOT a claim about WIKIWIKI's unpublished quota.
 // Shared across schedule, classification and video clients in this process.
@@ -6,6 +7,7 @@ export function createWikiRateLimit({sleep=sleepDefault,clock=()=>Date.now(),int
   let tail=Promise.resolve(),next=0,consecutive=0,paused=false,retryAt=0;
   function deferred(operation) { const error=new HttpRequestError('Wiki API','rate_limited',429,Math.max(0,retryAt-clock()));error.operation=operation;return error; }
   return {
+    postpone(error) {paused=true;retryAt=Math.max(retryAt,clock()+Math.max(30000,error.retryAfterMs??0));},
     restore(value) {const time=Date.parse(value);if(time>clock()){retryAt=Math.max(retryAt,time);paused=true;}},
     snapshot() {return paused?{retryAt:new Date(retryAt).toISOString()}:{};},
     async run(request,operation,method) {

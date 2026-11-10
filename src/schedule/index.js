@@ -2,15 +2,15 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { wikiHttpClient } from '../services/wikiHttp.js';
-import { httpClient } from './http.js';
+import { wikiHttpClient, createWikiRateLimit, isWikiRateLimited } from '../services/wikiHttp.js';
+import { httpClient, HttpRequestError, requestErrorDetails } from './http.js';
 import { normalize, classify } from './normalize.js';
 import { verify } from './verify.js';
 import { sync, wikiClient } from './sync.js';
 
-export async function run({ env = process.env, fetchImpl = fetch, now = new Date(), fixture, output = 'work/schedule' } = {}) {
+export async function run({ env = process.env, fetchImpl = fetch, now = new Date(), fixture, output = 'work/schedule', rateLimit=createWikiRateLimit() } = {}) {
   const report = { processedAt: now.toISOString(), sources: {}, skipped: {} };
-  const generalTransport = httpClient(fetchImpl), wikiTransport = wikiHttpClient(fetchImpl);
+  const generalTransport = httpClient(fetchImpl), wikiTransport = wikiHttpClient(fetchImpl,{rateLimit});
   const transport = (label,...args) => (label.startsWith('Wiki ')?wikiTransport:generalTransport)(label,...args);
   report.apis = {};
   const request = async (label, url, options) => {
@@ -18,7 +18,8 @@ export async function run({ env = process.env, fetchImpl = fetch, now = new Date
       const data = await transport(label, url, options);
       report.apis[label] = 'ok';
       return data;
-    } catch {
+    } catch (error) {
+      if(error instanceof HttpRequestError)throw error;
       console.error(`${label}: failed`);
       throw new Error('API operation failed');
     }
@@ -35,14 +36,20 @@ export async function run({ env = process.env, fetchImpl = fetch, now = new Date
   Object.assign(report, { live: sections.live.length, upcoming: sections.upcoming.length, verified: verified.length });
   const wiki = fixture ? { get: async () => fixture.source, put: async () => { throw new Error('Fixture write prohibited'); } } : wikiClient(request, env);
   await mkdir(output, { recursive: true });
-  const result = await sync({ wiki, sections, dryRun: !!fixture || env.DRY_RUN !== 'false', writeEnabled: env.WIKI_WRITE_ENABLED === 'true', save: async (before, after) => {
-    await writeFile(resolve(output, 'before.wiki'), before);
-    await writeFile(resolve(output, 'preview.wiki'), after);
-    const diff = spawnSync('git', ['diff', '--no-index', '--', resolve(output, 'before.wiki'), resolve(output, 'preview.wiki')], { encoding: 'utf8' });
-    if (![0, 1].includes(diff.status)) throw new Error('Preview diff failed');
-    await writeFile(resolve(output, 'preview.diff'), diff.stdout);
-  } });
-  Object.assign(report, result);
+  try {
+    const result = await sync({ wiki, sections, dryRun: !!fixture || env.DRY_RUN !== 'false', writeEnabled: env.WIKI_WRITE_ENABLED === 'true', save: async (before, after) => {
+      await writeFile(resolve(output, 'before.wiki'), before);
+      await writeFile(resolve(output, 'preview.wiki'), after);
+      const diff = spawnSync('git', ['diff', '--no-index', '--', resolve(output, 'before.wiki'), resolve(output, 'preview.wiki')], { encoding: 'utf8' });
+      if (![0, 1].includes(diff.status)) throw new Error('Preview diff failed');
+      await writeFile(resolve(output, 'preview.diff'), diff.stdout);
+    } });
+    Object.assign(report, result,{failed:false,complete:true,outcome:'success'});
+  }catch(error){
+    if(!isWikiRateLimited(error))throw error;
+    rateLimit.postpone(error);
+    Object.assign(report,{failed:false,complete:false,outcome:'deferred',deferred:true,...requestErrorDetails(error),...rateLimit.snapshot()});
+  }
   await writeFile(resolve(output, 'report.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify(report));
   return report;

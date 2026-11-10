@@ -1,4 +1,4 @@
-import {wikiRateLimit} from '../services/wikiHttp.js';
+import {createWikiRateLimit} from '../services/wikiHttp.js';
 import {transferToCloudflare,digest} from './custody.js';
 import { savePreview } from '../services/preview.js';
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
@@ -20,7 +20,7 @@ export function classifierClient(env, fetchImpl = fetch) {
   };
 }
 export async function runClassifications({env=process.env,livers,cache,state,wiki,remote,now=new Date(),output='work/classifications',
-  details=fetchVideoDetails,persistCache=saveCache,persist=async value=>{await writeFile('data/classification-state.json.tmp',JSON.stringify(value,null,2)+'\n');await rename('data/classification-state.json.tmp','data/classification-state.json');},
+  rateLimit=createWikiRateLimit(),details=fetchVideoDetails,persistCache=saveCache,persist=async value=>{await writeFile('data/classification-state.json.tmp',JSON.stringify(value,null,2)+'\n');await rename('data/classification-state.json.tmp','data/classification-state.json');},
 }={}) {
   if(env.CLASSIFIER_SYNC_ENABLED!=='true')return {skipped:true};
   const dryRun=env.DRY_RUN!=='false'||env.VIDEO_WIKI_WRITE_ENABLED!=='true';
@@ -28,9 +28,8 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
   cache=structuredClone(cache??await loadCache());
   if(!state) {try {state=JSON.parse(await readFile('data/classification-state.json'));}catch(e){if(e.code!=='ENOENT')throw e;state={};}}
   state=structuredClone(state);
-  const ownWiki=!wiki;
-  if(ownWiki)wikiRateLimit.restore(state.wikiRetryAt);
-  wiki??=videoWikiClient(env);remote??=classifierClient(env);
+  if(Date.parse(state.wikiRetryAt)>+now)rateLimit.restore(state.wikiRetryAt);
+  wiki??=videoWikiClient(env,fetch,{rateLimit});remote??=classifierClient(env);
   await mkdir(output,{recursive:true});
   const report={dryRun,scanned:[],results:[],scanSkipped:[],scanFailures:[],scanDeferred:[],metadataFailures:[],unclassifiedCount:0,written:false};
   const pendingResponse=await remote('/internal/pending');
@@ -40,12 +39,12 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
   const custodyBatch=Number(env.CLASSIFIER_CUSTODY_BATCH_SIZE??10);
   if(!Number.isInteger(custodyBatch)||custodyBatch<1||custodyBatch>50)throw Error('Invalid custody batch size');
   const scanSize=dryRun&&env.CLASSIFIER_SCAN_ALL==='true'?livers.length:Math.min(5,livers.length);
-  let rateFailures=0, pauseUntil=Date.parse(state.wikiRetryAt)>+now?Date.parse(state.wikiRetryAt):0, scanAttempted=0;
+  let rateFailures=0, pauseUntil=Date.parse(rateLimit.snapshot().retryAt)||0, scanAttempted=0;
   function rateLimited(error) {
     if(!(error instanceof HttpRequestError)||error.status!==429)return false;
     rateFailures++;
     if(error.code==='rate_limited'||rateFailures>=2||(error.retryAfterMs??0)>5000)
-      pauseUntil=Math.max(pauseUntil,Date.now()+Math.max(30000,error.retryAfterMs??0));
+      {rateLimit.postpone(error);pauseUntil=Date.parse(rateLimit.snapshot().retryAt);}
     return true;
   }
   const deferredEntry=(item,error)=>({...item,outcome:'deferred',reason:'rate_limited',...(error?requestErrorDetails(error):{}),...(pauseUntil?{retryAt:new Date(pauseUntil).toISOString()}: {})});
