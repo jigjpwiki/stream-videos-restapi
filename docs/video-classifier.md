@@ -186,3 +186,7 @@ SQLテーブル・既存判断・履歴は削除しない。旧offset APIも残�
 ## Access転送・通信エラーからの復帰
 
 [確認できた原因、AJAX/CSRFヘッダー、再認証とrevision照合、診断方法](classifier-access-recovery.md)を参照。
+
+## 認証失敗の原因分類
+
+[Access側401とWorker認証の区別、公開鍵キャッシュ、不要な再認証の防止](classifier-auth-causes.md)を参照。

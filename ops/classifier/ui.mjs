@@ -9,6 +9,29 @@ let items=[],index=0,mode='queue',cursor=null,busy=false,last=null,historyBefore
 let visited=new Set(),deferred=[],deferredPass=false,lastCardKey=null;
 const label={shorts:'Shorts',normal:'投稿動画',hold:'保留',uncategorized:'未分類'};
 const errors={400:'操作内容が不正です。更新して再操作してください。',401:'認証が切れました。再ログインしてください。',403:'編集権限または認証を確認してください。',409:'他の編集が入りました。最新データを確認して再操作してください。',500:'サーバーで処理できませんでした。少し待って再操作してください。'};
+const workerAuth={
+ jwt_missing:['reauthenticate','認証JWTが届いていません。認証を確認してください。'],
+ jwt_expired:['reauthenticate','認証JWTの有効期限が切れました。再認証してください。'],
+ jwt_malformed:['contact_admin','認証JWTの形式を検証できません。管理者へ原因コードを連絡してください。'],
+ jwt_algorithm_invalid:['contact_admin','認証方式が一致しません。管理者による確認が必要です。'],
+ jwt_signature_invalid:['contact_admin','JWT署名を検証できません。管理者による確認が必要です。'],
+ jwt_issuer_mismatch:['contact_admin','認証issuerが一致しません。管理者による確認が必要です。'],
+ jwt_audience_mismatch:['contact_admin','認証audienceが一致しません。管理者による確認が必要です。'],
+ jwt_time_invalid:['contact_admin','JWTの時刻情報が不正です。管理者による確認が必要です。'],
+ jwt_issued_in_future:['contact_admin','JWTの発行時刻を検証できません。管理者による確認が必要です。'],
+ jwt_not_yet_valid:['contact_admin','JWTはまだ有効ではありません。管理者による時刻確認が必要です。'],
+ jwt_identity_missing:['contact_admin','JWTの編集者情報を検証できません。管理者による確認が必要です。'],
+ jwt_unknown_key:['contact_admin','対応する署名公開鍵がありません。管理者による確認が必要です。'],
+ editor_not_allowed:['contact_admin','この編集者には操作権限がありません。管理者へ確認してください。'],
+ auth_configuration:['contact_admin','認証設定が不正です。管理者による確認が必要です。'],
+ editor_configuration:['contact_admin','編集者許可リストの設定を確認してください。'],
+ auth_keys_timeout:['retry','認証公開鍵の取得がタイムアウトしました。再ログインせず時間を置いて更新してください。'],
+ auth_keys_network:['retry','認証公開鍵への接続に失敗しました。再ログインせず時間を置いて更新してください。'],
+ auth_keys_http:['retry','認証公開鍵サービスが一時的に利用できません。時間を置いて更新してください。'],
+ auth_keys_redirect:['retry','認証公開鍵の取得先が転送を返しました。管理者へ確認してください。'],
+ auth_keys_invalid:['retry','認証公開鍵の応答を検証できません。時間を置いて更新してください。'],
+ auth_check_unavailable:['retry','認証サービスを確認できません。時間を置いて更新してください。'],
+};
 const responseMessages={
  redirect_response:'APIが別の画面へ転送されました。認証を確認して「更新」を押してください。',
  unexpected_html:'APIからJSONではなくHTMLが返されました。認証またはアクセス制限を確認してください。',
@@ -20,10 +43,10 @@ const responseMessages={
 };
 function failure(code,details={}){
  const status=details.status||0;
- const e=Error(code==='http_error'?(errors[status]||(status===429?'アクセスが制限されています。時間を置いて「更新」してください。':status>=500?errors[500]:'取得できませんでした。「更新」で確認してください。')):responseMessages[code]||'応答を確認できませんでした。');
+ const e=Error(details.authSource==='worker'&&workerAuth[details.serverCode]?workerAuth[details.serverCode][1]:code==='http_error'?(errors[status]||(status===429?'アクセスが制限されています。時間を置いて「更新」してください。':status>=500?errors[500]:'取得できませんでした。「更新」で確認してください。')):responseMessages[code]||'応答を確認できませんでした。');
  Object.assign(e,details,{code,status});
- e.authRelated=code==='redirect_response'||code==='unexpected_html'||status===401||status===403;
- if(code!=='cancelled')console.warn(JSON.stringify({component:'classifier-ui',operation:details.operation,status,code,contentType:details.contentType??'unavailable',redirected:!!details.redirected,responseType:details.responseType??'unavailable',requestId:details.requestId,cfRay:details.cfRay}));
+ e.authRelated=details.authSource==='worker'?details.authAction==='reauthenticate':code==='redirect_response'||code==='unexpected_html'||status===401;
+ if(code!=='cancelled')console.warn(JSON.stringify({component:'classifier-ui',operation:details.operation,status,code,contentType:details.contentType??'unavailable',redirected:!!details.redirected,responseType:details.responseType??'unavailable',requestId:details.requestId,cfRay:details.cfRay,serverCode:details.serverCode,authSource:details.authSource,authAction:details.authAction}));
  return e;
 }
 function validItem(item){return item&&typeof item.key==='string'&&typeof item.videoId==='string'&&/^[\w-]{11}$/.test(item.videoId)&&Number.isInteger(item.revision)&&item.revision>=0&&(item.line==null||typeof item.line==='string')&&(item.metadata==null||typeof item.metadata==='object'&&!Array.isArray(item.metadata));}
@@ -47,7 +70,12 @@ async function api(path,data,{signal}={}){
   const requestId=r.headers.get('x-request-id'),ray=r.headers.get('cf-ray');
   details={...details,status:r.status,contentType,redirected:r.redirected||r.type==='opaqueredirect'||r.status>=300&&r.status<400,responseType:['basic','cors','opaque','opaqueredirect','default'].includes(r.type)?r.type:'other',requestId:/^[a-f0-9-]{36}$/i.test(requestId||'')?requestId:undefined,cfRay:/^[a-f0-9]{16}(?:-[a-z0-9]+)?$/i.test(ray||'')?ray:undefined};
   if(details.redirected)throw failure('redirect_response',details);
-  if(!r.ok)throw failure('http_error',details);
+  if(!r.ok){
+   let data; if(contentType==='json'){try{data=await r.json();}catch{}}
+   const verifiedWorker=r.headers.get('x-classifier-auth-source')==='worker'&&data?.authSource==='worker'&&Object.hasOwn(workerAuth,data?.code);
+   details={...details,authSource:verifiedWorker?'worker':!details.requestId&&(r.status===401||r.status===403)?'access_or_edge':'unknown',...(verifiedWorker?{serverCode:data.code,authAction:workerAuth[data.code][0]}:{})};
+   throw failure('http_error',details);
+  }
   if(contentType!=='json')throw failure(contentType==='html'?'unexpected_html':'non_json_response',details);
   let value;
   try{value=await r.json();}catch{throw failure(signal?.aborted?'cancelled':controller.signal.aborted?'timeout':'invalid_json',details);}
@@ -57,7 +85,7 @@ async function api(path,data,{signal}={}){
 }
 function showError(error,prefix=''){
  if(error.authRelated){authRequired=true;el('recovery').hidden=false;el('recovery').scrollIntoView({block:'nearest'});}
- const context=error.status?' (HTTP '+error.status+')':'';
+ const context=(error.status?' (HTTP '+error.status+')':'')+(error.serverCode?' / '+error.serverCode:'');
  message(prefix+error.message+context+(error.requestId?' / requestId: '+error.requestId:error.cfRay?' / cf-ray: '+error.cfRay:''));
  render();
 }
@@ -133,7 +161,7 @@ async function choose(choice,undo=false,target=null){
    pendingDecision=null;acceptSaved(result.item,operation);confirmed=true;
   }catch(error){
    if(error.status===409){pendingDecision=null;try{await conflict(item);}catch(freshError){showError(freshError,'最新データを取得できませんでした。');}return;}
-   if([400,401,403,404,422].includes(error.status)){pendingDecision=null;showError(error);return;}
+   if(error.authSource==='worker'||[400,401,403,404,422].includes(error.status)){pendingDecision=null;showError(error);return;}
    // Never repeat POST: one read verifies whether an ambiguous save committed.
    if(error.authRelated){showError(error,'保存結果は未確認です。「更新」で最新revisionを確認してください。');return;}
    try{const outcome=await reconcilePending();confirmed=outcome==='saved';if(!confirmed){if(outcome==='not_saved')showError(error,'分類は未保存です。');return;}}
