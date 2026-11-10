@@ -12,7 +12,7 @@ export async function runSync({ env = process.env, runSchedule = schedule, runVi
     ['videos', () => env.UNIFIED_VIDEOS_ENABLED === 'true' ? runVideoBatch({ env }) : { skipped: true }]]) {
     try {
       results[name] = await operation();
-      if (Object.values(results[name]?.results ?? {}).some(r=>!r.success)) results[name].failed = true;
+      if (name === 'videos' && Object.values(results[name]?.results ?? {}).some(r=>!r.success)) results[name].failed = true;
     } catch { results[name] = { failed: true }; }
   }
   return results;

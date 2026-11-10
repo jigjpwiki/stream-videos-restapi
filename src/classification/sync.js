@@ -1,7 +1,8 @@
 import { savePreview } from '../services/preview.js';
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import { join } from 'node:path';
-import { videoWikiClient, guardedEdit } from '../services/wikiwiki.js';
+import { requestErrorDetails } from '../schedule/http.js';
+import { videoWikiClient, guardedEdit, WikiPageNotFoundError } from '../services/wikiwiki.js';
 import { loadCache } from '../services/storage.js';
 import { fetchVideoDetails, quotaRequest } from '../services/youtube.js';
 import { unclassifiedRows, reconcileClassification } from './wiki.js';
@@ -26,7 +27,7 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
   if(!state) {try {state=JSON.parse(await readFile('data/classification-state.json'));}catch(e){if(e.code!=='ENOENT')throw e;state={};}}
   state=structuredClone(state);wiki??=videoWikiClient(env);remote??=classifierClient(env);
   await mkdir(output,{recursive:true});
-  const report={dryRun,scanned:[],results:[],scanFailures:[],metadataFailures:[]};
+  const report={dryRun,scanned:[],results:[],scanSkipped:[],scanFailures:[],metadataFailures:[],unclassifiedCount:0,written:false};
   const pendingResponse=await remote('/internal/pending');
   if(!Array.isArray(pendingResponse.items)||pendingResponse.items.length>50)throw Error('Invalid classifier queue');
   const queue=pendingResponse.items;
@@ -38,8 +39,18 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
       const source=await wiki.get(liver.wikiPageName);
       pages.push({page:liver.wikiPageName,name:liver.name,rows:[...new Map(unclassifiedRows(source).map(row=>[row.videoId,row])).values()].map(row=>({videoId:row.videoId,line:row.line,metadata:cache[liver.youtubeChannelId]?.find(v=>v.videoId===row.videoId)}))});
       report.scanned.push(liver.wikiPageName);
-    }catch {report.scanFailures.push(liver.wikiPageName);}
+    }catch (error) {
+      const entry={page:liver.wikiPageName,...requestErrorDetails(error)};
+      if(error instanceof WikiPageNotFoundError) {
+        report.scanSkipped.push(entry);
+        console.warn(JSON.stringify({phase:'classification_scan',level:'warning',...entry}));
+      } else {
+        report.scanFailures.push(entry);
+        console.error(JSON.stringify({phase:'classification_scan',level:'error',...entry}));
+      }
+    }
   }
+  report.unclassifiedCount=pages.reduce((count,page)=>count+page.rows.length,0);
   const metadata=new Map(Object.values(cache).flat().map(v=>[v.videoId,v]));
   for(const item of queue)if(item.metadata?.publishedAt)metadata.set(item.videoId,item.metadata);
   const missing=[...new Set([...queue,...pages.flatMap(p=>p.rows)].map(v=>v.videoId))].filter(id=>!metadata.get(id)?.publishedAt||!Number.isFinite(metadata.get(id)?.durationSeconds)).slice(0,50);
@@ -65,7 +76,7 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
       });
       const receipt={key:item.key,videoId:item.videoId,revision:item.revision,outcome:resolution.outcome,receipt:resolution.receipt};
       report.results.push({...receipt,...result});receipts.push(receipt);
-    }catch {const failed={key:item.key,videoId:item.videoId,revision:item.revision,outcome:'failed'};receipts.push(failed);report.results.push(failed);}
+    }catch (error) {const failed={key:item.key,videoId:item.videoId,revision:item.revision,outcome:'failed',...requestErrorDetails(error)};receipts.push(failed);report.results.push(failed);}
   }
   if(!dryRun) {
     if(receipts.length){const ack=await remote('/internal/ack',{results:receipts});report.ackConflicts=ack.conflicts??[];}
@@ -73,6 +84,9 @@ export async function runClassifications({env=process.env,livers,cache,state,wik
     await persist(state);
   }
   report.failed=report.results.some(r=>r.outcome==='failed')||report.scanFailures.length>0||report.metadataFailures.length>0||!!report.ackConflicts?.length;
+  report.written=report.results.some(r=>r.written===true);
+  report.outcome=report.failed?'failure':report.scanSkipped.length?'success_with_warnings':'success';
+  console.log(JSON.stringify({phase:'classifications',dryRun,outcome:report.outcome,scanned:report.scanned.length,skipped:report.scanSkipped.length,scanFailures:report.scanFailures.length,applyFailures:report.results.filter(r=>r.outcome==='failed').length,metadataFailures:report.metadataFailures.length,unclassifiedCount:report.unclassifiedCount,written:report.written}));
   await writeFile(join(output,'report.json'),JSON.stringify(report,null,2)+'\n');
   await writeFile(join(output,'import-preview.json'),JSON.stringify({pages},null,2)+'\n');
   return report;

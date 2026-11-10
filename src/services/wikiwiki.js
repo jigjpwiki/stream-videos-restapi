@@ -1,4 +1,11 @@
-import { httpClient } from '../schedule/http.js';
+import { httpClient, HttpRequestError } from '../schedule/http.js';
+
+export class WikiPageNotFoundError extends HttpRequestError {
+  constructor() {
+    super('Wiki GET', 'page_not_found', 404);
+    this.name = 'WikiPageNotFoundError';
+  }
+}
 
 // Never expose credentials/remote bodies in errors. No retries for ambiguous PUTs.
 export function videoWikiClient(env = process.env, fetchImpl = fetch) {
@@ -9,15 +16,23 @@ export function videoWikiClient(env = process.env, fetchImpl = fetch) {
   const headers = async () => {
     if (!token) {
       const auth = await request('Wiki auth', `${base}/auth`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: env.WIKI_PASSWORD }) });
-      if (typeof auth.token !== 'string' || !auth.token) throw new Error('Invalid Wiki token');
+      if (typeof auth?.token !== 'string' || !auth.token) throw new HttpRequestError('Wiki auth', 'invalid_response');
       token = auth.token;
     }
     return { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' };
   };
   return {
     async get(page) {
-      const data = await request('Wiki GET', `${base}/page/${encodeURIComponent(page)}`, { headers: await headers() });
-      if (typeof data.source !== 'string') throw new Error('Invalid Wiki source');
+      // Authentication failures (including auth 404) are never page-not-found.
+      const pageHeaders = await headers();
+      let data;
+      try {
+        data = await request('Wiki GET', `${base}/page/${encodeURIComponent(page)}`, { headers: pageHeaders });
+      } catch (error) {
+        if (error instanceof HttpRequestError && error.code === 'http_error' && error.status === 404) throw new WikiPageNotFoundError();
+        throw error;
+      }
+      if (typeof data?.source !== 'string') throw new HttpRequestError('Wiki GET', 'invalid_response');
       return data.source;
     },
     async put(page, source) {
