@@ -4142,7 +4142,7 @@
       "actualStartTime": "2026-11-01T22:22:23Z",
       "actualEndTime": "2026-11-01T23:04:05Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T02:34:44.800Z"
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "-xj_O2bECRo",
@@ -4159,7 +4159,7 @@
       "actualStartTime": "2026-11-04T22:31:09Z",
       "actualEndTime": "2026-11-04T23:07:20Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T02:34:44.800Z"
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "gNT2Ro4f3VY",
@@ -4176,7 +4176,7 @@
       "actualStartTime": "2026-11-05T15:19:05Z",
       "actualEndTime": "2026-11-05T16:29:17Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T02:34:44.800Z"
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "iTv31ntsMck",
@@ -4193,7 +4193,7 @@
       "actualStartTime": "2026-11-06T12:00:25Z",
       "actualEndTime": "2026-11-06T13:35:24Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T02:34:44.800Z"
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "0cBdWvUFImg",
@@ -4209,7 +4209,7 @@
       "actualStartTime": "2026-11-09T09:51:09Z",
       "actualEndTime": "2026-11-09T13:18:46Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T02:34:44.800Z"
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     }
   ],
   "UCv2IYO-4waCpHvn50SWWY2A": [
@@ -13702,62 +13702,206 @@
     {
       "videoId": "6xAqltvC8l8",
       "title": "【 #ほの暮しの庭 】無料アプデ第2弾🌳新家具に新農具に誕生日🎂✨️遊び尽くすぞー！！【天透あわ/ゲーム実況】",
-      "registeredAt": "2026-10-29T07:45:36.408Z"
+      "registeredAt": "2026-10-29T07:45:36.408Z",
+      "url": "https://www.youtube.com/watch?v=6xAqltvC8l8",
+      "publishedAt": "2026-10-27T15:52:08Z",
+      "thumbnail": "https://i.ytimg.com/vi/6xAqltvC8l8/mqdefault.jpg",
+      "channelId": "UCXI0W_Os-BCIngpCb1YnOow",
+      "channelTitle": "天透あわ🫧",
+      "duration": "PT3H19M27S",
+      "durationSeconds": 11967,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-27T07:59:55Z",
+      "actualEndTime": "2026-10-27T11:19:15Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "HuNjMHfxV8c",
       "title": "【GARDEN INK】色の無い世界を塗り絵のように彩るぞ🎨🍃【天透あわ/パレデミア学園】",
-      "registeredAt": "2026-10-29T07:45:36.408Z"
+      "registeredAt": "2026-10-29T07:45:36.408Z",
+      "url": "https://www.youtube.com/watch?v=HuNjMHfxV8c",
+      "publishedAt": "2026-10-28T21:17:21Z",
+      "thumbnail": "https://i.ytimg.com/vi/HuNjMHfxV8c/mqdefault.jpg",
+      "channelId": "UCXI0W_Os-BCIngpCb1YnOow",
+      "channelTitle": "天透あわ🫧",
+      "duration": "PT1H2M",
+      "durationSeconds": 3720,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-28T06:58:48Z",
+      "actualEndTime": "2026-10-28T08:00:42Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "SRC1836irvI",
       "title": "【1周年記念】YouTube初配信から1周年🫧✨️これまでの話と、これからの話をしよう🗣︎💬【天透あわ/新人Vtuber】",
-      "registeredAt": "2026-10-31T18:13:15.222Z"
+      "registeredAt": "2026-10-31T18:13:15.222Z",
+      "url": "https://www.youtube.com/watch?v=SRC1836irvI",
+      "publishedAt": "2026-10-31T01:54:19Z",
+      "thumbnail": "https://i.ytimg.com/vi/SRC1836irvI/mqdefault.jpg",
+      "channelId": "UCXI0W_Os-BCIngpCb1YnOow",
+      "channelTitle": "天透あわ🫧",
+      "duration": "PT1H33M17S",
+      "durationSeconds": 5597,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-30T12:00:34Z",
+      "actualEndTime": "2026-10-30T13:33:46Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "KWTLOyW48QE",
       "title": "【#Minecraft 】マイクラ初心者日記🔰02-生きたい-【天透あわ/パレデミア学園】",
-      "registeredAt": "2026-11-03T08:47:03.698Z"
+      "registeredAt": "2026-11-03T08:47:03.698Z",
+      "url": "https://www.youtube.com/watch?v=KWTLOyW48QE",
+      "publishedAt": "2026-11-03T01:32:10Z",
+      "thumbnail": "https://i.ytimg.com/vi/KWTLOyW48QE/mqdefault.jpg",
+      "channelId": "UCXI0W_Os-BCIngpCb1YnOow",
+      "channelTitle": "天透あわ🫧",
+      "duration": "PT1H58M32S",
+      "durationSeconds": 7112,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-02T11:10:25Z",
+      "actualEndTime": "2026-11-02T13:17:59Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "gqAH9vD2NY4",
       "title": "【GARDEN INK】色の無い世界を塗り絵のように彩るぞ🎨🍃【天透あわ/パレデミア学園】",
-      "registeredAt": "2026-11-03T08:47:03.698Z"
+      "registeredAt": "2026-11-03T08:47:03.698Z",
+      "url": "https://www.youtube.com/watch?v=gqAH9vD2NY4",
+      "publishedAt": "2026-11-03T04:34:16Z",
+      "thumbnail": "https://i.ytimg.com/vi/gqAH9vD2NY4/mqdefault.jpg",
+      "channelId": "UCXI0W_Os-BCIngpCb1YnOow",
+      "channelTitle": "天透あわ🫧",
+      "duration": "PT1H53M28S",
+      "durationSeconds": 6808,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-02T13:31:52Z",
+      "actualEndTime": "2026-11-02T15:35:24Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "t0Bqq5zfNf4",
       "title": "【縦型雑談】よわよわ回線と戦いながら雑談🗣︎💬【天透あわ/パレデミア学園】",
-      "registeredAt": "2026-11-07T14:36:14.774Z"
+      "registeredAt": "2026-11-07T14:36:14.774Z",
+      "url": "https://www.youtube.com/watch?v=t0Bqq5zfNf4",
+      "publishedAt": "2026-11-04T22:44:26Z",
+      "thumbnail": "https://i.ytimg.com/vi/t0Bqq5zfNf4/mqdefault.jpg",
+      "channelId": "UCXI0W_Os-BCIngpCb1YnOow",
+      "channelTitle": "天透あわ🫧",
+      "duration": "PT1H20M9S",
+      "durationSeconds": 4809,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-04T09:00:18Z",
+      "actualEndTime": "2026-11-04T10:20:25Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "v7xAWfcNrc0",
       "title": "【雑談/歌枠】初見さん大歓迎🌈お話したり歌ったり🎤🫧【天透あわ/パレデミア学園】",
-      "registeredAt": "2026-11-07T14:36:14.774Z"
+      "registeredAt": "2026-11-07T14:36:14.774Z",
+      "url": "https://www.youtube.com/watch?v=v7xAWfcNrc0",
+      "publishedAt": "2026-11-05T10:01:31Z",
+      "thumbnail": "https://i.ytimg.com/vi/v7xAWfcNrc0/mqdefault.jpg",
+      "channelId": "UCXI0W_Os-BCIngpCb1YnOow",
+      "channelTitle": "天透あわ🫧",
+      "duration": "PT3H32S",
+      "durationSeconds": 10832,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-05T05:30:37Z",
+      "actualEndTime": "2026-11-05T08:31:52Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "Xz0HFqdgzJk",
       "title": "【雑談】初見さん歓迎のお昼雑談💬🫧大会に向けてマイクラで釣りもするよ🎣【天透あわ/パレデミア学園】",
-      "registeredAt": "2026-11-07T14:36:14.774Z"
+      "registeredAt": "2026-11-07T14:36:14.774Z",
+      "url": "https://www.youtube.com/watch?v=Xz0HFqdgzJk",
+      "publishedAt": "2026-11-06T07:04:51Z",
+      "thumbnail": "https://i.ytimg.com/vi/Xz0HFqdgzJk/mqdefault.jpg",
+      "channelId": "UCXI0W_Os-BCIngpCb1YnOow",
+      "channelTitle": "天透あわ🫧",
+      "duration": "PT2H32M18S",
+      "durationSeconds": 9138,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-06T03:31:53Z",
+      "actualEndTime": "2026-11-06T06:04:06Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "ZszvVWsYxO4",
       "title": "【#Minecraft 】パレデミア学園1期生の釣り大会🎣‼️ド初心者が釣りまくるぞ✨️【天透あわ/パレデミア学園】",
-      "registeredAt": "2026-11-07T14:36:14.774Z"
+      "registeredAt": "2026-11-07T14:36:14.774Z",
+      "url": "https://www.youtube.com/watch?v=ZszvVWsYxO4",
+      "publishedAt": "2026-11-07T01:39:52Z",
+      "thumbnail": "https://i.ytimg.com/vi/ZszvVWsYxO4/mqdefault.jpg",
+      "channelId": "UCXI0W_Os-BCIngpCb1YnOow",
+      "channelTitle": "天透あわ🫧",
+      "duration": "PT1H24M36S",
+      "durationSeconds": 5076,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-06T12:00:21Z",
+      "actualEndTime": "2026-11-06T13:30:12Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "nzY-bqEKQvc",
       "title": "【雑談】今日はいい泡の日なんだって！🫧【天透あわ/パレデミア学園】",
-      "registeredAt": "2026-11-10T01:31:36.789Z"
+      "registeredAt": "2026-11-10T01:31:36.789Z",
+      "url": "https://www.youtube.com/watch?v=nzY-bqEKQvc",
+      "publishedAt": "2026-11-08T19:41:51Z",
+      "thumbnail": "https://i.ytimg.com/vi/nzY-bqEKQvc/mqdefault.jpg",
+      "channelId": "UCXI0W_Os-BCIngpCb1YnOow",
+      "channelTitle": "天透あわ🫧",
+      "duration": "PT1H58M5S",
+      "durationSeconds": 7085,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-08T04:30:27Z",
+      "actualEndTime": "2026-11-08T06:28:27Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "KOChZVMWE-w",
       "title": "【グッズ紹介】いい泡の日新グッズ紹介🛍🫧こだわりポイントや制作秘話まで話しちゃうよ💭【天透あわ/パレデミア学園】",
-      "registeredAt": "2026-11-10T01:31:36.789Z"
+      "registeredAt": "2026-11-10T01:31:36.789Z",
+      "url": "https://www.youtube.com/watch?v=KOChZVMWE-w",
+      "publishedAt": "2026-11-08T21:42:25Z",
+      "thumbnail": "https://i.ytimg.com/vi/KOChZVMWE-w/mqdefault.jpg",
+      "channelId": "UCXI0W_Os-BCIngpCb1YnOow",
+      "channelTitle": "天透あわ🫧",
+      "duration": "PT1H4M25S",
+      "durationSeconds": 3865,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-08T08:30:42Z",
+      "actualEndTime": "2026-11-08T09:35:03Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "Npi-_LtGxLs",
       "title": "【 #ほの暮しの庭 】住人と仲良くなりたい‼️好感度アップ大作戦🤝🏻💖~リン＆コンノ編~【天透あわ/ゲーム実況】",
-      "registeredAt": "2026-11-10T01:31:36.789Z"
+      "registeredAt": "2026-11-10T01:31:36.789Z",
+      "url": "https://www.youtube.com/watch?v=Npi-_LtGxLs",
+      "publishedAt": "2026-11-09T11:18:31Z",
+      "thumbnail": "https://i.ytimg.com/vi/Npi-_LtGxLs/mqdefault.jpg",
+      "channelId": "UCXI0W_Os-BCIngpCb1YnOow",
+      "channelTitle": "天透あわ🫧",
+      "duration": "PT3H58M58S",
+      "durationSeconds": 14338,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-09T05:03:16Z",
+      "actualEndTime": "2026-11-09T09:02:07Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     }
   ],
   "UCAhdxmsdngH4noySdpVAVWQ": [
@@ -47018,7 +47162,7 @@
       "actualStartTime": null,
       "actualEndTime": null,
       "videoType": "uncategorized",
-      "fetchedAt": "2026-11-10T02:34:44.800Z"
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "u77vXih-CXE",
@@ -47035,7 +47179,7 @@
       "actualStartTime": "2026-10-28T12:31:19Z",
       "actualEndTime": "2026-10-28T14:50:57Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T02:34:44.800Z"
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "vLMoRPPE9fU",
@@ -47052,7 +47196,7 @@
       "actualStartTime": "2026-10-29T12:31:58Z",
       "actualEndTime": "2026-10-29T13:51:27Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T02:34:44.800Z"
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "ttf-skPA4e4",
@@ -47069,7 +47213,7 @@
       "actualStartTime": "2026-10-30T12:35:57Z",
       "actualEndTime": "2026-10-30T14:42:25Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T02:34:44.800Z"
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "f8NQ1cAn4ks",
@@ -47086,7 +47230,7 @@
       "actualStartTime": "2026-10-31T12:39:45Z",
       "actualEndTime": "2026-10-31T15:01:53Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T02:34:44.800Z"
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "drHBi1F_tQw",
@@ -47103,7 +47247,7 @@
       "actualStartTime": null,
       "actualEndTime": null,
       "videoType": "uncategorized",
-      "fetchedAt": "2026-11-10T02:34:44.800Z"
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "zW6AyoBoXmU",
@@ -47120,7 +47264,7 @@
       "actualStartTime": "2026-11-03T12:32:36Z",
       "actualEndTime": "2026-11-03T14:53:24Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T02:34:44.800Z"
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "kRT8BkDbdJs",
@@ -47137,7 +47281,7 @@
       "actualStartTime": "2026-11-06T12:31:46Z",
       "actualEndTime": "2026-11-06T15:07:47Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T02:34:44.800Z"
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "2toq8apVKzQ",
@@ -47154,7 +47298,7 @@
       "actualStartTime": "2026-11-07T12:32:32Z",
       "actualEndTime": "2026-11-07T14:53:52Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T02:34:44.800Z"
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "l-yW7kNdnx8",
@@ -47171,7 +47315,7 @@
       "actualStartTime": "2026-11-08T12:34:03Z",
       "actualEndTime": "2026-11-08T15:06:32Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T02:34:44.800Z"
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     }
   ],
   "UCgod8po0u4P5hdCsLhJWFPQ": [
@@ -47535,57 +47679,205 @@
     {
       "videoId": "yjKsSmafkkM",
       "title": "【あ。あ。あ。】純粋清楚担当ぽん！声で操作するゲームやってみる🧡【 橙葉ぽん/ぷろのゔぁ 】",
-      "registeredAt": "2026-10-28T07:41:10.411Z"
+      "registeredAt": "2026-10-28T07:41:10.411Z",
+      "url": "https://www.youtube.com/watch?v=yjKsSmafkkM",
+      "publishedAt": "2026-10-27T18:45:28Z",
+      "thumbnail": "https://i.ytimg.com/vi/yjKsSmafkkM/mqdefault.jpg",
+      "channelId": "UC0aNUh8VfQwgqj0taB8MDpg",
+      "channelTitle": "橙葉ぽん / Touha Pon【ぷろのゔぁ】",
+      "duration": "PT3H21S",
+      "durationSeconds": 10821,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-27T13:02:59Z",
+      "actualEndTime": "2026-10-27T16:03:28Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "porTaLaIdOQ",
       "title": "【龍が如く 極】シリーズ完全初見！！！伝説のぽん！#3【 橙葉ぽん/ぷろのゔぁ 】",
-      "registeredAt": "2026-10-30T20:24:20.181Z"
+      "registeredAt": "2026-10-30T20:24:20.181Z",
+      "url": "https://www.youtube.com/watch?v=porTaLaIdOQ",
+      "publishedAt": "2026-10-28T20:21:41Z",
+      "thumbnail": "https://i.ytimg.com/vi/porTaLaIdOQ/mqdefault.jpg",
+      "channelId": "UC0aNUh8VfQwgqj0taB8MDpg",
+      "channelTitle": "橙葉ぽん / Touha Pon【ぷろのゔぁ】",
+      "duration": "PT5H20M45S",
+      "durationSeconds": 19245,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-28T11:04:33Z",
+      "actualEndTime": "2026-10-28T16:26:32Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "bnZSlQ5GVsU",
       "title": "【 biohazard 0 HD REMASTER 】完全初見！！！バイオハザード０いくぞ...！🔥コウモリ倒せる...? #3【 橙葉ぽん/ぷろのゔぁ 】",
-      "registeredAt": "2026-10-30T20:24:20.181Z"
+      "registeredAt": "2026-10-30T20:24:20.181Z",
+      "url": "https://www.youtube.com/watch?v=bnZSlQ5GVsU",
+      "publishedAt": "2026-10-30T19:51:25Z",
+      "thumbnail": "https://i.ytimg.com/vi/bnZSlQ5GVsU/mqdefault.jpg",
+      "channelId": "UC0aNUh8VfQwgqj0taB8MDpg",
+      "channelTitle": "橙葉ぽん / Touha Pon【ぷろのゔぁ】",
+      "duration": "PT6H34M34S",
+      "durationSeconds": 23674,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-30T11:04:13Z",
+      "actualEndTime": "2026-10-30T17:39:01Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "t5MVP_oNIvU",
       "title": "【 biohazard 0 HD REMASTER 】完全初見！！！クリアまで！！バイオハザード０いくぞ...！🔥#4【 橙葉ぽん/ぷろのゔぁ 】",
-      "registeredAt": "2026-11-02T08:34:24.040Z"
+      "registeredAt": "2026-11-02T08:34:24.040Z",
+      "url": "https://www.youtube.com/watch?v=t5MVP_oNIvU",
+      "publishedAt": "2026-10-31T20:23:20Z",
+      "thumbnail": "https://i.ytimg.com/vi/t5MVP_oNIvU/mqdefault.jpg",
+      "channelId": "UC0aNUh8VfQwgqj0taB8MDpg",
+      "channelTitle": "橙葉ぽん / Touha Pon【ぷろのゔぁ】",
+      "duration": "PT5H6M35S",
+      "durationSeconds": 18395,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-31T11:03:54Z",
+      "actualEndTime": "2026-10-31T16:10:41Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "HLhc49nbWBE",
       "title": "【Japanese Ramen Simulator】ラーメン屋さん開店！！！アプデが来たと聞いて！【 橙葉ぽん/ぷろのゔぁ 】",
-      "registeredAt": "2026-11-02T08:34:24.040Z"
+      "registeredAt": "2026-11-02T08:34:24.040Z",
+      "url": "https://www.youtube.com/watch?v=HLhc49nbWBE",
+      "publishedAt": "2026-11-01T18:20:19Z",
+      "thumbnail": "https://i.ytimg.com/vi/HLhc49nbWBE/mqdefault.jpg",
+      "channelId": "UC0aNUh8VfQwgqj0taB8MDpg",
+      "channelTitle": "橙葉ぽん / Touha Pon【ぷろのゔぁ】",
+      "duration": "PT3H47M28S",
+      "durationSeconds": 13648,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-01T12:31:31Z",
+      "actualEndTime": "2026-11-01T16:19:32Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "YExMaokGndI",
       "title": "【 零 ～月蝕の仮面～ 】零シリーズ完全初見！！！和風ホラーの名作📷🧡【 橙葉ぽん/ぷろのゔぁ 】",
-      "registeredAt": "2026-11-05T06:17:49.514Z"
+      "registeredAt": "2026-11-05T06:17:49.514Z",
+      "url": "https://www.youtube.com/watch?v=YExMaokGndI",
+      "publishedAt": "2026-11-02T19:22:26Z",
+      "thumbnail": "https://i.ytimg.com/vi/YExMaokGndI/mqdefault.jpg",
+      "channelId": "UC0aNUh8VfQwgqj0taB8MDpg",
+      "channelTitle": "橙葉ぽん / Touha Pon【ぷろのゔぁ】",
+      "duration": "PT5H57M32S",
+      "durationSeconds": 21452,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-02T11:05:06Z",
+      "actualEndTime": "2026-11-02T17:03:05Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "RZMvcvuLE_w",
       "title": "【 ONE PIECE 海のごちそうレストラン】海で一番人気のレストランはこちらです🚢🍖【橙葉ぽん/ぷろのゔぁ 】",
-      "registeredAt": "2026-11-05T06:17:49.514Z"
+      "registeredAt": "2026-11-05T06:17:49.514Z",
+      "url": "https://www.youtube.com/watch?v=RZMvcvuLE_w",
+      "publishedAt": "2026-11-03T21:40:59Z",
+      "thumbnail": "https://i.ytimg.com/vi/RZMvcvuLE_w/mqdefault.jpg",
+      "channelId": "UC0aNUh8VfQwgqj0taB8MDpg",
+      "channelTitle": "橙葉ぽん / Touha Pon【ぷろのゔぁ】",
+      "duration": "PT5H13M",
+      "durationSeconds": 18780,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-03T12:07:03Z",
+      "actualEndTime": "2026-11-03T17:20:10Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "3-gCVfNWRcU",
       "title": "【龍が如く 極】シリーズ完全初見！！！伝説のぽん！#4【 橙葉ぽん/ぷろのゔぁ 】",
-      "registeredAt": "2026-11-05T06:17:49.514Z"
+      "registeredAt": "2026-11-05T06:17:49.514Z",
+      "url": "https://www.youtube.com/watch?v=3-gCVfNWRcU",
+      "publishedAt": "2026-11-04T19:47:31Z",
+      "thumbnail": "https://i.ytimg.com/vi/3-gCVfNWRcU/mqdefault.jpg",
+      "channelId": "UC0aNUh8VfQwgqj0taB8MDpg",
+      "channelTitle": "橙葉ぽん / Touha Pon【ぷろのゔぁ】",
+      "duration": "PT5H12M3S",
+      "durationSeconds": 18723,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-04T11:06:19Z",
+      "actualEndTime": "2026-11-04T16:18:32Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "Rc1Lo8tqnxg",
       "title": "【BIOHAZARD REVELATIONS 】完全初見！！！リベレーションズ！４と５の間の物語...【 橙葉ぽん/ぷろのゔぁ 】",
-      "registeredAt": "2026-11-06T20:07:52.026Z"
+      "registeredAt": "2026-11-06T20:07:52.026Z",
+      "url": "https://www.youtube.com/watch?v=Rc1Lo8tqnxg",
+      "publishedAt": "2026-11-06T18:40:06Z",
+      "thumbnail": "https://i.ytimg.com/vi/Rc1Lo8tqnxg/mqdefault.jpg",
+      "channelId": "UC0aNUh8VfQwgqj0taB8MDpg",
+      "channelTitle": "橙葉ぽん / Touha Pon【ぷろのゔぁ】",
+      "duration": "PT5H57M3S",
+      "durationSeconds": 21423,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-06T11:05:35Z",
+      "actualEndTime": "2026-11-06T17:03:45Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "EiYlSc3yips",
       "title": "【BIOHAZARD REVELATIONS 】完全初見！！！ラストまで！リベレーションズ！４と５の間の物語... #2【 橙葉ぽん/ぷろのゔぁ 】",
-      "registeredAt": "2026-11-09T01:16:57.078Z"
+      "registeredAt": "2026-11-09T01:16:57.078Z",
+      "url": "https://www.youtube.com/watch?v=EiYlSc3yips",
+      "publishedAt": "2026-11-07T18:47:38Z",
+      "thumbnail": "https://i.ytimg.com/vi/EiYlSc3yips/mqdefault.jpg",
+      "channelId": "UC0aNUh8VfQwgqj0taB8MDpg",
+      "channelTitle": "橙葉ぽん / Touha Pon【ぷろのゔぁ】",
+      "duration": "PT4H30M23S",
+      "durationSeconds": 16223,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-07T11:03:34Z",
+      "actualEndTime": "2026-11-07T15:34:16Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     },
     {
       "videoId": "fgwlT606FK8",
       "title": "【 利用規約に同意したい】同意する同意する同意する同意する【橙葉ぽん/ぷろのゔぁ 】",
-      "registeredAt": "2026-11-09T01:16:57.078Z"
+      "registeredAt": "2026-11-09T01:16:57.078Z",
+      "url": "https://www.youtube.com/watch?v=fgwlT606FK8",
+      "publishedAt": "2026-11-08T18:17:34Z",
+      "thumbnail": "https://i.ytimg.com/vi/fgwlT606FK8/mqdefault.jpg",
+      "channelId": "UC0aNUh8VfQwgqj0taB8MDpg",
+      "channelTitle": "橙葉ぽん / Touha Pon【ぷろのゔぁ】",
+      "duration": "PT6H22M59S",
+      "durationSeconds": 22979,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-08T11:24:16Z",
+      "actualEndTime": "2026-11-08T17:47:47Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
+    },
+    {
+      "videoId": "5JD0vCJj19U",
+      "title": "【 Potato Please 】大好きなじゃがいもたくさん皮むきする🍟🥔【橙葉ぽん/ぷろのゔぁ 】",
+      "url": "https://www.youtube.com/watch?v=5JD0vCJj19U",
+      "publishedAt": "2026-11-09T22:14:49Z",
+      "thumbnail": "https://i.ytimg.com/vi/5JD0vCJj19U/mqdefault.jpg",
+      "channelId": "UC0aNUh8VfQwgqj0taB8MDpg",
+      "channelTitle": "橙葉ぽん / Touha Pon【ぷろのゔぁ】",
+      "duration": "PT4H48M40S",
+      "durationSeconds": 17320,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-09T12:05:03Z",
+      "actualEndTime": "2026-11-09T16:54:40Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-10T04:34:49.496Z"
     }
   ],
   "UC5G2BLvcdLvBwBqgShrag9A": [
