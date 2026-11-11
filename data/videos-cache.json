@@ -22325,7 +22325,7 @@
       "actualStartTime": null,
       "actualEndTime": null,
       "videoType": "uncategorized",
-      "fetchedAt": "2026-11-11T12:35:09.506Z",
+      "fetchedAt": "2026-11-11T14:35:19.668Z",
       "pendingIngestion": false
     }
   ],
@@ -54044,7 +54044,7 @@
       "actualStartTime": "2026-11-08T02:45:27Z",
       "actualEndTime": "2026-11-08T03:19:50Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-11T12:25:09.568Z",
+      "fetchedAt": "2026-11-11T14:35:19.668Z",
       "pendingIngestion": false
     },
     {
@@ -54061,7 +54061,7 @@
       "actualStartTime": "2026-11-10T10:00:39Z",
       "actualEndTime": "2026-11-10T11:08:20Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-11T12:25:09.568Z",
+      "fetchedAt": "2026-11-11T14:35:19.668Z",
       "pendingIngestion": false
     }
   ],
