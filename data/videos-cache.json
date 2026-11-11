@@ -41643,7 +41643,7 @@
       "actualStartTime": "2026-11-06T13:01:21Z",
       "actualEndTime": "2026-11-06T17:17:03Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T22:44:58.988Z",
+      "fetchedAt": "2026-11-11T00:44:59.214Z",
       "pendingIngestion": false
     },
     {
@@ -41661,7 +41661,7 @@
       "actualStartTime": "2026-11-07T06:51:37Z",
       "actualEndTime": "2026-11-07T11:16:49Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T22:44:58.988Z",
+      "fetchedAt": "2026-11-11T00:44:59.214Z",
       "pendingIngestion": false
     },
     {
@@ -41679,7 +41679,7 @@
       "actualStartTime": "2026-11-07T13:02:20Z",
       "actualEndTime": "2026-11-07T15:12:24Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T22:44:58.988Z",
+      "fetchedAt": "2026-11-11T00:44:59.214Z",
       "pendingIngestion": false
     },
     {
@@ -41696,7 +41696,7 @@
       "actualStartTime": "2026-11-10T15:00:49Z",
       "actualEndTime": "2026-11-10T19:18:03Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T22:44:58.988Z",
+      "fetchedAt": "2026-11-11T00:44:59.214Z",
       "pendingIngestion": false
     }
   ],
@@ -56703,7 +56703,7 @@
       "actualStartTime": "2026-10-30T12:56:05Z",
       "actualEndTime": "2026-10-30T14:45:19Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T22:44:58.988Z",
+      "fetchedAt": "2026-11-11T00:44:59.214Z",
       "pendingIngestion": false
     },
     {
@@ -56721,7 +56721,7 @@
       "actualStartTime": "2026-10-30T18:03:03Z",
       "actualEndTime": "2026-10-30T19:52:06Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T22:44:58.988Z",
+      "fetchedAt": "2026-11-11T00:44:59.214Z",
       "pendingIngestion": false
     },
     {
@@ -56739,7 +56739,7 @@
       "actualStartTime": "2026-11-03T12:27:28Z",
       "actualEndTime": "2026-11-03T16:08:00Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T22:44:58.988Z",
+      "fetchedAt": "2026-11-11T00:44:59.214Z",
       "pendingIngestion": false
     },
     {
@@ -56763,7 +56763,7 @@
       "actualStartTime": "2026-11-04T15:00:53Z",
       "actualEndTime": "2026-11-04T17:14:59Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T22:44:58.988Z",
+      "fetchedAt": "2026-11-11T00:44:59.214Z",
       "pendingIngestion": false
     },
     {
@@ -56781,7 +56781,7 @@
       "actualStartTime": "2026-11-04T03:17:52Z",
       "actualEndTime": "2026-11-04T03:57:59Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T22:44:58.988Z",
+      "fetchedAt": "2026-11-11T00:44:59.214Z",
       "pendingIngestion": false
     },
     {
@@ -56799,7 +56799,7 @@
       "actualStartTime": "2026-11-05T11:15:56Z",
       "actualEndTime": "2026-11-05T16:05:15Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T22:44:58.988Z",
+      "fetchedAt": "2026-11-11T00:44:59.214Z",
       "pendingIngestion": false
     },
     {
@@ -56816,7 +56816,7 @@
       "actualStartTime": "2026-11-09T18:38:54Z",
       "actualEndTime": "2026-11-09T20:02:46Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T22:44:58.988Z",
+      "fetchedAt": "2026-11-11T00:44:59.214Z",
       "pendingIngestion": false
     },
     {
@@ -56833,7 +56833,7 @@
       "actualStartTime": "2026-11-08T14:36:30Z",
       "actualEndTime": "2026-11-08T15:17:26Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T22:44:58.988Z",
+      "fetchedAt": "2026-11-11T00:44:59.214Z",
       "pendingIngestion": false
     },
     {
@@ -56850,7 +56850,24 @@
       "actualStartTime": "2026-11-10T12:01:47Z",
       "actualEndTime": "2026-11-10T13:14:07Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T22:44:58.988Z",
+      "fetchedAt": "2026-11-11T00:44:59.214Z",
+      "pendingIngestion": false
+    },
+    {
+      "videoId": "lbWd0yq04zA",
+      "title": "【朝活】早起きしたので。【夜雨ねむる】",
+      "url": "https://www.youtube.com/watch?v=lbWd0yq04zA",
+      "publishedAt": "2026-11-10T09:26:21Z",
+      "thumbnail": "https://i.ytimg.com/vi/lbWd0yq04zA/mqdefault.jpg?v=6af39de5",
+      "channelId": "UC1hxdM37vjjqr-IfZuDn1iw",
+      "channelTitle": "夜雨ねむる【パレデミア学園】",
+      "duration": "PT1H16M21S",
+      "durationSeconds": 4581,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-10T22:45:03Z",
+      "actualEndTime": "2026-11-11T00:01:25Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-11T00:44:59.214Z",
       "pendingIngestion": false
     }
   ],
