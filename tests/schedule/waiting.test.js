@@ -20,17 +20,14 @@ async function sectionsAt(time, items = [reservation()]) {
   const records = await verify(normalize([row], 'youtube'), { env, now, request: async () => ({ items }) });
   return classify(records, now);
 }
-for (const [time, waiting] of [['01:59', false], ['02:00', true], ['02:05', true], ['03:30', true]]) {
-  test(`API upcoming at ${time}: same-day reservation remains, waiting=${waiting}`, async () => {
+for (const [time, count] of [['01:59', 1], ['02:00', 1], ['02:05', 0], ['03:30', 0]]) {
+  test(`API upcoming at ${time}: elapsed reservation excluded without pretending it is live`, async () => {
     const sections = await sectionsAt(`2026-11-09T${time}:00+09:00`);
     assert.equal(sections.live.length, 0);
-    assert.equal(sections.upcoming.length, 1);
-    assert.equal(sections.upcoming[0].waitingForStart, waiting);
+    assert.equal(sections.upcoming.length, count);
     const source = formatRows(sections.upcoming, '');
-    assert.equal(source.split('\n').length, 1);
-    assert.ok(source.includes('02時00分～'));
-    assert.equal(source.includes('[開始待ち]'), waiting);
-    assert.ok(source.includes(`[[${row.name}>${row.url}]]`));
+    assert.ok(!source.includes('[開始待ち]'));
+    if(count)assert.ok(source.includes('02時00分～'));
   });
 }
 test('verified actual start moves reservation to live at 02:10 without waiting label', async () => {
@@ -70,10 +67,10 @@ test('JST rollover hides previous-day reservations but retains previous-day veri
   assert.equal(sections.live.length, 1);
   assert.equal(sections.upcoming.length, 0);
 });
-test('waiting rows retain time/menu/ID sorting, ten-row limit and safe compact Wiki', () => {
+test('future rows retain time/menu/ID sorting, ten-row limit and safe compact Wiki', () => {
   const now = new Date('2026-11-09T03:30:00+09:00');
   const records = Array.from({ length: 12 }, (_, i) => ({
-    ...normalize([row], 'youtube')[0], id: String(i).padStart(11, '0'), identity: `channel${i}`,
+    ...normalize([row], 'youtube')[0], date:'2026-11-09T04:00:00+09:00', id: String(i).padStart(11, '0'), identity: `channel${i}`,
     name: '名前]]\n#evil &ref(x);',
   }));
   const config = { 'youtube:channel11': { menuOrder: 0, facePage: '真昼ねる/face.png' } };
@@ -81,16 +78,16 @@ test('waiting rows retain time/menu/ID sorting, ten-row limit and safe compact W
   assert.equal(sections.upcoming.length, 10);
   assert.equal(sections.upcoming[0].identity, 'channel11');
   assert.equal(sections.upcoming[1].id, records[0].id);
-  assert.ok(sections.upcoming.every(r => r.waitingForStart));
+  assert.ok(sections.upcoming.every(r => !r.waitingForStart));
   const source = formatRows(sections.upcoming, '');
   assert.equal(source.split('\n').length, 10);
-  assert.equal(source.match(/\[開始待ち\]/g).length, 10);
-  assert.ok(source.includes('[開始待ち] &ref(真昼ねる/face.png,nolink,25x25);'));
+  assert.ok(!source.includes('[開始待ち]'));
+  assert.ok(source.includes('&ref(真昼ねる/face.png,nolink,25x25);'));
   assert.ok(!source.includes('#evil'));
-  const earlier = { ...records[0], id: 'earlier', date: '2026-11-09T01:00:00+09:00' };
+  const earlier = { ...records[0], id: 'earlier', date: '2026-11-09T03:45:00+09:00' };
   assert.equal(classify([...records, earlier], now, config).upcoming[0].id, 'earlier');
 });
-test('dry-run pipeline includes waiting row; malformed API aborts before Wiki even with writes enabled', async () => {
+test('dry-run pipeline excludes elapsed reservation; malformed API aborts before Wiki even with writes enabled', async () => {
   const output = await mkdtemp(join(tmpdir(), 'schedule-waiting-'));
   try {
     const demo = { ...fixture, youtube: [row], twitch: [] };
@@ -98,8 +95,8 @@ test('dry-run pipeline includes waiting row; malformed API aborts before Wiki ev
     const report = await run({ fixture: demo, env, now, output, fetchImpl: async () => new Response(JSON.stringify({ items: [reservation()] })) });
     assert.equal(report.written, false);
     assert.equal(report.live, 0);
-    assert.equal(report.upcoming, 1);
-    assert.ok((await readFile(join(output, 'preview.wiki'), 'utf8')).includes('02時00分～ [開始待ち]'));
+    assert.equal(report.upcoming, 0);
+    assert.ok(!(await readFile(join(output, 'preview.wiki'), 'utf8')).includes('02時00分～'));
     let wikiRequests = 0;
     await assert.rejects(run({ env, now, output, fetchImpl: async url => {
       const u = new URL(url);

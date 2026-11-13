@@ -21,13 +21,13 @@ test('normalization excludes archives, videos, invalid dates, URLs and deduplica
  const stats={};assert.equal(normalize(data,'youtube',stats).length,1);assert.equal(stats.duplicate,1);
  assert.throws(()=>normalize({},'youtube'));assert.throws(()=>normalize([{status:'live',type:'stream'}],'youtube'));
 });
-test('JST same-day reservations, midnight, prior-day live, limit and menu sorting', () => {
+test('rolling reservations, midnight, prior-day live, limit and menu sorting', () => {
  const rows = Array.from({length:15}, (_,n)=>({...normalize([yt(n)],'youtube')[0],menuOrder:n}));
  const config=Object.fromEntries(rows.map(r=>[`youtube:${r.identity}`,{menuOrder:1}]));
  let sections=classify(rows,now,config);assert.equal(sections.upcoming.length,10);
- assert.equal(classify(rows,new Date('2026-11-09T23:59:00+09:00')).upcoming.length,10);
+ assert.equal(classify(rows,new Date('2026-11-09T23:59:00+09:00')).upcoming.length,0);
  const midnight={...rows[0],date:'2026-11-10T00:30:00+09:00'};
- assert.equal(classify([midnight],new Date('2026-11-09T23:59:00+09:00')).upcoming.length,0);
+ assert.equal(classify([midnight],new Date('2026-11-09T23:59:00+09:00')).upcoming.length,1);
  assert.equal(classify([midnight],new Date('2026-11-10T00:00:00+09:00')).upcoming.length,1);
  const live=rows.map((r,n)=>({...r,status:'live',date:'2026-11-08T23:00:00+09:00',identity:'x'+n}));
  const cfg={'youtube:x14':{menuOrder:0},'youtube:x0':{menuOrder:1}};
@@ -48,7 +48,7 @@ test('YouTube and Twitch verified starts, ended/private/changed/upcoming/premier
  upcoming.liveStreamingDetails.scheduledStartTime='2026-11-10T12:00:00+09:00';
  const moved=await verify([records[1]],{request:async()=>({items:[upcoming]}),env,now});assert.equal(classify(moved,now).upcoming.length,0);
  upcoming.contentDetails.duration='PT10M';assert.equal((await verify([records[1]],{request:async()=>({items:[upcoming]}),env,now})).length,0);
- const past=structuredClone(fixture.responses['www.googleapis.com'].items[1]);past.liveStreamingDetails.scheduledStartTime='2026-11-09T10:00:00+09:00';assert.equal(classify(await verify([records[1]],{request:async()=>({items:[past]}),env,now}),now).upcoming.length,1);
+ const past=structuredClone(fixture.responses['www.googleapis.com'].items[1]);past.liveStreamingDetails.scheduledStartTime='2026-11-09T10:00:00+09:00';assert.equal(classify(await verify([records[1]],{request:async()=>({items:[past]}),env,now}),now).upcoming.length,0);
  assert.equal((await verify([records[2]],{request:async label=>label==='Twitch auth'?{access_token:'token'}:{data:[]},env,now})).length,0);
  await assert.rejects(verify([record],{request:async()=>({items:[{...item,snippet:{...item.snippet,channelId:'wrong'}}]}),env,now}));
 });

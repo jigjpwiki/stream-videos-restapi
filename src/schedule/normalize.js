@@ -36,14 +36,15 @@ export function normalize(data, platform, stats = {}) {
 }
 export function classify(records, now, config = {}) {
   const live = [], upcoming = [];
+  const windowStart = +now, windowEnd = windowStart + 12 * 60 * 60 * 1000;
   for (const row of records) {
     const person = config[`${row.platform}:${row.identity}`];
     const item = { ...row, name: person?.displayName || row.name, facePage: person?.facePage, menuOrder: person?.menuOrder ?? Number.MAX_SAFE_INTEGER };
     if (row.status === 'live') live.push(item);
-    else if (row.status === 'upcoming' && day(row.date) === day(now)) {
-      // YouTube status has been rechecked by verify(): lateness alone is not an end/cancellation.
-      const waitingForStart = row.platform === 'youtube' && Date.parse(row.date) <= +now;
-      if (waitingForStart || Date.parse(row.date) > +now) upcoming.push({ ...item, waitingForStart });
+    else if (row.status === 'upcoming') {
+      const startsAt = Date.parse(row.date);
+      // Rolling window, inclusive at both ends; no JST calendar-day cutoff.
+      if (startsAt >= windowStart && startsAt <= windowEnd) upcoming.push(item);
     }
   }
   const sorted = rows => rows.sort((a, b) => Date.parse(a.date) - Date.parse(b.date) || a.menuOrder - b.menuOrder || `${a.platform}:${a.id}`.localeCompare(`${b.platform}:${b.id}`, 'en')).slice(0, 10);
