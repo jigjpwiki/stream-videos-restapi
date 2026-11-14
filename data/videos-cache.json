@@ -35745,7 +35745,7 @@
       "actualStartTime": "2026-10-31T14:33:13Z",
       "actualEndTime": "2026-10-31T15:55:48Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-14T21:45:06.223Z",
+      "fetchedAt": "2026-11-14T23:54:56.349Z",
       "pendingIngestion": false
     },
     {
@@ -35763,7 +35763,7 @@
       "actualStartTime": "2026-10-31T16:23:33Z",
       "actualEndTime": "2026-10-31T18:01:44Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-14T21:45:06.223Z",
+      "fetchedAt": "2026-11-14T23:54:56.349Z",
       "pendingIngestion": false
     },
     {
@@ -35781,7 +35781,7 @@
       "actualStartTime": "2026-11-02T14:16:13Z",
       "actualEndTime": "2026-11-02T15:32:08Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-14T21:45:06.223Z",
+      "fetchedAt": "2026-11-14T23:54:56.349Z",
       "pendingIngestion": false
     },
     {
@@ -35799,7 +35799,7 @@
       "actualStartTime": "2026-11-04T13:34:14Z",
       "actualEndTime": "2026-11-04T16:02:26Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-14T21:45:06.223Z",
+      "fetchedAt": "2026-11-14T23:54:56.349Z",
       "pendingIngestion": false
     },
     {
@@ -35817,7 +35817,7 @@
       "actualStartTime": "2026-11-06T14:31:44Z",
       "actualEndTime": "2026-11-06T17:08:59Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-14T21:45:06.223Z",
+      "fetchedAt": "2026-11-14T23:54:56.349Z",
       "pendingIngestion": false
     },
     {
@@ -35835,7 +35835,7 @@
       "actualStartTime": "2026-11-08T13:01:54Z",
       "actualEndTime": "2026-11-08T15:03:41Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-14T21:45:06.223Z",
+      "fetchedAt": "2026-11-14T23:54:56.349Z",
       "pendingIngestion": false
     },
     {
@@ -35852,7 +35852,7 @@
       "actualStartTime": "2026-11-10T13:03:22Z",
       "actualEndTime": "2026-11-10T14:07:44Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-14T21:45:06.223Z",
+      "fetchedAt": "2026-11-14T23:54:56.349Z",
       "pendingIngestion": false
     },
     {
@@ -35869,7 +35869,7 @@
       "actualStartTime": "2026-11-11T13:15:15Z",
       "actualEndTime": "2026-11-11T15:28:43Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-14T21:45:06.223Z",
+      "fetchedAt": "2026-11-14T23:54:56.349Z",
       "pendingIngestion": false
     },
     {
@@ -35886,7 +35886,24 @@
       "actualStartTime": "2026-11-13T12:10:18Z",
       "actualEndTime": "2026-11-13T14:12:51Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-14T21:45:06.223Z",
+      "fetchedAt": "2026-11-14T23:54:56.349Z",
+      "pendingIngestion": false
+    },
+    {
+      "videoId": "8jgNfaGxtDI",
+      "title": "【TikTokイベントラスト】9時まで張り切っていこう💥初見さんリクエスト歓迎🎤初見さん/ROMさんもおいで～☆≪パレデミア学園 / 灯野ぺけ。≫ #vtuber #歌枠 #朝活",
+      "url": "https://www.youtube.com/watch?v=8jgNfaGxtDI",
+      "publishedAt": "2026-11-14T21:55:24Z",
+      "thumbnail": "https://i.ytimg.com/vi/8jgNfaGxtDI/mqdefault.jpg?v=6af8d8ce",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT1H33M",
+      "durationSeconds": 5580,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-14T22:03:06Z",
+      "actualEndTime": "2026-11-14T23:36:07Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-14T23:54:56.349Z",
       "pendingIngestion": false
     }
   ],
