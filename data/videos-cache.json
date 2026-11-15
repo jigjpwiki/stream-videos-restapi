@@ -465,7 +465,7 @@
       "actualStartTime": "2026-11-04T14:59:39Z",
       "actualEndTime": "2026-11-04T17:15:22Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-15T11:15:09.771Z",
+      "fetchedAt": "2026-11-15T13:25:07.988Z",
       "pendingIngestion": false
     }
   ],
@@ -31331,7 +31331,7 @@
       "actualStartTime": "2026-11-03T12:45:19Z",
       "actualEndTime": "2026-11-03T15:06:23Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-15T11:15:09.771Z",
+      "fetchedAt": "2026-11-15T13:25:07.988Z",
       "pendingIngestion": false
     },
     {
@@ -31349,7 +31349,7 @@
       "actualStartTime": "2026-11-03T22:02:05Z",
       "actualEndTime": "2026-11-04T01:02:58Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-15T11:15:09.771Z",
+      "fetchedAt": "2026-11-15T13:25:07.988Z",
       "pendingIngestion": false
     },
     {
@@ -31366,7 +31366,7 @@
       "actualStartTime": null,
       "actualEndTime": null,
       "videoType": "normal",
-      "fetchedAt": "2026-11-15T11:15:09.771Z",
+      "fetchedAt": "2026-11-15T13:25:07.988Z",
       "pendingIngestion": false
     },
     {
@@ -31383,7 +31383,7 @@
       "actualStartTime": "2026-11-12T22:40:57Z",
       "actualEndTime": "2026-11-13T00:09:31Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-15T11:15:09.771Z",
+      "fetchedAt": "2026-11-15T13:25:07.988Z",
       "pendingIngestion": false
     },
     {
@@ -31400,7 +31400,7 @@
       "actualStartTime": "2026-11-13T09:36:54Z",
       "actualEndTime": "2026-11-13T12:09:20Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-15T11:15:09.771Z",
+      "fetchedAt": "2026-11-15T13:25:07.988Z",
       "pendingIngestion": false
     },
     {
@@ -31411,13 +31411,13 @@
       "thumbnail": "https://i.ytimg.com/vi/ofpFXncFtCY/mqdefault.jpg?v=6af8e685",
       "channelId": "UCUd4wJjvPQflbLnsk_YHleA",
       "channelTitle": "新巻るろな【パレデミア学園】",
-      "duration": "PT1H13M54S",
-      "durationSeconds": 4434,
+      "duration": "PT1H13M47S",
+      "durationSeconds": 4427,
       "liveBroadcastContent": "none",
       "actualStartTime": "2026-11-14T22:56:30Z",
       "actualEndTime": "2026-11-15T00:10:25Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-15T11:15:09.771Z",
+      "fetchedAt": "2026-11-15T13:25:07.988Z",
       "pendingIngestion": false
     }
   ],
