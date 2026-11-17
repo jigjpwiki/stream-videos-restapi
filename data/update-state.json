@@ -4,10 +4,10 @@
   "version": 2,
   "channels": {
     "UC0aNUh8VfQwgqj0taB8MDpg": {
-      "lastAttemptAt": "2026-11-17T17:45:42.114Z",
-      "status": "failed",
-      "failures": 1,
-      "lastSuccessAt": "2026-11-17T15:45:10.774Z",
+      "lastAttemptAt": "2026-11-17T17:55:01.007Z",
+      "status": "success",
+      "failures": 0,
+      "lastSuccessAt": "2026-11-17T17:55:01.007Z",
       "firstAttemptAt": "2026-11-10T09:24:54.574Z"
     },
     "UC0H7dRRqhfOifbYQ2TURdAg": {
