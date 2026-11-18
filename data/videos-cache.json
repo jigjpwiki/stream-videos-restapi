@@ -36751,7 +36751,7 @@
       "actualStartTime": "2026-11-04T13:34:14Z",
       "actualEndTime": "2026-11-04T16:02:26Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T04:25:04.856Z",
+      "fetchedAt": "2026-11-18T06:45:01.144Z",
       "pendingIngestion": false
     },
     {
@@ -36769,7 +36769,7 @@
       "actualStartTime": "2026-11-06T14:31:44Z",
       "actualEndTime": "2026-11-06T17:08:59Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T04:25:04.856Z",
+      "fetchedAt": "2026-11-18T06:45:01.144Z",
       "pendingIngestion": false
     },
     {
@@ -36787,7 +36787,7 @@
       "actualStartTime": "2026-11-08T13:01:54Z",
       "actualEndTime": "2026-11-08T15:03:41Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T04:25:04.856Z",
+      "fetchedAt": "2026-11-18T06:45:01.144Z",
       "pendingIngestion": false
     },
     {
@@ -36804,7 +36804,7 @@
       "actualStartTime": "2026-11-10T13:03:22Z",
       "actualEndTime": "2026-11-10T14:07:44Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T04:25:04.856Z",
+      "fetchedAt": "2026-11-18T06:45:01.144Z",
       "pendingIngestion": false
     },
     {
@@ -36821,7 +36821,7 @@
       "actualStartTime": "2026-11-11T13:15:15Z",
       "actualEndTime": "2026-11-11T15:28:43Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T04:25:04.856Z",
+      "fetchedAt": "2026-11-18T06:45:01.144Z",
       "pendingIngestion": false
     },
     {
@@ -36838,7 +36838,7 @@
       "actualStartTime": "2026-11-13T12:10:18Z",
       "actualEndTime": "2026-11-13T14:12:51Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T04:25:04.856Z",
+      "fetchedAt": "2026-11-18T06:45:01.144Z",
       "pendingIngestion": false
     },
     {
@@ -36855,7 +36855,24 @@
       "actualStartTime": "2026-11-14T22:03:06Z",
       "actualEndTime": "2026-11-14T23:36:07Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T04:25:04.856Z",
+      "fetchedAt": "2026-11-18T06:45:01.144Z",
+      "pendingIngestion": false
+    },
+    {
+      "videoId": "bkiYvavur8c",
+      "title": "StreamGearMixerを使って歌枠してみた🎤フレンズ/レベッカ #切り抜き #vtuber #shorts",
+      "url": "https://www.youtube.com/watch?v=bkiYvavur8c",
+      "publishedAt": "2026-11-18T04:53:09Z",
+      "thumbnail": "https://i.ytimg.com/vi/bkiYvavur8c/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT37S",
+      "durationSeconds": 37,
+      "liveBroadcastContent": "none",
+      "actualStartTime": null,
+      "actualEndTime": null,
+      "videoType": "shorts",
+      "fetchedAt": "2026-11-18T06:45:01.144Z",
       "pendingIngestion": false
     }
   ],
