@@ -263,10 +263,10 @@
       "firstAttemptAt": "2026-11-10T08:46:16.455Z"
     },
     "UCPgg_A08ksSYP-VivJGniRw": {
-      "lastAttemptAt": "2026-11-18T14:25:05.067Z",
-      "lastSuccessAt": "2026-11-18T12:15:07.474Z",
-      "status": "failed",
-      "failures": 1,
+      "lastAttemptAt": "2026-11-18T14:35:06.226Z",
+      "lastSuccessAt": "2026-11-18T14:35:06.226Z",
+      "status": "success",
+      "failures": 0,
       "firstAttemptAt": "2026-11-10T08:46:16.455Z"
     },
     "UCqcnlq8uJqnGml6hcIrMCZw": {
