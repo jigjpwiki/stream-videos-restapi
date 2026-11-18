@@ -46837,7 +46837,7 @@
       "actualStartTime": "2026-11-04T15:10:49Z",
       "actualEndTime": "2026-11-04T17:15:05Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T06:05:09.076Z",
+      "fetchedAt": "2026-11-18T08:15:06.583Z",
       "pendingIngestion": false
     },
     {
@@ -46855,7 +46855,7 @@
       "actualStartTime": "2026-11-06T12:00:08Z",
       "actualEndTime": "2026-11-06T13:40:30Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T06:05:09.076Z",
+      "fetchedAt": "2026-11-18T08:15:06.583Z",
       "pendingIngestion": false
     },
     {
@@ -46873,7 +46873,7 @@
       "actualStartTime": "2026-11-07T12:37:20Z",
       "actualEndTime": "2026-11-07T15:35:47Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T06:05:09.076Z",
+      "fetchedAt": "2026-11-18T08:15:06.583Z",
       "pendingIngestion": false
     },
     {
@@ -46890,7 +46890,7 @@
       "actualStartTime": "2026-11-09T14:03:06Z",
       "actualEndTime": "2026-11-09T18:00:29Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T06:05:09.076Z",
+      "fetchedAt": "2026-11-18T08:15:06.583Z",
       "pendingIngestion": false
     },
     {
@@ -46907,7 +46907,7 @@
       "actualStartTime": "2026-11-08T13:06:25Z",
       "actualEndTime": "2026-11-08T15:43:10Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T06:05:09.076Z",
+      "fetchedAt": "2026-11-18T08:15:06.583Z",
       "pendingIngestion": false
     },
     {
@@ -46924,7 +46924,7 @@
       "actualStartTime": "2026-11-10T13:38:28Z",
       "actualEndTime": "2026-11-10T18:06:31Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T06:05:09.076Z",
+      "fetchedAt": "2026-11-18T08:15:06.583Z",
       "pendingIngestion": false
     },
     {
@@ -46941,7 +46941,7 @@
       "actualStartTime": null,
       "actualEndTime": null,
       "videoType": "shorts",
-      "fetchedAt": "2026-11-18T06:05:09.076Z",
+      "fetchedAt": "2026-11-18T08:15:06.583Z",
       "pendingIngestion": false
     },
     {
@@ -46958,7 +46958,7 @@
       "actualStartTime": "2026-11-11T13:54:22Z",
       "actualEndTime": "2026-11-11T17:20:06Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T06:05:09.076Z",
+      "fetchedAt": "2026-11-18T08:15:06.583Z",
       "pendingIngestion": false
     },
     {
@@ -46975,7 +46975,7 @@
       "actualStartTime": "2026-11-12T13:38:31Z",
       "actualEndTime": "2026-11-12T16:50:24Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T06:05:09.076Z",
+      "fetchedAt": "2026-11-18T08:15:06.583Z",
       "pendingIngestion": false
     },
     {
@@ -46992,7 +46992,7 @@
       "actualStartTime": "2026-11-13T13:27:21Z",
       "actualEndTime": "2026-11-13T15:09:28Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T06:05:09.076Z",
+      "fetchedAt": "2026-11-18T08:15:06.583Z",
       "pendingIngestion": false
     },
     {
@@ -47026,7 +47026,7 @@
       "actualStartTime": "2026-11-15T13:37:50Z",
       "actualEndTime": "2026-11-15T17:00:04Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T06:05:09.076Z",
+      "fetchedAt": "2026-11-18T08:15:06.583Z",
       "pendingIngestion": false
     },
     {
@@ -47043,7 +47043,7 @@
       "actualStartTime": "2026-11-16T14:07:49Z",
       "actualEndTime": "2026-11-16T18:08:54Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T06:05:09.076Z",
+      "fetchedAt": "2026-11-18T08:15:06.583Z",
       "pendingIngestion": false
     },
     {
@@ -47060,7 +47060,7 @@
       "actualStartTime": null,
       "actualEndTime": null,
       "videoType": "shorts",
-      "fetchedAt": "2026-11-18T06:05:09.076Z",
+      "fetchedAt": "2026-11-18T08:15:06.583Z",
       "pendingIngestion": false
     },
     {
@@ -47077,7 +47077,7 @@
       "actualStartTime": "2026-11-17T13:36:06Z",
       "actualEndTime": "2026-11-17T16:14:54Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T06:05:09.076Z",
+      "fetchedAt": "2026-11-18T08:15:06.583Z",
       "pendingIngestion": false
     }
   ],
