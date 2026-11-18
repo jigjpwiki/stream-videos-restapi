@@ -40899,7 +40899,7 @@
       "actualStartTime": "2026-11-04T14:44:25Z",
       "actualEndTime": "2026-11-04T15:56:02Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -40917,7 +40917,7 @@
       "actualStartTime": "2026-11-05T12:59:49Z",
       "actualEndTime": "2026-11-05T14:35:12Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -40935,7 +40935,7 @@
       "actualStartTime": "2026-11-06T15:38:45Z",
       "actualEndTime": "2026-11-06T16:12:23Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -40953,7 +40953,7 @@
       "actualStartTime": "2026-11-08T11:00:28Z",
       "actualEndTime": "2026-11-08T12:54:34Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -40970,7 +40970,7 @@
       "actualStartTime": "2026-11-11T14:44:29Z",
       "actualEndTime": "2026-11-11T15:30:02Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -40987,7 +40987,7 @@
       "actualStartTime": "2026-11-12T13:59:36Z",
       "actualEndTime": "2026-11-12T15:05:20Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -41004,7 +41004,7 @@
       "actualStartTime": "2026-11-14T14:59:40Z",
       "actualEndTime": "2026-11-14T15:41:35Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -41021,7 +41021,7 @@
       "actualStartTime": "2026-11-14T16:02:21Z",
       "actualEndTime": "2026-11-14T17:27:29Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -41038,7 +41038,7 @@
       "actualStartTime": "2026-11-16T12:59:58Z",
       "actualEndTime": "2026-11-16T14:04:11Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -41055,7 +41055,7 @@
       "actualStartTime": "2026-11-18T08:59:17Z",
       "actualEndTime": "2026-11-18T10:17:06Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     }
   ],
@@ -46570,103 +46570,307 @@
       "videoId": "j3fYW8o7lko",
       "title": "【目指せ年内2000名様】10月予定&作戦会議＆#あんにんたいむ #136【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-03T07:14:21.686Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=j3fYW8o7lko",
+      "publishedAt": "2026-10-01T03:14:56Z",
+      "thumbnail": "https://i.ytimg.com/vi/j3fYW8o7lko/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT1H23M48S",
+      "durationSeconds": 5028,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-09-30T13:16:51Z",
+      "actualEndTime": "2026-09-30T14:40:29Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "iTQCz2Ktwck",
       "title": "【同時視聴】『ドラゴンボール』46～48話一緒にみよ！#あんにんたいむ #137【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-03T07:14:21.686Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=iTQCz2Ktwck",
+      "publishedAt": "2026-10-03T03:23:41Z",
+      "thumbnail": "https://i.ytimg.com/vi/iTQCz2Ktwck/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT1H43M24S",
+      "durationSeconds": 6204,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-02T13:32:37Z",
+      "actualEndTime": "2026-10-02T15:15:53Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "Q178xEie89A",
       "title": "【歌枠】歌っていくう！！#あんにんたいむ #138【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-05T07:51:43.377Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=Q178xEie89A",
+      "publishedAt": "2026-10-03T15:51:34Z",
+      "thumbnail": "https://i.ytimg.com/vi/Q178xEie89A/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT3H2M19S",
+      "durationSeconds": 10939,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-03T12:32:56Z",
+      "actualEndTime": "2026-10-03T15:35:41Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "vzrugV7u9jE",
       "title": "【寝落ち歓迎】おっとり癒しボイスがおにぎり屋さんを開く！#あんにんたいむ #139【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-05T07:51:43.377Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=vzrugV7u9jE",
+      "publishedAt": "2026-10-04T18:36:22Z",
+      "thumbnail": "https://i.ytimg.com/vi/vzrugV7u9jE/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT4H33M59S",
+      "durationSeconds": 16439,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-04T13:48:38Z",
+      "actualEndTime": "2026-10-04T18:22:27Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "HSKxoIQ5yis",
       "title": "【寝落ち推奨】ここがあなたの寝落ち場所　おっとり癒しボイスがおにぎり屋さんを開く！#あんにんたいむ #140【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-08T01:25:23.985Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=HSKxoIQ5yis",
+      "publishedAt": "2026-10-05T21:32:17Z",
+      "thumbnail": "https://i.ytimg.com/vi/HSKxoIQ5yis/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT7H39M20S",
+      "durationSeconds": 27560,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-05T13:38:00Z",
+      "actualEndTime": "2026-10-05T21:17:11Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "-IJvGXmg-pM",
       "title": "【寝落ち歓迎】ここがあなたの寝落ち場所　おっとり癒しボイスがおにぎり屋さんを開く！#あんにんたいむ #141【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-08T01:25:23.985Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=-IJvGXmg-pM",
+      "publishedAt": "2026-10-06T21:47:57Z",
+      "thumbnail": "https://i.ytimg.com/vi/-IJvGXmg-pM/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT7H47M20S",
+      "durationSeconds": 28040,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-06T13:38:53Z",
+      "actualEndTime": "2026-10-06T21:26:04Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "M0QAqyel4DQ",
       "title": "【コラボ配信】ふわふわコラボ！やうるちゃんと違う星のぼくらプレイ！#あんにんたいむ #142【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-08T01:25:23.985Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=M0QAqyel4DQ",
+      "publishedAt": "2026-10-07T16:09:37Z",
+      "thumbnail": "https://i.ytimg.com/vi/M0QAqyel4DQ/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT3H55M35S",
+      "durationSeconds": 14135,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-07T11:59:38Z",
+      "actualEndTime": "2026-10-07T15:55:04Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "vYqcJvStIIg",
       "title": "【心音ASMR】ここで一緒に寝よ？8時間密着添い寝で安眠｜Hugging Heart Beats #睡眠導入 #寝落ち",
       "registeredAt": "2026-10-10T14:04:16.065Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=vYqcJvStIIg",
+      "publishedAt": "2026-10-08T13:00:26Z",
+      "thumbnail": "https://i.ytimg.com/vi/vYqcJvStIIg/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT8H13M19S",
+      "durationSeconds": 29599,
+      "liveBroadcastContent": "none",
+      "actualStartTime": null,
+      "actualEndTime": null,
+      "videoType": "normal",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "AabINT-e6-w",
       "title": "【ささやきASMR】ここがあなたの寝落ち場所#あんにんたいむ #143【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-10T14:04:16.065Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=AabINT-e6-w",
+      "publishedAt": "2026-10-08T19:14:31Z",
+      "thumbnail": "https://i.ytimg.com/vi/AabINT-e6-w/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT2H12M24S",
+      "durationSeconds": 7944,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-08T16:56:58Z",
+      "actualEndTime": "2026-10-08T19:09:12Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "t1I5SVR39ck",
       "title": "【同時視聴】『ドラゴンボール』49～52話一緒にみよ！#あんにんたいむ #144【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-10T14:04:16.065Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=t1I5SVR39ck",
+      "publishedAt": "2026-10-09T15:22:42Z",
+      "thumbnail": "https://i.ytimg.com/vi/t1I5SVR39ck/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT2H11M49S",
+      "durationSeconds": 7909,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-09T13:06:23Z",
+      "actualEndTime": "2026-10-09T15:18:02Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "CZc1q-KKCXE",
       "title": "【歌枠】ジブリ歌う！#あんにんたいむ #145【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-13T01:42:26.188Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=CZc1q-KKCXE",
+      "publishedAt": "2026-10-10T15:28:53Z",
+      "thumbnail": "https://i.ytimg.com/vi/CZc1q-KKCXE/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT2H42M14S",
+      "durationSeconds": 9734,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-10T12:39:08Z",
+      "actualEndTime": "2026-10-10T15:21:12Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "MXHNpujzVcU",
       "title": "【ゲーム雑談】猫ちゃんたちの異変をさがせ！！#あんにんたいむ #146【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-13T01:42:26.188Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=MXHNpujzVcU",
+      "publishedAt": "2026-10-12T03:06:30Z",
+      "thumbnail": "https://i.ytimg.com/vi/MXHNpujzVcU/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT1H49M18S",
+      "durationSeconds": 6558,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-11T12:54:30Z",
+      "actualEndTime": "2026-10-11T14:43:40Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "hPH-TBYa3Lw",
-      "title": "【寝落ち歓迎】ここがあなたの寝落ち場所！ほのぐらしの庭#あんにんたいむ #147【パレデミア学園/香桜あんにん/＃新人VTuber】",
+      "title": "【寝落ち歓迎】ここがあなたの寝落ち場所！ほの暮しの庭#あんにんたいむ #147【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-13T01:42:26.188Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=hPH-TBYa3Lw",
+      "publishedAt": "2026-10-12T21:08:22Z",
+      "thumbnail": "https://i.ytimg.com/vi/hPH-TBYa3Lw/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT6H56M52S",
+      "durationSeconds": 25012,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-12T13:42:35Z",
+      "actualEndTime": "2026-10-12T20:39:24Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "Nif01Z-mQuY",
       "title": "【祝収益化】収益化を喜ぶ！ありがとう#あんにんたいむ #148【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-15T14:30:54.589Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=Nif01Z-mQuY",
+      "publishedAt": "2026-10-13T18:31:59Z",
+      "thumbnail": "https://i.ytimg.com/vi/Nif01Z-mQuY/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT4H35M54S",
+      "durationSeconds": 16554,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-13T13:41:11Z",
+      "actualEndTime": "2026-10-13T18:16:55Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "cBC5byOcVKM",
       "title": "【コラボ配信】ふわふわコラボ！やうるちゃんと違う星のぼくらプレイ！#あんにんたいむ #149【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-15T14:30:54.589Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=cBC5byOcVKM",
+      "publishedAt": "2026-10-14T16:34:37Z",
+      "thumbnail": "https://i.ytimg.com/vi/cBC5byOcVKM/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT4H21M28S",
+      "durationSeconds": 15688,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-14T12:00:07Z",
+      "actualEndTime": "2026-10-14T16:21:23Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "PxKYzv0Khr8",
       "title": "【コラボ配信】クゥ2期コラボ！PICO PARK #あんにんたいむ #150【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-17T11:48:55.353Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=PxKYzv0Khr8",
+      "publishedAt": "2026-10-15T17:37:00Z",
+      "thumbnail": "https://i.ytimg.com/vi/PxKYzv0Khr8/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT2H44M28S",
+      "durationSeconds": 9868,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-15T14:46:01Z",
+      "actualEndTime": "2026-10-15T17:30:20Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "A_vC7Vey4zc",
       "title": "【同時視聴】『ドラゴンボール』51～54話一緒にみよ！#あんにんたいむ #151【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-17T11:48:55.353Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=A_vC7Vey4zc",
+      "publishedAt": "2026-10-16T15:10:26Z",
+      "thumbnail": "https://i.ytimg.com/vi/A_vC7Vey4zc/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT2H3M23S",
+      "durationSeconds": 7403,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-16T13:02:22Z",
+      "actualEndTime": "2026-10-16T15:05:34Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "y2LA3sPDgsk",
@@ -46676,9 +46880,21 @@
     },
     {
       "videoId": "b0SlE4ZwG-Y",
-      "title": "【寝落ち枠】ここがあなたの寝落ち場所　ほの暮らしの庭#2 #あんにんたいむ #153【パレデミア学園/香桜あんにん/＃新人VTuber】",
+      "title": "【寝落ち枠】ここがあなたの寝落ち場所　ほの暮しの庭#2 #あんにんたいむ #153【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-19T02:15:48.351Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=b0SlE4ZwG-Y",
+      "publishedAt": "2026-10-18T21:12:19Z",
+      "thumbnail": "https://i.ytimg.com/vi/b0SlE4ZwG-Y/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT6H45M28S",
+      "durationSeconds": 24328,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-18T14:16:06Z",
+      "actualEndTime": "2026-10-18T21:01:23Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "NwBFxpxqMRU",
@@ -46702,31 +46918,91 @@
       "videoId": "rEIfD203JtY",
       "title": "【睡眠導入ささやきASMR】おっとり癒しボイスとささやき雑談 #あんにんたいむ #157【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-23T08:54:48.593Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=rEIfD203JtY",
+      "publishedAt": "2026-10-23T04:20:21Z",
+      "thumbnail": "https://i.ytimg.com/vi/rEIfD203JtY/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT1H32M31S",
+      "durationSeconds": 5551,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-22T13:44:57Z",
+      "actualEndTime": "2026-10-22T15:17:18Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "LqmNfMXe5yU",
       "title": "【ゲーム雑談】おっとり癒しボイスとタンポポは耐える！ #あんにんたいむ #158【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-25T08:47:37.922Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=LqmNfMXe5yU",
+      "publishedAt": "2026-10-24T03:42:52Z",
+      "thumbnail": "https://i.ytimg.com/vi/LqmNfMXe5yU/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT1H59M26S",
+      "durationSeconds": 7166,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-23T13:11:53Z",
+      "actualEndTime": "2026-10-23T15:11:08Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "0cGC-sxH4eI",
       "title": "【歌枠】好きな歌はなんですか？ #あんにんたいむ #159【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-25T08:47:37.922Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=0cGC-sxH4eI",
+      "publishedAt": "2026-10-24T17:21:27Z",
+      "thumbnail": "https://i.ytimg.com/vi/0cGC-sxH4eI/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT2H36M11S",
+      "durationSeconds": 9371,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-24T12:39:04Z",
+      "actualEndTime": "2026-10-24T15:15:06Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "_DxGqCRtaaI",
-      "title": "【寝落ち歓迎】おっとり癒しボイスがお届けするほの暮らしの庭 #あんにんたいむ #160【パレデミア学園/香桜あんにん/＃新人VTuber】",
+      "title": "【寝落ち歓迎】おっとり癒しボイスがお届けするほの暮しの庭 #あんにんたいむ #160【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-27T09:24:52.246Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=_DxGqCRtaaI",
+      "publishedAt": "2026-10-25T21:33:24Z",
+      "thumbnail": "https://i.ytimg.com/vi/_DxGqCRtaaI/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT5H29M24S",
+      "durationSeconds": 19764,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-25T13:26:23Z",
+      "actualEndTime": "2026-10-25T18:55:38Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "HLhUzIXfkWg",
       "title": "【寝落ち歓迎】おっとり癒しボイスがお届けするほの暮しの庭 #あんにんたいむ #161【パレデミア学園/香桜あんにん/＃新人VTuber】",
       "registeredAt": "2026-10-27T09:24:52.246Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=HLhUzIXfkWg",
+      "publishedAt": "2026-10-26T20:47:31Z",
+      "thumbnail": "https://i.ytimg.com/vi/HLhUzIXfkWg/mqdefault.jpg",
+      "channelId": "UC8zjZBqGnx_j55ZJzluhW8A",
+      "channelTitle": "香桜あんにん / Kosakura Annin 【パレデミア学園】",
+      "duration": "PT4H44M59S",
+      "durationSeconds": 17099,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-26T13:31:24Z",
+      "actualEndTime": "2026-10-26T18:16:14Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-18T12:55:21.425Z"
     },
     {
       "videoId": "BThABOYG0gA",
@@ -46743,7 +47019,7 @@
       "actualStartTime": "2026-10-27T13:54:35Z",
       "actualEndTime": "2026-10-27T23:16:08Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-11T01:35:00.682Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -46761,7 +47037,7 @@
       "actualStartTime": "2026-10-28T13:48:20Z",
       "actualEndTime": "2026-10-28T19:41:14Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-11T21:05:09.224Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -46779,7 +47055,7 @@
       "actualStartTime": "2026-10-29T13:48:45Z",
       "actualEndTime": "2026-10-29T18:06:56Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-12T22:25:23.164Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -46797,7 +47073,7 @@
       "actualStartTime": "2026-10-30T21:10:49Z",
       "actualEndTime": "2026-10-30T23:14:24Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-14T00:45:06.929Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -46815,7 +47091,7 @@
       "actualStartTime": "2026-10-31T08:30:36Z",
       "actualEndTime": "2026-10-31T12:03:10Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-14T15:45:00.831Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -46833,7 +47109,7 @@
       "actualStartTime": "2026-10-31T12:39:49Z",
       "actualEndTime": "2026-10-31T15:05:22Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-14T19:55:24.394Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -46851,7 +47127,7 @@
       "actualStartTime": "2026-11-01T12:06:39Z",
       "actualEndTime": "2026-11-01T14:33:11Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-15T15:15:23.904Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -46869,7 +47145,7 @@
       "actualStartTime": "2026-11-02T13:42:18Z",
       "actualEndTime": "2026-11-02T15:46:28Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-16T19:15:04.406Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -46905,7 +47181,7 @@
       "actualStartTime": "2026-11-04T15:10:49Z",
       "actualEndTime": "2026-11-04T17:15:05Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -46923,7 +47199,7 @@
       "actualStartTime": "2026-11-06T12:00:08Z",
       "actualEndTime": "2026-11-06T13:40:30Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -46941,7 +47217,7 @@
       "actualStartTime": "2026-11-07T12:37:20Z",
       "actualEndTime": "2026-11-07T15:35:47Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -46958,7 +47234,7 @@
       "actualStartTime": "2026-11-09T14:03:06Z",
       "actualEndTime": "2026-11-09T18:00:29Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -46975,7 +47251,7 @@
       "actualStartTime": "2026-11-08T13:06:25Z",
       "actualEndTime": "2026-11-08T15:43:10Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -46992,7 +47268,7 @@
       "actualStartTime": "2026-11-10T13:38:28Z",
       "actualEndTime": "2026-11-10T18:06:31Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -47009,7 +47285,7 @@
       "actualStartTime": null,
       "actualEndTime": null,
       "videoType": "shorts",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -47026,7 +47302,7 @@
       "actualStartTime": "2026-11-11T13:54:22Z",
       "actualEndTime": "2026-11-11T17:20:06Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -47043,7 +47319,7 @@
       "actualStartTime": "2026-11-12T13:38:31Z",
       "actualEndTime": "2026-11-12T16:50:24Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -47060,7 +47336,7 @@
       "actualStartTime": "2026-11-13T13:27:21Z",
       "actualEndTime": "2026-11-13T15:09:28Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -47094,7 +47370,7 @@
       "actualStartTime": "2026-11-15T13:37:50Z",
       "actualEndTime": "2026-11-15T17:00:04Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -47111,7 +47387,7 @@
       "actualStartTime": "2026-11-16T14:07:49Z",
       "actualEndTime": "2026-11-16T18:08:54Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -47128,7 +47404,7 @@
       "actualStartTime": null,
       "actualEndTime": null,
       "videoType": "shorts",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     },
     {
@@ -47145,7 +47421,7 @@
       "actualStartTime": "2026-11-17T13:36:06Z",
       "actualEndTime": "2026-11-17T16:14:54Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T10:35:23.031Z",
+      "fetchedAt": "2026-11-18T12:55:21.425Z",
       "pendingIngestion": false
     }
   ],
