@@ -4,10 +4,10 @@
   "version": 2,
   "channels": {
     "UC0aNUh8VfQwgqj0taB8MDpg": {
-      "lastAttemptAt": "2026-11-18T10:45:14.422Z",
+      "lastAttemptAt": "2026-11-18T13:05:33.061Z",
       "status": "success",
       "failures": 0,
-      "lastSuccessAt": "2026-11-18T10:45:14.422Z",
+      "lastSuccessAt": "2026-11-18T13:05:33.061Z",
       "firstAttemptAt": "2026-11-10T09:24:54.574Z"
     },
     "UC0H7dRRqhfOifbYQ2TURdAg": {
@@ -172,10 +172,10 @@
       "firstAttemptAt": "2026-11-10T10:35:04.573Z"
     },
     "UChccV6U0Tkx9de4YjXbEelw": {
-      "lastAttemptAt": "2026-11-18T10:45:14.422Z",
+      "lastAttemptAt": "2026-11-18T13:05:33.061Z",
       "lastSuccessAt": "2026-11-18T10:45:14.422Z",
-      "status": "success",
-      "failures": 0,
+      "status": "failed",
+      "failures": 1,
       "firstAttemptAt": "2026-11-10T10:35:04.573Z"
     },
     "UCiPOaOGhMEXaq0tiVftObBw": {
@@ -207,8 +207,8 @@
       "firstAttemptAt": "2026-11-10T08:27:15.566Z"
     },
     "UCJLYktDEOak1rSOGRVRKlLQ": {
-      "lastAttemptAt": "2026-11-18T10:45:14.422Z",
-      "lastSuccessAt": "2026-11-18T10:45:14.422Z",
+      "lastAttemptAt": "2026-11-18T13:05:33.061Z",
+      "lastSuccessAt": "2026-11-18T13:05:33.061Z",
       "status": "success",
       "failures": 0,
       "firstAttemptAt": "2026-11-10T08:27:15.566Z"
@@ -347,15 +347,15 @@
       "firstAttemptAt": "2026-11-10T09:24:54.574Z"
     },
     "UCXhHHxwH94cuHv4N1cAYQeA": {
-      "lastAttemptAt": "2026-11-18T10:45:14.422Z",
-      "lastSuccessAt": "2026-11-18T10:45:14.422Z",
+      "lastAttemptAt": "2026-11-18T13:05:33.061Z",
+      "lastSuccessAt": "2026-11-18T13:05:33.061Z",
       "status": "success",
       "failures": 0,
       "firstAttemptAt": "2026-11-10T09:24:54.574Z"
     },
     "UCXI0W_Os-BCIngpCb1YnOow": {
-      "lastAttemptAt": "2026-11-18T10:45:14.422Z",
-      "lastSuccessAt": "2026-11-18T10:45:14.422Z",
+      "lastAttemptAt": "2026-11-18T13:05:33.061Z",
+      "lastSuccessAt": "2026-11-18T13:05:33.061Z",
       "status": "success",
       "failures": 0,
       "firstAttemptAt": "2026-11-10T09:34:54.385Z"
