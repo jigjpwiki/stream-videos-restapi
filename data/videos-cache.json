@@ -24778,7 +24778,7 @@
       "actualStartTime": null,
       "actualEndTime": null,
       "videoType": "normal",
-      "fetchedAt": "2026-11-20T14:15:05.855Z",
+      "fetchedAt": "2026-11-20T16:25:05.788Z",
       "pendingIngestion": false
     }
   ],
@@ -46396,7 +46396,7 @@
       "actualStartTime": "2026-11-06T13:01:21Z",
       "actualEndTime": "2026-11-06T17:17:03Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-20T14:15:05.855Z",
+      "fetchedAt": "2026-11-20T16:25:05.788Z",
       "pendingIngestion": false
     },
     {
@@ -46414,7 +46414,7 @@
       "actualStartTime": "2026-11-07T06:51:37Z",
       "actualEndTime": "2026-11-07T11:16:49Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-20T14:15:05.855Z",
+      "fetchedAt": "2026-11-20T16:25:05.788Z",
       "pendingIngestion": false
     },
     {
@@ -46432,7 +46432,7 @@
       "actualStartTime": "2026-11-07T13:02:20Z",
       "actualEndTime": "2026-11-07T15:12:24Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-20T14:15:05.855Z",
+      "fetchedAt": "2026-11-20T16:25:05.788Z",
       "pendingIngestion": false
     },
     {
@@ -46449,7 +46449,7 @@
       "actualStartTime": "2026-11-10T15:00:49Z",
       "actualEndTime": "2026-11-10T19:18:03Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-20T14:15:05.855Z",
+      "fetchedAt": "2026-11-20T16:25:05.788Z",
       "pendingIngestion": false
     },
     {
@@ -46466,7 +46466,7 @@
       "actualStartTime": "2026-11-14T14:45:18Z",
       "actualEndTime": "2026-11-14T18:06:51Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-20T14:15:05.855Z",
+      "fetchedAt": "2026-11-20T16:25:05.788Z",
       "pendingIngestion": false
     },
     {
@@ -46483,7 +46483,7 @@
       "actualStartTime": "2026-11-16T04:15:01Z",
       "actualEndTime": "2026-11-16T11:55:57Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-20T14:15:05.855Z",
+      "fetchedAt": "2026-11-20T16:25:05.788Z",
       "pendingIngestion": false
     },
     {
@@ -46500,7 +46500,7 @@
       "actualStartTime": "2026-11-17T08:30:49Z",
       "actualEndTime": "2026-11-17T14:14:29Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-20T14:15:05.855Z",
+      "fetchedAt": "2026-11-20T16:25:05.788Z",
       "pendingIngestion": false
     },
     {
@@ -46517,7 +46517,7 @@
       "actualStartTime": "2026-11-19T10:45:21Z",
       "actualEndTime": "2026-11-19T15:06:52Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-20T14:15:05.855Z",
+      "fetchedAt": "2026-11-20T16:25:05.788Z",
       "pendingIngestion": false
     },
     {
@@ -46534,7 +46534,7 @@
       "actualStartTime": "2026-11-20T03:01:08Z",
       "actualEndTime": "2026-11-20T06:47:29Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-20T14:15:05.855Z",
+      "fetchedAt": "2026-11-20T16:25:05.788Z",
       "pendingIngestion": false
     },
     {
@@ -46545,13 +46545,13 @@
       "thumbnail": "https://i.ytimg.com/vi/0J5YzxI-Z2Y/mqdefault.jpg?v=6afff052",
       "channelId": "UCWi_ztz8Xuz4XfzhoG6ZfyA",
       "channelTitle": "瀬奈 りるか🎧💎パレデミア学園",
-      "duration": "PT4H46M5S",
-      "durationSeconds": 17165,
+      "duration": "PT4H46M7S",
+      "durationSeconds": 17167,
       "liveBroadcastContent": "none",
       "actualStartTime": "2026-11-20T08:00:16Z",
       "actualEndTime": "2026-11-20T12:46:22Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-20T14:15:05.855Z",
+      "fetchedAt": "2026-11-20T16:25:05.788Z",
       "pendingIngestion": false
     }
   ],
