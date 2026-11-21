@@ -18297,7 +18297,7 @@
       "actualStartTime": "2026-11-09T12:00:53Z",
       "actualEndTime": "2026-11-09T14:11:33Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-21T00:14:58.374Z",
+      "fetchedAt": "2026-11-21T02:25:07.963Z",
       "pendingIngestion": false
     },
     {
@@ -18314,7 +18314,7 @@
       "actualStartTime": "2026-11-10T12:00:51Z",
       "actualEndTime": "2026-11-10T16:11:31Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-21T00:14:58.374Z",
+      "fetchedAt": "2026-11-21T02:25:07.963Z",
       "pendingIngestion": false
     },
     {
@@ -18331,7 +18331,7 @@
       "actualStartTime": "2026-11-11T12:01:45Z",
       "actualEndTime": "2026-11-11T16:19:32Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-21T00:14:58.374Z",
+      "fetchedAt": "2026-11-21T02:25:07.963Z",
       "pendingIngestion": false
     },
     {
@@ -18348,7 +18348,7 @@
       "actualStartTime": null,
       "actualEndTime": null,
       "videoType": "uncategorized",
-      "fetchedAt": "2026-11-21T00:14:58.374Z",
+      "fetchedAt": "2026-11-21T02:25:07.963Z",
       "pendingIngestion": false
     },
     {
@@ -18365,7 +18365,7 @@
       "actualStartTime": "2026-11-12T12:03:42Z",
       "actualEndTime": "2026-11-12T15:34:54Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-21T00:14:58.374Z",
+      "fetchedAt": "2026-11-21T02:25:07.963Z",
       "pendingIngestion": false
     },
     {
@@ -18382,7 +18382,7 @@
       "actualStartTime": "2026-11-12T22:00:19Z",
       "actualEndTime": "2026-11-13T00:13:07Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-21T00:14:58.374Z",
+      "fetchedAt": "2026-11-21T02:25:07.963Z",
       "pendingIngestion": false
     },
     {
@@ -18399,7 +18399,7 @@
       "actualStartTime": "2026-11-13T12:01:17Z",
       "actualEndTime": "2026-11-13T14:15:05Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-21T00:14:58.374Z",
+      "fetchedAt": "2026-11-21T02:25:07.963Z",
       "pendingIngestion": false
     },
     {
@@ -18416,7 +18416,7 @@
       "actualStartTime": "2026-11-13T22:00:45Z",
       "actualEndTime": "2026-11-14T00:20:14Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-21T00:14:58.374Z",
+      "fetchedAt": "2026-11-21T02:25:07.963Z",
       "pendingIngestion": false
     },
     {
@@ -18433,7 +18433,7 @@
       "actualStartTime": "2026-11-14T12:02:35Z",
       "actualEndTime": "2026-11-14T16:12:33Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-21T00:14:58.374Z",
+      "fetchedAt": "2026-11-21T02:25:07.963Z",
       "pendingIngestion": false
     },
     {
@@ -18450,7 +18450,7 @@
       "actualStartTime": "2026-11-14T22:08:27Z",
       "actualEndTime": "2026-11-15T00:32:44Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-21T00:14:58.374Z",
+      "fetchedAt": "2026-11-21T02:25:07.963Z",
       "pendingIngestion": false
     },
     {
@@ -18467,7 +18467,7 @@
       "actualStartTime": "2026-11-15T12:01:03Z",
       "actualEndTime": "2026-11-15T15:28:43Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-21T00:14:58.374Z",
+      "fetchedAt": "2026-11-21T02:25:07.963Z",
       "pendingIngestion": false
     },
     {
@@ -18484,7 +18484,7 @@
       "actualStartTime": "2026-11-16T12:00:27Z",
       "actualEndTime": "2026-11-16T15:58:57Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-21T00:14:58.374Z",
+      "fetchedAt": "2026-11-21T02:25:07.963Z",
       "pendingIngestion": false
     },
     {
@@ -18501,7 +18501,7 @@
       "actualStartTime": "2026-11-16T22:01:39Z",
       "actualEndTime": "2026-11-17T00:21:59Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-21T00:14:58.374Z",
+      "fetchedAt": "2026-11-21T02:25:07.963Z",
       "pendingIngestion": false
     },
     {
@@ -18518,7 +18518,7 @@
       "actualStartTime": "2026-11-18T12:00:15Z",
       "actualEndTime": "2026-11-18T16:48:55Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-21T00:14:58.374Z",
+      "fetchedAt": "2026-11-21T02:25:07.963Z",
       "pendingIngestion": false
     },
     {
@@ -18535,7 +18535,24 @@
       "actualStartTime": "2026-11-19T22:01:55Z",
       "actualEndTime": "2026-11-20T00:17:25Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-21T00:14:58.374Z",
+      "fetchedAt": "2026-11-21T02:25:07.963Z",
+      "pendingIngestion": false
+    },
+    {
+      "videoId": "mpgLP9HsC3w",
+      "title": "【朝活】100人におはよう言いたい✧初リアイベ前日の朝雑談【猫乃間うと/パレデミア学園】 #うとすとりぃむ #新人vtuber",
+      "url": "https://www.youtube.com/watch?v=mpgLP9HsC3w",
+      "publishedAt": "2026-11-21T00:49:29Z",
+      "thumbnail": "https://i.ytimg.com/vi/mpgLP9HsC3w/mqdefault.jpg",
+      "channelId": "UCOH9jshsynMeCSRlPhiCSvw",
+      "channelTitle": "猫乃間 うと / Uto Nekonoma",
+      "duration": "PT2H30M41S",
+      "durationSeconds": 9041,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-20T22:01:50Z",
+      "actualEndTime": "2026-11-21T00:32:26Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-21T02:25:07.963Z",
       "pendingIngestion": false
     }
   ],
