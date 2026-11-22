@@ -26386,7 +26386,7 @@
       "actualStartTime": "2026-11-08T10:20:15Z",
       "actualEndTime": "2026-11-08T18:07:25Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T10:25:11.772Z",
+      "fetchedAt": "2026-11-22T12:35:12.392Z",
       "pendingIngestion": false
     },
     {
@@ -26403,7 +26403,7 @@
       "actualStartTime": "2026-11-09T10:15:35Z",
       "actualEndTime": "2026-11-09T18:05:18Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T10:25:11.772Z",
+      "fetchedAt": "2026-11-22T12:35:12.392Z",
       "pendingIngestion": false
     },
     {
@@ -26420,7 +26420,7 @@
       "actualStartTime": "2026-11-10T10:49:52Z",
       "actualEndTime": "2026-11-10T18:07:20Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T10:25:11.772Z",
+      "fetchedAt": "2026-11-22T12:35:12.392Z",
       "pendingIngestion": false
     },
     {
@@ -26437,7 +26437,7 @@
       "actualStartTime": "2026-11-11T12:10:54Z",
       "actualEndTime": "2026-11-11T18:04:59Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T10:25:11.772Z",
+      "fetchedAt": "2026-11-22T12:35:12.392Z",
       "pendingIngestion": false
     },
     {
@@ -26454,7 +26454,7 @@
       "actualStartTime": "2026-11-12T10:17:23Z",
       "actualEndTime": "2026-11-12T18:05:19Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T10:25:11.772Z",
+      "fetchedAt": "2026-11-22T12:35:12.392Z",
       "pendingIngestion": false
     },
     {
@@ -26471,7 +26471,7 @@
       "actualStartTime": "2026-11-13T12:00:50Z",
       "actualEndTime": "2026-11-13T18:07:43Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T10:25:11.772Z",
+      "fetchedAt": "2026-11-22T12:35:12.392Z",
       "pendingIngestion": false
     },
     {
@@ -26488,7 +26488,7 @@
       "actualStartTime": "2026-11-14T11:47:58Z",
       "actualEndTime": "2026-11-14T20:03:59Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T10:25:11.772Z",
+      "fetchedAt": "2026-11-22T12:35:12.392Z",
       "pendingIngestion": false
     },
     {
@@ -26505,7 +26505,7 @@
       "actualStartTime": "2026-11-15T10:12:51Z",
       "actualEndTime": "2026-11-15T16:49:03Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T10:25:11.772Z",
+      "fetchedAt": "2026-11-22T12:35:12.392Z",
       "pendingIngestion": false
     },
     {
@@ -26522,7 +26522,7 @@
       "actualStartTime": "2026-11-16T05:01:34Z",
       "actualEndTime": "2026-11-16T10:27:14Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T10:25:11.772Z",
+      "fetchedAt": "2026-11-22T12:35:12.392Z",
       "pendingIngestion": false
     },
     {
@@ -26539,7 +26539,7 @@
       "actualStartTime": "2026-11-16T12:03:55Z",
       "actualEndTime": "2026-11-16T14:28:26Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T10:25:11.772Z",
+      "fetchedAt": "2026-11-22T12:35:12.392Z",
       "pendingIngestion": false
     },
     {
@@ -26556,7 +26556,24 @@
       "actualStartTime": "2026-11-19T15:15:14Z",
       "actualEndTime": "2026-11-19T16:17:56Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T10:25:11.772Z",
+      "fetchedAt": "2026-11-22T12:35:12.392Z",
+      "pendingIngestion": false
+    },
+    {
+      "videoId": "8ppgCFdTf58",
+      "title": "【スプラトゥーン3】完全初見！ストーリーモードやります！🦑#4【#変幻リメ】",
+      "url": "https://www.youtube.com/watch?v=8ppgCFdTf58",
+      "publishedAt": "2026-11-22T06:25:44Z",
+      "thumbnail": "https://i.ytimg.com/vi/8ppgCFdTf58/mqdefault.jpg?v=6b028aea",
+      "channelId": "UC5bCRde8xRrNS7s6GjCNCyQ",
+      "channelTitle": "変幻リメ / Henge Rime",
+      "duration": "PT3H28M34S",
+      "durationSeconds": 12514,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-22T07:00:04Z",
+      "actualEndTime": "2026-11-22T10:28:38Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-22T12:35:12.392Z",
       "pendingIngestion": false
     }
   ],

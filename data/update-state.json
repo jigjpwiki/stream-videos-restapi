@@ -39,10 +39,10 @@
       "firstAttemptAt": "2026-11-10T09:34:54.385Z"
     },
     "UC5bCRde8xRrNS7s6GjCNCyQ": {
-      "lastAttemptAt": "2026-11-22T12:25:14.326Z",
-      "lastSuccessAt": "2026-11-22T10:25:11.772Z",
-      "status": "failed",
-      "failures": 1,
+      "lastAttemptAt": "2026-11-22T12:35:12.392Z",
+      "lastSuccessAt": "2026-11-22T12:35:12.392Z",
+      "status": "success",
+      "failures": 0,
       "firstAttemptAt": "2026-11-10T10:04:59.454Z"
     },
     "UC5G2BLvcdLvBwBqgShrag9A": {
