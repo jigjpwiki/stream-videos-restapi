@@ -7277,7 +7277,7 @@
       "actualStartTime": "2026-11-08T15:08:54Z",
       "actualEndTime": "2026-11-08T16:05:26Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T13:35:07.606Z",
+      "fetchedAt": "2026-11-22T15:55:04.730Z",
       "pendingIngestion": false
     },
     {
@@ -7294,7 +7294,7 @@
       "actualStartTime": "2026-11-10T15:05:51Z",
       "actualEndTime": "2026-11-10T16:04:41Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T13:35:07.606Z",
+      "fetchedAt": "2026-11-22T15:55:04.730Z",
       "pendingIngestion": false
     },
     {
@@ -7311,7 +7311,7 @@
       "actualStartTime": "2026-11-11T15:03:22Z",
       "actualEndTime": "2026-11-11T16:04:07Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T13:35:07.606Z",
+      "fetchedAt": "2026-11-22T15:55:04.730Z",
       "pendingIngestion": false
     },
     {
@@ -7328,7 +7328,7 @@
       "actualStartTime": "2026-11-14T15:05:09Z",
       "actualEndTime": "2026-11-14T16:02:29Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T13:35:07.606Z",
+      "fetchedAt": "2026-11-22T15:55:04.730Z",
       "pendingIngestion": false
     },
     {
@@ -7345,7 +7345,7 @@
       "actualStartTime": "2026-11-15T15:01:13Z",
       "actualEndTime": "2026-11-15T16:00:52Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T13:35:07.606Z",
+      "fetchedAt": "2026-11-22T15:55:04.730Z",
       "pendingIngestion": false
     },
     {
@@ -7362,7 +7362,7 @@
       "actualStartTime": "2026-11-16T15:02:13Z",
       "actualEndTime": "2026-11-16T16:04:44Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T13:35:07.606Z",
+      "fetchedAt": "2026-11-22T15:55:04.730Z",
       "pendingIngestion": false
     },
     {
@@ -7379,7 +7379,7 @@
       "actualStartTime": "2026-11-17T15:02:25Z",
       "actualEndTime": "2026-11-17T16:03:43Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T13:35:07.606Z",
+      "fetchedAt": "2026-11-22T15:55:04.730Z",
       "pendingIngestion": false
     },
     {
@@ -7396,7 +7396,7 @@
       "actualStartTime": "2026-11-19T15:01:25Z",
       "actualEndTime": "2026-11-19T16:03:56Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T13:35:07.606Z",
+      "fetchedAt": "2026-11-22T15:55:04.730Z",
       "pendingIngestion": false
     },
     {
@@ -7413,7 +7413,7 @@
       "actualStartTime": null,
       "actualEndTime": null,
       "videoType": "normal",
-      "fetchedAt": "2026-11-22T13:35:07.606Z",
+      "fetchedAt": "2026-11-22T15:55:04.730Z",
       "pendingIngestion": false
     },
     {
@@ -7430,7 +7430,7 @@
       "actualStartTime": "2026-11-21T15:06:41Z",
       "actualEndTime": "2026-11-21T16:01:48Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T13:35:07.606Z",
+      "fetchedAt": "2026-11-22T15:55:04.730Z",
       "pendingIngestion": false
     },
     {
@@ -7447,7 +7447,41 @@
       "actualStartTime": "2026-11-22T12:01:39Z",
       "actualEndTime": "2026-11-22T12:54:26Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T13:35:07.606Z",
+      "fetchedAt": "2026-11-22T15:55:04.730Z",
+      "pendingIngestion": false
+    },
+    {
+      "videoId": "1nMecFbJUO4",
+      "title": "【#雑談配信】うたみた公開した日の雑談。【七音うら】",
+      "url": "https://www.youtube.com/watch?v=1nMecFbJUO4",
+      "publishedAt": "2026-11-22T10:36:31Z",
+      "thumbnail": "https://i.ytimg.com/vi/1nMecFbJUO4/mqdefault.jpg?v=6b02c5af",
+      "channelId": "UCv2IYO-4waCpHvn50SWWY2A",
+      "channelTitle": "七音うら / Ura Nanaoto",
+      "duration": "PT39M29S",
+      "durationSeconds": 2369,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-22T15:00:45Z",
+      "actualEndTime": "2026-11-22T15:40:15Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-22T15:55:04.730Z",
+      "pendingIngestion": false
+    },
+    {
+      "videoId": "ifn398C0AQ4",
+      "title": "【歌ってみた】どきどきキュン!で大暴走♡ / Covered by 愛上オハナ 愛乃宮ゆめ 陰山アゲハ 緋月・ローズ・ブレイド 七音うら【パレデミア学園】",
+      "url": "https://www.youtube.com/watch?v=ifn398C0AQ4",
+      "publishedAt": "2026-11-22T14:55:07Z",
+      "thumbnail": "https://i.ytimg.com/vi/ifn398C0AQ4/mqdefault.jpg",
+      "channelId": "UCv2IYO-4waCpHvn50SWWY2A",
+      "channelTitle": "七音うら / Ura Nanaoto",
+      "duration": "PT3M13S",
+      "durationSeconds": 193,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-22T14:55:07Z",
+      "actualEndTime": "2026-11-22T14:59:19Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-22T15:55:04.730Z",
       "pendingIngestion": false
     }
   ],

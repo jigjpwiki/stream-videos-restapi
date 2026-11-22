@@ -312,10 +312,10 @@
       "firstAttemptAt": "2026-11-10T09:05:01.032Z"
     },
     "UCv2IYO-4waCpHvn50SWWY2A": {
-      "lastAttemptAt": "2026-11-22T15:45:05.772Z",
-      "lastSuccessAt": "2026-11-22T13:35:07.606Z",
-      "status": "failed",
-      "failures": 1,
+      "lastAttemptAt": "2026-11-22T15:55:04.730Z",
+      "lastSuccessAt": "2026-11-22T15:55:04.730Z",
+      "status": "success",
+      "failures": 0,
       "firstAttemptAt": "2026-11-10T09:05:01.032Z"
     },
     "UCWi_ztz8Xuz4XfzhoG6ZfyA": {
