@@ -25322,7 +25322,7 @@
       "actualStartTime": null,
       "actualEndTime": null,
       "videoType": "normal",
-      "fetchedAt": "2026-11-22T01:15:07.740Z",
+      "fetchedAt": "2026-11-22T03:25:03.596Z",
       "pendingIngestion": false
     }
   ],
@@ -38835,7 +38835,7 @@
       "actualStartTime": "2026-11-08T13:01:54Z",
       "actualEndTime": "2026-11-08T15:03:41Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T01:15:07.740Z",
+      "fetchedAt": "2026-11-22T03:25:03.596Z",
       "pendingIngestion": false
     },
     {
@@ -38852,7 +38852,7 @@
       "actualStartTime": "2026-11-10T13:03:22Z",
       "actualEndTime": "2026-11-10T14:07:44Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T01:15:07.740Z",
+      "fetchedAt": "2026-11-22T03:25:03.596Z",
       "pendingIngestion": false
     },
     {
@@ -38869,7 +38869,7 @@
       "actualStartTime": "2026-11-11T13:15:15Z",
       "actualEndTime": "2026-11-11T15:28:43Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T01:15:07.740Z",
+      "fetchedAt": "2026-11-22T03:25:03.596Z",
       "pendingIngestion": false
     },
     {
@@ -38886,7 +38886,7 @@
       "actualStartTime": "2026-11-13T12:10:18Z",
       "actualEndTime": "2026-11-13T14:12:51Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T01:15:07.740Z",
+      "fetchedAt": "2026-11-22T03:25:03.596Z",
       "pendingIngestion": false
     },
     {
@@ -38903,7 +38903,7 @@
       "actualStartTime": "2026-11-14T22:03:06Z",
       "actualEndTime": "2026-11-14T23:36:07Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T01:15:07.740Z",
+      "fetchedAt": "2026-11-22T03:25:03.596Z",
       "pendingIngestion": false
     },
     {
@@ -38920,7 +38920,7 @@
       "actualStartTime": null,
       "actualEndTime": null,
       "videoType": "shorts",
-      "fetchedAt": "2026-11-22T01:15:07.740Z",
+      "fetchedAt": "2026-11-22T03:25:03.596Z",
       "pendingIngestion": false
     },
     {
@@ -38937,7 +38937,7 @@
       "actualStartTime": "2026-11-19T12:04:14Z",
       "actualEndTime": "2026-11-19T13:17:43Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T01:15:07.740Z",
+      "fetchedAt": "2026-11-22T03:25:03.596Z",
       "pendingIngestion": false
     }
   ],
@@ -47452,7 +47452,7 @@
       "actualStartTime": "2026-11-10T15:00:49Z",
       "actualEndTime": "2026-11-10T19:18:03Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T01:15:07.740Z",
+      "fetchedAt": "2026-11-22T03:25:03.596Z",
       "pendingIngestion": false
     },
     {
@@ -47469,7 +47469,7 @@
       "actualStartTime": "2026-11-14T14:45:18Z",
       "actualEndTime": "2026-11-14T18:06:51Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T01:15:07.740Z",
+      "fetchedAt": "2026-11-22T03:25:03.596Z",
       "pendingIngestion": false
     },
     {
@@ -47486,7 +47486,7 @@
       "actualStartTime": "2026-11-16T04:15:01Z",
       "actualEndTime": "2026-11-16T11:55:57Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T01:15:07.740Z",
+      "fetchedAt": "2026-11-22T03:25:03.596Z",
       "pendingIngestion": false
     },
     {
@@ -47503,7 +47503,7 @@
       "actualStartTime": "2026-11-17T08:30:49Z",
       "actualEndTime": "2026-11-17T14:14:29Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T01:15:07.740Z",
+      "fetchedAt": "2026-11-22T03:25:03.596Z",
       "pendingIngestion": false
     },
     {
@@ -47520,7 +47520,7 @@
       "actualStartTime": "2026-11-19T10:45:21Z",
       "actualEndTime": "2026-11-19T15:06:52Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T01:15:07.740Z",
+      "fetchedAt": "2026-11-22T03:25:03.596Z",
       "pendingIngestion": false
     },
     {
@@ -47537,7 +47537,7 @@
       "actualStartTime": "2026-11-20T03:01:08Z",
       "actualEndTime": "2026-11-20T06:47:29Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T01:15:07.740Z",
+      "fetchedAt": "2026-11-22T03:25:03.596Z",
       "pendingIngestion": false
     },
     {
@@ -47554,7 +47554,7 @@
       "actualStartTime": "2026-11-20T08:00:16Z",
       "actualEndTime": "2026-11-20T12:46:22Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T01:15:07.740Z",
+      "fetchedAt": "2026-11-22T03:25:03.596Z",
       "pendingIngestion": false
     },
     {
@@ -47571,7 +47571,7 @@
       "actualStartTime": "2026-11-21T03:00:22Z",
       "actualEndTime": "2026-11-21T06:14:28Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T01:15:07.740Z",
+      "fetchedAt": "2026-11-22T03:25:03.596Z",
       "pendingIngestion": false
     }
   ],
