@@ -68320,7 +68320,7 @@
       "actualStartTime": "2026-11-09T12:05:03Z",
       "actualEndTime": "2026-11-09T16:54:40Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-23T15:45:07.349Z",
+      "fetchedAt": "2026-11-23T18:25:10.534Z",
       "pendingIngestion": false
     },
     {
@@ -68337,7 +68337,7 @@
       "actualStartTime": "2026-11-10T11:05:13Z",
       "actualEndTime": "2026-11-10T16:57:49Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-23T15:45:07.349Z",
+      "fetchedAt": "2026-11-23T18:25:10.534Z",
       "pendingIngestion": false
     },
     {
@@ -68354,7 +68354,7 @@
       "actualStartTime": "2026-11-13T11:09:50Z",
       "actualEndTime": "2026-11-13T18:01:17Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-23T15:45:07.349Z",
+      "fetchedAt": "2026-11-23T18:25:10.534Z",
       "pendingIngestion": false
     },
     {
@@ -68371,7 +68371,7 @@
       "actualStartTime": "2026-11-14T05:02:27Z",
       "actualEndTime": "2026-11-14T07:27:24Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-23T15:45:07.349Z",
+      "fetchedAt": "2026-11-23T18:25:10.534Z",
       "pendingIngestion": false
     },
     {
@@ -68388,7 +68388,7 @@
       "actualStartTime": "2026-11-14T11:12:08Z",
       "actualEndTime": "2026-11-14T16:34:00Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-23T15:45:07.349Z",
+      "fetchedAt": "2026-11-23T18:25:10.534Z",
       "pendingIngestion": false
     },
     {
@@ -68405,7 +68405,7 @@
       "actualStartTime": "2026-11-15T08:05:21Z",
       "actualEndTime": "2026-11-15T17:26:48Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-23T15:45:07.349Z",
+      "fetchedAt": "2026-11-23T18:25:10.534Z",
       "pendingIngestion": false
     },
     {
@@ -68422,7 +68422,7 @@
       "actualStartTime": "2026-11-17T11:05:16Z",
       "actualEndTime": "2026-11-17T16:45:52Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-23T15:45:07.349Z",
+      "fetchedAt": "2026-11-23T18:25:10.534Z",
       "pendingIngestion": false
     },
     {
@@ -68439,7 +68439,7 @@
       "actualStartTime": "2026-11-18T11:07:49Z",
       "actualEndTime": "2026-11-18T15:24:35Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-23T15:45:07.349Z",
+      "fetchedAt": "2026-11-23T18:25:10.534Z",
       "pendingIngestion": false
     },
     {
@@ -68456,7 +68456,24 @@
       "actualStartTime": "2026-11-21T07:09:17Z",
       "actualEndTime": "2026-11-21T13:26:30Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-23T15:45:07.349Z",
+      "fetchedAt": "2026-11-23T18:25:10.534Z",
+      "pendingIngestion": false
+    },
+    {
+      "videoId": "mGRR5W1PwIA",
+      "title": "【 ポケモンHGSS 】完全初見！！！人生初めてのポケモン...！ハートゴールドします！#5 マツバとのバトルが終わったところ🧡【橙葉ぽん/ぷろのゔぁ 】",
+      "url": "https://www.youtube.com/watch?v=mGRR5W1PwIA",
+      "publishedAt": "2026-11-23T17:29:40Z",
+      "thumbnail": "https://i.ytimg.com/vi/mGRR5W1PwIA/mqdefault.jpg",
+      "channelId": "UC0aNUh8VfQwgqj0taB8MDpg",
+      "channelTitle": "橙葉ぽん / Touha Pon【ぷろのゔぁ】",
+      "duration": "PT5H52M28S",
+      "durationSeconds": 21148,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-23T11:10:53Z",
+      "actualEndTime": "2026-11-23T17:04:04Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-23T18:25:10.534Z",
       "pendingIngestion": false
     }
   ],
