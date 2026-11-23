@@ -4,9 +4,9 @@
   "version": 2,
   "channels": {
     "UC0aNUh8VfQwgqj0taB8MDpg": {
-      "lastAttemptAt": "2026-11-23T15:45:07.349Z",
-      "status": "success",
-      "failures": 0,
+      "lastAttemptAt": "2026-11-23T17:55:04.174Z",
+      "status": "failed",
+      "failures": 1,
       "lastSuccessAt": "2026-11-23T15:45:07.349Z",
       "firstAttemptAt": "2026-11-10T09:24:54.574Z"
     },
@@ -95,8 +95,8 @@
       "firstAttemptAt": "2026-11-10T10:15:04.258Z"
     },
     "UCAbXhpEu49k6t3HE3qqpFCg": {
-      "lastAttemptAt": "2026-11-23T15:45:07.349Z",
-      "lastSuccessAt": "2026-11-23T15:45:07.349Z",
+      "lastAttemptAt": "2026-11-23T17:55:04.174Z",
+      "lastSuccessAt": "2026-11-23T17:55:04.174Z",
       "status": "success",
       "failures": 0,
       "firstAttemptAt": "2026-11-10T10:15:04.258Z"
@@ -312,8 +312,8 @@
       "firstAttemptAt": "2026-11-10T09:05:01.032Z"
     },
     "UCv2IYO-4waCpHvn50SWWY2A": {
-      "lastAttemptAt": "2026-11-23T15:45:07.349Z",
-      "lastSuccessAt": "2026-11-23T15:45:07.349Z",
+      "lastAttemptAt": "2026-11-23T17:55:04.174Z",
+      "lastSuccessAt": "2026-11-23T17:55:04.174Z",
       "status": "success",
       "failures": 0,
       "firstAttemptAt": "2026-11-10T09:05:01.032Z"
@@ -326,15 +326,15 @@
       "firstAttemptAt": "2026-11-10T09:05:01.032Z"
     },
     "UCwSq7LbTyR1lXLJphsHKy2A": {
-      "lastAttemptAt": "2026-11-23T15:45:07.349Z",
-      "lastSuccessAt": "2026-11-23T15:45:07.349Z",
+      "lastAttemptAt": "2026-11-23T17:55:04.174Z",
+      "lastSuccessAt": "2026-11-23T17:55:04.174Z",
       "status": "success",
       "failures": 0,
       "firstAttemptAt": "2026-11-10T09:05:01.032Z"
     },
     "UCwxQdxFJW67WGv-s5_z030w": {
-      "lastAttemptAt": "2026-11-23T15:45:07.349Z",
-      "lastSuccessAt": "2026-11-23T15:45:07.349Z",
+      "lastAttemptAt": "2026-11-23T17:55:04.174Z",
+      "lastSuccessAt": "2026-11-23T17:55:04.174Z",
       "status": "success",
       "failures": 0,
       "firstAttemptAt": "2026-11-10T09:24:54.574Z"
