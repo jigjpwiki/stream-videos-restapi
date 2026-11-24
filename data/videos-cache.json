@@ -48200,7 +48200,7 @@
       "actualStartTime": "2026-11-10T15:00:49Z",
       "actualEndTime": "2026-11-10T19:18:03Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-24T07:45:15.046Z",
+      "fetchedAt": "2026-11-24T10:45:04.048Z",
       "pendingIngestion": false
     },
     {
@@ -48217,7 +48217,7 @@
       "actualStartTime": "2026-11-14T14:45:18Z",
       "actualEndTime": "2026-11-14T18:06:51Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-24T07:45:15.046Z",
+      "fetchedAt": "2026-11-24T10:45:04.048Z",
       "pendingIngestion": false
     },
     {
@@ -48234,7 +48234,7 @@
       "actualStartTime": "2026-11-16T04:15:01Z",
       "actualEndTime": "2026-11-16T11:55:57Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-24T07:45:15.046Z",
+      "fetchedAt": "2026-11-24T10:45:04.048Z",
       "pendingIngestion": false
     },
     {
@@ -48251,7 +48251,7 @@
       "actualStartTime": "2026-11-17T08:30:49Z",
       "actualEndTime": "2026-11-17T14:14:29Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-24T07:45:15.046Z",
+      "fetchedAt": "2026-11-24T10:45:04.048Z",
       "pendingIngestion": false
     },
     {
@@ -48268,7 +48268,7 @@
       "actualStartTime": "2026-11-19T10:45:21Z",
       "actualEndTime": "2026-11-19T15:06:52Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-24T07:45:15.046Z",
+      "fetchedAt": "2026-11-24T10:45:04.048Z",
       "pendingIngestion": false
     },
     {
@@ -48285,7 +48285,7 @@
       "actualStartTime": "2026-11-20T03:01:08Z",
       "actualEndTime": "2026-11-20T06:47:29Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-24T07:45:15.046Z",
+      "fetchedAt": "2026-11-24T10:45:04.048Z",
       "pendingIngestion": false
     },
     {
@@ -48302,7 +48302,7 @@
       "actualStartTime": "2026-11-20T08:00:16Z",
       "actualEndTime": "2026-11-20T12:46:22Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-24T07:45:15.046Z",
+      "fetchedAt": "2026-11-24T10:45:04.048Z",
       "pendingIngestion": false
     },
     {
@@ -48319,7 +48319,7 @@
       "actualStartTime": "2026-11-21T03:00:22Z",
       "actualEndTime": "2026-11-21T06:14:28Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-24T07:45:15.046Z",
+      "fetchedAt": "2026-11-24T10:45:04.048Z",
       "pendingIngestion": false
     },
     {
@@ -48336,7 +48336,24 @@
       "actualStartTime": "2026-11-22T03:00:04Z",
       "actualEndTime": "2026-11-22T05:57:45Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-24T07:45:15.046Z",
+      "fetchedAt": "2026-11-24T10:45:04.048Z",
+      "pendingIngestion": false
+    },
+    {
+      "videoId": "XDW3ykQRGT8",
+      "title": "【ブルアカ大決戦】ゴズ3属性詰める！✨最終3桁順位を目指してスコア詰め詰めTA🌟人のTLを参考に3桁順位目指す作業配信🪄ROM・並走・寝落ち大歓迎✨【ブルーアーカイブ】 ＃せなりるライブ",
+      "url": "https://www.youtube.com/watch?v=XDW3ykQRGT8",
+      "publishedAt": "2026-11-24T02:20:58Z",
+      "thumbnail": "https://i.ytimg.com/vi/XDW3ykQRGT8/mqdefault.jpg?v=6b04f48c",
+      "channelId": "UCWi_ztz8Xuz4XfzhoG6ZfyA",
+      "channelTitle": "瀬奈 りるか🎧💎パレデミア学園",
+      "duration": "PT5H41M52S",
+      "durationSeconds": 20512,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-24T02:59:53Z",
+      "actualEndTime": "2026-11-24T08:41:45Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-24T10:45:04.048Z",
       "pendingIngestion": false
     }
   ],
