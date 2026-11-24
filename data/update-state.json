@@ -270,10 +270,10 @@
       "firstAttemptAt": "2026-11-10T08:46:16.455Z"
     },
     "UCqcnlq8uJqnGml6hcIrMCZw": {
-      "lastAttemptAt": "2026-11-24T15:05:19.423Z",
-      "status": "failed",
-      "failures": 1,
-      "lastSuccessAt": "2026-11-24T12:55:28.775Z",
+      "lastAttemptAt": "2026-11-24T16:05:06.197Z",
+      "status": "success",
+      "failures": 0,
+      "lastSuccessAt": "2026-11-24T16:05:06.197Z",
       "firstAttemptAt": "2026-11-10T09:45:06.958Z"
     },
     "UCrB-SfrqB5ChY8aAT99grXw": {
