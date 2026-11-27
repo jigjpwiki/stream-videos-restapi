@@ -49696,7 +49696,7 @@
       "actualStartTime": "2026-11-14T14:45:18Z",
       "actualEndTime": "2026-11-14T18:06:51Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-27T12:45:09.452Z",
+      "fetchedAt": "2026-11-27T15:05:07.625Z",
       "pendingIngestion": false
     },
     {
@@ -49713,7 +49713,7 @@
       "actualStartTime": "2026-11-16T04:15:01Z",
       "actualEndTime": "2026-11-16T11:55:57Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-27T12:45:09.452Z",
+      "fetchedAt": "2026-11-27T15:05:07.625Z",
       "pendingIngestion": false
     },
     {
@@ -49730,7 +49730,7 @@
       "actualStartTime": "2026-11-17T08:30:49Z",
       "actualEndTime": "2026-11-17T14:14:29Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-27T12:45:09.452Z",
+      "fetchedAt": "2026-11-27T15:05:07.625Z",
       "pendingIngestion": false
     },
     {
@@ -49747,7 +49747,7 @@
       "actualStartTime": "2026-11-19T10:45:21Z",
       "actualEndTime": "2026-11-19T15:06:52Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-27T12:45:09.452Z",
+      "fetchedAt": "2026-11-27T15:05:07.625Z",
       "pendingIngestion": false
     },
     {
@@ -49764,7 +49764,7 @@
       "actualStartTime": "2026-11-20T03:01:08Z",
       "actualEndTime": "2026-11-20T06:47:29Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-27T12:45:09.452Z",
+      "fetchedAt": "2026-11-27T15:05:07.625Z",
       "pendingIngestion": false
     },
     {
@@ -49781,7 +49781,7 @@
       "actualStartTime": "2026-11-20T08:00:16Z",
       "actualEndTime": "2026-11-20T12:46:22Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-27T12:45:09.452Z",
+      "fetchedAt": "2026-11-27T15:05:07.625Z",
       "pendingIngestion": false
     },
     {
@@ -49798,7 +49798,7 @@
       "actualStartTime": "2026-11-21T03:00:22Z",
       "actualEndTime": "2026-11-21T06:14:28Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-27T12:45:09.452Z",
+      "fetchedAt": "2026-11-27T15:05:07.625Z",
       "pendingIngestion": false
     },
     {
@@ -49815,7 +49815,7 @@
       "actualStartTime": "2026-11-22T03:00:04Z",
       "actualEndTime": "2026-11-22T05:57:45Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-27T12:45:09.452Z",
+      "fetchedAt": "2026-11-27T15:05:07.625Z",
       "pendingIngestion": false
     },
     {
@@ -49832,7 +49832,7 @@
       "actualStartTime": "2026-11-24T02:59:53Z",
       "actualEndTime": "2026-11-24T08:41:45Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-27T12:45:09.452Z",
+      "fetchedAt": "2026-11-27T15:05:07.625Z",
       "pendingIngestion": false
     },
     {
@@ -49849,7 +49849,7 @@
       "actualStartTime": "2026-11-24T10:00:12Z",
       "actualEndTime": "2026-11-24T15:49:44Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-27T12:45:09.452Z",
+      "fetchedAt": "2026-11-27T15:05:07.625Z",
       "pendingIngestion": false
     },
     {
@@ -49866,7 +49866,24 @@
       "actualStartTime": "2026-11-25T03:02:01Z",
       "actualEndTime": "2026-11-25T06:08:21Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-27T12:45:09.452Z",
+      "fetchedAt": "2026-11-27T15:05:07.625Z",
+      "pendingIngestion": false
+    },
+    {
+      "videoId": "Ofb1sHgYHkE",
+      "title": "【#15 空の軌跡 the 1st】完全初見！終章のつづき！🎮✨武術大会決勝戦！優勝したい！✨※ネタバレ注意【＃パレデミア学園】＃せなりるライブ",
+      "url": "https://www.youtube.com/watch?v=Ofb1sHgYHkE",
+      "publishedAt": "2026-11-27T14:28:49Z",
+      "thumbnail": "https://i.ytimg.com/vi/Ofb1sHgYHkE/mqdefault.jpg",
+      "channelId": "UCWi_ztz8Xuz4XfzhoG6ZfyA",
+      "channelTitle": "瀬奈 りるか🎧💎パレデミア学園",
+      "duration": "PT6H47M34S",
+      "durationSeconds": 24454,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-11-27T05:59:58Z",
+      "actualEndTime": "2026-11-27T12:47:28Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-27T15:05:07.625Z",
       "pendingIngestion": false
     }
   ],

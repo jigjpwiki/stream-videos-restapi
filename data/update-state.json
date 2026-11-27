@@ -319,10 +319,10 @@
       "firstAttemptAt": "2026-11-10T09:05:01.032Z"
     },
     "UCWi_ztz8Xuz4XfzhoG6ZfyA": {
-      "lastAttemptAt": "2026-11-27T14:45:16.095Z",
-      "lastSuccessAt": "2026-11-27T12:45:09.452Z",
-      "status": "failed",
-      "failures": 1,
+      "lastAttemptAt": "2026-11-27T15:05:07.625Z",
+      "lastSuccessAt": "2026-11-27T15:05:07.625Z",
+      "status": "success",
+      "failures": 0,
       "firstAttemptAt": "2026-11-10T09:05:01.032Z"
     },
     "UCwSq7LbTyR1lXLJphsHKy2A": {
