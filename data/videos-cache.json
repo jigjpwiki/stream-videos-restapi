@@ -26699,7 +26699,7 @@
       "actualStartTime": null,
       "actualEndTime": null,
       "videoType": "normal",
-      "fetchedAt": "2026-11-28T13:25:07.072Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     }
   ],
@@ -40760,181 +40760,541 @@
       "videoId": "-sVSl4xv1V0",
       "title": "【 #飲酒配信  】スナックぺけOPEN！初見さん/ROMさん大歓迎☆≪パレデミア学園 / 灯野ぺけ。≫ #vtuber #雑談",
       "registeredAt": "2026-09-20T22:01:45.250Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=-sVSl4xv1V0",
+      "publishedAt": "2026-09-19T16:47:00Z",
+      "thumbnail": "https://i.ytimg.com/vi/-sVSl4xv1V0/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT3H27M21S",
+      "durationSeconds": 12441,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-09-19T13:10:32Z",
+      "actualEndTime": "2026-09-19T16:38:01Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "uhtKOgaFs6M",
       "title": "【 #コラボ 】暴露話も！？後輩の牡丹雪と初コラボ雑談！初見さん/ROMさん大歓迎☆≪パレデミア学園 / 灯野ぺけ。≫ #vtuber #雑談",
       "registeredAt": "2026-09-20T22:01:45.250Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=uhtKOgaFs6M",
+      "publishedAt": "2026-09-20T17:33:29Z",
+      "thumbnail": "https://i.ytimg.com/vi/uhtKOgaFs6M/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT4H9M2S",
+      "durationSeconds": 14942,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-09-20T13:14:38Z",
+      "actualEndTime": "2026-09-20T17:23:53Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "Douo6GRBHOw",
       "title": "ガンダムSEED同時視聴【30話～】🛰️🚀🌌初見さん/ROMさん大歓迎💥≪パレデミア学園 / 灯野ぺけ。≫ #vtuber #ガンダムSEED  #同時視聴",
       "registeredAt": "2026-09-22T23:54:02.372Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=Douo6GRBHOw",
+      "publishedAt": "2026-09-21T15:21:32Z",
+      "thumbnail": "https://i.ytimg.com/vi/Douo6GRBHOw/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT2H1M36S",
+      "durationSeconds": 7296,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-09-21T13:02:07Z",
+      "actualEndTime": "2026-09-21T15:13:39Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "z_BOJ7sIfEI",
       "title": "【 #歌枠  】目指せ！ch登録1500人！初見さん/ROMさん大歓迎☆≪パレデミア学園 / 灯野ぺけ。≫ #vtuber #雑談",
       "registeredAt": "2026-09-22T23:54:02.372Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=z_BOJ7sIfEI",
+      "publishedAt": "2026-09-22T16:12:53Z",
+      "thumbnail": "https://i.ytimg.com/vi/z_BOJ7sIfEI/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT2H37M31S",
+      "durationSeconds": 9451,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-09-22T13:24:57Z",
+      "actualEndTime": "2026-09-22T16:02:41Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "F2GvbbmpBd8",
       "title": "【 #ホグワーツレガシー 】part8 ストーリー進めよう！ 初見さん/ROMさんもおいで～💥≪パレデミア学園 / 灯野ぺけ。≫ #vtuber #hogwartslegacy",
       "registeredAt": "2026-09-25T02:20:40.627Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=F2GvbbmpBd8",
+      "publishedAt": "2026-09-23T17:20:46Z",
+      "thumbnail": "https://i.ytimg.com/vi/F2GvbbmpBd8/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT2H26M46S",
+      "durationSeconds": 8806,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-09-23T13:28:21Z",
+      "actualEndTime": "2026-09-23T17:13:29Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "4jcrSaLLXfY",
       "title": "【 #minecraft  】４人で建築やってくぞ！ 初見さん/ROMさんもおいで～💥≪ #パレデミア学園 / 灯野ぺけ。≫ #vtuber",
       "registeredAt": "2026-09-25T02:20:40.627Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=4jcrSaLLXfY",
+      "publishedAt": "2026-09-24T16:06:35Z",
+      "thumbnail": "https://i.ytimg.com/vi/4jcrSaLLXfY/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT3H54M23S",
+      "durationSeconds": 14063,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-09-24T12:02:56Z",
+      "actualEndTime": "2026-09-24T15:55:15Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "eLPZHOsOYTc",
       "title": "【 #apex  】 初心者が久々に参加型をやるぞ！初見さん/ROMさんもおいで～💥≪パレデミア学園 / 灯野ぺけ。≫ #vtuber #ゲーム配信",
       "registeredAt": "2026-09-27T00:00:17.160Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=eLPZHOsOYTc",
+      "publishedAt": "2026-09-25T18:10:28Z",
+      "thumbnail": "https://i.ytimg.com/vi/eLPZHOsOYTc/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT2H19M27S",
+      "durationSeconds": 8367,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-09-25T13:01:47Z",
+      "actualEndTime": "2026-09-25T15:21:31Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "vjqxn9elFSM",
       "title": "【 #飲酒配信  】スナックぺけOPEN！初見さん/ROMさん大歓迎☆≪パレデミア学園 / 灯野ぺけ。≫ #vtuber #雑談",
       "registeredAt": "2026-09-27T00:00:17.160Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=vjqxn9elFSM",
+      "publishedAt": "2026-09-26T15:46:56Z",
+      "thumbnail": "https://i.ytimg.com/vi/vjqxn9elFSM/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT2H34M28S",
+      "durationSeconds": 9268,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-09-26T13:06:03Z",
+      "actualEndTime": "2026-09-26T15:40:47Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "dDKktFmO3QY",
       "title": "【 #歌枠  】TikTokイベント最終日💥初見さん/ROMさん大歓迎☆≪ #パレデミア学園 / 灯野ぺけ。≫ #vtuber",
       "registeredAt": "2026-09-29T10:12:35.665Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=dDKktFmO3QY",
+      "publishedAt": "2026-09-27T00:42:22Z",
+      "thumbnail": "https://i.ytimg.com/vi/dDKktFmO3QY/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT2H27M12S",
+      "durationSeconds": 8832,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-09-26T22:03:56Z",
+      "actualEndTime": "2026-09-27T00:31:18Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "x0UMfg5b-bk",
       "title": "ガンダムSEED同時視聴【34話～】🛰️🚀🌌初見さん/ROMさん大歓迎💥≪パレデミア学園 / 灯野ぺけ。≫ #vtuber #ガンダムSEED  #同時視聴",
       "registeredAt": "2026-09-29T10:12:35.665Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=x0UMfg5b-bk",
+      "publishedAt": "2026-09-28T15:17:15Z",
+      "thumbnail": "https://i.ytimg.com/vi/x0UMfg5b-bk/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT2H8M2S",
+      "durationSeconds": 7682,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-09-28T13:02:19Z",
+      "actualEndTime": "2026-09-28T15:10:31Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "BBEZRq0CLqM",
       "title": "【 #minecraft  】４人で前回の続き！ 初見さん/ROMさんもおいで～💥≪ #パレデミア学園 / 灯野ぺけ。≫ #vtuber",
       "registeredAt": "2026-10-02T01:10:55.111Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=BBEZRq0CLqM",
+      "publishedAt": "2026-09-29T16:04:36Z",
+      "thumbnail": "https://i.ytimg.com/vi/BBEZRq0CLqM/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT2H46M40S",
+      "durationSeconds": 10000,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-09-29T13:07:42Z",
+      "actualEndTime": "2026-09-29T15:55:00Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "myuW5XEuZp4",
-      "title": "【 #朝活   】声がやべえ 初見さん/ROMさんもおいで～💥≪ 灯野ぺけ。/パレデミア学園≫ #vtuber",
+      "title": "【 #朝活 43回目 】声がやべえ 初見さん/ROMさんもおいで～💥≪ 灯野ぺけ。/パレデミア学園≫ #vtuber",
       "registeredAt": "2026-10-02T01:10:55.111Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=myuW5XEuZp4",
+      "publishedAt": "2026-10-01T12:28:48Z",
+      "thumbnail": "https://i.ytimg.com/vi/myuW5XEuZp4/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT1H19M41S",
+      "durationSeconds": 4781,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-09-30T22:46:06Z",
+      "actualEndTime": "2026-10-01T00:06:06Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "z-8wJdDjg5U",
       "title": "【 #karaoke  】スナックぺけOPEN！一見さん/ROMさん大歓迎☆≪パレデミア学園 / 灯野ぺけ。≫ #vtuber #雑談",
       "registeredAt": "2026-10-04T07:32:44.938Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=z-8wJdDjg5U",
+      "publishedAt": "2026-10-03T15:12:53Z",
+      "thumbnail": "https://i.ytimg.com/vi/z-8wJdDjg5U/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT2H1M49S",
+      "durationSeconds": 7309,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-03T13:04:46Z",
+      "actualEndTime": "2026-10-03T15:06:46Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "IBvHO8PRIkU",
       "title": "【 #朝活 44回目 】50人からのおはよう待ってます☀️気付いたら朝だった！ 初見さん/ROMさんもおいで～💥≪ 灯野ぺけ。/パレデミア学園≫ #vtuber",
       "registeredAt": "2026-10-04T07:32:44.938Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=IBvHO8PRIkU",
+      "publishedAt": "2026-10-04T11:54:43Z",
+      "thumbnail": "https://i.ytimg.com/vi/IBvHO8PRIkU/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT1H29M56S",
+      "durationSeconds": 5396,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-03T22:03:17Z",
+      "actualEndTime": "2026-10-03T23:33:23Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "SOm-WFfTR00",
       "title": "【 #地獄銭湯 】ホラーは苦手って言ったじゃん。 初見さん/ROMさんもおいで～💥≪パレデミア学園 / 灯野ぺけ。≫ #vtuber #ゲーム配信 #ホラーゲーム",
       "registeredAt": "2026-10-06T21:58:46.474Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=SOm-WFfTR00",
+      "publishedAt": "2026-10-05T04:39:17Z",
+      "thumbnail": "https://i.ytimg.com/vi/SOm-WFfTR00/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT1H21M55S",
+      "durationSeconds": 4915,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-04T15:04:49Z",
+      "actualEndTime": "2026-10-04T16:26:56Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "GzG-dyC10_I",
       "title": "【 VIVANT (2026)第9話 】#同時視聴  初見さん/ROMさん大歓迎☆≪パレデミア学園 / 灯野ぺけ。≫ #vtuber #ドラマ  #vivant",
       "registeredAt": "2026-10-06T21:58:46.474Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=GzG-dyC10_I",
+      "publishedAt": "2026-10-06T02:37:55Z",
+      "thumbnail": "https://i.ytimg.com/vi/GzG-dyC10_I/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT1H8M54S",
+      "durationSeconds": 4134,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-05T13:07:20Z",
+      "actualEndTime": "2026-10-05T14:16:22Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "Qc3367J1-ug",
       "title": "【 #minecraft  】ミュゥ寮サーバーラスト！🐈‍⬛初見さん/ROMさんも大歓迎💥≪パレデミア学園 / 灯野ぺけ。≫ #vtuber #ゲーム配信",
       "registeredAt": "2026-10-06T21:58:46.474Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=Qc3367J1-ug",
+      "publishedAt": "2026-10-06T16:21:24Z",
+      "thumbnail": "https://i.ytimg.com/vi/Qc3367J1-ug/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT2H35M2S",
+      "durationSeconds": 9302,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-06T13:38:30Z",
+      "actualEndTime": "2026-10-06T16:13:43Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "-zNmDoMYMp0",
       "title": "【 #朝活   】声がやべえ 初見さん/ROMさんもおいで～💥≪ 灯野ぺけ。/パレデミア学園≫ #vtuber",
       "registeredAt": "2026-10-09T10:59:43.010Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=-zNmDoMYMp0",
+      "publishedAt": "2026-10-06T22:33:00Z",
+      "thumbnail": "https://i.ytimg.com/vi/-zNmDoMYMp0/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT4S",
+      "durationSeconds": 4,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-06T22:30:52Z",
+      "actualEndTime": "2026-10-06T22:30:57Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "zd-BecN-XNE",
       "title": "【 #朝活 45回目 】寝坊ごめんなさい！目指せ！60人からのおはよう☀️初見さん/ROMさんもおいで～💥≪ 灯野ぺけ。/パレデミア学園≫ #vtuber #雑談",
       "registeredAt": "2026-10-09T10:59:43.010Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=zd-BecN-XNE",
+      "publishedAt": "2026-10-07T12:31:07Z",
+      "thumbnail": "https://i.ytimg.com/vi/zd-BecN-XNE/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT1H5M4S",
+      "durationSeconds": 3904,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-06T22:32:03Z",
+      "actualEndTime": "2026-10-06T23:37:18Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "DktQ30JV9DE",
       "title": "【 #ホグワーツレガシー 】part9 ストーリー進めよう！ 初見さん/ROMさんもおいで～💥≪パレデミア学園 / 灯野ぺけ。≫ #vtuber #hogwartslegacy",
       "registeredAt": "2026-10-09T10:59:43.010Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=DktQ30JV9DE",
+      "publishedAt": "2026-10-07T16:29:05Z",
+      "thumbnail": "https://i.ytimg.com/vi/DktQ30JV9DE/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT2H4M14S",
+      "durationSeconds": 7454,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-07T13:16:08Z",
+      "actualEndTime": "2026-10-07T15:20:35Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "0nWGtRiKvIQ",
       "title": "【 VIVANT (2026)第10話 】#同時視聴  初見さん/ROMさん大歓迎☆≪パレデミア学園 / 灯野ぺけ。≫ #vtuber #ドラマ  #vivant",
       "registeredAt": "2026-10-14T14:45:31.396Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=0nWGtRiKvIQ",
+      "publishedAt": "2026-10-13T02:52:32Z",
+      "thumbnail": "https://i.ytimg.com/vi/0nWGtRiKvIQ/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT1H3M56S",
+      "durationSeconds": 3836,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-12T13:18:18Z",
+      "actualEndTime": "2026-10-12T14:22:24Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "mV0vPXU7iVg",
       "title": "【 #歌枠 】目指せ！60人からのおはよう☀️朝から元気に歌をお届け🎤 #朝活 46回目 初見さん/ROMさんもおいで～💥≪ 灯野ぺけ。/パレデミア学園≫ #vtuber",
       "registeredAt": "2026-10-14T14:45:31.396Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=mV0vPXU7iVg",
+      "publishedAt": "2026-10-13T12:33:51Z",
+      "thumbnail": "https://i.ytimg.com/vi/mV0vPXU7iVg/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT1H8M4S",
+      "durationSeconds": 4084,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-12T22:01:57Z",
+      "actualEndTime": "2026-10-12T23:10:08Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "o62q-8EYYdI",
       "title": "【 #ホグワーツレガシー 】part10 ストーリー進めよう！ 初見さん/ROMさんもおいで～💥≪パレデミア学園 / 灯野ぺけ。≫ #vtuber #hogwartslegacy",
       "registeredAt": "2026-10-14T14:45:31.396Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=o62q-8EYYdI",
+      "publishedAt": "2026-10-13T17:11:57Z",
+      "thumbnail": "https://i.ytimg.com/vi/o62q-8EYYdI/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT2H23M5S",
+      "durationSeconds": 8585,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-13T13:18:45Z",
+      "actualEndTime": "2026-10-13T15:42:00Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "Bdx24Nf0SlA",
       "title": "【 #minecraft  】４人でエンドラ倒しに行くぞ💥初見さん/ROMさんもおいで～ ≪ パレデミア学園 / 灯野ぺけ。≫ #vtuber #コラボ",
       "registeredAt": "2026-10-16T14:23:17.871Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=Bdx24Nf0SlA",
+      "publishedAt": "2026-10-14T17:18:25Z",
+      "thumbnail": "https://i.ytimg.com/vi/Bdx24Nf0SlA/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT4H53M47S",
+      "durationSeconds": 17627,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-14T12:06:36Z",
+      "actualEndTime": "2026-10-14T17:00:36Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "GkdR7jHLgnY",
       "title": "【ハロウィングッズが出たよ🎃👻】みんな可愛すぎない！？初見さん/ROMさんもおいで～💥≪ 灯野ぺけ。/パレデミア学園≫ #vtuber #雑談 #グッズ",
       "registeredAt": "2026-10-16T14:23:17.871Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=GkdR7jHLgnY",
+      "publishedAt": "2026-10-16T00:03:43Z",
+      "thumbnail": "https://i.ytimg.com/vi/GkdR7jHLgnY/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT1H2M24S",
+      "durationSeconds": 3744,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-15T10:52:24Z",
+      "actualEndTime": "2026-10-15T11:54:59Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "29Qlh3BLOkI",
       "title": "【 #雑談 】10/14のリベンジ💥 #朝活 47回目 初見さん/ROMさんもおいで～💥≪ 灯野ぺけ。/パレデミア学園≫ #vtuber",
       "registeredAt": "2026-10-16T14:23:17.871Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=29Qlh3BLOkI",
+      "publishedAt": "2026-10-16T11:44:35Z",
+      "thumbnail": "https://i.ytimg.com/vi/29Qlh3BLOkI/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT42M35S",
+      "durationSeconds": 2555,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-15T22:36:04Z",
+      "actualEndTime": "2026-10-15T23:18:49Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "yyiSiCK5EKs",
       "title": "【 #ホグワーツレガシー 】part11 呪文を覚えよう！ 初見さん/ROMさんもおいで～💥≪パレデミア学園 / 灯野ぺけ。≫ #vtuber #hogwartslegacy",
       "registeredAt": "2026-10-18T06:57:03.654Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=yyiSiCK5EKs",
+      "publishedAt": "2026-10-16T18:17:16Z",
+      "thumbnail": "https://i.ytimg.com/vi/yyiSiCK5EKs/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT2H18M31S",
+      "durationSeconds": 8311,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-16T13:01:29Z",
+      "actualEndTime": "2026-10-16T15:20:12Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "xkP9nw_LR3k",
       "title": "【 VIVANT (2026)第11話 】#同時視聴  初見さん/ROMさん大歓迎☆≪パレデミア学園 / 灯野ぺけ。≫ #vtuber #ドラマ  #vivant",
       "registeredAt": "2026-10-20T06:49:23.367Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=xkP9nw_LR3k",
+      "publishedAt": "2026-10-20T02:30:23Z",
+      "thumbnail": "https://i.ytimg.com/vi/xkP9nw_LR3k/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT1H10M40S",
+      "durationSeconds": 4240,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-19T13:05:53Z",
+      "actualEndTime": "2026-10-19T14:16:43Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "5OwJSCHnL7U",
       "title": "【 #焼肉パーティーサバイバル  】４人焼肉勝負だ💥初見さん/ROMさんもおいで～ ≪ パレデミア学園 / 灯野ぺけ。≫ #vtuber #コラボ",
       "registeredAt": "2026-10-22T08:59:36.036Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=5OwJSCHnL7U",
+      "publishedAt": "2026-10-21T16:43:13Z",
+      "thumbnail": "https://i.ytimg.com/vi/5OwJSCHnL7U/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT3H34M32S",
+      "durationSeconds": 12872,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-21T12:17:04Z",
+      "actualEndTime": "2026-10-21T15:51:45Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "lekuFloeAio",
       "title": "【 #karaoke  】スナックぺけOPEN！一見さん/ROMさん大歓迎☆≪パレデミア学園 / 灯野ぺけ。≫ #vtuber #雑談",
       "registeredAt": "2026-10-26T02:10:18.340Z",
-      "pendingIngestion": false
+      "pendingIngestion": false,
+      "url": "https://www.youtube.com/watch?v=lekuFloeAio",
+      "publishedAt": "2026-10-25T03:48:54Z",
+      "thumbnail": "https://i.ytimg.com/vi/lekuFloeAio/mqdefault.jpg",
+      "channelId": "UCldoz5HLh6BMW29HGnRpC0Q",
+      "channelTitle": "灯野 ぺけ。",
+      "duration": "PT1H39M18S",
+      "durationSeconds": 5958,
+      "liveBroadcastContent": "none",
+      "actualStartTime": "2026-10-24T13:57:16Z",
+      "actualEndTime": "2026-10-24T15:36:43Z",
+      "videoType": "liveArchive",
+      "fetchedAt": "2026-11-28T15:25:28.629Z"
     },
     {
       "videoId": "gQLNn6U9fDY",
@@ -40951,7 +41311,7 @@
       "actualStartTime": "2026-10-26T13:20:19Z",
       "actualEndTime": "2026-10-26T15:11:21Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-10T06:04:47.411Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -40969,7 +41329,7 @@
       "actualStartTime": "2026-10-27T13:30:37Z",
       "actualEndTime": "2026-10-27T14:36:29Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-11T04:24:56.871Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -40987,7 +41347,7 @@
       "actualStartTime": "2026-10-28T12:03:03Z",
       "actualEndTime": "2026-10-28T15:17:04Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-11T18:05:04.666Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -41005,7 +41365,7 @@
       "actualStartTime": "2026-10-30T13:02:12Z",
       "actualEndTime": "2026-10-30T15:33:43Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-13T19:34:56.854Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -41023,7 +41383,7 @@
       "actualStartTime": "2026-10-31T14:33:13Z",
       "actualEndTime": "2026-10-31T15:55:48Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-15T06:15:11.934Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -41041,7 +41401,7 @@
       "actualStartTime": "2026-10-31T16:23:33Z",
       "actualEndTime": "2026-10-31T18:01:44Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-15T08:25:00.541Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -41059,7 +41419,7 @@
       "actualStartTime": "2026-11-02T14:16:13Z",
       "actualEndTime": "2026-11-02T15:32:08Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-17T04:35:08.607Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -41077,7 +41437,7 @@
       "actualStartTime": "2026-11-04T13:34:14Z",
       "actualEndTime": "2026-11-04T16:02:26Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-18T19:45:08.344Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -41095,7 +41455,7 @@
       "actualStartTime": "2026-11-06T14:31:44Z",
       "actualEndTime": "2026-11-06T17:08:59Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-20T19:05:06.703Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -41113,7 +41473,7 @@
       "actualStartTime": "2026-11-08T13:01:54Z",
       "actualEndTime": "2026-11-08T15:03:41Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-22T18:15:10.718Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -41130,7 +41490,7 @@
       "actualStartTime": "2026-11-10T13:03:22Z",
       "actualEndTime": "2026-11-10T14:07:44Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-25T02:25:00.918Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -41147,7 +41507,7 @@
       "actualStartTime": "2026-11-11T13:15:15Z",
       "actualEndTime": "2026-11-11T15:28:43Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-25T20:05:13.385Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -41164,7 +41524,7 @@
       "actualStartTime": "2026-11-13T12:10:18Z",
       "actualEndTime": "2026-11-13T14:12:51Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-27T20:15:12.036Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -41181,7 +41541,7 @@
       "actualStartTime": "2026-11-14T22:03:06Z",
       "actualEndTime": "2026-11-14T23:36:07Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-28T13:25:07.072Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -41198,7 +41558,7 @@
       "actualStartTime": null,
       "actualEndTime": null,
       "videoType": "shorts",
-      "fetchedAt": "2026-11-28T13:25:07.072Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -41215,7 +41575,7 @@
       "actualStartTime": "2026-11-19T12:04:14Z",
       "actualEndTime": "2026-11-19T13:17:43Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-28T13:25:07.072Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -41232,7 +41592,7 @@
       "actualStartTime": "2026-11-25T12:16:29Z",
       "actualEndTime": "2026-11-25T15:32:48Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-28T13:25:07.072Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -41249,7 +41609,7 @@
       "actualStartTime": "2026-11-26T12:15:22Z",
       "actualEndTime": "2026-11-26T13:34:37Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-28T13:25:07.072Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -41266,7 +41626,7 @@
       "actualStartTime": "2026-11-27T13:01:55Z",
       "actualEndTime": "2026-11-27T15:16:32Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-28T13:25:07.072Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     }
   ],
@@ -70378,7 +70738,7 @@
       "actualStartTime": "2026-11-14T12:31:55Z",
       "actualEndTime": "2026-11-14T15:07:41Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-28T13:25:07.072Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -70395,7 +70755,7 @@
       "actualStartTime": "2026-11-15T12:32:13Z",
       "actualEndTime": "2026-11-15T14:56:06Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-28T13:25:07.072Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -70412,7 +70772,7 @@
       "actualStartTime": "2026-11-16T12:54:28Z",
       "actualEndTime": "2026-11-16T15:24:33Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-28T13:25:07.072Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -70429,7 +70789,7 @@
       "actualStartTime": "2026-11-17T12:31:57Z",
       "actualEndTime": "2026-11-17T14:40:41Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-28T13:25:07.072Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -70446,7 +70806,7 @@
       "actualStartTime": "2026-11-19T12:35:00Z",
       "actualEndTime": "2026-11-19T14:13:50Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-28T13:25:07.072Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -70463,7 +70823,7 @@
       "actualStartTime": "2026-11-21T12:31:11Z",
       "actualEndTime": "2026-11-21T15:03:38Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-28T13:25:07.072Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -70480,7 +70840,7 @@
       "actualStartTime": "2026-11-23T12:31:53Z",
       "actualEndTime": "2026-11-23T14:53:51Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-28T13:25:07.072Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     },
     {
@@ -70497,7 +70857,7 @@
       "actualStartTime": "2026-11-25T12:33:22Z",
       "actualEndTime": "2026-11-25T15:10:32Z",
       "videoType": "liveArchive",
-      "fetchedAt": "2026-11-28T13:25:07.072Z",
+      "fetchedAt": "2026-11-28T15:25:28.629Z",
       "pendingIngestion": false
     }
   ],
