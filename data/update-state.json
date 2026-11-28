@@ -4,9 +4,9 @@
   "version": 2,
   "channels": {
     "UC0aNUh8VfQwgqj0taB8MDpg": {
-      "lastAttemptAt": "2026-11-28T16:55:07.261Z",
-      "status": "success",
-      "failures": 0,
+      "lastAttemptAt": "2026-11-28T19:05:08.409Z",
+      "status": "failed",
+      "failures": 1,
       "lastSuccessAt": "2026-11-28T16:55:07.261Z",
       "firstAttemptAt": "2026-11-10T09:24:54.574Z"
     },
@@ -172,8 +172,8 @@
       "firstAttemptAt": "2026-11-10T10:35:04.573Z"
     },
     "UChccV6U0Tkx9de4YjXbEelw": {
-      "lastAttemptAt": "2026-11-28T16:55:07.261Z",
-      "lastSuccessAt": "2026-11-28T16:55:07.261Z",
+      "lastAttemptAt": "2026-11-28T19:05:08.409Z",
+      "lastSuccessAt": "2026-11-28T19:05:08.409Z",
       "status": "success",
       "failures": 0,
       "firstAttemptAt": "2026-11-10T10:35:04.573Z"
@@ -207,8 +207,8 @@
       "firstAttemptAt": "2026-11-10T08:27:15.566Z"
     },
     "UCJLYktDEOak1rSOGRVRKlLQ": {
-      "lastAttemptAt": "2026-11-28T16:55:07.261Z",
-      "lastSuccessAt": "2026-11-28T16:55:07.261Z",
+      "lastAttemptAt": "2026-11-28T19:05:08.409Z",
+      "lastSuccessAt": "2026-11-28T19:05:08.409Z",
       "status": "success",
       "failures": 0,
       "firstAttemptAt": "2026-11-10T08:27:15.566Z"
@@ -256,8 +256,8 @@
       "firstAttemptAt": "2026-11-10T08:46:16.455Z"
     },
     "UCpdWNjSU-onhmcARqgHIfpg": {
-      "lastAttemptAt": "2026-11-28T16:55:07.261Z",
-      "lastSuccessAt": "2026-11-28T16:55:07.261Z",
+      "lastAttemptAt": "2026-11-28T19:05:08.409Z",
+      "lastSuccessAt": "2026-11-28T19:05:08.409Z",
       "status": "success",
       "failures": 0,
       "firstAttemptAt": "2026-11-10T08:46:16.455Z"
@@ -277,8 +277,8 @@
       "firstAttemptAt": "2026-11-10T09:45:06.958Z"
     },
     "UCrB-SfrqB5ChY8aAT99grXw": {
-      "lastAttemptAt": "2026-11-28T16:55:07.261Z",
-      "lastSuccessAt": "2026-11-28T16:55:07.261Z",
+      "lastAttemptAt": "2026-11-28T19:05:08.409Z",
+      "lastSuccessAt": "2026-11-28T19:05:08.409Z",
       "status": "success",
       "failures": 0,
       "firstAttemptAt": "2026-11-10T08:46:16.455Z"
